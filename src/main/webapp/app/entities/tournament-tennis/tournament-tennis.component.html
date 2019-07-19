@@ -17,7 +17,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="tennisJazzApp.tournament.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="startDate"><span jhiTranslate="tennisJazzApp.tournament.startDate">Start Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="inProgress"><span jhiTranslate="tennisJazzApp.tournament.inProgress">In Progress</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -26,7 +25,6 @@
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let tournament of tournaments ;trackBy: trackId">
-                <td><a [routerLink]="['/tournament-tennis', tournament.id, 'view' ]">{{tournament.id}}</a></td>
                 <td>{{tournament.name}}</td>
                 <td>{{tournament.startDate | date:'mediumDate'}}</td>
                 <td>{{tournament.inProgress}}</td>

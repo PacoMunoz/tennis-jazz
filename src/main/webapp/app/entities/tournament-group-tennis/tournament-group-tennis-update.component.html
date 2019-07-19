@@ -19,13 +19,13 @@
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.tournamentGroup.tournament" for="field_tournament">Tournament</label>
                     <select class="form-control" id="field_tournament" name="tournament" formControlName="tournament">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="tournamentOption.id === editForm.get('tournament').value?.id ? editForm.get('tournament').value : tournamentOption" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.id}}</option>
+                        <option [ngValue]="tournamentOption.id === editForm.get('tournament').value?.id ? editForm.get('tournament').value : tournamentOption" *ngFor="let tournamentOption of tournaments; trackBy: trackTournamentById">{{tournamentOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="tennisJazzApp.tournamentGroup.players" for="field_players">Players</label>
                     <select class="form-control" id="field_players" multiple name="players" formControlName="players">
-                        <option [ngValue]="getSelected(editForm.get('players').value, playerOption)" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                        <option [ngValue]="getSelected(editForm.get('players').value, playerOption)" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.name}} {{playerOption.surname}}</option>
                     </select>
                 </div>
             </div>

@@ -44,21 +44,21 @@
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.round" for="field_round">Round</label>
                     <select class="form-control" id="field_round" name="round" formControlName="round">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="roundOption.id === editForm.get('round').value?.id ? editForm.get('round').value : roundOption" *ngFor="let roundOption of rounds; trackBy: trackRoundById">{{roundOption.id}}</option>
+                        <option [ngValue]="roundOption.id === editForm.get('round').value?.id ? editForm.get('round').value : roundOption" *ngFor="let roundOption of rounds; trackBy: trackRoundById">{{roundOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayer" for="field_visitorPlayer">Visitor Player</label>
                     <select class="form-control" id="field_visitorPlayer" name="visitorPlayer" formControlName="visitorPlayer">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="playerOption.id === editForm.get('visitorPlayer').value?.id ? editForm.get('visitorPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                        <option [ngValue]="playerOption.id === editForm.get('visitorPlayer').value?.id ? editForm.get('visitorPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.name}} {{playerOption.surname}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayer" for="field_localPlayer">Local Player</label>
                     <select class="form-control" id="field_localPlayer" name="localPlayer" formControlName="localPlayer">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="playerOption.id === editForm.get('localPlayer').value?.id ? editForm.get('localPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                        <option [ngValue]="playerOption.id === editForm.get('localPlayer').value?.id ? editForm.get('localPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.name}} {{playerOption.surname}}</option>
                     </select>
                 </div>
             </div>

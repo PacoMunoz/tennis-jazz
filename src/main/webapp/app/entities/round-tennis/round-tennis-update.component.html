@@ -37,7 +37,7 @@
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.round.tournamentGroup" for="field_tournamentGroup">Tournament Group</label>
                     <select class="form-control" id="field_tournamentGroup" name="tournamentGroup" formControlName="tournamentGroup">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="tournamentGroupOption.id === editForm.get('tournamentGroup').value?.id ? editForm.get('tournamentGroup').value : tournamentGroupOption" *ngFor="let tournamentGroupOption of tournamentgroups; trackBy: trackTournamentGroupById">{{tournamentGroupOption.id}}</option>
+                        <option [ngValue]="tournamentGroupOption.id === editForm.get('tournamentGroup').value?.id ? editForm.get('tournamentGroup').value : tournamentGroupOption" *ngFor="let tournamentGroupOption of tournamentgroups; trackBy: trackTournamentGroupById">{{tournamentGroupOption.name}}</option>
                     </select>
                 </div>
             </div>
