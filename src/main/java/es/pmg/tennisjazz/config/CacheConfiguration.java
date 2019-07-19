@@ -43,6 +43,18 @@ public class CacheConfiguration {
             createCache(cm, es.pmg.tennisjazz.domain.User.class.getName());
             createCache(cm, es.pmg.tennisjazz.domain.Authority.class.getName());
             createCache(cm, es.pmg.tennisjazz.domain.User.class.getName() + ".authorities");
+            createCache(cm, es.pmg.tennisjazz.domain.Tournament.class.getName());
+            createCache(cm, es.pmg.tennisjazz.domain.Tournament.class.getName() + ".groups");
+            createCache(cm, es.pmg.tennisjazz.domain.TournamentGroup.class.getName());
+            createCache(cm, es.pmg.tennisjazz.domain.TournamentGroup.class.getName() + ".rounds");
+            createCache(cm, es.pmg.tennisjazz.domain.TournamentGroup.class.getName() + ".players");
+            createCache(cm, es.pmg.tennisjazz.domain.Player.class.getName());
+            createCache(cm, es.pmg.tennisjazz.domain.Player.class.getName() + ".visitorMatches");
+            createCache(cm, es.pmg.tennisjazz.domain.Player.class.getName() + ".localMatches");
+            createCache(cm, es.pmg.tennisjazz.domain.Player.class.getName() + ".groups");
+            createCache(cm, es.pmg.tennisjazz.domain.Round.class.getName());
+            createCache(cm, es.pmg.tennisjazz.domain.Round.class.getName() + ".matchs");
+            createCache(cm, es.pmg.tennisjazz.domain.Match.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

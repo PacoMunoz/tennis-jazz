@@ -1,0 +1,41 @@
+{
+    "name": "TournamentGroup",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "tournament",
+            "otherEntityName": "tournament",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "round",
+            "otherEntityRelationshipName": "tournamentGroup",
+            "relationshipName": "rounds"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "groups",
+            "relationshipName": "players",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190717204920",
+    "entityTableName": "tournament_group",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "tennis"
+}

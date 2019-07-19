@@ -1,0 +1,30 @@
+{
+  "tennisJazzApp": {
+    "match": {
+      "home": {
+        "title": "Matches",
+        "createLabel": "Crear nuevo Match",
+        "createOrEditLabel": "Crear o editar Match",
+        "notFound": "No Match found"
+      },
+      "created": "Un nuevo Match ha sido creado con el identificador {{ param }}",
+      "updated": "Un Match ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Match ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Match {{ id }}?"
+      },
+      "detail": {
+        "title": "Match"
+      },
+      "player1Set1Result": "Player 1 Set 1 Result",
+      "player2Set1Result": "Player 2 Set 1 Result",
+      "player1Set2Result": "Player 1 Set 2 Result",
+      "player2Set2Result": "Player 2 Set 2 Result",
+      "player1Set3Result": "Player 1 Set 3 Result",
+      "player2Set3Result": "Player 2 Set 3 Result",
+      "round": "Round",
+      "visitorPlayer": "Visitor Player",
+      "localPlayer": "Local Player"
+    }
+  }
+}

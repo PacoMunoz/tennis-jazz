@@ -1,0 +1,25 @@
+{
+  "tennisJazzApp": {
+    "tournament": {
+      "home": {
+        "title": "Tournaments",
+        "createLabel": "Create a new Tournament",
+        "createOrEditLabel": "Create or edit a Tournament",
+        "notFound": "No Tournament found"
+      },
+      "created": "A new Tournament is created with identifier {{ param }}",
+      "updated": "A Tournament is updated with identifier {{ param }}",
+      "deleted": "A Tournament is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tournament {{ id }}?"
+      },
+      "detail": {
+        "title": "Tournament"
+      },
+      "name": "Name",
+      "startDate": "Start Date",
+      "inProgress": "In Progress",
+      "groups": "Groups"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tournamentGroup">
+            <h2><span jhiTranslate="tennisJazzApp.tournamentGroup.detail.title">Tournament Group</span> {{tournamentGroup.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tennisJazzApp.tournamentGroup.name">Name</span></dt>
+                <dd>
+                    <span>{{tournamentGroup.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.tournamentGroup.tournament">Tournament</span></dt>
+                <dd>
+                    <div *ngIf="tournamentGroup.tournament">
+                        <a [routerLink]="['/tournament-tennis', tournamentGroup.tournament?.id, 'view']">{{tournamentGroup.tournament?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.tournamentGroup.players">Players</span></dt>
+                <dd>
+                    <span *ngFor="let players of tournamentGroup.players; let last = last">
+                        <a [routerLink]="['/player-tennis', players?.id, 'view' ]">{{players.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tournament-group-tennis', tournamentGroup.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

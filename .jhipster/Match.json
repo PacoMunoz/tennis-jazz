@@ -1,0 +1,61 @@
+{
+    "name": "Match",
+    "fields": [
+        {
+            "fieldName": "player1Set1Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "player2Set1Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "player1Set2Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "player2Set2Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "player1Set3Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "player2Set3Result",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "round",
+            "otherEntityName": "round",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "visitorMatches",
+            "relationshipName": "visitorPlayer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "localMatches",
+            "relationshipName": "localPlayer",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190717204923",
+    "entityTableName": "match",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "tennis"
+}
