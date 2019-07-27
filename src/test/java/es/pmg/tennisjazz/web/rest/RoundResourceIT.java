@@ -163,6 +163,24 @@ public class RoundResourceIT {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = roundRepository.findAll().size();
+        // set the field null
+        round.setName(null);
+
+        // Create the Round, which fails.
+
+        restRoundMockMvc.perform(post("/api/rounds")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(round)))
+            .andExpect(status().isBadRequest());
+
+        List<Round> roundList = roundRepository.findAll();
+        assertThat(roundList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRounds() throws Exception {
         // Initialize the database
         roundRepository.saveAndFlush(round);

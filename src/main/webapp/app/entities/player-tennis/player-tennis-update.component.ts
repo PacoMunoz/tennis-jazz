@@ -21,7 +21,7 @@ export class PlayerTennisUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [],
+    name: [null, [Validators.required]],
     surname: [],
     email: [],
     phone: [],

@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -58,7 +59,7 @@ public class TournamentGroupResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/tournament-groups")
-    public ResponseEntity<TournamentGroup> createTournamentGroup(@RequestBody TournamentGroup tournamentGroup) throws URISyntaxException {
+    public ResponseEntity<TournamentGroup> createTournamentGroup(@Valid @RequestBody TournamentGroup tournamentGroup) throws URISyntaxException {
         log.debug("REST request to save TournamentGroup : {}", tournamentGroup);
         if (tournamentGroup.getId() != null) {
             throw new BadRequestAlertException("A new tournamentGroup cannot already have an ID", ENTITY_NAME, "idexists");
@@ -79,7 +80,7 @@ public class TournamentGroupResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/tournament-groups")
-    public ResponseEntity<TournamentGroup> updateTournamentGroup(@RequestBody TournamentGroup tournamentGroup) throws URISyntaxException {
+    public ResponseEntity<TournamentGroup> updateTournamentGroup(@Valid @RequestBody TournamentGroup tournamentGroup) throws URISyntaxException {
         log.debug("REST request to update TournamentGroup : {}", tournamentGroup);
         if (tournamentGroup.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

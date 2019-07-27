@@ -23,6 +23,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'match-tennis',
         loadChildren: './match-tennis/match-tennis.module#TennisJazzMatchTennisModule'
+      },
+      {
+        path: 'ranking-tennis',
+        loadChildren: './ranking-tennis/ranking-tennis.module#TennisJazzRankingTennisModule'
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

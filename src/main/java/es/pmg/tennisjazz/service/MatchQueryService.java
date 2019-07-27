@@ -103,6 +103,24 @@ public class MatchQueryService extends QueryService<Match> {
             if (criteria.getPlayer2Set3Result() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPlayer2Set3Result(), Match_.player2Set3Result));
             }
+            if (criteria.getLocalPlayerSets() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSets(), Match_.localPlayerSets));
+            }
+            if (criteria.getVisitorPlayerSets() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerSets(), Match_.visitorPlayerSets));
+            }
+            if (criteria.getLocalPlayerAbandoned() != null) {
+                specification = specification.and(buildSpecification(criteria.getLocalPlayerAbandoned(), Match_.localPlayerAbandoned));
+            }
+            if (criteria.getVisitorPlayerAbandoned() != null) {
+                specification = specification.and(buildSpecification(criteria.getVisitorPlayerAbandoned(), Match_.visitorPlayerAbandoned));
+            }
+            if (criteria.getLocalPlayerNotPresent() != null) {
+                specification = specification.and(buildSpecification(criteria.getLocalPlayerNotPresent(), Match_.localPlayerNotPresent));
+            }
+            if (criteria.getVisitorPlayerNotPresent() != null) {
+                specification = specification.and(buildSpecification(criteria.getVisitorPlayerNotPresent(), Match_.visitorPlayerNotPresent));
+            }
             if (criteria.getRoundId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRoundId(),
                     root -> root.join(Match_.round, JoinType.LEFT).get(Round_.id)));

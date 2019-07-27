@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(MatchTennisService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new MatchTennis(0, 0, 0, 0, 0, 0, 0);
+      elemDefault = new MatchTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, false);
     });
 
     describe('Service methods', () => {
@@ -64,7 +64,13 @@ describe('Service Tests', () => {
             player1Set2Result: 1,
             player2Set2Result: 1,
             player1Set3Result: 1,
-            player2Set3Result: 1
+            player2Set3Result: 1,
+            localPlayerSets: 1,
+            visitorPlayerSets: 1,
+            localPlayerAbandoned: true,
+            visitorPlayerAbandoned: true,
+            localPlayerNotPresent: true,
+            visitorPlayerNotPresent: true
           },
           elemDefault
         );
@@ -87,7 +93,13 @@ describe('Service Tests', () => {
             player1Set2Result: 1,
             player2Set2Result: 1,
             player1Set3Result: 1,
-            player2Set3Result: 1
+            player2Set3Result: 1,
+            localPlayerSets: 1,
+            visitorPlayerSets: 1,
+            localPlayerAbandoned: true,
+            visitorPlayerAbandoned: true,
+            localPlayerNotPresent: true,
+            visitorPlayerNotPresent: true
           },
           elemDefault
         );

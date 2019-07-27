@@ -3,7 +3,10 @@
     "fields": [
         {
             "fieldName": "name",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "startDate",
@@ -28,7 +31,7 @@
             "relationshipName": "matchs"
         }
     ],
-    "changelogDate": "20190717204922",
+    "changelogDate": "20190720062002",
     "entityTableName": "round",
     "dto": "no",
     "pagination": "infinite-scroll",

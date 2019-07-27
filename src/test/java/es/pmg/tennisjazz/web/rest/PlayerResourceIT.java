@@ -3,6 +3,7 @@ package es.pmg.tennisjazz.web.rest;
 import es.pmg.tennisjazz.TennisJazzApp;
 import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.domain.Match;
+import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.domain.TournamentGroup;
 import es.pmg.tennisjazz.repository.PlayerRepository;
 import es.pmg.tennisjazz.service.PlayerService;
@@ -170,6 +171,24 @@ public class PlayerResourceIT {
         assertThat(playerList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setName(null);
+
+        // Create the Player, which fails.
+
+        restPlayerMockMvc.perform(post("/api/players")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(player)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -437,6 +456,25 @@ public class PlayerResourceIT {
 
         // Get all the playerList where localMatches equals to localMatchesId + 1
         defaultPlayerShouldNotBeFound("localMatchesId.equals=" + (localMatchesId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPlayersByRankingsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Ranking rankings = RankingResourceIT.createEntity(em);
+        em.persist(rankings);
+        em.flush();
+        player.addRankings(rankings);
+        playerRepository.saveAndFlush(player);
+        Long rankingsId = rankings.getId();
+
+        // Get all the playerList where rankings equals to rankingsId
+        defaultPlayerShouldBeFound("rankingsId.equals=" + rankingsId);
+
+        // Get all the playerList where rankings equals to rankingsId + 1
+        defaultPlayerShouldNotBeFound("rankingsId.equals=" + (rankingsId + 1));
     }
 
 

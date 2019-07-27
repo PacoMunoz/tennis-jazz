@@ -33,6 +33,12 @@ public class TournamentCriteria implements Serializable, Criteria {
 
     private BooleanFilter inProgress;
 
+    private IntegerFilter winPoints;
+
+    private IntegerFilter lossPoints;
+
+    private IntegerFilter notPresentPoints;
+
     private LongFilter groupsId;
 
     public TournamentCriteria(){
@@ -43,6 +49,9 @@ public class TournamentCriteria implements Serializable, Criteria {
         this.name = other.name == null ? null : other.name.copy();
         this.startDate = other.startDate == null ? null : other.startDate.copy();
         this.inProgress = other.inProgress == null ? null : other.inProgress.copy();
+        this.winPoints = other.winPoints == null ? null : other.winPoints.copy();
+        this.lossPoints = other.lossPoints == null ? null : other.lossPoints.copy();
+        this.notPresentPoints = other.notPresentPoints == null ? null : other.notPresentPoints.copy();
         this.groupsId = other.groupsId == null ? null : other.groupsId.copy();
     }
 
@@ -83,6 +92,30 @@ public class TournamentCriteria implements Serializable, Criteria {
         this.inProgress = inProgress;
     }
 
+    public IntegerFilter getWinPoints() {
+        return winPoints;
+    }
+
+    public void setWinPoints(IntegerFilter winPoints) {
+        this.winPoints = winPoints;
+    }
+
+    public IntegerFilter getLossPoints() {
+        return lossPoints;
+    }
+
+    public void setLossPoints(IntegerFilter lossPoints) {
+        this.lossPoints = lossPoints;
+    }
+
+    public IntegerFilter getNotPresentPoints() {
+        return notPresentPoints;
+    }
+
+    public void setNotPresentPoints(IntegerFilter notPresentPoints) {
+        this.notPresentPoints = notPresentPoints;
+    }
+
     public LongFilter getGroupsId() {
         return groupsId;
     }
@@ -106,6 +139,9 @@ public class TournamentCriteria implements Serializable, Criteria {
             Objects.equals(name, that.name) &&
             Objects.equals(startDate, that.startDate) &&
             Objects.equals(inProgress, that.inProgress) &&
+            Objects.equals(winPoints, that.winPoints) &&
+            Objects.equals(lossPoints, that.lossPoints) &&
+            Objects.equals(notPresentPoints, that.notPresentPoints) &&
             Objects.equals(groupsId, that.groupsId);
     }
 
@@ -116,6 +152,9 @@ public class TournamentCriteria implements Serializable, Criteria {
         name,
         startDate,
         inProgress,
+        winPoints,
+        lossPoints,
+        notPresentPoints,
         groupsId
         );
     }
@@ -127,6 +166,9 @@ public class TournamentCriteria implements Serializable, Criteria {
                 (name != null ? "name=" + name + ", " : "") +
                 (startDate != null ? "startDate=" + startDate + ", " : "") +
                 (inProgress != null ? "inProgress=" + inProgress + ", " : "") +
+                (winPoints != null ? "winPoints=" + winPoints + ", " : "") +
+                (lossPoints != null ? "lossPoints=" + lossPoints + ", " : "") +
+                (notPresentPoints != null ? "notPresentPoints=" + notPresentPoints + ", " : "") +
                 (groupsId != null ? "groupsId=" + groupsId + ", " : "") +
             "}";
     }

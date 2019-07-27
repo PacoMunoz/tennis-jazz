@@ -6,6 +6,9 @@ export interface ITournamentTennis {
   name?: string;
   startDate?: Moment;
   inProgress?: boolean;
+  winPoints?: number;
+  lossPoints?: number;
+  notPresentPoints?: number;
   groups?: ITournamentGroupTennis[];
 }
 
@@ -15,6 +18,9 @@ export class TournamentTennis implements ITournamentTennis {
     public name?: string,
     public startDate?: Moment,
     public inProgress?: boolean,
+    public winPoints?: number,
+    public lossPoints?: number,
+    public notPresentPoints?: number,
     public groups?: ITournamentGroupTennis[]
   ) {
     this.inProgress = this.inProgress || false;

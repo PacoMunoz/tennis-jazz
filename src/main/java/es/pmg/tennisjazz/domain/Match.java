@@ -39,6 +39,24 @@ public class Match implements Serializable {
     @Column(name = "player_2_set_3_result")
     private Integer player2Set3Result;
 
+    @Column(name = "local_player_sets")
+    private Integer localPlayerSets;
+
+    @Column(name = "visitor_player_sets")
+    private Integer visitorPlayerSets;
+
+    @Column(name = "local_player_abandoned")
+    private Boolean localPlayerAbandoned;
+
+    @Column(name = "visitor_player_abandoned")
+    private Boolean visitorPlayerAbandoned;
+
+    @Column(name = "local_player_not_present")
+    private Boolean localPlayerNotPresent;
+
+    @Column(name = "visitor_player_not_present")
+    private Boolean visitorPlayerNotPresent;
+
     @ManyToOne
     @JsonIgnoreProperties("matches")
     private Round round;
@@ -138,6 +156,84 @@ public class Match implements Serializable {
         this.player2Set3Result = player2Set3Result;
     }
 
+    public Integer getLocalPlayerSets() {
+        return localPlayerSets;
+    }
+
+    public Match localPlayerSets(Integer localPlayerSets) {
+        this.localPlayerSets = localPlayerSets;
+        return this;
+    }
+
+    public void setLocalPlayerSets(Integer localPlayerSets) {
+        this.localPlayerSets = localPlayerSets;
+    }
+
+    public Integer getVisitorPlayerSets() {
+        return visitorPlayerSets;
+    }
+
+    public Match visitorPlayerSets(Integer visitorPlayerSets) {
+        this.visitorPlayerSets = visitorPlayerSets;
+        return this;
+    }
+
+    public void setVisitorPlayerSets(Integer visitorPlayerSets) {
+        this.visitorPlayerSets = visitorPlayerSets;
+    }
+
+    public Boolean isLocalPlayerAbandoned() {
+        return localPlayerAbandoned;
+    }
+
+    public Match localPlayerAbandoned(Boolean localPlayerAbandoned) {
+        this.localPlayerAbandoned = localPlayerAbandoned;
+        return this;
+    }
+
+    public void setLocalPlayerAbandoned(Boolean localPlayerAbandoned) {
+        this.localPlayerAbandoned = localPlayerAbandoned;
+    }
+
+    public Boolean isVisitorPlayerAbandoned() {
+        return visitorPlayerAbandoned;
+    }
+
+    public Match visitorPlayerAbandoned(Boolean visitorPlayerAbandoned) {
+        this.visitorPlayerAbandoned = visitorPlayerAbandoned;
+        return this;
+    }
+
+    public void setVisitorPlayerAbandoned(Boolean visitorPlayerAbandoned) {
+        this.visitorPlayerAbandoned = visitorPlayerAbandoned;
+    }
+
+    public Boolean isLocalPlayerNotPresent() {
+        return localPlayerNotPresent;
+    }
+
+    public Match localPlayerNotPresent(Boolean localPlayerNotPresent) {
+        this.localPlayerNotPresent = localPlayerNotPresent;
+        return this;
+    }
+
+    public void setLocalPlayerNotPresent(Boolean localPlayerNotPresent) {
+        this.localPlayerNotPresent = localPlayerNotPresent;
+    }
+
+    public Boolean isVisitorPlayerNotPresent() {
+        return visitorPlayerNotPresent;
+    }
+
+    public Match visitorPlayerNotPresent(Boolean visitorPlayerNotPresent) {
+        this.visitorPlayerNotPresent = visitorPlayerNotPresent;
+        return this;
+    }
+
+    public void setVisitorPlayerNotPresent(Boolean visitorPlayerNotPresent) {
+        this.visitorPlayerNotPresent = visitorPlayerNotPresent;
+    }
+
     public Round getRound() {
         return round;
     }
@@ -204,6 +300,12 @@ public class Match implements Serializable {
             ", player2Set2Result=" + getPlayer2Set2Result() +
             ", player1Set3Result=" + getPlayer1Set3Result() +
             ", player2Set3Result=" + getPlayer2Set3Result() +
+            ", localPlayerSets=" + getLocalPlayerSets() +
+            ", visitorPlayerSets=" + getVisitorPlayerSets() +
+            ", localPlayerAbandoned='" + isLocalPlayerAbandoned() + "'" +
+            ", visitorPlayerAbandoned='" + isVisitorPlayerAbandoned() + "'" +
+            ", localPlayerNotPresent='" + isLocalPlayerNotPresent() + "'" +
+            ", visitorPlayerNotPresent='" + isVisitorPlayerNotPresent() + "'" +
             "}";
     }
 }

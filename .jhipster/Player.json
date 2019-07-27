@@ -3,7 +3,10 @@
     "fields": [
         {
             "fieldName": "name",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "surname",
@@ -36,6 +39,12 @@
             "relationshipName": "localMatches"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "ranking",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "rankings"
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityName": "tournamentGroup",
             "otherEntityRelationshipName": "players",
@@ -44,7 +53,7 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20190717204921",
+    "changelogDate": "20190720062001",
     "entityTableName": "player",
     "dto": "no",
     "pagination": "infinite-scroll",

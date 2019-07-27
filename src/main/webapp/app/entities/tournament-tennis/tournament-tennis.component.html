@@ -20,6 +20,9 @@
             <th jhiSortBy="name"><span jhiTranslate="tennisJazzApp.tournament.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="startDate"><span jhiTranslate="tennisJazzApp.tournament.startDate">Start Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="inProgress"><span jhiTranslate="tennisJazzApp.tournament.inProgress">In Progress</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="winPoints"><span jhiTranslate="tennisJazzApp.tournament.winPoints">Win Points</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lossPoints"><span jhiTranslate="tennisJazzApp.tournament.lossPoints">Loss Points</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="notPresentPoints"><span jhiTranslate="tennisJazzApp.tournament.notPresentPoints">Not Present Points</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -28,6 +31,9 @@
                 <td>{{tournament.name}}</td>
                 <td>{{tournament.startDate | date:'mediumDate'}}</td>
                 <td>{{tournament.inProgress}}</td>
+                <td>{{tournament.winPoints}}</td>
+                <td>{{tournament.lossPoints}}</td>
+                <td>{{tournament.notPresentPoints}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

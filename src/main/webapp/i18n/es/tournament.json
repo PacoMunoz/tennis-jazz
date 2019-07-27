@@ -19,6 +19,9 @@
       "name": "Name",
       "startDate": "Start Date",
       "inProgress": "In Progress",
+      "winPoints": "Win Points",
+      "lossPoints": "Loss Points",
+      "notPresentPoints": "Not Present Points",
       "groups": "Groups"
     }
   }

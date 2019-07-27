@@ -12,6 +12,24 @@
         {
             "fieldName": "inProgress",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "winPoints",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lossPoints",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "notPresentPoints",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [
@@ -22,7 +40,7 @@
             "relationshipName": "groups"
         }
     ],
-    "changelogDate": "20190717204919",
+    "changelogDate": "20190720061959",
     "entityTableName": "tournament",
     "dto": "no",
     "pagination": "infinite-scroll",

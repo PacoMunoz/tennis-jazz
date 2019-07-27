@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,7 +24,8 @@ public class Player implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "surname")
@@ -45,6 +47,10 @@ public class Player implements Serializable {
     @OneToMany(mappedBy = "localPlayer")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Match> localMatches = new HashSet<>();
+
+    @OneToMany(mappedBy = "player")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Ranking> rankings = new HashSet<>();
 
     @ManyToMany(mappedBy = "players")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -173,6 +179,31 @@ public class Player implements Serializable {
 
     public void setLocalMatches(Set<Match> matches) {
         this.localMatches = matches;
+    }
+
+    public Set<Ranking> getRankings() {
+        return rankings;
+    }
+
+    public Player rankings(Set<Ranking> rankings) {
+        this.rankings = rankings;
+        return this;
+    }
+
+    public Player addRankings(Ranking ranking) {
+        this.rankings.add(ranking);
+        ranking.setPlayer(this);
+        return this;
+    }
+
+    public Player removeRankings(Ranking ranking) {
+        this.rankings.remove(ranking);
+        ranking.setPlayer(null);
+        return this;
+    }
+
+    public void setRankings(Set<Ranking> rankings) {
+        this.rankings = rankings;
     }
 
     public Set<TournamentGroup> getGroups() {

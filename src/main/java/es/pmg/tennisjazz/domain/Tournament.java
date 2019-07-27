@@ -3,6 +3,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -31,6 +32,17 @@ public class Tournament implements Serializable {
 
     @Column(name = "in_progress")
     private Boolean inProgress;
+
+    @NotNull
+    @Column(name = "win_points", nullable = false)
+    private Integer winPoints;
+
+    @NotNull
+    @Column(name = "loss_points", nullable = false)
+    private Integer lossPoints;
+
+    @Column(name = "not_present_points")
+    private Integer notPresentPoints;
 
     @OneToMany(mappedBy = "tournament")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -84,6 +96,45 @@ public class Tournament implements Serializable {
         this.inProgress = inProgress;
     }
 
+    public Integer getWinPoints() {
+        return winPoints;
+    }
+
+    public Tournament winPoints(Integer winPoints) {
+        this.winPoints = winPoints;
+        return this;
+    }
+
+    public void setWinPoints(Integer winPoints) {
+        this.winPoints = winPoints;
+    }
+
+    public Integer getLossPoints() {
+        return lossPoints;
+    }
+
+    public Tournament lossPoints(Integer lossPoints) {
+        this.lossPoints = lossPoints;
+        return this;
+    }
+
+    public void setLossPoints(Integer lossPoints) {
+        this.lossPoints = lossPoints;
+    }
+
+    public Integer getNotPresentPoints() {
+        return notPresentPoints;
+    }
+
+    public Tournament notPresentPoints(Integer notPresentPoints) {
+        this.notPresentPoints = notPresentPoints;
+        return this;
+    }
+
+    public void setNotPresentPoints(Integer notPresentPoints) {
+        this.notPresentPoints = notPresentPoints;
+    }
+
     public Set<TournamentGroup> getGroups() {
         return groups;
     }
@@ -133,6 +184,9 @@ public class Tournament implements Serializable {
             ", name='" + getName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", inProgress='" + isInProgress() + "'" +
+            ", winPoints=" + getWinPoints() +
+            ", lossPoints=" + getLossPoints() +
+            ", notPresentPoints=" + getNotPresentPoints() +
             "}";
     }
 }

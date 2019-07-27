@@ -19,6 +19,7 @@
       "name": "Name",
       "tournament": "Tournament",
       "rounds": "Rounds",
+      "rankings": "Rankings",
       "players": "Players"
     }
   }

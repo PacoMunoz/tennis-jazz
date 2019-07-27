@@ -48,6 +48,15 @@ public class TournamentResourceIT {
     private static final Boolean DEFAULT_IN_PROGRESS = false;
     private static final Boolean UPDATED_IN_PROGRESS = true;
 
+    private static final Integer DEFAULT_WIN_POINTS = 1;
+    private static final Integer UPDATED_WIN_POINTS = 2;
+
+    private static final Integer DEFAULT_LOSS_POINTS = 1;
+    private static final Integer UPDATED_LOSS_POINTS = 2;
+
+    private static final Integer DEFAULT_NOT_PRESENT_POINTS = 1;
+    private static final Integer UPDATED_NOT_PRESENT_POINTS = 2;
+
     @Autowired
     private TournamentRepository tournamentRepository;
 
@@ -98,7 +107,10 @@ public class TournamentResourceIT {
         Tournament tournament = new Tournament()
             .name(DEFAULT_NAME)
             .startDate(DEFAULT_START_DATE)
-            .inProgress(DEFAULT_IN_PROGRESS);
+            .inProgress(DEFAULT_IN_PROGRESS)
+            .winPoints(DEFAULT_WIN_POINTS)
+            .lossPoints(DEFAULT_LOSS_POINTS)
+            .notPresentPoints(DEFAULT_NOT_PRESENT_POINTS);
         return tournament;
     }
     /**
@@ -111,7 +123,10 @@ public class TournamentResourceIT {
         Tournament tournament = new Tournament()
             .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
-            .inProgress(UPDATED_IN_PROGRESS);
+            .inProgress(UPDATED_IN_PROGRESS)
+            .winPoints(UPDATED_WIN_POINTS)
+            .lossPoints(UPDATED_LOSS_POINTS)
+            .notPresentPoints(UPDATED_NOT_PRESENT_POINTS);
         return tournament;
     }
 
@@ -138,6 +153,9 @@ public class TournamentResourceIT {
         assertThat(testTournament.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testTournament.isInProgress()).isEqualTo(DEFAULT_IN_PROGRESS);
+        assertThat(testTournament.getWinPoints()).isEqualTo(DEFAULT_WIN_POINTS);
+        assertThat(testTournament.getLossPoints()).isEqualTo(DEFAULT_LOSS_POINTS);
+        assertThat(testTournament.getNotPresentPoints()).isEqualTo(DEFAULT_NOT_PRESENT_POINTS);
     }
 
     @Test
@@ -162,6 +180,42 @@ public class TournamentResourceIT {
 
     @Test
     @Transactional
+    public void checkWinPointsIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tournamentRepository.findAll().size();
+        // set the field null
+        tournament.setWinPoints(null);
+
+        // Create the Tournament, which fails.
+
+        restTournamentMockMvc.perform(post("/api/tournaments")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(tournament)))
+            .andExpect(status().isBadRequest());
+
+        List<Tournament> tournamentList = tournamentRepository.findAll();
+        assertThat(tournamentList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLossPointsIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tournamentRepository.findAll().size();
+        // set the field null
+        tournament.setLossPoints(null);
+
+        // Create the Tournament, which fails.
+
+        restTournamentMockMvc.perform(post("/api/tournaments")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(tournament)))
+            .andExpect(status().isBadRequest());
+
+        List<Tournament> tournamentList = tournamentRepository.findAll();
+        assertThat(tournamentList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllTournaments() throws Exception {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
@@ -173,7 +227,10 @@ public class TournamentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].inProgress").value(hasItem(DEFAULT_IN_PROGRESS.booleanValue())));
+            .andExpect(jsonPath("$.[*].inProgress").value(hasItem(DEFAULT_IN_PROGRESS.booleanValue())))
+            .andExpect(jsonPath("$.[*].winPoints").value(hasItem(DEFAULT_WIN_POINTS)))
+            .andExpect(jsonPath("$.[*].lossPoints").value(hasItem(DEFAULT_LOSS_POINTS)))
+            .andExpect(jsonPath("$.[*].notPresentPoints").value(hasItem(DEFAULT_NOT_PRESENT_POINTS)));
     }
     
     @Test
@@ -189,7 +246,10 @@ public class TournamentResourceIT {
             .andExpect(jsonPath("$.id").value(tournament.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.inProgress").value(DEFAULT_IN_PROGRESS.booleanValue()));
+            .andExpect(jsonPath("$.inProgress").value(DEFAULT_IN_PROGRESS.booleanValue()))
+            .andExpect(jsonPath("$.winPoints").value(DEFAULT_WIN_POINTS))
+            .andExpect(jsonPath("$.lossPoints").value(DEFAULT_LOSS_POINTS))
+            .andExpect(jsonPath("$.notPresentPoints").value(DEFAULT_NOT_PRESENT_POINTS));
     }
 
     @Test
@@ -338,6 +398,204 @@ public class TournamentResourceIT {
 
     @Test
     @Transactional
+    public void getAllTournamentsByWinPointsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints equals to DEFAULT_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.equals=" + DEFAULT_WIN_POINTS);
+
+        // Get all the tournamentList where winPoints equals to UPDATED_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.equals=" + UPDATED_WIN_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinPointsIsInShouldWork() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints in DEFAULT_WIN_POINTS or UPDATED_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.in=" + DEFAULT_WIN_POINTS + "," + UPDATED_WIN_POINTS);
+
+        // Get all the tournamentList where winPoints equals to UPDATED_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.in=" + UPDATED_WIN_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinPointsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints is not null
+        defaultTournamentShouldBeFound("winPoints.specified=true");
+
+        // Get all the tournamentList where winPoints is null
+        defaultTournamentShouldNotBeFound("winPoints.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinPointsIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints greater than or equals to DEFAULT_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.greaterOrEqualThan=" + DEFAULT_WIN_POINTS);
+
+        // Get all the tournamentList where winPoints greater than or equals to UPDATED_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.greaterOrEqualThan=" + UPDATED_WIN_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinPointsIsLessThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints less than or equals to DEFAULT_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.lessThan=" + DEFAULT_WIN_POINTS);
+
+        // Get all the tournamentList where winPoints less than or equals to UPDATED_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.lessThan=" + UPDATED_WIN_POINTS);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints equals to DEFAULT_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.equals=" + DEFAULT_LOSS_POINTS);
+
+        // Get all the tournamentList where lossPoints equals to UPDATED_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.equals=" + UPDATED_LOSS_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsInShouldWork() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints in DEFAULT_LOSS_POINTS or UPDATED_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.in=" + DEFAULT_LOSS_POINTS + "," + UPDATED_LOSS_POINTS);
+
+        // Get all the tournamentList where lossPoints equals to UPDATED_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.in=" + UPDATED_LOSS_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints is not null
+        defaultTournamentShouldBeFound("lossPoints.specified=true");
+
+        // Get all the tournamentList where lossPoints is null
+        defaultTournamentShouldNotBeFound("lossPoints.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints greater than or equals to DEFAULT_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.greaterOrEqualThan=" + DEFAULT_LOSS_POINTS);
+
+        // Get all the tournamentList where lossPoints greater than or equals to UPDATED_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.greaterOrEqualThan=" + UPDATED_LOSS_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsLessThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints less than or equals to DEFAULT_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.lessThan=" + DEFAULT_LOSS_POINTS);
+
+        // Get all the tournamentList where lossPoints less than or equals to UPDATED_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.lessThan=" + UPDATED_LOSS_POINTS);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints equals to DEFAULT_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.equals=" + DEFAULT_NOT_PRESENT_POINTS);
+
+        // Get all the tournamentList where notPresentPoints equals to UPDATED_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.equals=" + UPDATED_NOT_PRESENT_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsInShouldWork() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints in DEFAULT_NOT_PRESENT_POINTS or UPDATED_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.in=" + DEFAULT_NOT_PRESENT_POINTS + "," + UPDATED_NOT_PRESENT_POINTS);
+
+        // Get all the tournamentList where notPresentPoints equals to UPDATED_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.in=" + UPDATED_NOT_PRESENT_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints is not null
+        defaultTournamentShouldBeFound("notPresentPoints.specified=true");
+
+        // Get all the tournamentList where notPresentPoints is null
+        defaultTournamentShouldNotBeFound("notPresentPoints.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints greater than or equals to DEFAULT_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.greaterOrEqualThan=" + DEFAULT_NOT_PRESENT_POINTS);
+
+        // Get all the tournamentList where notPresentPoints greater than or equals to UPDATED_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.greaterOrEqualThan=" + UPDATED_NOT_PRESENT_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsLessThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints less than or equals to DEFAULT_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.lessThan=" + DEFAULT_NOT_PRESENT_POINTS);
+
+        // Get all the tournamentList where notPresentPoints less than or equals to UPDATED_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.lessThan=" + UPDATED_NOT_PRESENT_POINTS);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllTournamentsByGroupsIsEqualToSomething() throws Exception {
         // Initialize the database
         TournamentGroup groups = TournamentGroupResourceIT.createEntity(em);
@@ -364,7 +622,10 @@ public class TournamentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].inProgress").value(hasItem(DEFAULT_IN_PROGRESS.booleanValue())));
+            .andExpect(jsonPath("$.[*].inProgress").value(hasItem(DEFAULT_IN_PROGRESS.booleanValue())))
+            .andExpect(jsonPath("$.[*].winPoints").value(hasItem(DEFAULT_WIN_POINTS)))
+            .andExpect(jsonPath("$.[*].lossPoints").value(hasItem(DEFAULT_LOSS_POINTS)))
+            .andExpect(jsonPath("$.[*].notPresentPoints").value(hasItem(DEFAULT_NOT_PRESENT_POINTS)));
 
         // Check, that the count call also returns 1
         restTournamentMockMvc.perform(get("/api/tournaments/count?sort=id,desc&" + filter))
@@ -414,7 +675,10 @@ public class TournamentResourceIT {
         updatedTournament
             .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
-            .inProgress(UPDATED_IN_PROGRESS);
+            .inProgress(UPDATED_IN_PROGRESS)
+            .winPoints(UPDATED_WIN_POINTS)
+            .lossPoints(UPDATED_LOSS_POINTS)
+            .notPresentPoints(UPDATED_NOT_PRESENT_POINTS);
 
         restTournamentMockMvc.perform(put("/api/tournaments")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -428,6 +692,9 @@ public class TournamentResourceIT {
         assertThat(testTournament.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testTournament.isInProgress()).isEqualTo(UPDATED_IN_PROGRESS);
+        assertThat(testTournament.getWinPoints()).isEqualTo(UPDATED_WIN_POINTS);
+        assertThat(testTournament.getLossPoints()).isEqualTo(UPDATED_LOSS_POINTS);
+        assertThat(testTournament.getNotPresentPoints()).isEqualTo(UPDATED_NOT_PRESENT_POINTS);
     }
 
     @Test

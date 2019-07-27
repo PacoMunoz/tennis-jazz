@@ -4,6 +4,7 @@ import es.pmg.tennisjazz.TennisJazzApp;
 import es.pmg.tennisjazz.domain.TournamentGroup;
 import es.pmg.tennisjazz.domain.Tournament;
 import es.pmg.tennisjazz.domain.Round;
+import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.repository.TournamentGroupRepository;
 import es.pmg.tennisjazz.service.TournamentGroupService;
@@ -161,6 +162,24 @@ public class TournamentGroupResourceIT {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tournamentGroupRepository.findAll().size();
+        // set the field null
+        tournamentGroup.setName(null);
+
+        // Create the TournamentGroup, which fails.
+
+        restTournamentGroupMockMvc.perform(post("/api/tournament-groups")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(tournamentGroup)))
+            .andExpect(status().isBadRequest());
+
+        List<TournamentGroup> tournamentGroupList = tournamentGroupRepository.findAll();
+        assertThat(tournamentGroupList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllTournamentGroups() throws Exception {
         // Initialize the database
         tournamentGroupRepository.saveAndFlush(tournamentGroup);
@@ -294,6 +313,25 @@ public class TournamentGroupResourceIT {
 
         // Get all the tournamentGroupList where rounds equals to roundsId + 1
         defaultTournamentGroupShouldNotBeFound("roundsId.equals=" + (roundsId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTournamentGroupsByRankingsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Ranking rankings = RankingResourceIT.createEntity(em);
+        em.persist(rankings);
+        em.flush();
+        tournamentGroup.addRankings(rankings);
+        tournamentGroupRepository.saveAndFlush(tournamentGroup);
+        Long rankingsId = rankings.getId();
+
+        // Get all the tournamentGroupList where rankings equals to rankingsId
+        defaultTournamentGroupShouldBeFound("rankingsId.equals=" + rankingsId);
+
+        // Get all the tournamentGroupList where rankings equals to rankingsId + 1
+        defaultTournamentGroupShouldNotBeFound("rankingsId.equals=" + (rankingsId + 1));
     }
 
 

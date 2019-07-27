@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -58,7 +59,7 @@ public class PlayerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/players")
-    public ResponseEntity<Player> createPlayer(@RequestBody Player player) throws URISyntaxException {
+    public ResponseEntity<Player> createPlayer(@Valid @RequestBody Player player) throws URISyntaxException {
         log.debug("REST request to save Player : {}", player);
         if (player.getId() != null) {
             throw new BadRequestAlertException("A new player cannot already have an ID", ENTITY_NAME, "idexists");
@@ -79,7 +80,7 @@ public class PlayerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/players")
-    public ResponseEntity<Player> updatePlayer(@RequestBody Player player) throws URISyntaxException {
+    public ResponseEntity<Player> updatePlayer(@Valid @RequestBody Player player) throws URISyntaxException {
         log.debug("REST request to update Player : {}", player);
         if (player.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

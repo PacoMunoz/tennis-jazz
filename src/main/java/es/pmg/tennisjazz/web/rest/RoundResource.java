@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -58,7 +59,7 @@ public class RoundResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/rounds")
-    public ResponseEntity<Round> createRound(@RequestBody Round round) throws URISyntaxException {
+    public ResponseEntity<Round> createRound(@Valid @RequestBody Round round) throws URISyntaxException {
         log.debug("REST request to save Round : {}", round);
         if (round.getId() != null) {
             throw new BadRequestAlertException("A new round cannot already have an ID", ENTITY_NAME, "idexists");
@@ -79,7 +80,7 @@ public class RoundResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/rounds")
-    public ResponseEntity<Round> updateRound(@RequestBody Round round) throws URISyntaxException {
+    public ResponseEntity<Round> updateRound(@Valid @RequestBody Round round) throws URISyntaxException {
         log.debug("REST request to update Round : {}", round);
         if (round.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

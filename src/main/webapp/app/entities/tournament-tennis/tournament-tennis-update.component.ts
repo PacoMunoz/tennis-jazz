@@ -19,7 +19,10 @@ export class TournamentTennisUpdateComponent implements OnInit {
     id: [],
     name: [],
     startDate: [],
-    inProgress: []
+    inProgress: [],
+    winPoints: [null, [Validators.required]],
+    lossPoints: [null, [Validators.required]],
+    notPresentPoints: []
   });
 
   constructor(protected tournamentService: TournamentTennisService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -36,7 +39,10 @@ export class TournamentTennisUpdateComponent implements OnInit {
       id: tournament.id,
       name: tournament.name,
       startDate: tournament.startDate,
-      inProgress: tournament.inProgress
+      inProgress: tournament.inProgress,
+      winPoints: tournament.winPoints,
+      lossPoints: tournament.lossPoints,
+      notPresentPoints: tournament.notPresentPoints
     });
   }
 
@@ -60,7 +66,10 @@ export class TournamentTennisUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       startDate: this.editForm.get(['startDate']).value,
-      inProgress: this.editForm.get(['inProgress']).value
+      inProgress: this.editForm.get(['inProgress']).value,
+      winPoints: this.editForm.get(['winPoints']).value,
+      lossPoints: this.editForm.get(['lossPoints']).value,
+      notPresentPoints: this.editForm.get(['notPresentPoints']).value
     };
   }
 

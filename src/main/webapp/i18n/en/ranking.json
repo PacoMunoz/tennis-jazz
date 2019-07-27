@@ -1,0 +1,31 @@
+{
+  "tennisJazzApp": {
+    "ranking": {
+      "home": {
+        "title": "Rankings",
+        "createLabel": "Create a new Ranking",
+        "createOrEditLabel": "Create or edit a Ranking",
+        "notFound": "No Ranking found"
+      },
+      "created": "A new Ranking is created with identifier {{ param }}",
+      "updated": "A Ranking is updated with identifier {{ param }}",
+      "deleted": "A Ranking is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ranking {{ id }}?"
+      },
+      "detail": {
+        "title": "Ranking"
+      },
+      "points": "Points",
+      "gamesWin": "Games Win",
+      "gamesLoss": "Games Loss",
+      "setsWin": "Sets Win",
+      "setsLost": "Sets Lost",
+      "matchesPlayed": "Matches Played",
+      "matchesWined": "Matches Wined",
+      "matchesLoss": "Matches Loss",
+      "tournamentGroup": "Tournament Group",
+      "player": "Player"
+    }
+  }
+}

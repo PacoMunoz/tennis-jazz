@@ -40,6 +40,8 @@ public class PlayerCriteria implements Serializable, Criteria {
 
     private LongFilter localMatchesId;
 
+    private LongFilter rankingsId;
+
     private LongFilter groupsId;
 
     public PlayerCriteria(){
@@ -54,6 +56,7 @@ public class PlayerCriteria implements Serializable, Criteria {
         this.other = other.other == null ? null : other.other.copy();
         this.visitorMatchesId = other.visitorMatchesId == null ? null : other.visitorMatchesId.copy();
         this.localMatchesId = other.localMatchesId == null ? null : other.localMatchesId.copy();
+        this.rankingsId = other.rankingsId == null ? null : other.rankingsId.copy();
         this.groupsId = other.groupsId == null ? null : other.groupsId.copy();
     }
 
@@ -126,6 +129,14 @@ public class PlayerCriteria implements Serializable, Criteria {
         this.localMatchesId = localMatchesId;
     }
 
+    public LongFilter getRankingsId() {
+        return rankingsId;
+    }
+
+    public void setRankingsId(LongFilter rankingsId) {
+        this.rankingsId = rankingsId;
+    }
+
     public LongFilter getGroupsId() {
         return groupsId;
     }
@@ -153,6 +164,7 @@ public class PlayerCriteria implements Serializable, Criteria {
             Objects.equals(other, that.other) &&
             Objects.equals(visitorMatchesId, that.visitorMatchesId) &&
             Objects.equals(localMatchesId, that.localMatchesId) &&
+            Objects.equals(rankingsId, that.rankingsId) &&
             Objects.equals(groupsId, that.groupsId);
     }
 
@@ -167,6 +179,7 @@ public class PlayerCriteria implements Serializable, Criteria {
         other,
         visitorMatchesId,
         localMatchesId,
+        rankingsId,
         groupsId
         );
     }
@@ -182,6 +195,7 @@ public class PlayerCriteria implements Serializable, Criteria {
                 (other != null ? "other=" + other + ", " : "") +
                 (visitorMatchesId != null ? "visitorMatchesId=" + visitorMatchesId + ", " : "") +
                 (localMatchesId != null ? "localMatchesId=" + localMatchesId + ", " : "") +
+                (rankingsId != null ? "rankingsId=" + rankingsId + ", " : "") +
                 (groupsId != null ? "groupsId=" + groupsId + ", " : "") +
             "}";
     }

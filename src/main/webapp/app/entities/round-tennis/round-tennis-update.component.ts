@@ -24,7 +24,7 @@ export class RoundTennisUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [],
+    name: [null, [Validators.required]],
     startDate: [],
     endDate: [],
     tournamentGroup: []

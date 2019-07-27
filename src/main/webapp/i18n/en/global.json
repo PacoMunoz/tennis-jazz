@@ -12,6 +12,7 @@
         "playerTennis": "Player",
         "roundTennis": "Round",
         "matchTennis": "Match",
+        "rankingTennis": "Ranking",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

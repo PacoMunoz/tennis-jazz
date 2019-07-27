@@ -22,6 +22,12 @@
       "player2Set2Result": "Player 2 Set 2 Result",
       "player1Set3Result": "Player 1 Set 3 Result",
       "player2Set3Result": "Player 2 Set 3 Result",
+      "localPlayerSets": "Local Player Sets",
+      "visitorPlayerSets": "Visitor Player Sets",
+      "localPlayerAbandoned": "Local Player Abandoned",
+      "visitorPlayerAbandoned": "Visitor Player Abandoned",
+      "localPlayerNotPresent": "Local Player Not Present",
+      "visitorPlayerNotPresent": "Visitor Player Not Present",
       "round": "Round",
       "visitorPlayer": "Visitor Player",
       "localPlayer": "Local Player"

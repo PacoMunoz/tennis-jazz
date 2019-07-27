@@ -96,6 +96,10 @@ public class TournamentGroupQueryService extends QueryService<TournamentGroup> {
                 specification = specification.and(buildSpecification(criteria.getRoundsId(),
                     root -> root.join(TournamentGroup_.rounds, JoinType.LEFT).get(Round_.id)));
             }
+            if (criteria.getRankingsId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRankingsId(),
+                    root -> root.join(TournamentGroup_.rankings, JoinType.LEFT).get(Ranking_.id)));
+            }
             if (criteria.getPlayersId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPlayersId(),
                     root -> root.join(TournamentGroup_.players, JoinType.LEFT).get(Player_.id)));

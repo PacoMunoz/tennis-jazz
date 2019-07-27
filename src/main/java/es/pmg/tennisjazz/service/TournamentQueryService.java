@@ -94,6 +94,15 @@ public class TournamentQueryService extends QueryService<Tournament> {
             if (criteria.getInProgress() != null) {
                 specification = specification.and(buildSpecification(criteria.getInProgress(), Tournament_.inProgress));
             }
+            if (criteria.getWinPoints() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getWinPoints(), Tournament_.winPoints));
+            }
+            if (criteria.getLossPoints() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLossPoints(), Tournament_.lossPoints));
+            }
+            if (criteria.getNotPresentPoints() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getNotPresentPoints(), Tournament_.notPresentPoints));
+            }
             if (criteria.getGroupsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getGroupsId(),
                     root -> root.join(Tournament_.groups, JoinType.LEFT).get(TournamentGroup_.id)));

@@ -28,6 +28,41 @@
                     <input type="checkbox" class="form-control" name="inProgress" id="field_inProgress"
                            formControlName="inProgress"/>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.winPoints" for="field_winPoints">Win Points</label>
+                    <input type="number" class="form-control" name="winPoints" id="field_winPoints"
+                           formControlName="winPoints"/>
+                    <div *ngIf="editForm.get('winPoints').invalid && (editForm.get('winPoints').dirty || editForm.get('winPoints').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('winPoints').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('winPoints')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.lossPoints" for="field_lossPoints">Loss Points</label>
+                    <input type="number" class="form-control" name="lossPoints" id="field_lossPoints"
+                           formControlName="lossPoints"/>
+                    <div *ngIf="editForm.get('lossPoints').invalid && (editForm.get('lossPoints').dirty || editForm.get('lossPoints').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('lossPoints').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('lossPoints')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.notPresentPoints" for="field_notPresentPoints">Not Present Points</label>
+                    <input type="number" class="form-control" name="notPresentPoints" id="field_notPresentPoints"
+                           formControlName="notPresentPoints"/>
+                </div>
 
             </div>
             <div>
