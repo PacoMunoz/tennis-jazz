@@ -3,6 +3,8 @@ package es.pmg.tennisjazz.web.rest;
 import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.service.RankingService;
 import es.pmg.tennisjazz.web.rest.errors.BadRequestAlertException;
+import es.pmg.tennisjazz.service.dto.RankingCriteria;
+import es.pmg.tennisjazz.service.RankingQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -41,8 +43,11 @@ public class RankingResource {
 
     private final RankingService rankingService;
 
-    public RankingResource(RankingService rankingService) {
+    private final RankingQueryService rankingQueryService;
+
+    public RankingResource(RankingService rankingService, RankingQueryService rankingQueryService) {
         this.rankingService = rankingService;
+        this.rankingQueryService = rankingQueryService;
     }
 
     /**
@@ -91,14 +96,27 @@ public class RankingResource {
      * @param pageable the pagination information.
      * @param queryParams a {@link MultiValueMap} query parameters.
      * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rankings in body.
      */
     @GetMapping("/rankings")
-    public ResponseEntity<List<Ranking>> getAllRankings(Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
-        log.debug("REST request to get a page of Rankings");
-        Page<Ranking> page = rankingService.findAll(pageable);
+    public ResponseEntity<List<Ranking>> getAllRankings(RankingCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get Rankings by criteria: {}", criteria);
+        Page<Ranking> page = rankingQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * {@code GET  /rankings/count} : count all the rankings.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/rankings/count")
+    public ResponseEntity<Long> countRankings(RankingCriteria criteria) {
+        log.debug("REST request to count Rankings by criteria: {}", criteria);
+        return ResponseEntity.ok().body(rankingQueryService.countByCriteria(criteria));
     }
 
     /**

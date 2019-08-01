@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable, of, pipe, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
@@ -9,6 +9,14 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { TournamentGroupTennisService } from './tournament-group-tennis.service';
+import { RoundTennisService } from 'app/entities/round-tennis';
+import { IRoundTennis } from 'app/shared/model/round-tennis.model';
+import { MatchTennisService } from 'app/entities/match-tennis';
+import { IMatchTennis } from 'app/shared/model/match-tennis.model';
+import { RankingTennisService } from 'app/entities/ranking-tennis';
+import { IRankingTennis, RankingTennis } from 'app/shared/model/ranking-tennis.model';
+import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { error } from 'util';
 
 @Component({
   selector: 'jhi-tournament-group-tennis',
@@ -30,7 +38,10 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     protected jhiAlertService: JhiAlertService,
     protected eventManager: JhiEventManager,
     protected parseLinks: JhiParseLinks,
-    protected accountService: AccountService
+    protected accountService: AccountService,
+    protected roundTennisService: RoundTennisService,
+    protected matchTennisService: MatchTennisService,
+    protected rankingTennisService: RankingTennisService
   ) {
     this.tournamentGroups = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -104,5 +115,224 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  /*updateRanking(){
+    for (let i = 0; i < this.tournamentGroups.length; i++) {
+      if (this.tournamentGroups[i].id === 1){
+        this.roundTennisService
+          .query({
+            'tournamentGroupId.equals': group.id
+          }).subscribe(
+          (res: HttpResponse<IRoundTennis[]>) => this.getRoundMatches(res.body, group),
+          (res: HttpErrorResponse) => this.onError(res.message)
+        );
+      }
+    }
+  }*/
+
+  updateRanking() {
+    for (let i = 0; i < this.tournamentGroups.length; i++) {
+      this.getGroupRounds(this.tournamentGroups[i]);
+    }
+  }
+
+  getGroupRounds(group: ITournamentGroupTennis) {
+    console.log('getGroupsRounds para el grupo : ' + group.id);
+    this.roundTennisService
+      .query({
+        'tournamentGroupId.equals': group.id
+      })
+      .subscribe(
+        (res: HttpResponse<IRoundTennis[]>) => this.getRoundMatches(res.body, group),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+
+  getRoundMatches(rounds: IRoundTennis[], group: ITournamentGroupTennis) {
+    console.log('getRoundMatches para el grupo: ' + group.id);
+    for (let i = 0; i < rounds.length; i++) {
+      this.matchTennisService
+        .query({ 'roundId.equals': rounds[i].id })
+        .subscribe(
+          (res: HttpResponse<IMatchTennis[]>) => this.generateRankings(res.body, group),
+          (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+  }
+
+  generateRankings(matches: IMatchTennis[], group: ITournamentGroupTennis) {
+    console.log('El número de partidos son : ' + matches.length);
+    for (let i = 0; i < matches.length; i++) {
+      this.generateRankingJugadoresLocales(matches[i], group);
+    }
+  }
+
+  generateRankingJugadoresLocales(match: IMatchTennis, group: ITournamentGroupTennis) {
+    console.log('Generando ranking para el partido' + match.id);
+    this.rankingTennisService
+      .query({
+        'playerId.equals': match.localPlayer.id,
+        'tournamentGroupId.equals': group.id
+      })
+      .subscribe(
+        (res: HttpResponse<IRankingTennis[]>) => {
+          if (res.body.length === 0) {
+            this.createRankingLocalPlayer(match.localPlayer, group, match);
+          } else {
+            this.updateRankingLocalPlayer(res.body[0], match);
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+
+  generateRanking(match: IMatchTennis, group: ITournamentGroupTennis) {
+    console.log('Generando ranking para el partido' + match.id);
+    this.rankingTennisService
+      .query({
+        'playerId.equals': match.localPlayer.id,
+        'tournamentGroupId.equals': group.id
+      })
+      .subscribe(
+        (res: HttpResponse<IRankingTennis[]>) => {
+          if (res.body.length === 0) {
+            this.createRankingLocalPlayer(match.localPlayer, group, match);
+          } else {
+            this.updateRankingLocalPlayer(res.body[0], match);
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+
+    this.rankingTennisService
+      .query({
+        'playerId.equals': match.visitorPlayer.id,
+        'tournamentGroupId.equals': group.id
+      })
+      .subscribe(
+        (res: HttpResponse<IRankingTennis[]>) => {
+          if (res.body.length === 0) {
+            this.createRankingVisitorPlayer(match.visitorPlayer, group, match);
+          } else {
+            this.updateRankingVisitorPlayer(res.body[0], match);
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+
+  createRankingLocalPlayer(player: IPlayerTennis, group: ITournamentGroupTennis, match: IMatchTennis) {
+    console.log('Creando ranking para el Jugador Local : ' + player.name + ' en el grupo : ' + group.name);
+    const ranking: IRankingTennis = {};
+    ranking.player = player;
+    ranking.tournamentGroup = group;
+    ranking.gamesWin =
+      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
+      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
+      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+    ranking.gamesLoss =
+      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
+      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
+      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+    // si ha ganado dos sets, si el visitante se ha retirado o si se ha lesionado entonces ha ganado el partido
+    if (match.localPlayerSets === 2 || match.visitorPlayerAbandoned || match.visitorPlayerNotPresent) {
+      ranking.matchesWined = 1;
+      ranking.matchesLoss = 0;
+      ranking.points = 3;
+    } else {
+      ranking.matchesWined = 0;
+      ranking.matchesLoss = 1;
+      ranking.points = 1;
+    }
+    ranking.setsWin = match.localPlayerSets;
+    ranking.setsLost = match.visitorPlayerSets;
+    ranking.matchesPlayed = 1;
+    this.rankingTennisService
+      .create(ranking)
+      .subscribe((res: HttpResponse<any>) => console.log(res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  createRankingVisitorPlayer(player: IPlayerTennis, group: ITournamentGroupTennis, match: IMatchTennis) {
+    console.log('Creando ranking para el Jugador Visitante : ' + player.name + ' en el grupo : ' + group.name);
+    const ranking: IRankingTennis = {};
+    ranking.player = player;
+    ranking.tournamentGroup = group;
+    ranking.gamesLoss =
+      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
+      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
+      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+    ranking.gamesWin =
+      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
+      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
+      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+    // si ha ganado dos sets, si el visitante se ha retirado o si se ha lesionado entonces ha ganado el partido
+    if (match.visitorPlayerSets === 2 || match.localPlayerAbandoned || match.localPlayerNotPresent) {
+      ranking.matchesWined = 1;
+      ranking.matchesLoss = 0;
+      ranking.points = 3;
+    } else {
+      ranking.matchesWined = 0;
+      ranking.matchesLoss = 1;
+      ranking.points = 1;
+    }
+    ranking.setsWin = match.visitorPlayerSets;
+    ranking.setsLost = match.localPlayerSets;
+    ranking.matchesPlayed = 1;
+    this.rankingTennisService
+      .create(ranking)
+      .subscribe((res: HttpResponse<any>) => console.log(res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  updateRankingLocalPlayer(ranking: IRankingTennis, match: IMatchTennis) {
+    console.log('Actualizando ranking para el Jugador Local : ' + ranking.player.name + ' en el grupo : ' + ranking.tournamentGroup.name);
+    if (match.localPlayerSets === 2 || match.visitorPlayerAbandoned || match.visitorPlayerNotPresent) {
+      ranking.points += 3;
+      ranking.matchesWined += 1;
+    } else {
+      ranking.points += 1;
+      ranking.matchesLoss += 1;
+    }
+    ranking.gamesWin +=
+      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
+      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
+      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+    ranking.gamesLoss +=
+      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
+      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
+      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+    ranking.setsWin += match.localPlayerSets;
+    ranking.setsLost += match.visitorPlayerSets;
+    ranking.matchesPlayed += 1;
+    this.rankingTennisService
+      .update(ranking)
+      .subscribe((res: HttpResponse<any>) => console.log(res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  updateRankingVisitorPlayer(ranking: IRankingTennis, match: IMatchTennis) {
+    console.log(
+      'Actualizando ranking para el Jugador Visitante : ' + ranking.player.name + ' en el grupo : ' + ranking.tournamentGroup.name
+    );
+    if (match.visitorPlayerSets === 2 || match.localPlayerAbandoned || match.localPlayerNotPresent) {
+      ranking.matchesWined += 1;
+      ranking.points += 3;
+    } else {
+      ranking.matchesLoss += 1;
+      ranking.points += 1;
+    }
+    ranking.gamesLoss +=
+      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
+      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
+      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+    ranking.gamesWin +=
+      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
+      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
+      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+    ranking.setsWin += match.visitorPlayerSets;
+    ranking.setsLost += match.localPlayerSets;
+    ranking.matchesPlayed += 1;
+    this.rankingTennisService
+      .update(ranking)
+      .subscribe((res: HttpResponse<any>) => console.log(res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 }
