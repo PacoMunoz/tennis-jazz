@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable, of, pipe, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { from, Observable, of, pipe, Subscription } from 'rxjs';
+import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
@@ -132,8 +132,24 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
   }*/
 
   updateRanking() {
-    for (let i = 0; i < this.tournamentGroups.length; i++) {
+    /*for (let i = 0; i < this.tournamentGroups.length; i++) {
       this.getGroupRounds(this.tournamentGroups[i]);
+    }*/
+    console.log('empieza la fiesta');
+    for (let i = 0; i < this.tournamentGroups.length; i++) {
+      this.roundTennisService
+        .query({
+          'tournamentGroupId.equals': this.tournamentGroups[i].id
+        })
+        .pipe(
+          switchMap(rounds => from(rounds.body)),
+          mergeMap(round =>
+            this.matchTennisService.query({ 'roundId.equals': round.id }).pipe(
+              switchMap(matches => from(matches.body)),
+              tap(match => console.log('Partido entre Jugador 1 ' + match.localPlayer.name + ' y jugador 2 ' + match.visitorPlayer.name))
+            )
+          )
+        );
     }
   }
 
