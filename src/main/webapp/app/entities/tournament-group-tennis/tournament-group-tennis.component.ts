@@ -126,14 +126,23 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap(players => from(players.body)),
         map(player => {
-          let ranking: IRankingTennis = {};
+          const ranking: IRankingTennis = {};
           ranking.player = player;
           ranking.tournamentGroup = this.tournamentGroups[0];
+          ranking.matchesLoss = 0;
+          ranking.points = 0;
+          ranking.matchesPlayed = 0;
+          ranking.setsLost = 0;
+          ranking.setsWin = 0;
+          ranking.gamesLoss = 0;
+          ranking.gamesWin = 0;
+          ranking.matchesWined = 0;
           return this.rankingTennisService.create(ranking).subscribe();
         })
       )
       .subscribe();
   }
+
   updateRanking() {
     for (let i = 0; i < this.tournamentGroups.length; i++) {
       if (this.tournamentGroups[i].id === 1) {
@@ -149,11 +158,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateRanking_2() {
-    /*for (let i = 0; i < this.tournamentGroups.length; i++) {
-      this.getGroupRounds(this.tournamentGroups[i]);
-    }*/
-    console.log('empieza la fiesta');
+  /*updateRanking_2() {
     for (let i = 0; i < this.tournamentGroups.length; i++) {
       this.roundTennisService
         .query({
@@ -169,22 +174,9 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
           )
         );
     }
-  }
-
-  getGroupRounds(group: ITournamentGroupTennis) {
-    console.log('getGroupsRounds para el grupo : ' + group.id);
-    this.roundTennisService
-      .query({
-        'tournamentGroupId.equals': group.id
-      })
-      .subscribe(
-        (res: HttpResponse<IRoundTennis[]>) => this.getRoundMatches(res.body, group),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-  }
+  }*/
 
   getRoundMatches(rounds: IRoundTennis[], group: ITournamentGroupTennis) {
-    console.log('getRoundMatches para el grupo: ' + group.id);
     for (let i = 0; i < rounds.length; i++) {
       console.log('Para la jornada: ' + rounds[i].name);
       this.matchTennisService
@@ -197,14 +189,13 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
   }
 
   generateRankings(matches: IMatchTennis[], group: ITournamentGroupTennis) {
-    console.log('El número de partidos son : ' + matches.length);
     for (let i = 0; i < matches.length; i++) {
-      this.generateRankingJugadoresLocales(matches[i], group);
+      this.generateLocalPlayersRanking(matches[i], group);
+      this.generateVisitorPlayersRanking(matches[i], group);
     }
   }
 
-  generateRankingJugadoresLocales(match: IMatchTennis, group: ITournamentGroupTennis) {
-    console.log('Generando ranking para el partido: ' + match.id + ' de la jornada: ' + match.round.name + ' y el grupo :' + group.name);
+  generateLocalPlayersRanking(match: IMatchTennis, group: ITournamentGroupTennis) {
     this.rankingTennisService
       .query({
         'playerId.equals': match.localPlayer.id,
@@ -224,8 +215,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       );
   }
 
-  generateRankingJugadoresVisitantes(match: IMatchTennis, group: ITournamentGroupTennis) {
-    console.log('Generando ranking para el partido: ' + match.id + ' de la jornada: ' + match.round.name + ' y el grupo :' + group.name);
+  generateVisitorPlayersRanking(match: IMatchTennis, group: ITournamentGroupTennis) {
     this.rankingTennisService
       .query({
         'playerId.equals': match.visitorPlayer.id,
@@ -245,8 +235,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       );
   }
 
-  generateRanking(match: IMatchTennis, group: ITournamentGroupTennis) {
-    console.log('Generando ranking para el partido' + match.id);
+  /*generateRanking(match: IMatchTennis, group: ITournamentGroupTennis) {
     this.rankingTennisService
       .query({
         'playerId.equals': match.localPlayer.id,
@@ -278,10 +267,9 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-  }
+  }*/
 
   createRankingLocalPlayer(player: IPlayerTennis, group: ITournamentGroupTennis, match: IMatchTennis) {
-    console.log('Creando ranking para el Jugador Local : ' + player.name + ' en el grupo : ' + group.name);
     const ranking: IRankingTennis = {};
     ranking.player = player;
     ranking.tournamentGroup = group;
@@ -312,7 +300,6 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
   }
 
   createRankingVisitorPlayer(player: IPlayerTennis, group: ITournamentGroupTennis, match: IMatchTennis) {
-    console.log('Creando ranking para el Jugador Visitante : ' + player.name + ' en el grupo : ' + group.name);
     const ranking: IRankingTennis = {};
     ranking.player = player;
     ranking.tournamentGroup = group;
