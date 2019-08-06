@@ -1,4 +1,4 @@
-id;player_1_set_1_result;player_2_set_1_result;player_1_set_2_result;player_2_set_2_result;player_1_set_3_result;player_2_set_3_result;local_player_sets;visitor_player_sets;local_player_abandoned;visitor_player_abandoned;local_player_not_present;visitor_player_not_present;round_id;visitor_player_id;local_player_id
+id;local_player_set_1_result;visitor_player_set_1_result;local_player_set_2_result;visitor_player_set_2_result;local_player_set_3_result;visitor_player_set_3_result;local_player_sets;visitor_player_sets;local_player_abandoned;visitor_player_abandoned;local_player_not_present;visitor_player_not_present;round_id;visitor_player_id;local_player_id
 1;6;4;6;4;;;2;0;false;false;false;false;1;1;2
 2;2;6;4;3;;;0;1;true;false;false;false;1;9;3
 3;3;6;6;3;6;1;2;1;false;false;false;false;1;8;4

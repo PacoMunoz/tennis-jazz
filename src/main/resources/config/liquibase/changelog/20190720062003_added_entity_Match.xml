@@ -16,27 +16,27 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="player_1_set_1_result" type="integer">
+            <column name="local_player_set_1_result" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="player_2_set_1_result" type="integer">
+            <column name="visitor_player_set_1_result" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="player_1_set_2_result" type="integer">
+            <column name="local_player_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="player_2_set_2_result" type="integer">
+            <column name="visitor_player_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="player_1_set_3_result" type="integer">
+            <column name="local_player_set_3_result" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="player_2_set_3_result" type="integer">
+            <column name="visitor_player_set_3_result" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -100,12 +100,12 @@
                   separator=";"
                   tableName="jhi_match">
             <column name="id" type="numeric"/>
-            <column name="player_1_set_1_result" type="numeric"/>
-            <column name="player_2_set_1_result" type="numeric"/>
-            <column name="player_1_set_2_result" type="numeric"/>
-            <column name="player_2_set_2_result" type="numeric"/>
-            <column name="player_1_set_3_result" type="numeric"/>
-            <column name="player_2_set_3_result" type="numeric"/>
+            <column name="local_player_set_1_result" type="numeric"/>
+            <column name="visitor_player_set_1_result" type="numeric"/>
+            <column name="local_player_set_2_result" type="numeric"/>
+            <column name="visitor_player_set_2_result" type="numeric"/>
+            <column name="local_player_set_3_result" type="numeric"/>
+            <column name="visitor_player_set_3_result" type="numeric"/>
             <column name="local_player_sets" type="numeric"/>
             <column name="visitor_player_sets" type="numeric"/>
             <column name="local_player_abandoned" type="boolean"/>

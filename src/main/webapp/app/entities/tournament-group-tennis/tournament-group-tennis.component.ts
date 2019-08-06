@@ -132,11 +132,11 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
           ranking.matchesLoss = 0;
           ranking.points = 0;
           ranking.matchesPlayed = 0;
-          ranking.setsLost = 0;
+          ranking.setsLoss = 0;
           ranking.setsWin = 0;
           ranking.gamesLoss = 0;
           ranking.gamesWin = 0;
-          ranking.matchesWined = 0;
+          ranking.matchesWon = 0;
           ranking.matchesNotPresent = 0;
           ranking.matchesAbandoned = 0;
           return this.rankingTennisService.create(ranking).subscribe();
@@ -276,25 +276,25 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     ranking.player = player;
     ranking.tournamentGroup = group;
     ranking.gamesWin =
-      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
-      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
-      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+      (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
+      (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
+      (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
     ranking.gamesLoss =
-      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
-      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
-      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+      (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
+      (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
+      (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
     // si ha ganado dos sets, si el visitante se ha retirado o si se ha lesionado entonces ha ganado el partido
     if (match.localPlayerSets === 2 || match.visitorPlayerAbandoned || match.visitorPlayerNotPresent) {
-      ranking.matchesWined = 1;
+      ranking.matchesWon = 1;
       ranking.matchesLoss = 0;
       ranking.points = 3;
     } else {
-      ranking.matchesWined = 0;
+      ranking.matchesWon = 0;
       ranking.matchesLoss = 1;
       ranking.points = 1;
     }
     ranking.setsWin = match.localPlayerSets;
-    ranking.setsLost = match.visitorPlayerSets;
+    ranking.setsLoss = match.visitorPlayerSets;
     ranking.matchesPlayed = 1;
     this.rankingTennisService
       .create(ranking)
@@ -306,25 +306,25 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     ranking.player = player;
     ranking.tournamentGroup = group;
     ranking.gamesLoss =
-      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
-      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
-      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+      (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
+      (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
+      (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
     ranking.gamesWin =
-      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
-      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
-      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+      (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
+      (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
+      (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
     // si ha ganado dos sets, si el visitante se ha retirado o si se ha lesionado entonces ha ganado el partido
     if (match.visitorPlayerSets === 2 || match.localPlayerAbandoned || match.localPlayerNotPresent) {
-      ranking.matchesWined = 1;
+      ranking.matchesWon = 1;
       ranking.matchesLoss = 0;
       ranking.points = 3;
     } else {
-      ranking.matchesWined = 0;
+      ranking.matchesWon = 0;
       ranking.matchesLoss = 1;
       ranking.points = 1;
     }
     ranking.setsWin = match.visitorPlayerSets;
-    ranking.setsLost = match.localPlayerSets;
+    ranking.setsLoss = match.localPlayerSets;
     ranking.matchesPlayed = 1;
     this.rankingTennisService
       .create(ranking)
@@ -335,7 +335,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     console.log('Actualizando ranking para el Jugador Local : ' + ranking.player.name + ' en el grupo : ' + ranking.tournamentGroup.name);
     if (match.localPlayerSets === 2 || match.visitorPlayerAbandoned || match.visitorPlayerNotPresent) {
       ranking.points += 3;
-      ranking.matchesWined += 1;
+      ranking.matchesWon += 1;
     } else {
       ranking.points += 1;
       ranking.matchesLoss += 1;
@@ -347,15 +347,15 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       ranking.matchesNotPresent += 1;
     }
     ranking.gamesWin +=
-      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
-      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
-      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+      (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
+      (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
+      (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
     ranking.gamesLoss +=
-      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
-      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
-      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+      (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
+      (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
+      (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
     ranking.setsWin += match.localPlayerSets;
-    ranking.setsLost += match.visitorPlayerSets;
+    ranking.setsLoss += match.visitorPlayerSets;
     ranking.matchesPlayed += 1;
     this.rankingTennisService
       .update(ranking)
@@ -364,7 +364,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
 
   updateRankingVisitorPlayer(ranking: IRankingTennis, match: IMatchTennis) {
     if (match.visitorPlayerSets === 2 || match.localPlayerAbandoned || match.localPlayerNotPresent) {
-      ranking.matchesWined += 1;
+      ranking.matchesWon += 1;
       ranking.points += 3;
     } else {
       ranking.matchesLoss += 1;
@@ -377,15 +377,15 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       ranking.matchesNotPresent += 1;
     }
     ranking.gamesLoss +=
-      (match.player1Set1Result != null ? match.player1Set1Result : 0) +
-      (match.player1Set2Result != null ? match.player1Set2Result : 0) +
-      (match.player1Set3Result != null ? match.player1Set3Result : 0);
+      (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
+      (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
+      (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
     ranking.gamesWin +=
-      (match.player2Set1Result != null ? match.player2Set1Result : 0) +
-      (match.player2Set2Result != null ? match.player2Set2Result : 0) +
-      (match.player2Set3Result != null ? match.player2Set3Result : 0);
+      (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
+      (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
+      (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
     ranking.setsWin += match.visitorPlayerSets;
-    ranking.setsLost += match.localPlayerSets;
+    ranking.setsLoss += match.localPlayerSets;
     ranking.matchesPlayed += 1;
     this.rankingTennisService
       .update(ranking)

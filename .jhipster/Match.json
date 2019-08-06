@@ -2,27 +2,27 @@
     "name": "Match",
     "fields": [
         {
-            "fieldName": "player1Set1Result",
+            "fieldName": "localPlayerSet1Result",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "player2Set1Result",
+            "fieldName": "visitorPlayerSet1Result",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "player1Set2Result",
+            "fieldName": "localPlayerSet2Result",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "player2Set2Result",
+            "fieldName": "visitorPlayerSet2Result",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "player1Set3Result",
+            "fieldName": "localPlayerSet3Result",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "player2Set3Result",
+            "fieldName": "visitorPlayerSet3Result",
             "fieldType": "Integer"
         },
         {

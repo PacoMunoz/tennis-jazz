@@ -32,7 +32,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="sets_lost" type="integer">
+            <column name="sets_loss" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -40,7 +40,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="matches_wined" type="integer">
+            <column name="matches_won" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -92,9 +92,9 @@
             <column name="games_win" type="numeric"/>
             <column name="games_loss" type="numeric"/>
             <column name="sets_win" type="numeric"/>
-            <column name="sets_lost" type="numeric"/>
+            <column name="sets_loss" type="numeric"/>
             <column name="matches_played" type="numeric"/>
-            <column name="matches_wined" type="numeric"/>
+            <column name="matches_won" type="numeric"/>
             <column name="matches_loss" type="numeric"/>
             <column name="matches_not_present" type="numeric"/>
             <column name="matches_abandoned" type="numeric"/>

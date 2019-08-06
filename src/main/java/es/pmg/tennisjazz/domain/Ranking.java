@@ -33,14 +33,14 @@ public class Ranking implements Serializable {
     @Column(name = "sets_win")
     private Integer setsWin;
 
-    @Column(name = "sets_lost")
-    private Integer setsLost;
+    @Column(name = "sets_loss")
+    private Integer setsLoss;
 
     @Column(name = "matches_played")
     private Integer matchesPlayed;
 
-    @Column(name = "matches_wined")
-    private Integer matchesWined;
+    @Column(name = "matches_won")
+    private Integer matchesWon;
 
     @Column(name = "matches_loss")
     private Integer matchesLoss;
@@ -120,17 +120,17 @@ public class Ranking implements Serializable {
         this.setsWin = setsWin;
     }
 
-    public Integer getSetsLost() {
-        return setsLost;
+    public Integer getSetsLoss() {
+        return setsLoss;
     }
 
-    public Ranking setsLost(Integer setsLost) {
-        this.setsLost = setsLost;
+    public Ranking setsLoss(Integer setsLoss) {
+        this.setsLoss = setsLoss;
         return this;
     }
 
-    public void setSetsLost(Integer setsLost) {
-        this.setsLost = setsLost;
+    public void setSetsLoss(Integer setsLoss) {
+        this.setsLoss = setsLoss;
     }
 
     public Integer getMatchesPlayed() {
@@ -146,17 +146,17 @@ public class Ranking implements Serializable {
         this.matchesPlayed = matchesPlayed;
     }
 
-    public Integer getMatchesWined() {
-        return matchesWined;
+    public Integer getMatchesWon() {
+        return matchesWon;
     }
 
-    public Ranking matchesWined(Integer matchesWined) {
-        this.matchesWined = matchesWined;
+    public Ranking matchesWon(Integer matchesWon) {
+        this.matchesWon = matchesWon;
         return this;
     }
 
-    public void setMatchesWined(Integer matchesWined) {
-        this.matchesWined = matchesWined;
+    public void setMatchesWon(Integer matchesWon) {
+        this.matchesWon = matchesWon;
     }
 
     public Integer getMatchesLoss() {
@@ -249,9 +249,9 @@ public class Ranking implements Serializable {
             ", gamesWin=" + getGamesWin() +
             ", gamesLoss=" + getGamesLoss() +
             ", setsWin=" + getSetsWin() +
-            ", setsLost=" + getSetsLost() +
+            ", setsLoss=" + getSetsLoss() +
             ", matchesPlayed=" + getMatchesPlayed() +
-            ", matchesWined=" + getMatchesWined() +
+            ", matchesWon=" + getMatchesWon() +
             ", matchesLoss=" + getMatchesLoss() +
             ", matchesNotPresent=" + getMatchesNotPresent() +
             ", matchesAbandoned=" + getMatchesAbandoned() +

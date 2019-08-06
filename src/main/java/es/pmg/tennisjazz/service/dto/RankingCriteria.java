@@ -34,11 +34,11 @@ public class RankingCriteria implements Serializable, Criteria {
 
     private IntegerFilter setsWin;
 
-    private IntegerFilter setsLost;
+    private IntegerFilter setsLoss;
 
     private IntegerFilter matchesPlayed;
 
-    private IntegerFilter matchesWined;
+    private IntegerFilter matchesWon;
 
     private IntegerFilter matchesLoss;
 
@@ -59,9 +59,9 @@ public class RankingCriteria implements Serializable, Criteria {
         this.gamesWin = other.gamesWin == null ? null : other.gamesWin.copy();
         this.gamesLoss = other.gamesLoss == null ? null : other.gamesLoss.copy();
         this.setsWin = other.setsWin == null ? null : other.setsWin.copy();
-        this.setsLost = other.setsLost == null ? null : other.setsLost.copy();
+        this.setsLoss = other.setsLoss == null ? null : other.setsLoss.copy();
         this.matchesPlayed = other.matchesPlayed == null ? null : other.matchesPlayed.copy();
-        this.matchesWined = other.matchesWined == null ? null : other.matchesWined.copy();
+        this.matchesWon = other.matchesWon == null ? null : other.matchesWon.copy();
         this.matchesLoss = other.matchesLoss == null ? null : other.matchesLoss.copy();
         this.matchesNotPresent = other.matchesNotPresent == null ? null : other.matchesNotPresent.copy();
         this.matchesAbandoned = other.matchesAbandoned == null ? null : other.matchesAbandoned.copy();
@@ -114,12 +114,12 @@ public class RankingCriteria implements Serializable, Criteria {
         this.setsWin = setsWin;
     }
 
-    public IntegerFilter getSetsLost() {
-        return setsLost;
+    public IntegerFilter getSetsLoss() {
+        return setsLoss;
     }
 
-    public void setSetsLost(IntegerFilter setsLost) {
-        this.setsLost = setsLost;
+    public void setSetsLoss(IntegerFilter setsLoss) {
+        this.setsLoss = setsLoss;
     }
 
     public IntegerFilter getMatchesPlayed() {
@@ -130,12 +130,12 @@ public class RankingCriteria implements Serializable, Criteria {
         this.matchesPlayed = matchesPlayed;
     }
 
-    public IntegerFilter getMatchesWined() {
-        return matchesWined;
+    public IntegerFilter getMatchesWon() {
+        return matchesWon;
     }
 
-    public void setMatchesWined(IntegerFilter matchesWined) {
-        this.matchesWined = matchesWined;
+    public void setMatchesWon(IntegerFilter matchesWon) {
+        this.matchesWon = matchesWon;
     }
 
     public IntegerFilter getMatchesLoss() {
@@ -194,9 +194,9 @@ public class RankingCriteria implements Serializable, Criteria {
             Objects.equals(gamesWin, that.gamesWin) &&
             Objects.equals(gamesLoss, that.gamesLoss) &&
             Objects.equals(setsWin, that.setsWin) &&
-            Objects.equals(setsLost, that.setsLost) &&
+            Objects.equals(setsLoss, that.setsLoss) &&
             Objects.equals(matchesPlayed, that.matchesPlayed) &&
-            Objects.equals(matchesWined, that.matchesWined) &&
+            Objects.equals(matchesWon, that.matchesWon) &&
             Objects.equals(matchesLoss, that.matchesLoss) &&
             Objects.equals(matchesNotPresent, that.matchesNotPresent) &&
             Objects.equals(matchesAbandoned, that.matchesAbandoned) &&
@@ -212,9 +212,9 @@ public class RankingCriteria implements Serializable, Criteria {
         gamesWin,
         gamesLoss,
         setsWin,
-        setsLost,
+        setsLoss,
         matchesPlayed,
-        matchesWined,
+        matchesWon,
         matchesLoss,
         matchesNotPresent,
         matchesAbandoned,
@@ -231,9 +231,9 @@ public class RankingCriteria implements Serializable, Criteria {
                 (gamesWin != null ? "gamesWin=" + gamesWin + ", " : "") +
                 (gamesLoss != null ? "gamesLoss=" + gamesLoss + ", " : "") +
                 (setsWin != null ? "setsWin=" + setsWin + ", " : "") +
-                (setsLost != null ? "setsLost=" + setsLost + ", " : "") +
+                (setsLoss != null ? "setsLoss=" + setsLoss + ", " : "") +
                 (matchesPlayed != null ? "matchesPlayed=" + matchesPlayed + ", " : "") +
-                (matchesWined != null ? "matchesWined=" + matchesWined + ", " : "") +
+                (matchesWon != null ? "matchesWon=" + matchesWon + ", " : "") +
                 (matchesLoss != null ? "matchesLoss=" + matchesLoss + ", " : "") +
                 (matchesNotPresent != null ? "matchesNotPresent=" + matchesNotPresent + ", " : "") +
                 (matchesAbandoned != null ? "matchesAbandoned=" + matchesAbandoned + ", " : "") +

@@ -16,12 +16,12 @@
       "detail": {
         "title": "Match"
       },
-      "player1Set1Result": "Player 1 Set 1 Result",
-      "player2Set1Result": "Player 2 Set 1 Result",
-      "player1Set2Result": "Player 1 Set 2 Result",
-      "player2Set2Result": "Player 2 Set 2 Result",
-      "player1Set3Result": "Player 1 Set 3 Result",
-      "player2Set3Result": "Player 2 Set 3 Result",
+      "localPlayerSet1Result": "Local Player Set 1 Result",
+      "visitorPlayerSet1Result": "Visitor Player Set 1 Result",
+      "localPlayerSet2Result": "Local Player Set 2 Result",
+      "visitorPlayerSet2Result": "Visitor Player Set 2 Result",
+      "localPlayerSet3Result": "Local Player Set 3 Result",
+      "visitorPlayerSet3Result": "Visitor Player Set 3 Result",
       "localPlayerSets": "Local Player Sets",
       "visitorPlayerSets": "Visitor Player Sets",
       "localPlayerAbandoned": "Local Player Abandoned",

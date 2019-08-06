@@ -59,12 +59,12 @@ describe('Service Tests', () => {
       it('should update a MatchTennis', async () => {
         const returnedFromService = Object.assign(
           {
-            player1Set1Result: 1,
-            player2Set1Result: 1,
-            player1Set2Result: 1,
-            player2Set2Result: 1,
-            player1Set3Result: 1,
-            player2Set3Result: 1,
+            localPlayerSet1Result: 1,
+            visitorPlayerSet1Result: 1,
+            localPlayerSet2Result: 1,
+            visitorPlayerSet2Result: 1,
+            localPlayerSet3Result: 1,
+            visitorPlayerSet3Result: 1,
             localPlayerSets: 1,
             visitorPlayerSets: 1,
             localPlayerAbandoned: true,
@@ -88,12 +88,12 @@ describe('Service Tests', () => {
       it('should return a list of MatchTennis', async () => {
         const returnedFromService = Object.assign(
           {
-            player1Set1Result: 1,
-            player2Set1Result: 1,
-            player1Set2Result: 1,
-            player2Set2Result: 1,
-            player1Set3Result: 1,
-            player2Set3Result: 1,
+            localPlayerSet1Result: 1,
+            visitorPlayerSet1Result: 1,
+            localPlayerSet2Result: 1,
+            visitorPlayerSet2Result: 1,
+            localPlayerSet3Result: 1,
+            visitorPlayerSet3Result: 1,
             localPlayerSets: 1,
             visitorPlayerSets: 1,
             localPlayerAbandoned: true,

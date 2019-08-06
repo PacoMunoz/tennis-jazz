@@ -38,23 +38,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = TennisJazzApp.class)
 public class MatchResourceIT {
 
-    private static final Integer DEFAULT_PLAYER_1_SET_1_RESULT = 1;
-    private static final Integer UPDATED_PLAYER_1_SET_1_RESULT = 2;
+    private static final Integer DEFAULT_LOCAL_PLAYER_SET_1_RESULT = 1;
+    private static final Integer UPDATED_LOCAL_PLAYER_SET_1_RESULT = 2;
 
-    private static final Integer DEFAULT_PLAYER_2_SET_1_RESULT = 1;
-    private static final Integer UPDATED_PLAYER_2_SET_1_RESULT = 2;
+    private static final Integer DEFAULT_VISITOR_PLAYER_SET_1_RESULT = 1;
+    private static final Integer UPDATED_VISITOR_PLAYER_SET_1_RESULT = 2;
 
-    private static final Integer DEFAULT_PLAYER_1_SET_2_RESULT = 1;
-    private static final Integer UPDATED_PLAYER_1_SET_2_RESULT = 2;
+    private static final Integer DEFAULT_LOCAL_PLAYER_SET_2_RESULT = 1;
+    private static final Integer UPDATED_LOCAL_PLAYER_SET_2_RESULT = 2;
 
-    private static final Integer DEFAULT_PLAYER_2_SET_2_RESULT = 1;
-    private static final Integer UPDATED_PLAYER_2_SET_2_RESULT = 2;
+    private static final Integer DEFAULT_VISITOR_PLAYER_SET_2_RESULT = 1;
+    private static final Integer UPDATED_VISITOR_PLAYER_SET_2_RESULT = 2;
 
-    private static final Integer DEFAULT_PLAYER_1_SET_3_RESULT = 1;
-    private static final Integer UPDATED_PLAYER_1_SET_3_RESULT = 2;
+    private static final Integer DEFAULT_LOCAL_PLAYER_SET_3_RESULT = 1;
+    private static final Integer UPDATED_LOCAL_PLAYER_SET_3_RESULT = 2;
 
-    private static final Integer DEFAULT_PLAYER_2_SET_3_RESULT = 1;
-    private static final Integer UPDATED_PLAYER_2_SET_3_RESULT = 2;
+    private static final Integer DEFAULT_VISITOR_PLAYER_SET_3_RESULT = 1;
+    private static final Integer UPDATED_VISITOR_PLAYER_SET_3_RESULT = 2;
 
     private static final Integer DEFAULT_LOCAL_PLAYER_SETS = 1;
     private static final Integer UPDATED_LOCAL_PLAYER_SETS = 2;
@@ -122,12 +122,12 @@ public class MatchResourceIT {
      */
     public static Match createEntity(EntityManager em) {
         Match match = new Match()
-            .player1Set1Result(DEFAULT_PLAYER_1_SET_1_RESULT)
-            .player2Set1Result(DEFAULT_PLAYER_2_SET_1_RESULT)
-            .player1Set2Result(DEFAULT_PLAYER_1_SET_2_RESULT)
-            .player2Set2Result(DEFAULT_PLAYER_2_SET_2_RESULT)
-            .player1Set3Result(DEFAULT_PLAYER_1_SET_3_RESULT)
-            .player2Set3Result(DEFAULT_PLAYER_2_SET_3_RESULT)
+            .localPlayerSet1Result(DEFAULT_LOCAL_PLAYER_SET_1_RESULT)
+            .visitorPlayerSet1Result(DEFAULT_VISITOR_PLAYER_SET_1_RESULT)
+            .localPlayerSet2Result(DEFAULT_LOCAL_PLAYER_SET_2_RESULT)
+            .visitorPlayerSet2Result(DEFAULT_VISITOR_PLAYER_SET_2_RESULT)
+            .localPlayerSet3Result(DEFAULT_LOCAL_PLAYER_SET_3_RESULT)
+            .visitorPlayerSet3Result(DEFAULT_VISITOR_PLAYER_SET_3_RESULT)
             .localPlayerSets(DEFAULT_LOCAL_PLAYER_SETS)
             .visitorPlayerSets(DEFAULT_VISITOR_PLAYER_SETS)
             .localPlayerAbandoned(DEFAULT_LOCAL_PLAYER_ABANDONED)
@@ -144,12 +144,12 @@ public class MatchResourceIT {
      */
     public static Match createUpdatedEntity(EntityManager em) {
         Match match = new Match()
-            .player1Set1Result(UPDATED_PLAYER_1_SET_1_RESULT)
-            .player2Set1Result(UPDATED_PLAYER_2_SET_1_RESULT)
-            .player1Set2Result(UPDATED_PLAYER_1_SET_2_RESULT)
-            .player2Set2Result(UPDATED_PLAYER_2_SET_2_RESULT)
-            .player1Set3Result(UPDATED_PLAYER_1_SET_3_RESULT)
-            .player2Set3Result(UPDATED_PLAYER_2_SET_3_RESULT)
+            .localPlayerSet1Result(UPDATED_LOCAL_PLAYER_SET_1_RESULT)
+            .visitorPlayerSet1Result(UPDATED_VISITOR_PLAYER_SET_1_RESULT)
+            .localPlayerSet2Result(UPDATED_LOCAL_PLAYER_SET_2_RESULT)
+            .visitorPlayerSet2Result(UPDATED_VISITOR_PLAYER_SET_2_RESULT)
+            .localPlayerSet3Result(UPDATED_LOCAL_PLAYER_SET_3_RESULT)
+            .visitorPlayerSet3Result(UPDATED_VISITOR_PLAYER_SET_3_RESULT)
             .localPlayerSets(UPDATED_LOCAL_PLAYER_SETS)
             .visitorPlayerSets(UPDATED_VISITOR_PLAYER_SETS)
             .localPlayerAbandoned(UPDATED_LOCAL_PLAYER_ABANDONED)
@@ -179,12 +179,12 @@ public class MatchResourceIT {
         List<Match> matchList = matchRepository.findAll();
         assertThat(matchList).hasSize(databaseSizeBeforeCreate + 1);
         Match testMatch = matchList.get(matchList.size() - 1);
-        assertThat(testMatch.getPlayer1Set1Result()).isEqualTo(DEFAULT_PLAYER_1_SET_1_RESULT);
-        assertThat(testMatch.getPlayer2Set1Result()).isEqualTo(DEFAULT_PLAYER_2_SET_1_RESULT);
-        assertThat(testMatch.getPlayer1Set2Result()).isEqualTo(DEFAULT_PLAYER_1_SET_2_RESULT);
-        assertThat(testMatch.getPlayer2Set2Result()).isEqualTo(DEFAULT_PLAYER_2_SET_2_RESULT);
-        assertThat(testMatch.getPlayer1Set3Result()).isEqualTo(DEFAULT_PLAYER_1_SET_3_RESULT);
-        assertThat(testMatch.getPlayer2Set3Result()).isEqualTo(DEFAULT_PLAYER_2_SET_3_RESULT);
+        assertThat(testMatch.getLocalPlayerSet1Result()).isEqualTo(DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
+        assertThat(testMatch.getVisitorPlayerSet1Result()).isEqualTo(DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
+        assertThat(testMatch.getLocalPlayerSet2Result()).isEqualTo(DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
+        assertThat(testMatch.getVisitorPlayerSet2Result()).isEqualTo(DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
+        assertThat(testMatch.getLocalPlayerSet3Result()).isEqualTo(DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+        assertThat(testMatch.getVisitorPlayerSet3Result()).isEqualTo(DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
         assertThat(testMatch.getLocalPlayerSets()).isEqualTo(DEFAULT_LOCAL_PLAYER_SETS);
         assertThat(testMatch.getVisitorPlayerSets()).isEqualTo(DEFAULT_VISITOR_PLAYER_SETS);
         assertThat(testMatch.isLocalPlayerAbandoned()).isEqualTo(DEFAULT_LOCAL_PLAYER_ABANDONED);
@@ -224,12 +224,12 @@ public class MatchResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(match.getId().intValue())))
-            .andExpect(jsonPath("$.[*].player1Set1Result").value(hasItem(DEFAULT_PLAYER_1_SET_1_RESULT)))
-            .andExpect(jsonPath("$.[*].player2Set1Result").value(hasItem(DEFAULT_PLAYER_2_SET_1_RESULT)))
-            .andExpect(jsonPath("$.[*].player1Set2Result").value(hasItem(DEFAULT_PLAYER_1_SET_2_RESULT)))
-            .andExpect(jsonPath("$.[*].player2Set2Result").value(hasItem(DEFAULT_PLAYER_2_SET_2_RESULT)))
-            .andExpect(jsonPath("$.[*].player1Set3Result").value(hasItem(DEFAULT_PLAYER_1_SET_3_RESULT)))
-            .andExpect(jsonPath("$.[*].player2Set3Result").value(hasItem(DEFAULT_PLAYER_2_SET_3_RESULT)))
+            .andExpect(jsonPath("$.[*].localPlayerSet1Result").value(hasItem(DEFAULT_LOCAL_PLAYER_SET_1_RESULT)))
+            .andExpect(jsonPath("$.[*].visitorPlayerSet1Result").value(hasItem(DEFAULT_VISITOR_PLAYER_SET_1_RESULT)))
+            .andExpect(jsonPath("$.[*].localPlayerSet2Result").value(hasItem(DEFAULT_LOCAL_PLAYER_SET_2_RESULT)))
+            .andExpect(jsonPath("$.[*].visitorPlayerSet2Result").value(hasItem(DEFAULT_VISITOR_PLAYER_SET_2_RESULT)))
+            .andExpect(jsonPath("$.[*].localPlayerSet3Result").value(hasItem(DEFAULT_LOCAL_PLAYER_SET_3_RESULT)))
+            .andExpect(jsonPath("$.[*].visitorPlayerSet3Result").value(hasItem(DEFAULT_VISITOR_PLAYER_SET_3_RESULT)))
             .andExpect(jsonPath("$.[*].localPlayerSets").value(hasItem(DEFAULT_LOCAL_PLAYER_SETS)))
             .andExpect(jsonPath("$.[*].visitorPlayerSets").value(hasItem(DEFAULT_VISITOR_PLAYER_SETS)))
             .andExpect(jsonPath("$.[*].localPlayerAbandoned").value(hasItem(DEFAULT_LOCAL_PLAYER_ABANDONED.booleanValue())))
@@ -249,12 +249,12 @@ public class MatchResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(match.getId().intValue()))
-            .andExpect(jsonPath("$.player1Set1Result").value(DEFAULT_PLAYER_1_SET_1_RESULT))
-            .andExpect(jsonPath("$.player2Set1Result").value(DEFAULT_PLAYER_2_SET_1_RESULT))
-            .andExpect(jsonPath("$.player1Set2Result").value(DEFAULT_PLAYER_1_SET_2_RESULT))
-            .andExpect(jsonPath("$.player2Set2Result").value(DEFAULT_PLAYER_2_SET_2_RESULT))
-            .andExpect(jsonPath("$.player1Set3Result").value(DEFAULT_PLAYER_1_SET_3_RESULT))
-            .andExpect(jsonPath("$.player2Set3Result").value(DEFAULT_PLAYER_2_SET_3_RESULT))
+            .andExpect(jsonPath("$.localPlayerSet1Result").value(DEFAULT_LOCAL_PLAYER_SET_1_RESULT))
+            .andExpect(jsonPath("$.visitorPlayerSet1Result").value(DEFAULT_VISITOR_PLAYER_SET_1_RESULT))
+            .andExpect(jsonPath("$.localPlayerSet2Result").value(DEFAULT_LOCAL_PLAYER_SET_2_RESULT))
+            .andExpect(jsonPath("$.visitorPlayerSet2Result").value(DEFAULT_VISITOR_PLAYER_SET_2_RESULT))
+            .andExpect(jsonPath("$.localPlayerSet3Result").value(DEFAULT_LOCAL_PLAYER_SET_3_RESULT))
+            .andExpect(jsonPath("$.visitorPlayerSet3Result").value(DEFAULT_VISITOR_PLAYER_SET_3_RESULT))
             .andExpect(jsonPath("$.localPlayerSets").value(DEFAULT_LOCAL_PLAYER_SETS))
             .andExpect(jsonPath("$.visitorPlayerSets").value(DEFAULT_VISITOR_PLAYER_SETS))
             .andExpect(jsonPath("$.localPlayerAbandoned").value(DEFAULT_LOCAL_PLAYER_ABANDONED.booleanValue()))
@@ -265,397 +265,397 @@ public class MatchResourceIT {
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set1ResultIsEqualToSomething() throws Exception {
+    public void getAllMatchesByLocalPlayerSet1ResultIsEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set1Result equals to DEFAULT_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldBeFound("player1Set1Result.equals=" + DEFAULT_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result equals to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.equals=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set1Result equals to UPDATED_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player1Set1Result.equals=" + UPDATED_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result equals to UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.equals=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set1ResultIsInShouldWork() throws Exception {
+    public void getAllMatchesByLocalPlayerSet1ResultIsInShouldWork() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set1Result in DEFAULT_PLAYER_1_SET_1_RESULT or UPDATED_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldBeFound("player1Set1Result.in=" + DEFAULT_PLAYER_1_SET_1_RESULT + "," + UPDATED_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result in DEFAULT_LOCAL_PLAYER_SET_1_RESULT or UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.in=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT + "," + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set1Result equals to UPDATED_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player1Set1Result.in=" + UPDATED_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result equals to UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.in=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set1ResultIsNullOrNotNull() throws Exception {
+    public void getAllMatchesByLocalPlayerSet1ResultIsNullOrNotNull() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set1Result is not null
-        defaultMatchShouldBeFound("player1Set1Result.specified=true");
+        // Get all the matchList where localPlayerSet1Result is not null
+        defaultMatchShouldBeFound("localPlayerSet1Result.specified=true");
 
-        // Get all the matchList where player1Set1Result is null
-        defaultMatchShouldNotBeFound("player1Set1Result.specified=false");
+        // Get all the matchList where localPlayerSet1Result is null
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set1ResultIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllMatchesByLocalPlayerSet1ResultIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set1Result greater than or equals to DEFAULT_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldBeFound("player1Set1Result.greaterOrEqualThan=" + DEFAULT_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result greater than or equals to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set1Result greater than or equals to UPDATED_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player1Set1Result.greaterOrEqualThan=" + UPDATED_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result greater than or equals to UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set1ResultIsLessThanSomething() throws Exception {
+    public void getAllMatchesByLocalPlayerSet1ResultIsLessThanSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set1Result less than or equals to DEFAULT_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player1Set1Result.lessThan=" + DEFAULT_PLAYER_1_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result less than or equals to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.lessThan=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set1Result less than or equals to UPDATED_PLAYER_1_SET_1_RESULT
-        defaultMatchShouldBeFound("player1Set1Result.lessThan=" + UPDATED_PLAYER_1_SET_1_RESULT);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set1ResultIsEqualToSomething() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set1Result equals to DEFAULT_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldBeFound("player2Set1Result.equals=" + DEFAULT_PLAYER_2_SET_1_RESULT);
-
-        // Get all the matchList where player2Set1Result equals to UPDATED_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player2Set1Result.equals=" + UPDATED_PLAYER_2_SET_1_RESULT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set1ResultIsInShouldWork() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set1Result in DEFAULT_PLAYER_2_SET_1_RESULT or UPDATED_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldBeFound("player2Set1Result.in=" + DEFAULT_PLAYER_2_SET_1_RESULT + "," + UPDATED_PLAYER_2_SET_1_RESULT);
-
-        // Get all the matchList where player2Set1Result equals to UPDATED_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player2Set1Result.in=" + UPDATED_PLAYER_2_SET_1_RESULT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set1ResultIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set1Result is not null
-        defaultMatchShouldBeFound("player2Set1Result.specified=true");
-
-        // Get all the matchList where player2Set1Result is null
-        defaultMatchShouldNotBeFound("player2Set1Result.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set1ResultIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set1Result greater than or equals to DEFAULT_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldBeFound("player2Set1Result.greaterOrEqualThan=" + DEFAULT_PLAYER_2_SET_1_RESULT);
-
-        // Get all the matchList where player2Set1Result greater than or equals to UPDATED_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player2Set1Result.greaterOrEqualThan=" + UPDATED_PLAYER_2_SET_1_RESULT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set1ResultIsLessThanSomething() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set1Result less than or equals to DEFAULT_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldNotBeFound("player2Set1Result.lessThan=" + DEFAULT_PLAYER_2_SET_1_RESULT);
-
-        // Get all the matchList where player2Set1Result less than or equals to UPDATED_PLAYER_2_SET_1_RESULT
-        defaultMatchShouldBeFound("player2Set1Result.lessThan=" + UPDATED_PLAYER_2_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result less than or equals to UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.lessThan=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
     }
 
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set2ResultIsEqualToSomething() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet1ResultIsEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set2Result equals to DEFAULT_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldBeFound("player1Set2Result.equals=" + DEFAULT_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result equals to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.equals=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set2Result equals to UPDATED_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player1Set2Result.equals=" + UPDATED_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result equals to UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.equals=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set2ResultIsInShouldWork() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet1ResultIsInShouldWork() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set2Result in DEFAULT_PLAYER_1_SET_2_RESULT or UPDATED_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldBeFound("player1Set2Result.in=" + DEFAULT_PLAYER_1_SET_2_RESULT + "," + UPDATED_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result in DEFAULT_VISITOR_PLAYER_SET_1_RESULT or UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.in=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT + "," + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set2Result equals to UPDATED_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player1Set2Result.in=" + UPDATED_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result equals to UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.in=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set2ResultIsNullOrNotNull() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet1ResultIsNullOrNotNull() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set2Result is not null
-        defaultMatchShouldBeFound("player1Set2Result.specified=true");
+        // Get all the matchList where visitorPlayerSet1Result is not null
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.specified=true");
 
-        // Get all the matchList where player1Set2Result is null
-        defaultMatchShouldNotBeFound("player1Set2Result.specified=false");
+        // Get all the matchList where visitorPlayerSet1Result is null
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set2ResultIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet1ResultIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set2Result greater than or equals to DEFAULT_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldBeFound("player1Set2Result.greaterOrEqualThan=" + DEFAULT_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result greater than or equals to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set2Result greater than or equals to UPDATED_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player1Set2Result.greaterOrEqualThan=" + UPDATED_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result greater than or equals to UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set2ResultIsLessThanSomething() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet1ResultIsLessThanSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set2Result less than or equals to DEFAULT_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player1Set2Result.lessThan=" + DEFAULT_PLAYER_1_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result less than or equals to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.lessThan=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where player1Set2Result less than or equals to UPDATED_PLAYER_1_SET_2_RESULT
-        defaultMatchShouldBeFound("player1Set2Result.lessThan=" + UPDATED_PLAYER_1_SET_2_RESULT);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set2ResultIsEqualToSomething() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set2Result equals to DEFAULT_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldBeFound("player2Set2Result.equals=" + DEFAULT_PLAYER_2_SET_2_RESULT);
-
-        // Get all the matchList where player2Set2Result equals to UPDATED_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player2Set2Result.equals=" + UPDATED_PLAYER_2_SET_2_RESULT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set2ResultIsInShouldWork() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set2Result in DEFAULT_PLAYER_2_SET_2_RESULT or UPDATED_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldBeFound("player2Set2Result.in=" + DEFAULT_PLAYER_2_SET_2_RESULT + "," + UPDATED_PLAYER_2_SET_2_RESULT);
-
-        // Get all the matchList where player2Set2Result equals to UPDATED_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player2Set2Result.in=" + UPDATED_PLAYER_2_SET_2_RESULT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set2ResultIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set2Result is not null
-        defaultMatchShouldBeFound("player2Set2Result.specified=true");
-
-        // Get all the matchList where player2Set2Result is null
-        defaultMatchShouldNotBeFound("player2Set2Result.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set2ResultIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set2Result greater than or equals to DEFAULT_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldBeFound("player2Set2Result.greaterOrEqualThan=" + DEFAULT_PLAYER_2_SET_2_RESULT);
-
-        // Get all the matchList where player2Set2Result greater than or equals to UPDATED_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player2Set2Result.greaterOrEqualThan=" + UPDATED_PLAYER_2_SET_2_RESULT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllMatchesByPlayer2Set2ResultIsLessThanSomething() throws Exception {
-        // Initialize the database
-        matchRepository.saveAndFlush(match);
-
-        // Get all the matchList where player2Set2Result less than or equals to DEFAULT_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldNotBeFound("player2Set2Result.lessThan=" + DEFAULT_PLAYER_2_SET_2_RESULT);
-
-        // Get all the matchList where player2Set2Result less than or equals to UPDATED_PLAYER_2_SET_2_RESULT
-        defaultMatchShouldBeFound("player2Set2Result.lessThan=" + UPDATED_PLAYER_2_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result less than or equals to UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.lessThan=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
     }
 
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set3ResultIsEqualToSomething() throws Exception {
+    public void getAllMatchesByLocalPlayerSet2ResultIsEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set3Result equals to DEFAULT_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldBeFound("player1Set3Result.equals=" + DEFAULT_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result equals to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.equals=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player1Set3Result equals to UPDATED_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player1Set3Result.equals=" + UPDATED_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result equals to UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.equals=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set3ResultIsInShouldWork() throws Exception {
+    public void getAllMatchesByLocalPlayerSet2ResultIsInShouldWork() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set3Result in DEFAULT_PLAYER_1_SET_3_RESULT or UPDATED_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldBeFound("player1Set3Result.in=" + DEFAULT_PLAYER_1_SET_3_RESULT + "," + UPDATED_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result in DEFAULT_LOCAL_PLAYER_SET_2_RESULT or UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.in=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT + "," + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player1Set3Result equals to UPDATED_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player1Set3Result.in=" + UPDATED_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result equals to UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.in=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set3ResultIsNullOrNotNull() throws Exception {
+    public void getAllMatchesByLocalPlayerSet2ResultIsNullOrNotNull() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set3Result is not null
-        defaultMatchShouldBeFound("player1Set3Result.specified=true");
+        // Get all the matchList where localPlayerSet2Result is not null
+        defaultMatchShouldBeFound("localPlayerSet2Result.specified=true");
 
-        // Get all the matchList where player1Set3Result is null
-        defaultMatchShouldNotBeFound("player1Set3Result.specified=false");
+        // Get all the matchList where localPlayerSet2Result is null
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set3ResultIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllMatchesByLocalPlayerSet2ResultIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set3Result greater than or equals to DEFAULT_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldBeFound("player1Set3Result.greaterOrEqualThan=" + DEFAULT_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result greater than or equals to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player1Set3Result greater than or equals to UPDATED_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player1Set3Result.greaterOrEqualThan=" + UPDATED_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result greater than or equals to UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer1Set3ResultIsLessThanSomething() throws Exception {
+    public void getAllMatchesByLocalPlayerSet2ResultIsLessThanSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player1Set3Result less than or equals to DEFAULT_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player1Set3Result.lessThan=" + DEFAULT_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result less than or equals to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.lessThan=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player1Set3Result less than or equals to UPDATED_PLAYER_1_SET_3_RESULT
-        defaultMatchShouldBeFound("player1Set3Result.lessThan=" + UPDATED_PLAYER_1_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet2Result less than or equals to UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.lessThan=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
     }
 
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer2Set3ResultIsEqualToSomething() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet2ResultIsEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player2Set3Result equals to DEFAULT_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldBeFound("player2Set3Result.equals=" + DEFAULT_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result equals to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.equals=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player2Set3Result equals to UPDATED_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player2Set3Result.equals=" + UPDATED_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result equals to UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.equals=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer2Set3ResultIsInShouldWork() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet2ResultIsInShouldWork() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player2Set3Result in DEFAULT_PLAYER_2_SET_3_RESULT or UPDATED_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldBeFound("player2Set3Result.in=" + DEFAULT_PLAYER_2_SET_3_RESULT + "," + UPDATED_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result in DEFAULT_VISITOR_PLAYER_SET_2_RESULT or UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.in=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT + "," + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player2Set3Result equals to UPDATED_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player2Set3Result.in=" + UPDATED_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result equals to UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.in=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer2Set3ResultIsNullOrNotNull() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet2ResultIsNullOrNotNull() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player2Set3Result is not null
-        defaultMatchShouldBeFound("player2Set3Result.specified=true");
+        // Get all the matchList where visitorPlayerSet2Result is not null
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.specified=true");
 
-        // Get all the matchList where player2Set3Result is null
-        defaultMatchShouldNotBeFound("player2Set3Result.specified=false");
+        // Get all the matchList where visitorPlayerSet2Result is null
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer2Set3ResultIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet2ResultIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player2Set3Result greater than or equals to DEFAULT_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldBeFound("player2Set3Result.greaterOrEqualThan=" + DEFAULT_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result greater than or equals to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player2Set3Result greater than or equals to UPDATED_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player2Set3Result.greaterOrEqualThan=" + UPDATED_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result greater than or equals to UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
     }
 
     @Test
     @Transactional
-    public void getAllMatchesByPlayer2Set3ResultIsLessThanSomething() throws Exception {
+    public void getAllMatchesByVisitorPlayerSet2ResultIsLessThanSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where player2Set3Result less than or equals to DEFAULT_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldNotBeFound("player2Set3Result.lessThan=" + DEFAULT_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result less than or equals to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.lessThan=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where player2Set3Result less than or equals to UPDATED_PLAYER_2_SET_3_RESULT
-        defaultMatchShouldBeFound("player2Set3Result.lessThan=" + UPDATED_PLAYER_2_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result less than or equals to UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.lessThan=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result equals to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.equals=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where localPlayerSet3Result equals to UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.equals=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result in DEFAULT_LOCAL_PLAYER_SET_3_RESULT or UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.in=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT + "," + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where localPlayerSet3Result equals to UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.in=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result is not null
+        defaultMatchShouldBeFound("localPlayerSet3Result.specified=true");
+
+        // Get all the matchList where localPlayerSet3Result is null
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result greater than or equals to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where localPlayerSet3Result greater than or equals to UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsLessThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result less than or equals to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.lessThan=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where localPlayerSet3Result less than or equals to UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.lessThan=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result equals to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.equals=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where visitorPlayerSet3Result equals to UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.equals=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result in DEFAULT_VISITOR_PLAYER_SET_3_RESULT or UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.in=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT + "," + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where visitorPlayerSet3Result equals to UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.in=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result is not null
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.specified=true");
+
+        // Get all the matchList where visitorPlayerSet3Result is null
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result greater than or equals to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where visitorPlayerSet3Result greater than or equals to UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsLessThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result less than or equals to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.lessThan=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where visitorPlayerSet3Result less than or equals to UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.lessThan=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
     }
 
 
@@ -1011,12 +1011,12 @@ public class MatchResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(match.getId().intValue())))
-            .andExpect(jsonPath("$.[*].player1Set1Result").value(hasItem(DEFAULT_PLAYER_1_SET_1_RESULT)))
-            .andExpect(jsonPath("$.[*].player2Set1Result").value(hasItem(DEFAULT_PLAYER_2_SET_1_RESULT)))
-            .andExpect(jsonPath("$.[*].player1Set2Result").value(hasItem(DEFAULT_PLAYER_1_SET_2_RESULT)))
-            .andExpect(jsonPath("$.[*].player2Set2Result").value(hasItem(DEFAULT_PLAYER_2_SET_2_RESULT)))
-            .andExpect(jsonPath("$.[*].player1Set3Result").value(hasItem(DEFAULT_PLAYER_1_SET_3_RESULT)))
-            .andExpect(jsonPath("$.[*].player2Set3Result").value(hasItem(DEFAULT_PLAYER_2_SET_3_RESULT)))
+            .andExpect(jsonPath("$.[*].localPlayerSet1Result").value(hasItem(DEFAULT_LOCAL_PLAYER_SET_1_RESULT)))
+            .andExpect(jsonPath("$.[*].visitorPlayerSet1Result").value(hasItem(DEFAULT_VISITOR_PLAYER_SET_1_RESULT)))
+            .andExpect(jsonPath("$.[*].localPlayerSet2Result").value(hasItem(DEFAULT_LOCAL_PLAYER_SET_2_RESULT)))
+            .andExpect(jsonPath("$.[*].visitorPlayerSet2Result").value(hasItem(DEFAULT_VISITOR_PLAYER_SET_2_RESULT)))
+            .andExpect(jsonPath("$.[*].localPlayerSet3Result").value(hasItem(DEFAULT_LOCAL_PLAYER_SET_3_RESULT)))
+            .andExpect(jsonPath("$.[*].visitorPlayerSet3Result").value(hasItem(DEFAULT_VISITOR_PLAYER_SET_3_RESULT)))
             .andExpect(jsonPath("$.[*].localPlayerSets").value(hasItem(DEFAULT_LOCAL_PLAYER_SETS)))
             .andExpect(jsonPath("$.[*].visitorPlayerSets").value(hasItem(DEFAULT_VISITOR_PLAYER_SETS)))
             .andExpect(jsonPath("$.[*].localPlayerAbandoned").value(hasItem(DEFAULT_LOCAL_PLAYER_ABANDONED.booleanValue())))
@@ -1070,12 +1070,12 @@ public class MatchResourceIT {
         // Disconnect from session so that the updates on updatedMatch are not directly saved in db
         em.detach(updatedMatch);
         updatedMatch
-            .player1Set1Result(UPDATED_PLAYER_1_SET_1_RESULT)
-            .player2Set1Result(UPDATED_PLAYER_2_SET_1_RESULT)
-            .player1Set2Result(UPDATED_PLAYER_1_SET_2_RESULT)
-            .player2Set2Result(UPDATED_PLAYER_2_SET_2_RESULT)
-            .player1Set3Result(UPDATED_PLAYER_1_SET_3_RESULT)
-            .player2Set3Result(UPDATED_PLAYER_2_SET_3_RESULT)
+            .localPlayerSet1Result(UPDATED_LOCAL_PLAYER_SET_1_RESULT)
+            .visitorPlayerSet1Result(UPDATED_VISITOR_PLAYER_SET_1_RESULT)
+            .localPlayerSet2Result(UPDATED_LOCAL_PLAYER_SET_2_RESULT)
+            .visitorPlayerSet2Result(UPDATED_VISITOR_PLAYER_SET_2_RESULT)
+            .localPlayerSet3Result(UPDATED_LOCAL_PLAYER_SET_3_RESULT)
+            .visitorPlayerSet3Result(UPDATED_VISITOR_PLAYER_SET_3_RESULT)
             .localPlayerSets(UPDATED_LOCAL_PLAYER_SETS)
             .visitorPlayerSets(UPDATED_VISITOR_PLAYER_SETS)
             .localPlayerAbandoned(UPDATED_LOCAL_PLAYER_ABANDONED)
@@ -1092,12 +1092,12 @@ public class MatchResourceIT {
         List<Match> matchList = matchRepository.findAll();
         assertThat(matchList).hasSize(databaseSizeBeforeUpdate);
         Match testMatch = matchList.get(matchList.size() - 1);
-        assertThat(testMatch.getPlayer1Set1Result()).isEqualTo(UPDATED_PLAYER_1_SET_1_RESULT);
-        assertThat(testMatch.getPlayer2Set1Result()).isEqualTo(UPDATED_PLAYER_2_SET_1_RESULT);
-        assertThat(testMatch.getPlayer1Set2Result()).isEqualTo(UPDATED_PLAYER_1_SET_2_RESULT);
-        assertThat(testMatch.getPlayer2Set2Result()).isEqualTo(UPDATED_PLAYER_2_SET_2_RESULT);
-        assertThat(testMatch.getPlayer1Set3Result()).isEqualTo(UPDATED_PLAYER_1_SET_3_RESULT);
-        assertThat(testMatch.getPlayer2Set3Result()).isEqualTo(UPDATED_PLAYER_2_SET_3_RESULT);
+        assertThat(testMatch.getLocalPlayerSet1Result()).isEqualTo(UPDATED_LOCAL_PLAYER_SET_1_RESULT);
+        assertThat(testMatch.getVisitorPlayerSet1Result()).isEqualTo(UPDATED_VISITOR_PLAYER_SET_1_RESULT);
+        assertThat(testMatch.getLocalPlayerSet2Result()).isEqualTo(UPDATED_LOCAL_PLAYER_SET_2_RESULT);
+        assertThat(testMatch.getVisitorPlayerSet2Result()).isEqualTo(UPDATED_VISITOR_PLAYER_SET_2_RESULT);
+        assertThat(testMatch.getLocalPlayerSet3Result()).isEqualTo(UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+        assertThat(testMatch.getVisitorPlayerSet3Result()).isEqualTo(UPDATED_VISITOR_PLAYER_SET_3_RESULT);
         assertThat(testMatch.getLocalPlayerSets()).isEqualTo(UPDATED_LOCAL_PLAYER_SETS);
         assertThat(testMatch.getVisitorPlayerSets()).isEqualTo(UPDATED_VISITOR_PLAYER_SETS);
         assertThat(testMatch.isLocalPlayerAbandoned()).isEqualTo(UPDATED_LOCAL_PLAYER_ABANDONED);

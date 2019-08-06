@@ -7,9 +7,9 @@ export interface IRankingTennis {
   gamesWin?: number;
   gamesLoss?: number;
   setsWin?: number;
-  setsLost?: number;
+  setsLoss?: number;
   matchesPlayed?: number;
-  matchesWined?: number;
+  matchesWon?: number;
   matchesLoss?: number;
   matchesNotPresent?: number;
   matchesAbandoned?: number;
@@ -24,9 +24,9 @@ export class RankingTennis implements IRankingTennis {
     public gamesWin?: number,
     public gamesLoss?: number,
     public setsWin?: number,
-    public setsLost?: number,
+    public setsLoss?: number,
     public matchesPlayed?: number,
-    public matchesWined?: number,
+    public matchesWon?: number,
     public matchesLoss?: number,
     public matchesNotPresent?: number,
     public matchesAbandoned?: number,

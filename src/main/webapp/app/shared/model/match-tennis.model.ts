@@ -3,12 +3,12 @@ import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 
 export interface IMatchTennis {
   id?: number;
-  player1Set1Result?: number;
-  player2Set1Result?: number;
-  player1Set2Result?: number;
-  player2Set2Result?: number;
-  player1Set3Result?: number;
-  player2Set3Result?: number;
+  localPlayerSet1Result?: number;
+  visitorPlayerSet1Result?: number;
+  localPlayerSet2Result?: number;
+  visitorPlayerSet2Result?: number;
+  localPlayerSet3Result?: number;
+  visitorPlayerSet3Result?: number;
   localPlayerSets?: number;
   visitorPlayerSets?: number;
   localPlayerAbandoned?: boolean;
@@ -23,12 +23,12 @@ export interface IMatchTennis {
 export class MatchTennis implements IMatchTennis {
   constructor(
     public id?: number,
-    public player1Set1Result?: number,
-    public player2Set1Result?: number,
-    public player1Set2Result?: number,
-    public player2Set2Result?: number,
-    public player1Set3Result?: number,
-    public player2Set3Result?: number,
+    public localPlayerSet1Result?: number,
+    public visitorPlayerSet1Result?: number,
+    public localPlayerSet2Result?: number,
+    public visitorPlayerSet2Result?: number,
+    public localPlayerSet3Result?: number,
+    public visitorPlayerSet3Result?: number,
     public localPlayerSets?: number,
     public visitorPlayerSets?: number,
     public localPlayerAbandoned?: boolean,

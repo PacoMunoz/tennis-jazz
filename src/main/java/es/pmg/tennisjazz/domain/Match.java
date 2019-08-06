@@ -21,23 +21,23 @@ public class Match implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "player_1_set_1_result")
-    private Integer player1Set1Result;
+    @Column(name = "local_player_set_1_result")
+    private Integer localPlayerSet1Result;
 
-    @Column(name = "player_2_set_1_result")
-    private Integer player2Set1Result;
+    @Column(name = "visitor_player_set_1_result")
+    private Integer visitorPlayerSet1Result;
 
-    @Column(name = "player_1_set_2_result")
-    private Integer player1Set2Result;
+    @Column(name = "local_player_set_2_result")
+    private Integer localPlayerSet2Result;
 
-    @Column(name = "player_2_set_2_result")
-    private Integer player2Set2Result;
+    @Column(name = "visitor_player_set_2_result")
+    private Integer visitorPlayerSet2Result;
 
-    @Column(name = "player_1_set_3_result")
-    private Integer player1Set3Result;
+    @Column(name = "local_player_set_3_result")
+    private Integer localPlayerSet3Result;
 
-    @Column(name = "player_2_set_3_result")
-    private Integer player2Set3Result;
+    @Column(name = "visitor_player_set_3_result")
+    private Integer visitorPlayerSet3Result;
 
     @Column(name = "local_player_sets")
     private Integer localPlayerSets;
@@ -78,82 +78,82 @@ public class Match implements Serializable {
         this.id = id;
     }
 
-    public Integer getPlayer1Set1Result() {
-        return player1Set1Result;
+    public Integer getLocalPlayerSet1Result() {
+        return localPlayerSet1Result;
     }
 
-    public Match player1Set1Result(Integer player1Set1Result) {
-        this.player1Set1Result = player1Set1Result;
+    public Match localPlayerSet1Result(Integer localPlayerSet1Result) {
+        this.localPlayerSet1Result = localPlayerSet1Result;
         return this;
     }
 
-    public void setPlayer1Set1Result(Integer player1Set1Result) {
-        this.player1Set1Result = player1Set1Result;
+    public void setLocalPlayerSet1Result(Integer localPlayerSet1Result) {
+        this.localPlayerSet1Result = localPlayerSet1Result;
     }
 
-    public Integer getPlayer2Set1Result() {
-        return player2Set1Result;
+    public Integer getVisitorPlayerSet1Result() {
+        return visitorPlayerSet1Result;
     }
 
-    public Match player2Set1Result(Integer player2Set1Result) {
-        this.player2Set1Result = player2Set1Result;
+    public Match visitorPlayerSet1Result(Integer visitorPlayerSet1Result) {
+        this.visitorPlayerSet1Result = visitorPlayerSet1Result;
         return this;
     }
 
-    public void setPlayer2Set1Result(Integer player2Set1Result) {
-        this.player2Set1Result = player2Set1Result;
+    public void setVisitorPlayerSet1Result(Integer visitorPlayerSet1Result) {
+        this.visitorPlayerSet1Result = visitorPlayerSet1Result;
     }
 
-    public Integer getPlayer1Set2Result() {
-        return player1Set2Result;
+    public Integer getLocalPlayerSet2Result() {
+        return localPlayerSet2Result;
     }
 
-    public Match player1Set2Result(Integer player1Set2Result) {
-        this.player1Set2Result = player1Set2Result;
+    public Match localPlayerSet2Result(Integer localPlayerSet2Result) {
+        this.localPlayerSet2Result = localPlayerSet2Result;
         return this;
     }
 
-    public void setPlayer1Set2Result(Integer player1Set2Result) {
-        this.player1Set2Result = player1Set2Result;
+    public void setLocalPlayerSet2Result(Integer localPlayerSet2Result) {
+        this.localPlayerSet2Result = localPlayerSet2Result;
     }
 
-    public Integer getPlayer2Set2Result() {
-        return player2Set2Result;
+    public Integer getVisitorPlayerSet2Result() {
+        return visitorPlayerSet2Result;
     }
 
-    public Match player2Set2Result(Integer player2Set2Result) {
-        this.player2Set2Result = player2Set2Result;
+    public Match visitorPlayerSet2Result(Integer visitorPlayerSet2Result) {
+        this.visitorPlayerSet2Result = visitorPlayerSet2Result;
         return this;
     }
 
-    public void setPlayer2Set2Result(Integer player2Set2Result) {
-        this.player2Set2Result = player2Set2Result;
+    public void setVisitorPlayerSet2Result(Integer visitorPlayerSet2Result) {
+        this.visitorPlayerSet2Result = visitorPlayerSet2Result;
     }
 
-    public Integer getPlayer1Set3Result() {
-        return player1Set3Result;
+    public Integer getLocalPlayerSet3Result() {
+        return localPlayerSet3Result;
     }
 
-    public Match player1Set3Result(Integer player1Set3Result) {
-        this.player1Set3Result = player1Set3Result;
+    public Match localPlayerSet3Result(Integer localPlayerSet3Result) {
+        this.localPlayerSet3Result = localPlayerSet3Result;
         return this;
     }
 
-    public void setPlayer1Set3Result(Integer player1Set3Result) {
-        this.player1Set3Result = player1Set3Result;
+    public void setLocalPlayerSet3Result(Integer localPlayerSet3Result) {
+        this.localPlayerSet3Result = localPlayerSet3Result;
     }
 
-    public Integer getPlayer2Set3Result() {
-        return player2Set3Result;
+    public Integer getVisitorPlayerSet3Result() {
+        return visitorPlayerSet3Result;
     }
 
-    public Match player2Set3Result(Integer player2Set3Result) {
-        this.player2Set3Result = player2Set3Result;
+    public Match visitorPlayerSet3Result(Integer visitorPlayerSet3Result) {
+        this.visitorPlayerSet3Result = visitorPlayerSet3Result;
         return this;
     }
 
-    public void setPlayer2Set3Result(Integer player2Set3Result) {
-        this.player2Set3Result = player2Set3Result;
+    public void setVisitorPlayerSet3Result(Integer visitorPlayerSet3Result) {
+        this.visitorPlayerSet3Result = visitorPlayerSet3Result;
     }
 
     public Integer getLocalPlayerSets() {
@@ -294,12 +294,12 @@ public class Match implements Serializable {
     public String toString() {
         return "Match{" +
             "id=" + getId() +
-            ", player1Set1Result=" + getPlayer1Set1Result() +
-            ", player2Set1Result=" + getPlayer2Set1Result() +
-            ", player1Set2Result=" + getPlayer1Set2Result() +
-            ", player2Set2Result=" + getPlayer2Set2Result() +
-            ", player1Set3Result=" + getPlayer1Set3Result() +
-            ", player2Set3Result=" + getPlayer2Set3Result() +
+            ", localPlayerSet1Result=" + getLocalPlayerSet1Result() +
+            ", visitorPlayerSet1Result=" + getVisitorPlayerSet1Result() +
+            ", localPlayerSet2Result=" + getLocalPlayerSet2Result() +
+            ", visitorPlayerSet2Result=" + getVisitorPlayerSet2Result() +
+            ", localPlayerSet3Result=" + getLocalPlayerSet3Result() +
+            ", visitorPlayerSet3Result=" + getVisitorPlayerSet3Result() +
             ", localPlayerSets=" + getLocalPlayerSets() +
             ", visitorPlayerSets=" + getVisitorPlayerSets() +
             ", localPlayerAbandoned='" + isLocalPlayerAbandoned() + "'" +

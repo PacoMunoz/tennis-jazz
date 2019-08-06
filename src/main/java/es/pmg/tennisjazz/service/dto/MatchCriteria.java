@@ -26,17 +26,17 @@ public class MatchCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private IntegerFilter player1Set1Result;
+    private IntegerFilter localPlayerSet1Result;
 
-    private IntegerFilter player2Set1Result;
+    private IntegerFilter visitorPlayerSet1Result;
 
-    private IntegerFilter player1Set2Result;
+    private IntegerFilter localPlayerSet2Result;
 
-    private IntegerFilter player2Set2Result;
+    private IntegerFilter visitorPlayerSet2Result;
 
-    private IntegerFilter player1Set3Result;
+    private IntegerFilter localPlayerSet3Result;
 
-    private IntegerFilter player2Set3Result;
+    private IntegerFilter visitorPlayerSet3Result;
 
     private IntegerFilter localPlayerSets;
 
@@ -61,12 +61,12 @@ public class MatchCriteria implements Serializable, Criteria {
 
     public MatchCriteria(MatchCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.player1Set1Result = other.player1Set1Result == null ? null : other.player1Set1Result.copy();
-        this.player2Set1Result = other.player2Set1Result == null ? null : other.player2Set1Result.copy();
-        this.player1Set2Result = other.player1Set2Result == null ? null : other.player1Set2Result.copy();
-        this.player2Set2Result = other.player2Set2Result == null ? null : other.player2Set2Result.copy();
-        this.player1Set3Result = other.player1Set3Result == null ? null : other.player1Set3Result.copy();
-        this.player2Set3Result = other.player2Set3Result == null ? null : other.player2Set3Result.copy();
+        this.localPlayerSet1Result = other.localPlayerSet1Result == null ? null : other.localPlayerSet1Result.copy();
+        this.visitorPlayerSet1Result = other.visitorPlayerSet1Result == null ? null : other.visitorPlayerSet1Result.copy();
+        this.localPlayerSet2Result = other.localPlayerSet2Result == null ? null : other.localPlayerSet2Result.copy();
+        this.visitorPlayerSet2Result = other.visitorPlayerSet2Result == null ? null : other.visitorPlayerSet2Result.copy();
+        this.localPlayerSet3Result = other.localPlayerSet3Result == null ? null : other.localPlayerSet3Result.copy();
+        this.visitorPlayerSet3Result = other.visitorPlayerSet3Result == null ? null : other.visitorPlayerSet3Result.copy();
         this.localPlayerSets = other.localPlayerSets == null ? null : other.localPlayerSets.copy();
         this.visitorPlayerSets = other.visitorPlayerSets == null ? null : other.visitorPlayerSets.copy();
         this.localPlayerAbandoned = other.localPlayerAbandoned == null ? null : other.localPlayerAbandoned.copy();
@@ -91,52 +91,52 @@ public class MatchCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public IntegerFilter getPlayer1Set1Result() {
-        return player1Set1Result;
+    public IntegerFilter getLocalPlayerSet1Result() {
+        return localPlayerSet1Result;
     }
 
-    public void setPlayer1Set1Result(IntegerFilter player1Set1Result) {
-        this.player1Set1Result = player1Set1Result;
+    public void setLocalPlayerSet1Result(IntegerFilter localPlayerSet1Result) {
+        this.localPlayerSet1Result = localPlayerSet1Result;
     }
 
-    public IntegerFilter getPlayer2Set1Result() {
-        return player2Set1Result;
+    public IntegerFilter getVisitorPlayerSet1Result() {
+        return visitorPlayerSet1Result;
     }
 
-    public void setPlayer2Set1Result(IntegerFilter player2Set1Result) {
-        this.player2Set1Result = player2Set1Result;
+    public void setVisitorPlayerSet1Result(IntegerFilter visitorPlayerSet1Result) {
+        this.visitorPlayerSet1Result = visitorPlayerSet1Result;
     }
 
-    public IntegerFilter getPlayer1Set2Result() {
-        return player1Set2Result;
+    public IntegerFilter getLocalPlayerSet2Result() {
+        return localPlayerSet2Result;
     }
 
-    public void setPlayer1Set2Result(IntegerFilter player1Set2Result) {
-        this.player1Set2Result = player1Set2Result;
+    public void setLocalPlayerSet2Result(IntegerFilter localPlayerSet2Result) {
+        this.localPlayerSet2Result = localPlayerSet2Result;
     }
 
-    public IntegerFilter getPlayer2Set2Result() {
-        return player2Set2Result;
+    public IntegerFilter getVisitorPlayerSet2Result() {
+        return visitorPlayerSet2Result;
     }
 
-    public void setPlayer2Set2Result(IntegerFilter player2Set2Result) {
-        this.player2Set2Result = player2Set2Result;
+    public void setVisitorPlayerSet2Result(IntegerFilter visitorPlayerSet2Result) {
+        this.visitorPlayerSet2Result = visitorPlayerSet2Result;
     }
 
-    public IntegerFilter getPlayer1Set3Result() {
-        return player1Set3Result;
+    public IntegerFilter getLocalPlayerSet3Result() {
+        return localPlayerSet3Result;
     }
 
-    public void setPlayer1Set3Result(IntegerFilter player1Set3Result) {
-        this.player1Set3Result = player1Set3Result;
+    public void setLocalPlayerSet3Result(IntegerFilter localPlayerSet3Result) {
+        this.localPlayerSet3Result = localPlayerSet3Result;
     }
 
-    public IntegerFilter getPlayer2Set3Result() {
-        return player2Set3Result;
+    public IntegerFilter getVisitorPlayerSet3Result() {
+        return visitorPlayerSet3Result;
     }
 
-    public void setPlayer2Set3Result(IntegerFilter player2Set3Result) {
-        this.player2Set3Result = player2Set3Result;
+    public void setVisitorPlayerSet3Result(IntegerFilter visitorPlayerSet3Result) {
+        this.visitorPlayerSet3Result = visitorPlayerSet3Result;
     }
 
     public IntegerFilter getLocalPlayerSets() {
@@ -223,12 +223,12 @@ public class MatchCriteria implements Serializable, Criteria {
         final MatchCriteria that = (MatchCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(player1Set1Result, that.player1Set1Result) &&
-            Objects.equals(player2Set1Result, that.player2Set1Result) &&
-            Objects.equals(player1Set2Result, that.player1Set2Result) &&
-            Objects.equals(player2Set2Result, that.player2Set2Result) &&
-            Objects.equals(player1Set3Result, that.player1Set3Result) &&
-            Objects.equals(player2Set3Result, that.player2Set3Result) &&
+            Objects.equals(localPlayerSet1Result, that.localPlayerSet1Result) &&
+            Objects.equals(visitorPlayerSet1Result, that.visitorPlayerSet1Result) &&
+            Objects.equals(localPlayerSet2Result, that.localPlayerSet2Result) &&
+            Objects.equals(visitorPlayerSet2Result, that.visitorPlayerSet2Result) &&
+            Objects.equals(localPlayerSet3Result, that.localPlayerSet3Result) &&
+            Objects.equals(visitorPlayerSet3Result, that.visitorPlayerSet3Result) &&
             Objects.equals(localPlayerSets, that.localPlayerSets) &&
             Objects.equals(visitorPlayerSets, that.visitorPlayerSets) &&
             Objects.equals(localPlayerAbandoned, that.localPlayerAbandoned) &&
@@ -244,12 +244,12 @@ public class MatchCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        player1Set1Result,
-        player2Set1Result,
-        player1Set2Result,
-        player2Set2Result,
-        player1Set3Result,
-        player2Set3Result,
+        localPlayerSet1Result,
+        visitorPlayerSet1Result,
+        localPlayerSet2Result,
+        visitorPlayerSet2Result,
+        localPlayerSet3Result,
+        visitorPlayerSet3Result,
         localPlayerSets,
         visitorPlayerSets,
         localPlayerAbandoned,
@@ -266,12 +266,12 @@ public class MatchCriteria implements Serializable, Criteria {
     public String toString() {
         return "MatchCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (player1Set1Result != null ? "player1Set1Result=" + player1Set1Result + ", " : "") +
-                (player2Set1Result != null ? "player2Set1Result=" + player2Set1Result + ", " : "") +
-                (player1Set2Result != null ? "player1Set2Result=" + player1Set2Result + ", " : "") +
-                (player2Set2Result != null ? "player2Set2Result=" + player2Set2Result + ", " : "") +
-                (player1Set3Result != null ? "player1Set3Result=" + player1Set3Result + ", " : "") +
-                (player2Set3Result != null ? "player2Set3Result=" + player2Set3Result + ", " : "") +
+                (localPlayerSet1Result != null ? "localPlayerSet1Result=" + localPlayerSet1Result + ", " : "") +
+                (visitorPlayerSet1Result != null ? "visitorPlayerSet1Result=" + visitorPlayerSet1Result + ", " : "") +
+                (localPlayerSet2Result != null ? "localPlayerSet2Result=" + localPlayerSet2Result + ", " : "") +
+                (visitorPlayerSet2Result != null ? "visitorPlayerSet2Result=" + visitorPlayerSet2Result + ", " : "") +
+                (localPlayerSet3Result != null ? "localPlayerSet3Result=" + localPlayerSet3Result + ", " : "") +
+                (visitorPlayerSet3Result != null ? "visitorPlayerSet3Result=" + visitorPlayerSet3Result + ", " : "") +
                 (localPlayerSets != null ? "localPlayerSets=" + localPlayerSets + ", " : "") +
                 (visitorPlayerSets != null ? "visitorPlayerSets=" + visitorPlayerSets + ", " : "") +
                 (localPlayerAbandoned != null ? "localPlayerAbandoned=" + localPlayerAbandoned + ", " : "") +

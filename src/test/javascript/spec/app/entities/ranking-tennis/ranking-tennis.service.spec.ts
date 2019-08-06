@@ -63,9 +63,9 @@ describe('Service Tests', () => {
             gamesWin: 1,
             gamesLoss: 1,
             setsWin: 1,
-            setsLost: 1,
+            setsLoss: 1,
             matchesPlayed: 1,
-            matchesWined: 1,
+            matchesWon: 1,
             matchesLoss: 1,
             matchesNotPresent: 1,
             matchesAbandoned: 1
@@ -90,9 +90,9 @@ describe('Service Tests', () => {
             gamesWin: 1,
             gamesLoss: 1,
             setsWin: 1,
-            setsLost: 1,
+            setsLoss: 1,
             matchesPlayed: 1,
-            matchesWined: 1,
+            matchesWon: 1,
             matchesLoss: 1,
             matchesNotPresent: 1,
             matchesAbandoned: 1

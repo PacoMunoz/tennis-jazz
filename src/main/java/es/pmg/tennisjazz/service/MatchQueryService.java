@@ -85,23 +85,23 @@ public class MatchQueryService extends QueryService<Match> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Match_.id));
             }
-            if (criteria.getPlayer1Set1Result() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPlayer1Set1Result(), Match_.player1Set1Result));
+            if (criteria.getLocalPlayerSet1Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSet1Result(), Match_.localPlayerSet1Result));
             }
-            if (criteria.getPlayer2Set1Result() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPlayer2Set1Result(), Match_.player2Set1Result));
+            if (criteria.getVisitorPlayerSet1Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerSet1Result(), Match_.visitorPlayerSet1Result));
             }
-            if (criteria.getPlayer1Set2Result() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPlayer1Set2Result(), Match_.player1Set2Result));
+            if (criteria.getLocalPlayerSet2Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSet2Result(), Match_.localPlayerSet2Result));
             }
-            if (criteria.getPlayer2Set2Result() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPlayer2Set2Result(), Match_.player2Set2Result));
+            if (criteria.getVisitorPlayerSet2Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerSet2Result(), Match_.visitorPlayerSet2Result));
             }
-            if (criteria.getPlayer1Set3Result() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPlayer1Set3Result(), Match_.player1Set3Result));
+            if (criteria.getLocalPlayerSet3Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSet3Result(), Match_.localPlayerSet3Result));
             }
-            if (criteria.getPlayer2Set3Result() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPlayer2Set3Result(), Match_.player2Set3Result));
+            if (criteria.getVisitorPlayerSet3Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerSet3Result(), Match_.visitorPlayerSet3Result));
             }
             if (criteria.getLocalPlayerSets() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSets(), Match_.localPlayerSets));

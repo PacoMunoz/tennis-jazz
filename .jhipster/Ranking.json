@@ -18,7 +18,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "setsLost",
+            "fieldName": "setsLoss",
             "fieldType": "Integer"
         },
         {
@@ -26,7 +26,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "matchesWined",
+            "fieldName": "matchesWon",
             "fieldType": "Integer"
         },
         {

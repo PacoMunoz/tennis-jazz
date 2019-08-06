@@ -18,12 +18,12 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="player1Set1Result"><span jhiTranslate="tennisJazzApp.match.player1Set1Result">Player 1 Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="player2Set1Result"><span jhiTranslate="tennisJazzApp.match.player2Set1Result">Player 2 Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="player1Set2Result"><span jhiTranslate="tennisJazzApp.match.player1Set2Result">Player 1 Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="player2Set2Result"><span jhiTranslate="tennisJazzApp.match.player2Set2Result">Player 2 Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="player1Set3Result"><span jhiTranslate="tennisJazzApp.match.player1Set3Result">Player 1 Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="player2Set3Result"><span jhiTranslate="tennisJazzApp.match.player2Set3Result">Player 2 Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localPlayerSet1Result"><span jhiTranslate="tennisJazzApp.match.localPlayerSet1Result">Local Player Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visitorPlayerSet1Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet1Result">Visitor Player Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localPlayerSet2Result"><span jhiTranslate="tennisJazzApp.match.localPlayerSet2Result">Local Player Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visitorPlayerSet2Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet2Result">Visitor Player Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localPlayerSet3Result"><span jhiTranslate="tennisJazzApp.match.localPlayerSet3Result">Local Player Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visitorPlayerSet3Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet3Result">Visitor Player Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerSets"><span jhiTranslate="tennisJazzApp.match.localPlayerSets">Local Player Sets</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayerSets"><span jhiTranslate="tennisJazzApp.match.visitorPlayerSets">Visitor Player Sets</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerAbandoned"><span jhiTranslate="tennisJazzApp.match.localPlayerAbandoned">Local Player Abandoned</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -39,12 +39,12 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let match of matches ;trackBy: trackId">
                 <td><a [routerLink]="['/match-tennis', match.id, 'view' ]">{{match.id}}</a></td>
-                <td>{{match.player1Set1Result}}</td>
-                <td>{{match.player2Set1Result}}</td>
-                <td>{{match.player1Set2Result}}</td>
-                <td>{{match.player2Set2Result}}</td>
-                <td>{{match.player1Set3Result}}</td>
-                <td>{{match.player2Set3Result}}</td>
+                <td>{{match.localPlayerSet1Result}}</td>
+                <td>{{match.visitorPlayerSet1Result}}</td>
+                <td>{{match.localPlayerSet2Result}}</td>
+                <td>{{match.visitorPlayerSet2Result}}</td>
+                <td>{{match.localPlayerSet3Result}}</td>
+                <td>{{match.visitorPlayerSet3Result}}</td>
                 <td>{{match.localPlayerSets}}</td>
                 <td>{{match.visitorPlayerSets}}</td>
                 <td>{{match.localPlayerAbandoned}}</td>

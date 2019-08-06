@@ -97,14 +97,14 @@ public class RankingQueryService extends QueryService<Ranking> {
             if (criteria.getSetsWin() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSetsWin(), Ranking_.setsWin));
             }
-            if (criteria.getSetsLost() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSetsLost(), Ranking_.setsLost));
+            if (criteria.getSetsLoss() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSetsLoss(), Ranking_.setsLoss));
             }
             if (criteria.getMatchesPlayed() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMatchesPlayed(), Ranking_.matchesPlayed));
             }
-            if (criteria.getMatchesWined() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMatchesWined(), Ranking_.matchesWined));
+            if (criteria.getMatchesWon() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getMatchesWon(), Ranking_.matchesWon));
             }
             if (criteria.getMatchesLoss() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMatchesLoss(), Ranking_.matchesLoss));
