@@ -11,6 +11,8 @@ export interface IRankingTennis {
   matchesPlayed?: number;
   matchesWined?: number;
   matchesLoss?: number;
+  matchesNotPresent?: number;
+  matchesAbandoned?: number;
   tournamentGroup?: ITournamentGroupTennis;
   player?: IPlayerTennis;
 }
@@ -26,6 +28,8 @@ export class RankingTennis implements IRankingTennis {
     public matchesPlayed?: number,
     public matchesWined?: number,
     public matchesLoss?: number,
+    public matchesNotPresent?: number,
+    public matchesAbandoned?: number,
     public tournamentGroup?: ITournamentGroupTennis,
     public player?: IPlayerTennis
   ) {}

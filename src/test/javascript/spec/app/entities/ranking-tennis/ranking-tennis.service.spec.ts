@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(RankingTennisService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new RankingTennis(0, 0, 0, 0, 0, 0, 0, 0, 0);
+      elemDefault = new RankingTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -66,7 +66,9 @@ describe('Service Tests', () => {
             setsLost: 1,
             matchesPlayed: 1,
             matchesWined: 1,
-            matchesLoss: 1
+            matchesLoss: 1,
+            matchesNotPresent: 1,
+            matchesAbandoned: 1
           },
           elemDefault
         );
@@ -91,7 +93,9 @@ describe('Service Tests', () => {
             setsLost: 1,
             matchesPlayed: 1,
             matchesWined: 1,
-            matchesLoss: 1
+            matchesLoss: 1,
+            matchesNotPresent: 1,
+            matchesAbandoned: 1
           },
           elemDefault
         );

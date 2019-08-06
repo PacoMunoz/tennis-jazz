@@ -32,6 +32,14 @@
         {
             "fieldName": "matchesLoss",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesNotPresent",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesAbandoned",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [

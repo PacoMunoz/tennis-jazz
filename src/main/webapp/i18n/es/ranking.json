@@ -24,6 +24,8 @@
       "matchesPlayed": "Matches Played",
       "matchesWined": "Matches Wined",
       "matchesLoss": "Matches Loss",
+      "matchesNotPresent": "Matches Not Present",
+      "matchesAbandoned": "Matches Abandoned",
       "tournamentGroup": "Tournament Group",
       "player": "Player"
     }

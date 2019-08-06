@@ -137,6 +137,8 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
           ranking.gamesLoss = 0;
           ranking.gamesWin = 0;
           ranking.matchesWined = 0;
+          ranking.matchesNotPresent = 0;
+          ranking.matchesAbandoned = 0;
           return this.rankingTennisService.create(ranking).subscribe();
         })
       )
@@ -225,10 +227,10 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
         (res: HttpResponse<IRankingTennis[]>) => {
           if (res.body.length === 0) {
             console.log('No hay ranking para estos datos.');
-            this.createRankingLocalPlayer(match.visitorPlayer, group, match);
+            this.createRankingVisitorPlayer(match.visitorPlayer, group, match);
           } else {
             console.log('Si hay ranking para estos datos.');
-            this.updateRankingLocalPlayer(res.body[0], match);
+            this.updateRankingVisitorPlayer(res.body[0], match);
           }
         },
         (res: HttpErrorResponse) => this.onError(res.message)
@@ -338,6 +340,12 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       ranking.points += 1;
       ranking.matchesLoss += 1;
     }
+    if (match.localPlayerAbandoned) {
+      ranking.matchesAbandoned += 1;
+    }
+    if (match.localPlayerNotPresent) {
+      ranking.matchesNotPresent += 1;
+    }
     ranking.gamesWin +=
       (match.player1Set1Result != null ? match.player1Set1Result : 0) +
       (match.player1Set2Result != null ? match.player1Set2Result : 0) +
@@ -355,15 +363,18 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
   }
 
   updateRankingVisitorPlayer(ranking: IRankingTennis, match: IMatchTennis) {
-    console.log(
-      'Actualizando ranking para el Jugador Visitante : ' + ranking.player.name + ' en el grupo : ' + ranking.tournamentGroup.name
-    );
     if (match.visitorPlayerSets === 2 || match.localPlayerAbandoned || match.localPlayerNotPresent) {
       ranking.matchesWined += 1;
       ranking.points += 3;
     } else {
       ranking.matchesLoss += 1;
       ranking.points += 1;
+    }
+    if (match.visitorPlayerAbandoned) {
+      ranking.matchesAbandoned += 1;
+    }
+    if (match.visitorPlayerNotPresent) {
+      ranking.matchesNotPresent += 1;
     }
     ranking.gamesLoss +=
       (match.player1Set1Result != null ? match.player1Set1Result : 0) +

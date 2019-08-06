@@ -45,6 +45,12 @@ public class Ranking implements Serializable {
     @Column(name = "matches_loss")
     private Integer matchesLoss;
 
+    @Column(name = "matches_not_present")
+    private Integer matchesNotPresent;
+
+    @Column(name = "matches_abandoned")
+    private Integer matchesAbandoned;
+
     @ManyToOne
     @JsonIgnoreProperties("rankings")
     private TournamentGroup tournamentGroup;
@@ -166,6 +172,32 @@ public class Ranking implements Serializable {
         this.matchesLoss = matchesLoss;
     }
 
+    public Integer getMatchesNotPresent() {
+        return matchesNotPresent;
+    }
+
+    public Ranking matchesNotPresent(Integer matchesNotPresent) {
+        this.matchesNotPresent = matchesNotPresent;
+        return this;
+    }
+
+    public void setMatchesNotPresent(Integer matchesNotPresent) {
+        this.matchesNotPresent = matchesNotPresent;
+    }
+
+    public Integer getMatchesAbandoned() {
+        return matchesAbandoned;
+    }
+
+    public Ranking matchesAbandoned(Integer matchesAbandoned) {
+        this.matchesAbandoned = matchesAbandoned;
+        return this;
+    }
+
+    public void setMatchesAbandoned(Integer matchesAbandoned) {
+        this.matchesAbandoned = matchesAbandoned;
+    }
+
     public TournamentGroup getTournamentGroup() {
         return tournamentGroup;
     }
@@ -221,6 +253,8 @@ public class Ranking implements Serializable {
             ", matchesPlayed=" + getMatchesPlayed() +
             ", matchesWined=" + getMatchesWined() +
             ", matchesLoss=" + getMatchesLoss() +
+            ", matchesNotPresent=" + getMatchesNotPresent() +
+            ", matchesAbandoned=" + getMatchesAbandoned() +
             "}";
     }
 }

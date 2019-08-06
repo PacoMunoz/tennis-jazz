@@ -109,6 +109,12 @@ public class RankingQueryService extends QueryService<Ranking> {
             if (criteria.getMatchesLoss() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMatchesLoss(), Ranking_.matchesLoss));
             }
+            if (criteria.getMatchesNotPresent() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getMatchesNotPresent(), Ranking_.matchesNotPresent));
+            }
+            if (criteria.getMatchesAbandoned() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getMatchesAbandoned(), Ranking_.matchesAbandoned));
+            }
             if (criteria.getTournamentGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTournamentGroupId(),
                     root -> root.join(Ranking_.tournamentGroup, JoinType.LEFT).get(TournamentGroup_.id)));

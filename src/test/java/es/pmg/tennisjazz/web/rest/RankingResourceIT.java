@@ -62,6 +62,12 @@ public class RankingResourceIT {
     private static final Integer DEFAULT_MATCHES_LOSS = 1;
     private static final Integer UPDATED_MATCHES_LOSS = 2;
 
+    private static final Integer DEFAULT_MATCHES_NOT_PRESENT = 1;
+    private static final Integer UPDATED_MATCHES_NOT_PRESENT = 2;
+
+    private static final Integer DEFAULT_MATCHES_ABANDONED = 1;
+    private static final Integer UPDATED_MATCHES_ABANDONED = 2;
+
     @Autowired
     private RankingRepository rankingRepository;
 
@@ -117,7 +123,9 @@ public class RankingResourceIT {
             .setsLost(DEFAULT_SETS_LOST)
             .matchesPlayed(DEFAULT_MATCHES_PLAYED)
             .matchesWined(DEFAULT_MATCHES_WINED)
-            .matchesLoss(DEFAULT_MATCHES_LOSS);
+            .matchesLoss(DEFAULT_MATCHES_LOSS)
+            .matchesNotPresent(DEFAULT_MATCHES_NOT_PRESENT)
+            .matchesAbandoned(DEFAULT_MATCHES_ABANDONED);
         return ranking;
     }
     /**
@@ -135,7 +143,9 @@ public class RankingResourceIT {
             .setsLost(UPDATED_SETS_LOST)
             .matchesPlayed(UPDATED_MATCHES_PLAYED)
             .matchesWined(UPDATED_MATCHES_WINED)
-            .matchesLoss(UPDATED_MATCHES_LOSS);
+            .matchesLoss(UPDATED_MATCHES_LOSS)
+            .matchesNotPresent(UPDATED_MATCHES_NOT_PRESENT)
+            .matchesAbandoned(UPDATED_MATCHES_ABANDONED);
         return ranking;
     }
 
@@ -167,6 +177,8 @@ public class RankingResourceIT {
         assertThat(testRanking.getMatchesPlayed()).isEqualTo(DEFAULT_MATCHES_PLAYED);
         assertThat(testRanking.getMatchesWined()).isEqualTo(DEFAULT_MATCHES_WINED);
         assertThat(testRanking.getMatchesLoss()).isEqualTo(DEFAULT_MATCHES_LOSS);
+        assertThat(testRanking.getMatchesNotPresent()).isEqualTo(DEFAULT_MATCHES_NOT_PRESENT);
+        assertThat(testRanking.getMatchesAbandoned()).isEqualTo(DEFAULT_MATCHES_ABANDONED);
     }
 
     @Test
@@ -207,7 +219,9 @@ public class RankingResourceIT {
             .andExpect(jsonPath("$.[*].setsLost").value(hasItem(DEFAULT_SETS_LOST)))
             .andExpect(jsonPath("$.[*].matchesPlayed").value(hasItem(DEFAULT_MATCHES_PLAYED)))
             .andExpect(jsonPath("$.[*].matchesWined").value(hasItem(DEFAULT_MATCHES_WINED)))
-            .andExpect(jsonPath("$.[*].matchesLoss").value(hasItem(DEFAULT_MATCHES_LOSS)));
+            .andExpect(jsonPath("$.[*].matchesLoss").value(hasItem(DEFAULT_MATCHES_LOSS)))
+            .andExpect(jsonPath("$.[*].matchesNotPresent").value(hasItem(DEFAULT_MATCHES_NOT_PRESENT)))
+            .andExpect(jsonPath("$.[*].matchesAbandoned").value(hasItem(DEFAULT_MATCHES_ABANDONED)));
     }
     
     @Test
@@ -228,7 +242,9 @@ public class RankingResourceIT {
             .andExpect(jsonPath("$.setsLost").value(DEFAULT_SETS_LOST))
             .andExpect(jsonPath("$.matchesPlayed").value(DEFAULT_MATCHES_PLAYED))
             .andExpect(jsonPath("$.matchesWined").value(DEFAULT_MATCHES_WINED))
-            .andExpect(jsonPath("$.matchesLoss").value(DEFAULT_MATCHES_LOSS));
+            .andExpect(jsonPath("$.matchesLoss").value(DEFAULT_MATCHES_LOSS))
+            .andExpect(jsonPath("$.matchesNotPresent").value(DEFAULT_MATCHES_NOT_PRESENT))
+            .andExpect(jsonPath("$.matchesAbandoned").value(DEFAULT_MATCHES_ABANDONED));
     }
 
     @Test
@@ -761,6 +777,138 @@ public class RankingResourceIT {
 
     @Test
     @Transactional
+    public void getAllRankingsByMatchesNotPresentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent equals to DEFAULT_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.equals=" + DEFAULT_MATCHES_NOT_PRESENT);
+
+        // Get all the rankingList where matchesNotPresent equals to UPDATED_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.equals=" + UPDATED_MATCHES_NOT_PRESENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesNotPresentIsInShouldWork() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent in DEFAULT_MATCHES_NOT_PRESENT or UPDATED_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.in=" + DEFAULT_MATCHES_NOT_PRESENT + "," + UPDATED_MATCHES_NOT_PRESENT);
+
+        // Get all the rankingList where matchesNotPresent equals to UPDATED_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.in=" + UPDATED_MATCHES_NOT_PRESENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesNotPresentIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent is not null
+        defaultRankingShouldBeFound("matchesNotPresent.specified=true");
+
+        // Get all the rankingList where matchesNotPresent is null
+        defaultRankingShouldNotBeFound("matchesNotPresent.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesNotPresentIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent greater than or equals to DEFAULT_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.greaterOrEqualThan=" + DEFAULT_MATCHES_NOT_PRESENT);
+
+        // Get all the rankingList where matchesNotPresent greater than or equals to UPDATED_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.greaterOrEqualThan=" + UPDATED_MATCHES_NOT_PRESENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesNotPresentIsLessThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent less than or equals to DEFAULT_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.lessThan=" + DEFAULT_MATCHES_NOT_PRESENT);
+
+        // Get all the rankingList where matchesNotPresent less than or equals to UPDATED_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.lessThan=" + UPDATED_MATCHES_NOT_PRESENT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned equals to DEFAULT_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.equals=" + DEFAULT_MATCHES_ABANDONED);
+
+        // Get all the rankingList where matchesAbandoned equals to UPDATED_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.equals=" + UPDATED_MATCHES_ABANDONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsInShouldWork() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned in DEFAULT_MATCHES_ABANDONED or UPDATED_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.in=" + DEFAULT_MATCHES_ABANDONED + "," + UPDATED_MATCHES_ABANDONED);
+
+        // Get all the rankingList where matchesAbandoned equals to UPDATED_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.in=" + UPDATED_MATCHES_ABANDONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned is not null
+        defaultRankingShouldBeFound("matchesAbandoned.specified=true");
+
+        // Get all the rankingList where matchesAbandoned is null
+        defaultRankingShouldNotBeFound("matchesAbandoned.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned greater than or equals to DEFAULT_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.greaterOrEqualThan=" + DEFAULT_MATCHES_ABANDONED);
+
+        // Get all the rankingList where matchesAbandoned greater than or equals to UPDATED_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.greaterOrEqualThan=" + UPDATED_MATCHES_ABANDONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsLessThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned less than or equals to DEFAULT_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.lessThan=" + DEFAULT_MATCHES_ABANDONED);
+
+        // Get all the rankingList where matchesAbandoned less than or equals to UPDATED_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.lessThan=" + UPDATED_MATCHES_ABANDONED);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllRankingsByTournamentGroupIsEqualToSomething() throws Exception {
         // Initialize the database
         TournamentGroup tournamentGroup = TournamentGroupResourceIT.createEntity(em);
@@ -811,7 +959,9 @@ public class RankingResourceIT {
             .andExpect(jsonPath("$.[*].setsLost").value(hasItem(DEFAULT_SETS_LOST)))
             .andExpect(jsonPath("$.[*].matchesPlayed").value(hasItem(DEFAULT_MATCHES_PLAYED)))
             .andExpect(jsonPath("$.[*].matchesWined").value(hasItem(DEFAULT_MATCHES_WINED)))
-            .andExpect(jsonPath("$.[*].matchesLoss").value(hasItem(DEFAULT_MATCHES_LOSS)));
+            .andExpect(jsonPath("$.[*].matchesLoss").value(hasItem(DEFAULT_MATCHES_LOSS)))
+            .andExpect(jsonPath("$.[*].matchesNotPresent").value(hasItem(DEFAULT_MATCHES_NOT_PRESENT)))
+            .andExpect(jsonPath("$.[*].matchesAbandoned").value(hasItem(DEFAULT_MATCHES_ABANDONED)));
 
         // Check, that the count call also returns 1
         restRankingMockMvc.perform(get("/api/rankings/count?sort=id,desc&" + filter))
@@ -866,7 +1016,9 @@ public class RankingResourceIT {
             .setsLost(UPDATED_SETS_LOST)
             .matchesPlayed(UPDATED_MATCHES_PLAYED)
             .matchesWined(UPDATED_MATCHES_WINED)
-            .matchesLoss(UPDATED_MATCHES_LOSS);
+            .matchesLoss(UPDATED_MATCHES_LOSS)
+            .matchesNotPresent(UPDATED_MATCHES_NOT_PRESENT)
+            .matchesAbandoned(UPDATED_MATCHES_ABANDONED);
 
         restRankingMockMvc.perform(put("/api/rankings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -885,6 +1037,8 @@ public class RankingResourceIT {
         assertThat(testRanking.getMatchesPlayed()).isEqualTo(UPDATED_MATCHES_PLAYED);
         assertThat(testRanking.getMatchesWined()).isEqualTo(UPDATED_MATCHES_WINED);
         assertThat(testRanking.getMatchesLoss()).isEqualTo(UPDATED_MATCHES_LOSS);
+        assertThat(testRanking.getMatchesNotPresent()).isEqualTo(UPDATED_MATCHES_NOT_PRESENT);
+        assertThat(testRanking.getMatchesAbandoned()).isEqualTo(UPDATED_MATCHES_ABANDONED);
     }
 
     @Test
