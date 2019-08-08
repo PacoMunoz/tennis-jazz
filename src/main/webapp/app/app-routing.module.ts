@@ -12,7 +12,6 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         {
           path: 'admin',
           loadChildren: () => import('./admin/admin.module').then(m => m.TennisJazzAdminModule)
-          //loadChildren: './admin/admin.module#TennisJazzAdminModule'
         },
         ...LAYOUT_ROUTES
       ],

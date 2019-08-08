@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IRoundTennis } from 'app/shared/model/round-tennis.model';
 import { IMatchTennis } from 'app/shared/model/match-tennis.model';
 import { MatchTennisService } from 'app/entities/match-tennis';
 import { HttpResponse } from '@angular/common/http';
+import { IRoundTennis } from 'app/shared/model/round-tennis.model';
 
 @Component({
   selector: 'jhi-round-tennis-match-list',

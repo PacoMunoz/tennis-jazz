@@ -9,6 +9,7 @@ import { PlayerTennisService } from 'app/entities/player-tennis';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-list',
@@ -29,26 +30,38 @@ export class TournamentTennisGroupListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ tournament }) => {
-      this.tournament = tournament;
-    });
-    this.tournamentGroupTennisService
-      .query({
-        'tournamentId.equals': this.tournament.id
-      })
-      .subscribe(
-        (res: HttpResponse<ITournamentGroupTennis[]>) => {
-          this.setTournamentGroups(res.body);
-          //this.setPlayersTennis();
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.activatedRoute.data
+      .pipe(
+        map(({ tournament }) => {
+          this.tournament = tournament;
+          return this.tournamentGroupTennisService
+            .query({
+              'tournamentId.equals': this.tournament.id
+            })
+            .subscribe(
+              (res: HttpResponse<ITournamentGroupTennis[]>) => this.setTournamentGroups(res.body),
+              (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        })
+      )
+      .subscribe();
 
+    console.log('Vamoa a buscar el sort');
     this.rankingTennisService
       .query({
-        sort: 'points,desc'
+        page: 0,
+        size: 20,
+        sort: this.sort()
       })
-      .subscribe((res: HttpResponse<IRankingTennis[]>) => console.log('El numero de ranking es ' + res.body.length));
+      .subscribe(
+        (res: HttpResponse<IRankingTennis[]>) => console.log('El numero de ranking es', res.body.length),
+        error => console.log('error')
+      );
+  }
+
+  sort() {
+    const result = ['points' + ',' + 'desc'];
+    return result;
   }
 
   protected setTournamentGroups(data: ITournamentGroupTennis[]) {
