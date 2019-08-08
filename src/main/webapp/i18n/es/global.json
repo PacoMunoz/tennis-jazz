@@ -137,5 +137,7 @@
     "idexists": "Un/a nuevo/a {{entityName}} no puede tener ID",
     "idnull": "ID inválido"
   },
-  "footer": "Pie de página"
+  "footer": "Pie de página",
+  "showMore": "Ver más",
+  "showLess": "Ver menos"
 }

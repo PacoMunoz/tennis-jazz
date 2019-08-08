@@ -4,9 +4,15 @@
         <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
         <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
     </tr>
-    <tr *ngFor="let playerRank of ranking |  slice : 0: 2  ">
+    <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd  ">
         <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
         <td>{{playerRank.points}}</td>
     </tr>
     </tbody>
 </table>
+<button *ngIf="ranking.length > 4 && !showLessButton" type="submit"
+        class="btn btn-info btn-sm"
+        (click)="showMore()"><fa-icon [icon]="'plus'"></fa-icon><span class="d-none d-md-inline" jhiTranslate="showMore">Show More</span></button>
+<button *ngIf="ranking.length > 4 && showLessButton" type="submit"
+        class="btn btn-info btn-sm"
+        (click)="showLess()"><fa-icon [icon]="'plus'"></fa-icon><span class="d-none d-md-inline" jhiTranslate="showLess">Show Less</span></button>
