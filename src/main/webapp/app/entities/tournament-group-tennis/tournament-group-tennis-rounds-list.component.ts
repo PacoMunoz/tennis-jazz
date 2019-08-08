@@ -28,11 +28,15 @@ export class TournamentGroupTennisRoundsListComponent implements OnInit {
     });
     this.roundTennisService
       .query({
-        'tournamentGroupId.equals': this.group.id
+        'tournamentGroupId.equals': this.group.id,
+        sort: this.sort()
       })
       .subscribe((res: HttpResponse<IRoundTennis[]>) => this.getRounds(res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
+  sort() {
+    return ['startDate' + ',' + 'desc'];
+  }
   protected getRounds(data: IRoundTennis[]) {
     for (let i = 0; i < data.length; i++) {
       this.rounds.push(data[i]);

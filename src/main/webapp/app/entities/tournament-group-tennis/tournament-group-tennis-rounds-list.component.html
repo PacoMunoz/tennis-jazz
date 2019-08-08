@@ -1,9 +1,10 @@
 <jhi-alert></jhi-alert>
 <div class="container">
     <div class="card-columns m-5 animated fadeIn">
-        <div *ngFor="let round of rounds" class="card puntero">
+        <div *ngFor="let round of rounds" class="card">
             <div class="card-header bg-secondary">
                 <h5 class="card-title">{{round.name}}</h5>
+                <p> Del {{round.startDate|date}} al {{round.endDate|date}}</p>
             </div>
             <div class="row card-body">
                 <jhi-round-tennis-match-list [round]="round"></jhi-round-tennis-match-list>

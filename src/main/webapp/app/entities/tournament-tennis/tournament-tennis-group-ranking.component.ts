@@ -33,8 +33,7 @@ export class TournamentTennisGroupRankingComponent implements OnInit {
   }
 
   sort() {
-    const result = ['points' + ',' + 'desc'];
-    return result;
+    return ['points' + ',' + 'desc'];
   }
 
   protected setRanking(data: IRankingTennis[]) {

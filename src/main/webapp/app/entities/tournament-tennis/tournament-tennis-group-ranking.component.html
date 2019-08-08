@@ -4,7 +4,7 @@
         <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
         <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
     </tr>
-    <tr *ngFor="let playerRank of ranking">
+    <tr *ngFor="let playerRank of ranking |  slice : 0: 2  ">
         <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
         <td>{{playerRank.points}}</td>
     </tr>
