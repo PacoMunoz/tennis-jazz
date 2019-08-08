@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-match-tennis-heading" jhiTranslate="tennisJazzApp.match.home.createOrEditLabel">Create or edit a Match</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSet1Result" for="field_localPlayerSet1Result">Local Player Set 1 Result</label>
+                    <input type="number" class="form-control" name="localPlayerSet1Result" id="field_localPlayerSet1Result"
+                           formControlName="localPlayerSet1Result"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayerSet1Result" for="field_visitorPlayerSet1Result">Visitor Player Set 1 Result</label>
+                    <input type="number" class="form-control" name="visitorPlayerSet1Result" id="field_visitorPlayerSet1Result"
+                           formControlName="visitorPlayerSet1Result"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSet2Result" for="field_localPlayerSet2Result">Local Player Set 2 Result</label>
+                    <input type="number" class="form-control" name="localPlayerSet2Result" id="field_localPlayerSet2Result"
+                           formControlName="localPlayerSet2Result"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayerSet2Result" for="field_visitorPlayerSet2Result">Visitor Player Set 2 Result</label>
+                    <input type="number" class="form-control" name="visitorPlayerSet2Result" id="field_visitorPlayerSet2Result"
+                           formControlName="visitorPlayerSet2Result"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSet3Result" for="field_localPlayerSet3Result">Local Player Set 3 Result</label>
+                    <input type="number" class="form-control" name="localPlayerSet3Result" id="field_localPlayerSet3Result"
+                           formControlName="localPlayerSet3Result"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayerSet3Result" for="field_visitorPlayerSet3Result">Visitor Player Set 3 Result</label>
+                    <input type="number" class="form-control" name="visitorPlayerSet3Result" id="field_visitorPlayerSet3Result"
+                           formControlName="visitorPlayerSet3Result"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSets" for="field_localPlayerSets">Local Player Sets</label>
+                    <input type="number" class="form-control" name="localPlayerSets" id="field_localPlayerSets"
+                           formControlName="localPlayerSets"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayerSets" for="field_visitorPlayerSets">Visitor Player Sets</label>
+                    <input type="number" class="form-control" name="visitorPlayerSets" id="field_visitorPlayerSets"
+                           formControlName="visitorPlayerSets"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerAbandoned" for="field_localPlayerAbandoned">Local Player Abandoned</label>
+                    <input type="checkbox" class="form-control" name="localPlayerAbandoned" id="field_localPlayerAbandoned"
+                           formControlName="localPlayerAbandoned"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayerAbandoned" for="field_visitorPlayerAbandoned">Visitor Player Abandoned</label>
+                    <input type="checkbox" class="form-control" name="visitorPlayerAbandoned" id="field_visitorPlayerAbandoned"
+                           formControlName="visitorPlayerAbandoned"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerNotPresent" for="field_localPlayerNotPresent">Local Player Not Present</label>
+                    <input type="checkbox" class="form-control" name="localPlayerNotPresent" id="field_localPlayerNotPresent"
+                           formControlName="localPlayerNotPresent"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayerNotPresent" for="field_visitorPlayerNotPresent">Visitor Player Not Present</label>
+                    <input type="checkbox" class="form-control" name="visitorPlayerNotPresent" id="field_visitorPlayerNotPresent"
+                           formControlName="visitorPlayerNotPresent"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.round" for="field_round">Round</label>
+                    <select class="form-control" id="field_round" name="round" formControlName="round">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="roundOption.id === editForm.get('round').value?.id ? editForm.get('round').value : roundOption" *ngFor="let roundOption of rounds; trackBy: trackRoundById">{{roundOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.visitorPlayer" for="field_visitorPlayer">Visitor Player</label>
+                    <select class="form-control" id="field_visitorPlayer" name="visitorPlayer" formControlName="visitorPlayer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="playerOption.id === editForm.get('visitorPlayer').value?.id ? editForm.get('visitorPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayer" for="field_localPlayer">Local Player</label>
+                    <select class="form-control" id="field_localPlayer" name="localPlayer" formControlName="localPlayer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="playerOption.id === editForm.get('localPlayer').value?.id ? editForm.get('localPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

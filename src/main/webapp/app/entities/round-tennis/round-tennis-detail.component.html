@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="round">
+            <h2><span jhiTranslate="tennisJazzApp.round.detail.title">Round</span> {{round.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tennisJazzApp.round.name">Name</span></dt>
+                <dd>
+                    <span>{{round.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.round.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{round.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.round.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{round.endDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.round.tournamentGroup">Tournament Group</span></dt>
+                <dd>
+                    <div *ngIf="round.tournamentGroup">
+                        <a [routerLink]="['/tournament-group-tennis', round.tournamentGroup?.id, 'view']">{{round.tournamentGroup?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/round-tennis', round.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

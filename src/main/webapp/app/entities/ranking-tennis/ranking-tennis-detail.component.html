@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="ranking">
+            <h2><span jhiTranslate="tennisJazzApp.ranking.detail.title">Ranking</span> {{ranking.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></dt>
+                <dd>
+                    <span>{{ranking.points}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.gamesWin">Games Win</span></dt>
+                <dd>
+                    <span>{{ranking.gamesWin}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games Loss</span></dt>
+                <dd>
+                    <span>{{ranking.gamesLoss}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.setsWin">Sets Win</span></dt>
+                <dd>
+                    <span>{{ranking.setsWin}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets Loss</span></dt>
+                <dd>
+                    <span>{{ranking.setsLoss}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Matches Played</span></dt>
+                <dd>
+                    <span>{{ranking.matchesPlayed}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.matchesWon">Matches Won</span></dt>
+                <dd>
+                    <span>{{ranking.matchesWon}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.matchesLoss">Matches Loss</span></dt>
+                <dd>
+                    <span>{{ranking.matchesLoss}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.matchesNotPresent">Matches Not Present</span></dt>
+                <dd>
+                    <span>{{ranking.matchesNotPresent}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.matchesAbandoned">Matches Abandoned</span></dt>
+                <dd>
+                    <span>{{ranking.matchesAbandoned}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.tournamentGroup">Tournament Group</span></dt>
+                <dd>
+                    <div *ngIf="ranking.tournamentGroup">
+                        <a [routerLink]="['/tournament-group-tennis', ranking.tournamentGroup?.id, 'view']">{{ranking.tournamentGroup?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></dt>
+                <dd>
+                    <div *ngIf="ranking.player">
+                        <a [routerLink]="['/player-tennis', ranking.player?.id, 'view']">{{ranking.player?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ranking-tennis', ranking.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

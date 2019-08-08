@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-ranking-tennis-heading" jhiTranslate="tennisJazzApp.ranking.home.createOrEditLabel">Create or edit a Ranking</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.points" for="field_points">Points</label>
+                    <input type="number" class="form-control" name="points" id="field_points"
+                           formControlName="points"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.gamesWin" for="field_gamesWin">Games Win</label>
+                    <input type="number" class="form-control" name="gamesWin" id="field_gamesWin"
+                           formControlName="gamesWin"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.gamesLoss" for="field_gamesLoss">Games Loss</label>
+                    <input type="number" class="form-control" name="gamesLoss" id="field_gamesLoss"
+                           formControlName="gamesLoss"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.setsWin" for="field_setsWin">Sets Win</label>
+                    <input type="number" class="form-control" name="setsWin" id="field_setsWin"
+                           formControlName="setsWin"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.setsLoss" for="field_setsLoss">Sets Loss</label>
+                    <input type="number" class="form-control" name="setsLoss" id="field_setsLoss"
+                           formControlName="setsLoss"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.matchesPlayed" for="field_matchesPlayed">Matches Played</label>
+                    <input type="number" class="form-control" name="matchesPlayed" id="field_matchesPlayed"
+                           formControlName="matchesPlayed"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.matchesWon" for="field_matchesWon">Matches Won</label>
+                    <input type="number" class="form-control" name="matchesWon" id="field_matchesWon"
+                           formControlName="matchesWon"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.matchesLoss" for="field_matchesLoss">Matches Loss</label>
+                    <input type="number" class="form-control" name="matchesLoss" id="field_matchesLoss"
+                           formControlName="matchesLoss"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.matchesNotPresent" for="field_matchesNotPresent">Matches Not Present</label>
+                    <input type="number" class="form-control" name="matchesNotPresent" id="field_matchesNotPresent"
+                           formControlName="matchesNotPresent"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.matchesAbandoned" for="field_matchesAbandoned">Matches Abandoned</label>
+                    <input type="number" class="form-control" name="matchesAbandoned" id="field_matchesAbandoned"
+                           formControlName="matchesAbandoned"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.tournamentGroup" for="field_tournamentGroup">Tournament Group</label>
+                    <select class="form-control" id="field_tournamentGroup" name="tournamentGroup" formControlName="tournamentGroup">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tournamentGroupOption.id === editForm.get('tournamentGroup').value?.id ? editForm.get('tournamentGroup').value : tournamentGroupOption" *ngFor="let tournamentGroupOption of tournamentgroups; trackBy: trackTournamentGroupById">{{tournamentGroupOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.ranking.player" for="field_player">Player</label>
+                    <select class="form-control" id="field_player" name="player" formControlName="player">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="playerOption.id === editForm.get('player').value?.id ? editForm.get('player').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

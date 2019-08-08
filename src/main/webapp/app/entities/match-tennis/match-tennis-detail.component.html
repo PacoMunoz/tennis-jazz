@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="match">
+            <h2><span jhiTranslate="tennisJazzApp.match.detail.title">Match</span> {{match.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayerSet1Result">Local Player Set 1 Result</span></dt>
+                <dd>
+                    <span>{{match.localPlayerSet1Result}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet1Result">Visitor Player Set 1 Result</span></dt>
+                <dd>
+                    <span>{{match.visitorPlayerSet1Result}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayerSet2Result">Local Player Set 2 Result</span></dt>
+                <dd>
+                    <span>{{match.localPlayerSet2Result}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet2Result">Visitor Player Set 2 Result</span></dt>
+                <dd>
+                    <span>{{match.visitorPlayerSet2Result}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayerSet3Result">Local Player Set 3 Result</span></dt>
+                <dd>
+                    <span>{{match.localPlayerSet3Result}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet3Result">Visitor Player Set 3 Result</span></dt>
+                <dd>
+                    <span>{{match.visitorPlayerSet3Result}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayerSets">Local Player Sets</span></dt>
+                <dd>
+                    <span>{{match.localPlayerSets}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayerSets">Visitor Player Sets</span></dt>
+                <dd>
+                    <span>{{match.visitorPlayerSets}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayerAbandoned">Local Player Abandoned</span></dt>
+                <dd>
+                    <span>{{match.localPlayerAbandoned}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayerAbandoned">Visitor Player Abandoned</span></dt>
+                <dd>
+                    <span>{{match.visitorPlayerAbandoned}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayerNotPresent">Local Player Not Present</span></dt>
+                <dd>
+                    <span>{{match.localPlayerNotPresent}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayerNotPresent">Visitor Player Not Present</span></dt>
+                <dd>
+                    <span>{{match.visitorPlayerNotPresent}}</span>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.round">Round</span></dt>
+                <dd>
+                    <div *ngIf="match.round">
+                        <a [routerLink]="['/round-tennis', match.round?.id, 'view']">{{match.round?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.visitorPlayer">Visitor Player</span></dt>
+                <dd>
+                    <div *ngIf="match.visitorPlayer">
+                        <a [routerLink]="['/player-tennis', match.visitorPlayer?.id, 'view']">{{match.visitorPlayer?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.match.localPlayer">Local Player</span></dt>
+                <dd>
+                    <div *ngIf="match.localPlayer">
+                        <a [routerLink]="['/player-tennis', match.localPlayer?.id, 'view']">{{match.localPlayer?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/match-tennis', match.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

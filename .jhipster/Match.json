@@ -1,0 +1,85 @@
+{
+    "name": "Match",
+    "fields": [
+        {
+            "fieldName": "localPlayerSet1Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerSet1Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "localPlayerSet2Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerSet2Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "localPlayerSet3Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerSet3Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "localPlayerSets",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerSets",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "localPlayerAbandoned",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "visitorPlayerAbandoned",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "localPlayerNotPresent",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "visitorPlayerNotPresent",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "round",
+            "otherEntityName": "round",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "visitorMatches",
+            "relationshipName": "visitorPlayer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "localMatches",
+            "relationshipName": "localPlayer",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190720062003",
+    "entityTableName": "match",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "tennis"
+}

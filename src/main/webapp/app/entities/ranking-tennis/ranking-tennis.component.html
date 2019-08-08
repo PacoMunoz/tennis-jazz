@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tennisJazzApp.ranking.home.title">Rankings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ranking-tennis" [routerLink]="['/ranking-tennis/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="tennisJazzApp.ranking.home.createLabel">
+            Create new Ranking
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="rankings?.length === 0">
+        <span jhiTranslate="tennisJazzApp.ranking.home.notFound">No rankings found</span>
+    </div>
+    <div class="table-responsive" *ngIf="rankings?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="points"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gamesWin"><span jhiTranslate="tennisJazzApp.ranking.gamesWin">Games Win</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gamesLoss"><span jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="setsWin"><span jhiTranslate="tennisJazzApp.ranking.setsWin">Sets Win</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="setsLoss"><span jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchesPlayed"><span jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Matches Played</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchesWon"><span jhiTranslate="tennisJazzApp.ranking.matchesWon">Matches Won</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchesLoss"><span jhiTranslate="tennisJazzApp.ranking.matchesLoss">Matches Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchesNotPresent"><span jhiTranslate="tennisJazzApp.ranking.matchesNotPresent">Matches Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="matchesAbandoned"><span jhiTranslate="tennisJazzApp.ranking.matchesAbandoned">Matches Abandoned</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tournamentGroup.id"><span jhiTranslate="tennisJazzApp.ranking.tournamentGroup">Tournament Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="player.id"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let ranking of rankings ;trackBy: trackId">
+                <td><a [routerLink]="['/ranking-tennis', ranking.id, 'view' ]">{{ranking.id}}</a></td>
+                <td>{{ranking.points}}</td>
+                <td>{{ranking.gamesWin}}</td>
+                <td>{{ranking.gamesLoss}}</td>
+                <td>{{ranking.setsWin}}</td>
+                <td>{{ranking.setsLoss}}</td>
+                <td>{{ranking.matchesPlayed}}</td>
+                <td>{{ranking.matchesWon}}</td>
+                <td>{{ranking.matchesLoss}}</td>
+                <td>{{ranking.matchesNotPresent}}</td>
+                <td>{{ranking.matchesAbandoned}}</td>
+                <td>
+                    <div *ngIf="ranking.tournamentGroup">
+                        <a [routerLink]="['../tournament-group-tennis', ranking.tournamentGroup?.id, 'view' ]" >{{ranking.tournamentGroup?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="ranking.player">
+                        <a [routerLink]="['../player-tennis', ranking.player?.id, 'view' ]" >{{ranking.player?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/ranking-tennis', ranking.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/ranking-tennis', ranking.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'ranking-tennis', { outlets: { popup: ranking.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

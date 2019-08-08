@@ -1,0 +1,53 @@
+{
+    "name": "Tournament",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "inProgress",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "winPoints",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lossPoints",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "notPresentPoints",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tournamentGroup",
+            "otherEntityRelationshipName": "tournament",
+            "relationshipName": "groups"
+        }
+    ],
+    "changelogDate": "20190720061959",
+    "entityTableName": "tournament",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "tennis"
+}

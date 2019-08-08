@@ -1,0 +1,33 @@
+{
+  "tennisJazzApp": {
+    "ranking": {
+      "home": {
+        "title": "Rankings",
+        "createLabel": "Crear nuevo Ranking",
+        "createOrEditLabel": "Crear o editar Ranking",
+        "notFound": "No Ranking found"
+      },
+      "created": "Un nuevo Ranking ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ranking ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ranking ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ranking {{ id }}?"
+      },
+      "detail": {
+        "title": "Ranking"
+      },
+      "points": "Points",
+      "gamesWin": "Games Win",
+      "gamesLoss": "Games Loss",
+      "setsWin": "Sets Win",
+      "setsLoss": "Sets Loss",
+      "matchesPlayed": "Matches Played",
+      "matchesWon": "Matches Won",
+      "matchesLoss": "Matches Loss",
+      "matchesNotPresent": "Matches Not Present",
+      "matchesAbandoned": "Matches Abandoned",
+      "tournamentGroup": "Tournament Group",
+      "player": "Player"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+    "name": "Player",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "surname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "other",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "match",
+            "otherEntityRelationshipName": "visitorPlayer",
+            "relationshipName": "visitorMatches"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "match",
+            "otherEntityRelationshipName": "localPlayer",
+            "relationshipName": "localMatches"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "ranking",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "rankings"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "tournamentGroup",
+            "otherEntityRelationshipName": "players",
+            "relationshipName": "groups",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190720062001",
+    "entityTableName": "player",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "tennis"
+}

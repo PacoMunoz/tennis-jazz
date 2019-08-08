@@ -1,0 +1,69 @@
+{
+    "name": "Ranking",
+    "fields": [
+        {
+            "fieldName": "points",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "gamesWin",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "gamesLoss",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "setsWin",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "setsLoss",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesPlayed",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesWon",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesLoss",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesNotPresent",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "matchesAbandoned",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "tournamentGroup",
+            "otherEntityName": "tournamentGroup",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "player",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190720062004",
+    "entityTableName": "ranking",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "tennis"
+}
