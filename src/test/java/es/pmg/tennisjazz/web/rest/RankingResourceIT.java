@@ -33,40 +33,50 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link RankingResource} REST controller.
+ * Integration tests for the {@link RankingResource} REST controller.
  */
 @SpringBootTest(classes = TennisJazzApp.class)
 public class RankingResourceIT {
 
     private static final Integer DEFAULT_POINTS = 1;
     private static final Integer UPDATED_POINTS = 2;
+    private static final Integer SMALLER_POINTS = 1 - 1;
 
     private static final Integer DEFAULT_GAMES_WIN = 1;
     private static final Integer UPDATED_GAMES_WIN = 2;
+    private static final Integer SMALLER_GAMES_WIN = 1 - 1;
 
     private static final Integer DEFAULT_GAMES_LOSS = 1;
     private static final Integer UPDATED_GAMES_LOSS = 2;
+    private static final Integer SMALLER_GAMES_LOSS = 1 - 1;
 
     private static final Integer DEFAULT_SETS_WIN = 1;
     private static final Integer UPDATED_SETS_WIN = 2;
+    private static final Integer SMALLER_SETS_WIN = 1 - 1;
 
     private static final Integer DEFAULT_SETS_LOSS = 1;
     private static final Integer UPDATED_SETS_LOSS = 2;
+    private static final Integer SMALLER_SETS_LOSS = 1 - 1;
 
     private static final Integer DEFAULT_MATCHES_PLAYED = 1;
     private static final Integer UPDATED_MATCHES_PLAYED = 2;
+    private static final Integer SMALLER_MATCHES_PLAYED = 1 - 1;
 
     private static final Integer DEFAULT_MATCHES_WON = 1;
     private static final Integer UPDATED_MATCHES_WON = 2;
+    private static final Integer SMALLER_MATCHES_WON = 1 - 1;
 
     private static final Integer DEFAULT_MATCHES_LOSS = 1;
     private static final Integer UPDATED_MATCHES_LOSS = 2;
+    private static final Integer SMALLER_MATCHES_LOSS = 1 - 1;
 
     private static final Integer DEFAULT_MATCHES_NOT_PRESENT = 1;
     private static final Integer UPDATED_MATCHES_NOT_PRESENT = 2;
+    private static final Integer SMALLER_MATCHES_NOT_PRESENT = 1 - 1;
 
     private static final Integer DEFAULT_MATCHES_ABANDONED = 1;
     private static final Integer UPDATED_MATCHES_ABANDONED = 2;
+    private static final Integer SMALLER_MATCHES_ABANDONED = 1 - 1;
 
     @Autowired
     private RankingRepository rankingRepository;
@@ -292,11 +302,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where points greater than or equals to DEFAULT_POINTS
-        defaultRankingShouldBeFound("points.greaterOrEqualThan=" + DEFAULT_POINTS);
+        // Get all the rankingList where points is greater than or equal to DEFAULT_POINTS
+        defaultRankingShouldBeFound("points.greaterThanOrEqual=" + DEFAULT_POINTS);
 
-        // Get all the rankingList where points greater than or equals to UPDATED_POINTS
-        defaultRankingShouldNotBeFound("points.greaterOrEqualThan=" + UPDATED_POINTS);
+        // Get all the rankingList where points is greater than or equal to UPDATED_POINTS
+        defaultRankingShouldNotBeFound("points.greaterThanOrEqual=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByPointsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where points is less than or equal to DEFAULT_POINTS
+        defaultRankingShouldBeFound("points.lessThanOrEqual=" + DEFAULT_POINTS);
+
+        // Get all the rankingList where points is less than or equal to SMALLER_POINTS
+        defaultRankingShouldNotBeFound("points.lessThanOrEqual=" + SMALLER_POINTS);
     }
 
     @Test
@@ -305,11 +328,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where points less than or equals to DEFAULT_POINTS
+        // Get all the rankingList where points is less than DEFAULT_POINTS
         defaultRankingShouldNotBeFound("points.lessThan=" + DEFAULT_POINTS);
 
-        // Get all the rankingList where points less than or equals to UPDATED_POINTS
+        // Get all the rankingList where points is less than UPDATED_POINTS
         defaultRankingShouldBeFound("points.lessThan=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByPointsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where points is greater than DEFAULT_POINTS
+        defaultRankingShouldNotBeFound("points.greaterThan=" + DEFAULT_POINTS);
+
+        // Get all the rankingList where points is greater than SMALLER_POINTS
+        defaultRankingShouldBeFound("points.greaterThan=" + SMALLER_POINTS);
     }
 
 
@@ -358,11 +394,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin greater than or equals to DEFAULT_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.greaterOrEqualThan=" + DEFAULT_GAMES_WIN);
+        // Get all the rankingList where gamesWin is greater than or equal to DEFAULT_GAMES_WIN
+        defaultRankingShouldBeFound("gamesWin.greaterThanOrEqual=" + DEFAULT_GAMES_WIN);
 
-        // Get all the rankingList where gamesWin greater than or equals to UPDATED_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.greaterOrEqualThan=" + UPDATED_GAMES_WIN);
+        // Get all the rankingList where gamesWin is greater than or equal to UPDATED_GAMES_WIN
+        defaultRankingShouldNotBeFound("gamesWin.greaterThanOrEqual=" + UPDATED_GAMES_WIN);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByGamesWinIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where gamesWin is less than or equal to DEFAULT_GAMES_WIN
+        defaultRankingShouldBeFound("gamesWin.lessThanOrEqual=" + DEFAULT_GAMES_WIN);
+
+        // Get all the rankingList where gamesWin is less than or equal to SMALLER_GAMES_WIN
+        defaultRankingShouldNotBeFound("gamesWin.lessThanOrEqual=" + SMALLER_GAMES_WIN);
     }
 
     @Test
@@ -371,11 +420,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin less than or equals to DEFAULT_GAMES_WIN
+        // Get all the rankingList where gamesWin is less than DEFAULT_GAMES_WIN
         defaultRankingShouldNotBeFound("gamesWin.lessThan=" + DEFAULT_GAMES_WIN);
 
-        // Get all the rankingList where gamesWin less than or equals to UPDATED_GAMES_WIN
+        // Get all the rankingList where gamesWin is less than UPDATED_GAMES_WIN
         defaultRankingShouldBeFound("gamesWin.lessThan=" + UPDATED_GAMES_WIN);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByGamesWinIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where gamesWin is greater than DEFAULT_GAMES_WIN
+        defaultRankingShouldNotBeFound("gamesWin.greaterThan=" + DEFAULT_GAMES_WIN);
+
+        // Get all the rankingList where gamesWin is greater than SMALLER_GAMES_WIN
+        defaultRankingShouldBeFound("gamesWin.greaterThan=" + SMALLER_GAMES_WIN);
     }
 
 
@@ -424,11 +486,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesLoss greater than or equals to DEFAULT_GAMES_LOSS
-        defaultRankingShouldBeFound("gamesLoss.greaterOrEqualThan=" + DEFAULT_GAMES_LOSS);
+        // Get all the rankingList where gamesLoss is greater than or equal to DEFAULT_GAMES_LOSS
+        defaultRankingShouldBeFound("gamesLoss.greaterThanOrEqual=" + DEFAULT_GAMES_LOSS);
 
-        // Get all the rankingList where gamesLoss greater than or equals to UPDATED_GAMES_LOSS
-        defaultRankingShouldNotBeFound("gamesLoss.greaterOrEqualThan=" + UPDATED_GAMES_LOSS);
+        // Get all the rankingList where gamesLoss is greater than or equal to UPDATED_GAMES_LOSS
+        defaultRankingShouldNotBeFound("gamesLoss.greaterThanOrEqual=" + UPDATED_GAMES_LOSS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByGamesLossIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where gamesLoss is less than or equal to DEFAULT_GAMES_LOSS
+        defaultRankingShouldBeFound("gamesLoss.lessThanOrEqual=" + DEFAULT_GAMES_LOSS);
+
+        // Get all the rankingList where gamesLoss is less than or equal to SMALLER_GAMES_LOSS
+        defaultRankingShouldNotBeFound("gamesLoss.lessThanOrEqual=" + SMALLER_GAMES_LOSS);
     }
 
     @Test
@@ -437,11 +512,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesLoss less than or equals to DEFAULT_GAMES_LOSS
+        // Get all the rankingList where gamesLoss is less than DEFAULT_GAMES_LOSS
         defaultRankingShouldNotBeFound("gamesLoss.lessThan=" + DEFAULT_GAMES_LOSS);
 
-        // Get all the rankingList where gamesLoss less than or equals to UPDATED_GAMES_LOSS
+        // Get all the rankingList where gamesLoss is less than UPDATED_GAMES_LOSS
         defaultRankingShouldBeFound("gamesLoss.lessThan=" + UPDATED_GAMES_LOSS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByGamesLossIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where gamesLoss is greater than DEFAULT_GAMES_LOSS
+        defaultRankingShouldNotBeFound("gamesLoss.greaterThan=" + DEFAULT_GAMES_LOSS);
+
+        // Get all the rankingList where gamesLoss is greater than SMALLER_GAMES_LOSS
+        defaultRankingShouldBeFound("gamesLoss.greaterThan=" + SMALLER_GAMES_LOSS);
     }
 
 
@@ -490,11 +578,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin greater than or equals to DEFAULT_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.greaterOrEqualThan=" + DEFAULT_SETS_WIN);
+        // Get all the rankingList where setsWin is greater than or equal to DEFAULT_SETS_WIN
+        defaultRankingShouldBeFound("setsWin.greaterThanOrEqual=" + DEFAULT_SETS_WIN);
 
-        // Get all the rankingList where setsWin greater than or equals to UPDATED_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.greaterOrEqualThan=" + UPDATED_SETS_WIN);
+        // Get all the rankingList where setsWin is greater than or equal to UPDATED_SETS_WIN
+        defaultRankingShouldNotBeFound("setsWin.greaterThanOrEqual=" + UPDATED_SETS_WIN);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsBySetsWinIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where setsWin is less than or equal to DEFAULT_SETS_WIN
+        defaultRankingShouldBeFound("setsWin.lessThanOrEqual=" + DEFAULT_SETS_WIN);
+
+        // Get all the rankingList where setsWin is less than or equal to SMALLER_SETS_WIN
+        defaultRankingShouldNotBeFound("setsWin.lessThanOrEqual=" + SMALLER_SETS_WIN);
     }
 
     @Test
@@ -503,11 +604,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin less than or equals to DEFAULT_SETS_WIN
+        // Get all the rankingList where setsWin is less than DEFAULT_SETS_WIN
         defaultRankingShouldNotBeFound("setsWin.lessThan=" + DEFAULT_SETS_WIN);
 
-        // Get all the rankingList where setsWin less than or equals to UPDATED_SETS_WIN
+        // Get all the rankingList where setsWin is less than UPDATED_SETS_WIN
         defaultRankingShouldBeFound("setsWin.lessThan=" + UPDATED_SETS_WIN);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsBySetsWinIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where setsWin is greater than DEFAULT_SETS_WIN
+        defaultRankingShouldNotBeFound("setsWin.greaterThan=" + DEFAULT_SETS_WIN);
+
+        // Get all the rankingList where setsWin is greater than SMALLER_SETS_WIN
+        defaultRankingShouldBeFound("setsWin.greaterThan=" + SMALLER_SETS_WIN);
     }
 
 
@@ -556,11 +670,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsLoss greater than or equals to DEFAULT_SETS_LOSS
-        defaultRankingShouldBeFound("setsLoss.greaterOrEqualThan=" + DEFAULT_SETS_LOSS);
+        // Get all the rankingList where setsLoss is greater than or equal to DEFAULT_SETS_LOSS
+        defaultRankingShouldBeFound("setsLoss.greaterThanOrEqual=" + DEFAULT_SETS_LOSS);
 
-        // Get all the rankingList where setsLoss greater than or equals to UPDATED_SETS_LOSS
-        defaultRankingShouldNotBeFound("setsLoss.greaterOrEqualThan=" + UPDATED_SETS_LOSS);
+        // Get all the rankingList where setsLoss is greater than or equal to UPDATED_SETS_LOSS
+        defaultRankingShouldNotBeFound("setsLoss.greaterThanOrEqual=" + UPDATED_SETS_LOSS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsBySetsLossIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where setsLoss is less than or equal to DEFAULT_SETS_LOSS
+        defaultRankingShouldBeFound("setsLoss.lessThanOrEqual=" + DEFAULT_SETS_LOSS);
+
+        // Get all the rankingList where setsLoss is less than or equal to SMALLER_SETS_LOSS
+        defaultRankingShouldNotBeFound("setsLoss.lessThanOrEqual=" + SMALLER_SETS_LOSS);
     }
 
     @Test
@@ -569,11 +696,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsLoss less than or equals to DEFAULT_SETS_LOSS
+        // Get all the rankingList where setsLoss is less than DEFAULT_SETS_LOSS
         defaultRankingShouldNotBeFound("setsLoss.lessThan=" + DEFAULT_SETS_LOSS);
 
-        // Get all the rankingList where setsLoss less than or equals to UPDATED_SETS_LOSS
+        // Get all the rankingList where setsLoss is less than UPDATED_SETS_LOSS
         defaultRankingShouldBeFound("setsLoss.lessThan=" + UPDATED_SETS_LOSS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsBySetsLossIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where setsLoss is greater than DEFAULT_SETS_LOSS
+        defaultRankingShouldNotBeFound("setsLoss.greaterThan=" + DEFAULT_SETS_LOSS);
+
+        // Get all the rankingList where setsLoss is greater than SMALLER_SETS_LOSS
+        defaultRankingShouldBeFound("setsLoss.greaterThan=" + SMALLER_SETS_LOSS);
     }
 
 
@@ -622,11 +762,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesPlayed greater than or equals to DEFAULT_MATCHES_PLAYED
-        defaultRankingShouldBeFound("matchesPlayed.greaterOrEqualThan=" + DEFAULT_MATCHES_PLAYED);
+        // Get all the rankingList where matchesPlayed is greater than or equal to DEFAULT_MATCHES_PLAYED
+        defaultRankingShouldBeFound("matchesPlayed.greaterThanOrEqual=" + DEFAULT_MATCHES_PLAYED);
 
-        // Get all the rankingList where matchesPlayed greater than or equals to UPDATED_MATCHES_PLAYED
-        defaultRankingShouldNotBeFound("matchesPlayed.greaterOrEqualThan=" + UPDATED_MATCHES_PLAYED);
+        // Get all the rankingList where matchesPlayed is greater than or equal to UPDATED_MATCHES_PLAYED
+        defaultRankingShouldNotBeFound("matchesPlayed.greaterThanOrEqual=" + UPDATED_MATCHES_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesPlayedIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesPlayed is less than or equal to DEFAULT_MATCHES_PLAYED
+        defaultRankingShouldBeFound("matchesPlayed.lessThanOrEqual=" + DEFAULT_MATCHES_PLAYED);
+
+        // Get all the rankingList where matchesPlayed is less than or equal to SMALLER_MATCHES_PLAYED
+        defaultRankingShouldNotBeFound("matchesPlayed.lessThanOrEqual=" + SMALLER_MATCHES_PLAYED);
     }
 
     @Test
@@ -635,11 +788,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesPlayed less than or equals to DEFAULT_MATCHES_PLAYED
+        // Get all the rankingList where matchesPlayed is less than DEFAULT_MATCHES_PLAYED
         defaultRankingShouldNotBeFound("matchesPlayed.lessThan=" + DEFAULT_MATCHES_PLAYED);
 
-        // Get all the rankingList where matchesPlayed less than or equals to UPDATED_MATCHES_PLAYED
+        // Get all the rankingList where matchesPlayed is less than UPDATED_MATCHES_PLAYED
         defaultRankingShouldBeFound("matchesPlayed.lessThan=" + UPDATED_MATCHES_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesPlayedIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesPlayed is greater than DEFAULT_MATCHES_PLAYED
+        defaultRankingShouldNotBeFound("matchesPlayed.greaterThan=" + DEFAULT_MATCHES_PLAYED);
+
+        // Get all the rankingList where matchesPlayed is greater than SMALLER_MATCHES_PLAYED
+        defaultRankingShouldBeFound("matchesPlayed.greaterThan=" + SMALLER_MATCHES_PLAYED);
     }
 
 
@@ -688,11 +854,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesWon greater than or equals to DEFAULT_MATCHES_WON
-        defaultRankingShouldBeFound("matchesWon.greaterOrEqualThan=" + DEFAULT_MATCHES_WON);
+        // Get all the rankingList where matchesWon is greater than or equal to DEFAULT_MATCHES_WON
+        defaultRankingShouldBeFound("matchesWon.greaterThanOrEqual=" + DEFAULT_MATCHES_WON);
 
-        // Get all the rankingList where matchesWon greater than or equals to UPDATED_MATCHES_WON
-        defaultRankingShouldNotBeFound("matchesWon.greaterOrEqualThan=" + UPDATED_MATCHES_WON);
+        // Get all the rankingList where matchesWon is greater than or equal to UPDATED_MATCHES_WON
+        defaultRankingShouldNotBeFound("matchesWon.greaterThanOrEqual=" + UPDATED_MATCHES_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesWonIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesWon is less than or equal to DEFAULT_MATCHES_WON
+        defaultRankingShouldBeFound("matchesWon.lessThanOrEqual=" + DEFAULT_MATCHES_WON);
+
+        // Get all the rankingList where matchesWon is less than or equal to SMALLER_MATCHES_WON
+        defaultRankingShouldNotBeFound("matchesWon.lessThanOrEqual=" + SMALLER_MATCHES_WON);
     }
 
     @Test
@@ -701,11 +880,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesWon less than or equals to DEFAULT_MATCHES_WON
+        // Get all the rankingList where matchesWon is less than DEFAULT_MATCHES_WON
         defaultRankingShouldNotBeFound("matchesWon.lessThan=" + DEFAULT_MATCHES_WON);
 
-        // Get all the rankingList where matchesWon less than or equals to UPDATED_MATCHES_WON
+        // Get all the rankingList where matchesWon is less than UPDATED_MATCHES_WON
         defaultRankingShouldBeFound("matchesWon.lessThan=" + UPDATED_MATCHES_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesWonIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesWon is greater than DEFAULT_MATCHES_WON
+        defaultRankingShouldNotBeFound("matchesWon.greaterThan=" + DEFAULT_MATCHES_WON);
+
+        // Get all the rankingList where matchesWon is greater than SMALLER_MATCHES_WON
+        defaultRankingShouldBeFound("matchesWon.greaterThan=" + SMALLER_MATCHES_WON);
     }
 
 
@@ -754,11 +946,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesLoss greater than or equals to DEFAULT_MATCHES_LOSS
-        defaultRankingShouldBeFound("matchesLoss.greaterOrEqualThan=" + DEFAULT_MATCHES_LOSS);
+        // Get all the rankingList where matchesLoss is greater than or equal to DEFAULT_MATCHES_LOSS
+        defaultRankingShouldBeFound("matchesLoss.greaterThanOrEqual=" + DEFAULT_MATCHES_LOSS);
 
-        // Get all the rankingList where matchesLoss greater than or equals to UPDATED_MATCHES_LOSS
-        defaultRankingShouldNotBeFound("matchesLoss.greaterOrEqualThan=" + UPDATED_MATCHES_LOSS);
+        // Get all the rankingList where matchesLoss is greater than or equal to UPDATED_MATCHES_LOSS
+        defaultRankingShouldNotBeFound("matchesLoss.greaterThanOrEqual=" + UPDATED_MATCHES_LOSS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesLossIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesLoss is less than or equal to DEFAULT_MATCHES_LOSS
+        defaultRankingShouldBeFound("matchesLoss.lessThanOrEqual=" + DEFAULT_MATCHES_LOSS);
+
+        // Get all the rankingList where matchesLoss is less than or equal to SMALLER_MATCHES_LOSS
+        defaultRankingShouldNotBeFound("matchesLoss.lessThanOrEqual=" + SMALLER_MATCHES_LOSS);
     }
 
     @Test
@@ -767,11 +972,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesLoss less than or equals to DEFAULT_MATCHES_LOSS
+        // Get all the rankingList where matchesLoss is less than DEFAULT_MATCHES_LOSS
         defaultRankingShouldNotBeFound("matchesLoss.lessThan=" + DEFAULT_MATCHES_LOSS);
 
-        // Get all the rankingList where matchesLoss less than or equals to UPDATED_MATCHES_LOSS
+        // Get all the rankingList where matchesLoss is less than UPDATED_MATCHES_LOSS
         defaultRankingShouldBeFound("matchesLoss.lessThan=" + UPDATED_MATCHES_LOSS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesLossIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesLoss is greater than DEFAULT_MATCHES_LOSS
+        defaultRankingShouldNotBeFound("matchesLoss.greaterThan=" + DEFAULT_MATCHES_LOSS);
+
+        // Get all the rankingList where matchesLoss is greater than SMALLER_MATCHES_LOSS
+        defaultRankingShouldBeFound("matchesLoss.greaterThan=" + SMALLER_MATCHES_LOSS);
     }
 
 
@@ -820,11 +1038,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesNotPresent greater than or equals to DEFAULT_MATCHES_NOT_PRESENT
-        defaultRankingShouldBeFound("matchesNotPresent.greaterOrEqualThan=" + DEFAULT_MATCHES_NOT_PRESENT);
+        // Get all the rankingList where matchesNotPresent is greater than or equal to DEFAULT_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.greaterThanOrEqual=" + DEFAULT_MATCHES_NOT_PRESENT);
 
-        // Get all the rankingList where matchesNotPresent greater than or equals to UPDATED_MATCHES_NOT_PRESENT
-        defaultRankingShouldNotBeFound("matchesNotPresent.greaterOrEqualThan=" + UPDATED_MATCHES_NOT_PRESENT);
+        // Get all the rankingList where matchesNotPresent is greater than or equal to UPDATED_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.greaterThanOrEqual=" + UPDATED_MATCHES_NOT_PRESENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesNotPresentIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent is less than or equal to DEFAULT_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.lessThanOrEqual=" + DEFAULT_MATCHES_NOT_PRESENT);
+
+        // Get all the rankingList where matchesNotPresent is less than or equal to SMALLER_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.lessThanOrEqual=" + SMALLER_MATCHES_NOT_PRESENT);
     }
 
     @Test
@@ -833,11 +1064,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesNotPresent less than or equals to DEFAULT_MATCHES_NOT_PRESENT
+        // Get all the rankingList where matchesNotPresent is less than DEFAULT_MATCHES_NOT_PRESENT
         defaultRankingShouldNotBeFound("matchesNotPresent.lessThan=" + DEFAULT_MATCHES_NOT_PRESENT);
 
-        // Get all the rankingList where matchesNotPresent less than or equals to UPDATED_MATCHES_NOT_PRESENT
+        // Get all the rankingList where matchesNotPresent is less than UPDATED_MATCHES_NOT_PRESENT
         defaultRankingShouldBeFound("matchesNotPresent.lessThan=" + UPDATED_MATCHES_NOT_PRESENT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesNotPresentIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesNotPresent is greater than DEFAULT_MATCHES_NOT_PRESENT
+        defaultRankingShouldNotBeFound("matchesNotPresent.greaterThan=" + DEFAULT_MATCHES_NOT_PRESENT);
+
+        // Get all the rankingList where matchesNotPresent is greater than SMALLER_MATCHES_NOT_PRESENT
+        defaultRankingShouldBeFound("matchesNotPresent.greaterThan=" + SMALLER_MATCHES_NOT_PRESENT);
     }
 
 
@@ -886,11 +1130,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesAbandoned greater than or equals to DEFAULT_MATCHES_ABANDONED
-        defaultRankingShouldBeFound("matchesAbandoned.greaterOrEqualThan=" + DEFAULT_MATCHES_ABANDONED);
+        // Get all the rankingList where matchesAbandoned is greater than or equal to DEFAULT_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.greaterThanOrEqual=" + DEFAULT_MATCHES_ABANDONED);
 
-        // Get all the rankingList where matchesAbandoned greater than or equals to UPDATED_MATCHES_ABANDONED
-        defaultRankingShouldNotBeFound("matchesAbandoned.greaterOrEqualThan=" + UPDATED_MATCHES_ABANDONED);
+        // Get all the rankingList where matchesAbandoned is greater than or equal to UPDATED_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.greaterThanOrEqual=" + UPDATED_MATCHES_ABANDONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned is less than or equal to DEFAULT_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.lessThanOrEqual=" + DEFAULT_MATCHES_ABANDONED);
+
+        // Get all the rankingList where matchesAbandoned is less than or equal to SMALLER_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.lessThanOrEqual=" + SMALLER_MATCHES_ABANDONED);
     }
 
     @Test
@@ -899,11 +1156,24 @@ public class RankingResourceIT {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where matchesAbandoned less than or equals to DEFAULT_MATCHES_ABANDONED
+        // Get all the rankingList where matchesAbandoned is less than DEFAULT_MATCHES_ABANDONED
         defaultRankingShouldNotBeFound("matchesAbandoned.lessThan=" + DEFAULT_MATCHES_ABANDONED);
 
-        // Get all the rankingList where matchesAbandoned less than or equals to UPDATED_MATCHES_ABANDONED
+        // Get all the rankingList where matchesAbandoned is less than UPDATED_MATCHES_ABANDONED
         defaultRankingShouldBeFound("matchesAbandoned.lessThan=" + UPDATED_MATCHES_ABANDONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByMatchesAbandonedIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where matchesAbandoned is greater than DEFAULT_MATCHES_ABANDONED
+        defaultRankingShouldNotBeFound("matchesAbandoned.greaterThan=" + DEFAULT_MATCHES_ABANDONED);
+
+        // Get all the rankingList where matchesAbandoned is greater than SMALLER_MATCHES_ABANDONED
+        defaultRankingShouldBeFound("matchesAbandoned.greaterThan=" + SMALLER_MATCHES_ABANDONED);
     }
 
 
@@ -911,6 +1181,7 @@ public class RankingResourceIT {
     @Transactional
     public void getAllRankingsByTournamentGroupIsEqualToSomething() throws Exception {
         // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
         TournamentGroup tournamentGroup = TournamentGroupResourceIT.createEntity(em);
         em.persist(tournamentGroup);
         em.flush();
@@ -930,6 +1201,7 @@ public class RankingResourceIT {
     @Transactional
     public void getAllRankingsByPlayerIsEqualToSomething() throws Exception {
         // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
         Player player = PlayerResourceIT.createEntity(em);
         em.persist(player);
         em.flush();

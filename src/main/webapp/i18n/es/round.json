@@ -5,7 +5,7 @@
         "title": "Rounds",
         "createLabel": "Crear nuevo Round",
         "createOrEditLabel": "Crear o editar Round",
-        "notFound": "No Round found"
+        "notFound": "No Rounds found"
       },
       "created": "Un nuevo Round ha sido creado con el identificador {{ param }}",
       "updated": "Un Round ha sido actualizado con el identificador {{ param }}",

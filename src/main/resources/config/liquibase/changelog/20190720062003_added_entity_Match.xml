@@ -96,7 +96,7 @@
     -->
     <changeSet id="20190720062003-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/jhi_match.csv"
+                  file="config/liquibase/fake-data/jhi_match.csv"
                   separator=";"
                   tableName="jhi_match">
             <column name="id" type="numeric"/>

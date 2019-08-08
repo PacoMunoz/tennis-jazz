@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-round-tennis" [routerLink]="['/round-tennis/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="tennisJazzApp.round.home.createLabel">
-            Create new Round
+            Create a new Round
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
                 <td>{{round.endDate | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="round.tournamentGroup">
-                        <a [routerLink]="['../tournament-group-tennis', round.tournamentGroup?.id, 'view' ]" >{{round.tournamentGroup?.id}}</a>
+                        <a [routerLink]="['/tournament-group-tennis', round.tournamentGroup?.id, 'view' ]" >{{round.tournamentGroup?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -51,7 +51,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'round-tennis', { outlets: { popup: round.id + '/delete'} }]"
+                                [routerLink]="['/round-tennis', { outlets: { popup: round.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

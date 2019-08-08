@@ -5,7 +5,7 @@
         "title": "Players",
         "createLabel": "Crear nuevo Player",
         "createOrEditLabel": "Crear o editar Player",
-        "notFound": "No Player found"
+        "notFound": "No Players found"
       },
       "created": "Un nuevo Player ha sido creado con el identificador {{ param }}",
       "updated": "Un Player ha sido actualizado con el identificador {{ param }}",

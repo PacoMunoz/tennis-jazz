@@ -5,7 +5,7 @@
         "title": "Rankings",
         "createLabel": "Crear nuevo Ranking",
         "createOrEditLabel": "Crear o editar Ranking",
-        "notFound": "No Ranking found"
+        "notFound": "No Rankings found"
       },
       "created": "Un nuevo Ranking ha sido creado con el identificador {{ param }}",
       "updated": "Un Ranking ha sido actualizado con el identificador {{ param }}",

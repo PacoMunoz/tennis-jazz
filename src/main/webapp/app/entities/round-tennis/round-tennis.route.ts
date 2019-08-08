@@ -17,7 +17,7 @@ export class RoundTennisResolve implements Resolve<IRoundTennis> {
   constructor(private service: RoundTennisService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IRoundTennis> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<RoundTennis>) => response.ok),

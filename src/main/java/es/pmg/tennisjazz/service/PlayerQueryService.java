@@ -79,7 +79,7 @@ public class PlayerQueryService extends QueryService<Player> {
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */    
-    private Specification<Player> createSpecification(PlayerCriteria criteria) {
+    protected Specification<Player> createSpecification(PlayerCriteria criteria) {
         Specification<Player> specification = Specification.where(null);
         if (criteria != null) {
             if (criteria.getId() != null) {

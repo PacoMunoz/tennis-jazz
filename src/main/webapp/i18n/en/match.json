@@ -5,7 +5,7 @@
         "title": "Matches",
         "createLabel": "Create a new Match",
         "createOrEditLabel": "Create or edit a Match",
-        "notFound": "No Match found"
+        "notFound": "No Matches found"
       },
       "created": "A new Match is created with identifier {{ param }}",
       "updated": "A Match is updated with identifier {{ param }}",
