@@ -79,7 +79,7 @@ public class MatchQueryService extends QueryService<Match> {
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */    
-    private Specification<Match> createSpecification(MatchCriteria criteria) {
+    protected Specification<Match> createSpecification(MatchCriteria criteria) {
         Specification<Match> specification = Specification.where(null);
         if (criteria != null) {
             if (criteria.getId() != null) {

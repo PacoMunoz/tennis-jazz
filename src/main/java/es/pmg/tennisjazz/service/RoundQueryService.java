@@ -79,7 +79,7 @@ public class RoundQueryService extends QueryService<Round> {
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */    
-    private Specification<Round> createSpecification(RoundCriteria criteria) {
+    protected Specification<Round> createSpecification(RoundCriteria criteria) {
         Specification<Round> specification = Specification.where(null);
         if (criteria != null) {
             if (criteria.getId() != null) {

@@ -79,7 +79,7 @@ public class RankingQueryService extends QueryService<Ranking> {
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */    
-    private Specification<Ranking> createSpecification(RankingCriteria criteria) {
+    protected Specification<Ranking> createSpecification(RankingCriteria criteria) {
         Specification<Ranking> specification = Specification.where(null);
         if (criteria != null) {
             if (criteria.getId() != null) {

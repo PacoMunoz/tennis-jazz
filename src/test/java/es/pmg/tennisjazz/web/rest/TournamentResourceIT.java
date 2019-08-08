@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link TournamentResource} REST controller.
+ * Integration tests for the {@link TournamentResource} REST controller.
  */
 @SpringBootTest(classes = TennisJazzApp.class)
 public class TournamentResourceIT {
@@ -44,18 +44,22 @@ public class TournamentResourceIT {
 
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_START_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final Boolean DEFAULT_IN_PROGRESS = false;
     private static final Boolean UPDATED_IN_PROGRESS = true;
 
     private static final Integer DEFAULT_WIN_POINTS = 1;
     private static final Integer UPDATED_WIN_POINTS = 2;
+    private static final Integer SMALLER_WIN_POINTS = 1 - 1;
 
     private static final Integer DEFAULT_LOSS_POINTS = 1;
     private static final Integer UPDATED_LOSS_POINTS = 2;
+    private static final Integer SMALLER_LOSS_POINTS = 1 - 1;
 
     private static final Integer DEFAULT_NOT_PRESENT_POINTS = 1;
     private static final Integer UPDATED_NOT_PRESENT_POINTS = 2;
+    private static final Integer SMALLER_NOT_PRESENT_POINTS = 1 - 1;
 
     @Autowired
     private TournamentRepository tournamentRepository;
@@ -336,11 +340,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where startDate greater than or equals to DEFAULT_START_DATE
-        defaultTournamentShouldBeFound("startDate.greaterOrEqualThan=" + DEFAULT_START_DATE);
+        // Get all the tournamentList where startDate is greater than or equal to DEFAULT_START_DATE
+        defaultTournamentShouldBeFound("startDate.greaterThanOrEqual=" + DEFAULT_START_DATE);
 
-        // Get all the tournamentList where startDate greater than or equals to UPDATED_START_DATE
-        defaultTournamentShouldNotBeFound("startDate.greaterOrEqualThan=" + UPDATED_START_DATE);
+        // Get all the tournamentList where startDate is greater than or equal to UPDATED_START_DATE
+        defaultTournamentShouldNotBeFound("startDate.greaterThanOrEqual=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByStartDateIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where startDate is less than or equal to DEFAULT_START_DATE
+        defaultTournamentShouldBeFound("startDate.lessThanOrEqual=" + DEFAULT_START_DATE);
+
+        // Get all the tournamentList where startDate is less than or equal to SMALLER_START_DATE
+        defaultTournamentShouldNotBeFound("startDate.lessThanOrEqual=" + SMALLER_START_DATE);
     }
 
     @Test
@@ -349,11 +366,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where startDate less than or equals to DEFAULT_START_DATE
+        // Get all the tournamentList where startDate is less than DEFAULT_START_DATE
         defaultTournamentShouldNotBeFound("startDate.lessThan=" + DEFAULT_START_DATE);
 
-        // Get all the tournamentList where startDate less than or equals to UPDATED_START_DATE
+        // Get all the tournamentList where startDate is less than UPDATED_START_DATE
         defaultTournamentShouldBeFound("startDate.lessThan=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByStartDateIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where startDate is greater than DEFAULT_START_DATE
+        defaultTournamentShouldNotBeFound("startDate.greaterThan=" + DEFAULT_START_DATE);
+
+        // Get all the tournamentList where startDate is greater than SMALLER_START_DATE
+        defaultTournamentShouldBeFound("startDate.greaterThan=" + SMALLER_START_DATE);
     }
 
 
@@ -441,11 +471,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where winPoints greater than or equals to DEFAULT_WIN_POINTS
-        defaultTournamentShouldBeFound("winPoints.greaterOrEqualThan=" + DEFAULT_WIN_POINTS);
+        // Get all the tournamentList where winPoints is greater than or equal to DEFAULT_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.greaterThanOrEqual=" + DEFAULT_WIN_POINTS);
 
-        // Get all the tournamentList where winPoints greater than or equals to UPDATED_WIN_POINTS
-        defaultTournamentShouldNotBeFound("winPoints.greaterOrEqualThan=" + UPDATED_WIN_POINTS);
+        // Get all the tournamentList where winPoints is greater than or equal to UPDATED_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.greaterThanOrEqual=" + UPDATED_WIN_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinPointsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints is less than or equal to DEFAULT_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.lessThanOrEqual=" + DEFAULT_WIN_POINTS);
+
+        // Get all the tournamentList where winPoints is less than or equal to SMALLER_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.lessThanOrEqual=" + SMALLER_WIN_POINTS);
     }
 
     @Test
@@ -454,11 +497,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where winPoints less than or equals to DEFAULT_WIN_POINTS
+        // Get all the tournamentList where winPoints is less than DEFAULT_WIN_POINTS
         defaultTournamentShouldNotBeFound("winPoints.lessThan=" + DEFAULT_WIN_POINTS);
 
-        // Get all the tournamentList where winPoints less than or equals to UPDATED_WIN_POINTS
+        // Get all the tournamentList where winPoints is less than UPDATED_WIN_POINTS
         defaultTournamentShouldBeFound("winPoints.lessThan=" + UPDATED_WIN_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByWinPointsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where winPoints is greater than DEFAULT_WIN_POINTS
+        defaultTournamentShouldNotBeFound("winPoints.greaterThan=" + DEFAULT_WIN_POINTS);
+
+        // Get all the tournamentList where winPoints is greater than SMALLER_WIN_POINTS
+        defaultTournamentShouldBeFound("winPoints.greaterThan=" + SMALLER_WIN_POINTS);
     }
 
 
@@ -507,11 +563,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where lossPoints greater than or equals to DEFAULT_LOSS_POINTS
-        defaultTournamentShouldBeFound("lossPoints.greaterOrEqualThan=" + DEFAULT_LOSS_POINTS);
+        // Get all the tournamentList where lossPoints is greater than or equal to DEFAULT_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.greaterThanOrEqual=" + DEFAULT_LOSS_POINTS);
 
-        // Get all the tournamentList where lossPoints greater than or equals to UPDATED_LOSS_POINTS
-        defaultTournamentShouldNotBeFound("lossPoints.greaterOrEqualThan=" + UPDATED_LOSS_POINTS);
+        // Get all the tournamentList where lossPoints is greater than or equal to UPDATED_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.greaterThanOrEqual=" + UPDATED_LOSS_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints is less than or equal to DEFAULT_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.lessThanOrEqual=" + DEFAULT_LOSS_POINTS);
+
+        // Get all the tournamentList where lossPoints is less than or equal to SMALLER_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.lessThanOrEqual=" + SMALLER_LOSS_POINTS);
     }
 
     @Test
@@ -520,11 +589,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where lossPoints less than or equals to DEFAULT_LOSS_POINTS
+        // Get all the tournamentList where lossPoints is less than DEFAULT_LOSS_POINTS
         defaultTournamentShouldNotBeFound("lossPoints.lessThan=" + DEFAULT_LOSS_POINTS);
 
-        // Get all the tournamentList where lossPoints less than or equals to UPDATED_LOSS_POINTS
+        // Get all the tournamentList where lossPoints is less than UPDATED_LOSS_POINTS
         defaultTournamentShouldBeFound("lossPoints.lessThan=" + UPDATED_LOSS_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByLossPointsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where lossPoints is greater than DEFAULT_LOSS_POINTS
+        defaultTournamentShouldNotBeFound("lossPoints.greaterThan=" + DEFAULT_LOSS_POINTS);
+
+        // Get all the tournamentList where lossPoints is greater than SMALLER_LOSS_POINTS
+        defaultTournamentShouldBeFound("lossPoints.greaterThan=" + SMALLER_LOSS_POINTS);
     }
 
 
@@ -573,11 +655,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where notPresentPoints greater than or equals to DEFAULT_NOT_PRESENT_POINTS
-        defaultTournamentShouldBeFound("notPresentPoints.greaterOrEqualThan=" + DEFAULT_NOT_PRESENT_POINTS);
+        // Get all the tournamentList where notPresentPoints is greater than or equal to DEFAULT_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.greaterThanOrEqual=" + DEFAULT_NOT_PRESENT_POINTS);
 
-        // Get all the tournamentList where notPresentPoints greater than or equals to UPDATED_NOT_PRESENT_POINTS
-        defaultTournamentShouldNotBeFound("notPresentPoints.greaterOrEqualThan=" + UPDATED_NOT_PRESENT_POINTS);
+        // Get all the tournamentList where notPresentPoints is greater than or equal to UPDATED_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.greaterThanOrEqual=" + UPDATED_NOT_PRESENT_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints is less than or equal to DEFAULT_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.lessThanOrEqual=" + DEFAULT_NOT_PRESENT_POINTS);
+
+        // Get all the tournamentList where notPresentPoints is less than or equal to SMALLER_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.lessThanOrEqual=" + SMALLER_NOT_PRESENT_POINTS);
     }
 
     @Test
@@ -586,11 +681,24 @@ public class TournamentResourceIT {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
 
-        // Get all the tournamentList where notPresentPoints less than or equals to DEFAULT_NOT_PRESENT_POINTS
+        // Get all the tournamentList where notPresentPoints is less than DEFAULT_NOT_PRESENT_POINTS
         defaultTournamentShouldNotBeFound("notPresentPoints.lessThan=" + DEFAULT_NOT_PRESENT_POINTS);
 
-        // Get all the tournamentList where notPresentPoints less than or equals to UPDATED_NOT_PRESENT_POINTS
+        // Get all the tournamentList where notPresentPoints is less than UPDATED_NOT_PRESENT_POINTS
         defaultTournamentShouldBeFound("notPresentPoints.lessThan=" + UPDATED_NOT_PRESENT_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByNotPresentPointsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where notPresentPoints is greater than DEFAULT_NOT_PRESENT_POINTS
+        defaultTournamentShouldNotBeFound("notPresentPoints.greaterThan=" + DEFAULT_NOT_PRESENT_POINTS);
+
+        // Get all the tournamentList where notPresentPoints is greater than SMALLER_NOT_PRESENT_POINTS
+        defaultTournamentShouldBeFound("notPresentPoints.greaterThan=" + SMALLER_NOT_PRESENT_POINTS);
     }
 
 
@@ -598,6 +706,7 @@ public class TournamentResourceIT {
     @Transactional
     public void getAllTournamentsByGroupsIsEqualToSomething() throws Exception {
         // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
         TournamentGroup groups = TournamentGroupResourceIT.createEntity(em);
         em.persist(groups);
         em.flush();

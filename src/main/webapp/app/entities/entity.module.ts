@@ -6,27 +6,28 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: 'tournament-tennis',
-        loadChildren: './tournament-tennis/tournament-tennis.module#TennisJazzTournamentTennisModule'
+        loadChildren: () => import('./tournament-tennis/tournament-tennis.module').then(m => m.TennisJazzTournamentTennisModule)
       },
       {
         path: 'tournament-group-tennis',
-        loadChildren: './tournament-group-tennis/tournament-group-tennis.module#TennisJazzTournamentGroupTennisModule'
+        loadChildren: () =>
+          import('./tournament-group-tennis/tournament-group-tennis.module').then(m => m.TennisJazzTournamentGroupTennisModule)
       },
       {
         path: 'player-tennis',
-        loadChildren: './player-tennis/player-tennis.module#TennisJazzPlayerTennisModule'
+        loadChildren: () => import('./player-tennis/player-tennis.module').then(m => m.TennisJazzPlayerTennisModule)
       },
       {
         path: 'round-tennis',
-        loadChildren: './round-tennis/round-tennis.module#TennisJazzRoundTennisModule'
+        loadChildren: () => import('./round-tennis/round-tennis.module').then(m => m.TennisJazzRoundTennisModule)
       },
       {
         path: 'match-tennis',
-        loadChildren: './match-tennis/match-tennis.module#TennisJazzMatchTennisModule'
+        loadChildren: () => import('./match-tennis/match-tennis.module').then(m => m.TennisJazzMatchTennisModule)
       },
       {
         path: 'ranking-tennis',
-        loadChildren: './ranking-tennis/ranking-tennis.module#TennisJazzRankingTennisModule'
+        loadChildren: () => import('./ranking-tennis/ranking-tennis.module').then(m => m.TennisJazzRankingTennisModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

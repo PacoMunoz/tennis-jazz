@@ -5,7 +5,7 @@
         "title": "Tournament Groups",
         "createLabel": "Crear nuevo Tournament Group",
         "createOrEditLabel": "Crear o editar Tournament Group",
-        "notFound": "No Tournament Group found"
+        "notFound": "No Tournament Groups found"
       },
       "created": "Un nuevo Tournament Group ha sido creado con el identificador {{ param }}",
       "updated": "Un Tournament Group ha sido actualizado con el identificador {{ param }}",

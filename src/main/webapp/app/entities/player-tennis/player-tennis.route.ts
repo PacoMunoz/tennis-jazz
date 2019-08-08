@@ -17,7 +17,7 @@ export class PlayerTennisResolve implements Resolve<IPlayerTennis> {
   constructor(private service: PlayerTennisService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IPlayerTennis> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<PlayerTennis>) => response.ok),

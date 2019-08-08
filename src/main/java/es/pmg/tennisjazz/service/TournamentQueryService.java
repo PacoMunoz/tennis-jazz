@@ -79,7 +79,7 @@ public class TournamentQueryService extends QueryService<Tournament> {
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */    
-    private Specification<Tournament> createSpecification(TournamentCriteria criteria) {
+    protected Specification<Tournament> createSpecification(TournamentCriteria criteria) {
         Specification<Tournament> specification = Specification.where(null);
         if (criteria != null) {
             if (criteria.getId() != null) {

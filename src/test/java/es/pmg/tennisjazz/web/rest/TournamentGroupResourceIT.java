@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link TournamentGroupResource} REST controller.
+ * Integration tests for the {@link TournamentGroupResource} REST controller.
  */
 @SpringBootTest(classes = TennisJazzApp.class)
 public class TournamentGroupResourceIT {
@@ -282,6 +282,7 @@ public class TournamentGroupResourceIT {
     @Transactional
     public void getAllTournamentGroupsByTournamentIsEqualToSomething() throws Exception {
         // Initialize the database
+        tournamentGroupRepository.saveAndFlush(tournamentGroup);
         Tournament tournament = TournamentResourceIT.createEntity(em);
         em.persist(tournament);
         em.flush();
@@ -301,6 +302,7 @@ public class TournamentGroupResourceIT {
     @Transactional
     public void getAllTournamentGroupsByRoundsIsEqualToSomething() throws Exception {
         // Initialize the database
+        tournamentGroupRepository.saveAndFlush(tournamentGroup);
         Round rounds = RoundResourceIT.createEntity(em);
         em.persist(rounds);
         em.flush();
@@ -320,6 +322,7 @@ public class TournamentGroupResourceIT {
     @Transactional
     public void getAllTournamentGroupsByRankingsIsEqualToSomething() throws Exception {
         // Initialize the database
+        tournamentGroupRepository.saveAndFlush(tournamentGroup);
         Ranking rankings = RankingResourceIT.createEntity(em);
         em.persist(rankings);
         em.flush();
@@ -339,6 +342,7 @@ public class TournamentGroupResourceIT {
     @Transactional
     public void getAllTournamentGroupsByPlayersIsEqualToSomething() throws Exception {
         // Initialize the database
+        tournamentGroupRepository.saveAndFlush(tournamentGroup);
         Player players = PlayerResourceIT.createEntity(em);
         em.persist(players);
         em.flush();

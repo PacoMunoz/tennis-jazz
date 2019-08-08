@@ -17,7 +17,7 @@ export class TournamentTennisResolve implements Resolve<ITournamentTennis> {
   constructor(private service: TournamentTennisService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ITournamentTennis> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<TournamentTennis>) => response.ok),

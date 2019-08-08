@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link RoundResource} REST controller.
+ * Integration tests for the {@link RoundResource} REST controller.
  */
 @SpringBootTest(classes = TennisJazzApp.class)
 public class RoundResourceIT {
@@ -45,9 +45,11 @@ public class RoundResourceIT {
 
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_START_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_END_DATE = LocalDate.ofEpochDay(-1L);
 
     @Autowired
     private RoundRepository roundRepository;
@@ -295,11 +297,24 @@ public class RoundResourceIT {
         // Initialize the database
         roundRepository.saveAndFlush(round);
 
-        // Get all the roundList where startDate greater than or equals to DEFAULT_START_DATE
-        defaultRoundShouldBeFound("startDate.greaterOrEqualThan=" + DEFAULT_START_DATE);
+        // Get all the roundList where startDate is greater than or equal to DEFAULT_START_DATE
+        defaultRoundShouldBeFound("startDate.greaterThanOrEqual=" + DEFAULT_START_DATE);
 
-        // Get all the roundList where startDate greater than or equals to UPDATED_START_DATE
-        defaultRoundShouldNotBeFound("startDate.greaterOrEqualThan=" + UPDATED_START_DATE);
+        // Get all the roundList where startDate is greater than or equal to UPDATED_START_DATE
+        defaultRoundShouldNotBeFound("startDate.greaterThanOrEqual=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoundsByStartDateIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        roundRepository.saveAndFlush(round);
+
+        // Get all the roundList where startDate is less than or equal to DEFAULT_START_DATE
+        defaultRoundShouldBeFound("startDate.lessThanOrEqual=" + DEFAULT_START_DATE);
+
+        // Get all the roundList where startDate is less than or equal to SMALLER_START_DATE
+        defaultRoundShouldNotBeFound("startDate.lessThanOrEqual=" + SMALLER_START_DATE);
     }
 
     @Test
@@ -308,11 +323,24 @@ public class RoundResourceIT {
         // Initialize the database
         roundRepository.saveAndFlush(round);
 
-        // Get all the roundList where startDate less than or equals to DEFAULT_START_DATE
+        // Get all the roundList where startDate is less than DEFAULT_START_DATE
         defaultRoundShouldNotBeFound("startDate.lessThan=" + DEFAULT_START_DATE);
 
-        // Get all the roundList where startDate less than or equals to UPDATED_START_DATE
+        // Get all the roundList where startDate is less than UPDATED_START_DATE
         defaultRoundShouldBeFound("startDate.lessThan=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoundsByStartDateIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        roundRepository.saveAndFlush(round);
+
+        // Get all the roundList where startDate is greater than DEFAULT_START_DATE
+        defaultRoundShouldNotBeFound("startDate.greaterThan=" + DEFAULT_START_DATE);
+
+        // Get all the roundList where startDate is greater than SMALLER_START_DATE
+        defaultRoundShouldBeFound("startDate.greaterThan=" + SMALLER_START_DATE);
     }
 
 
@@ -361,11 +389,24 @@ public class RoundResourceIT {
         // Initialize the database
         roundRepository.saveAndFlush(round);
 
-        // Get all the roundList where endDate greater than or equals to DEFAULT_END_DATE
-        defaultRoundShouldBeFound("endDate.greaterOrEqualThan=" + DEFAULT_END_DATE);
+        // Get all the roundList where endDate is greater than or equal to DEFAULT_END_DATE
+        defaultRoundShouldBeFound("endDate.greaterThanOrEqual=" + DEFAULT_END_DATE);
 
-        // Get all the roundList where endDate greater than or equals to UPDATED_END_DATE
-        defaultRoundShouldNotBeFound("endDate.greaterOrEqualThan=" + UPDATED_END_DATE);
+        // Get all the roundList where endDate is greater than or equal to UPDATED_END_DATE
+        defaultRoundShouldNotBeFound("endDate.greaterThanOrEqual=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoundsByEndDateIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        roundRepository.saveAndFlush(round);
+
+        // Get all the roundList where endDate is less than or equal to DEFAULT_END_DATE
+        defaultRoundShouldBeFound("endDate.lessThanOrEqual=" + DEFAULT_END_DATE);
+
+        // Get all the roundList where endDate is less than or equal to SMALLER_END_DATE
+        defaultRoundShouldNotBeFound("endDate.lessThanOrEqual=" + SMALLER_END_DATE);
     }
 
     @Test
@@ -374,11 +415,24 @@ public class RoundResourceIT {
         // Initialize the database
         roundRepository.saveAndFlush(round);
 
-        // Get all the roundList where endDate less than or equals to DEFAULT_END_DATE
+        // Get all the roundList where endDate is less than DEFAULT_END_DATE
         defaultRoundShouldNotBeFound("endDate.lessThan=" + DEFAULT_END_DATE);
 
-        // Get all the roundList where endDate less than or equals to UPDATED_END_DATE
+        // Get all the roundList where endDate is less than UPDATED_END_DATE
         defaultRoundShouldBeFound("endDate.lessThan=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoundsByEndDateIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        roundRepository.saveAndFlush(round);
+
+        // Get all the roundList where endDate is greater than DEFAULT_END_DATE
+        defaultRoundShouldNotBeFound("endDate.greaterThan=" + DEFAULT_END_DATE);
+
+        // Get all the roundList where endDate is greater than SMALLER_END_DATE
+        defaultRoundShouldBeFound("endDate.greaterThan=" + SMALLER_END_DATE);
     }
 
 
@@ -386,6 +440,7 @@ public class RoundResourceIT {
     @Transactional
     public void getAllRoundsByTournamentGroupIsEqualToSomething() throws Exception {
         // Initialize the database
+        roundRepository.saveAndFlush(round);
         TournamentGroup tournamentGroup = TournamentGroupResourceIT.createEntity(em);
         em.persist(tournamentGroup);
         em.flush();
@@ -405,6 +460,7 @@ public class RoundResourceIT {
     @Transactional
     public void getAllRoundsByMatchsIsEqualToSomething() throws Exception {
         // Initialize the database
+        roundRepository.saveAndFlush(round);
         Match matchs = MatchResourceIT.createEntity(em);
         em.persist(matchs);
         em.flush();

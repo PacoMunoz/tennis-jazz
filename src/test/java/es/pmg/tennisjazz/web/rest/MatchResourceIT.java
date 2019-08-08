@@ -33,34 +33,42 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link MatchResource} REST controller.
+ * Integration tests for the {@link MatchResource} REST controller.
  */
 @SpringBootTest(classes = TennisJazzApp.class)
 public class MatchResourceIT {
 
     private static final Integer DEFAULT_LOCAL_PLAYER_SET_1_RESULT = 1;
     private static final Integer UPDATED_LOCAL_PLAYER_SET_1_RESULT = 2;
+    private static final Integer SMALLER_LOCAL_PLAYER_SET_1_RESULT = 1 - 1;
 
     private static final Integer DEFAULT_VISITOR_PLAYER_SET_1_RESULT = 1;
     private static final Integer UPDATED_VISITOR_PLAYER_SET_1_RESULT = 2;
+    private static final Integer SMALLER_VISITOR_PLAYER_SET_1_RESULT = 1 - 1;
 
     private static final Integer DEFAULT_LOCAL_PLAYER_SET_2_RESULT = 1;
     private static final Integer UPDATED_LOCAL_PLAYER_SET_2_RESULT = 2;
+    private static final Integer SMALLER_LOCAL_PLAYER_SET_2_RESULT = 1 - 1;
 
     private static final Integer DEFAULT_VISITOR_PLAYER_SET_2_RESULT = 1;
     private static final Integer UPDATED_VISITOR_PLAYER_SET_2_RESULT = 2;
+    private static final Integer SMALLER_VISITOR_PLAYER_SET_2_RESULT = 1 - 1;
 
     private static final Integer DEFAULT_LOCAL_PLAYER_SET_3_RESULT = 1;
     private static final Integer UPDATED_LOCAL_PLAYER_SET_3_RESULT = 2;
+    private static final Integer SMALLER_LOCAL_PLAYER_SET_3_RESULT = 1 - 1;
 
     private static final Integer DEFAULT_VISITOR_PLAYER_SET_3_RESULT = 1;
     private static final Integer UPDATED_VISITOR_PLAYER_SET_3_RESULT = 2;
+    private static final Integer SMALLER_VISITOR_PLAYER_SET_3_RESULT = 1 - 1;
 
     private static final Integer DEFAULT_LOCAL_PLAYER_SETS = 1;
     private static final Integer UPDATED_LOCAL_PLAYER_SETS = 2;
+    private static final Integer SMALLER_LOCAL_PLAYER_SETS = 1 - 1;
 
     private static final Integer DEFAULT_VISITOR_PLAYER_SETS = 1;
     private static final Integer UPDATED_VISITOR_PLAYER_SETS = 2;
+    private static final Integer SMALLER_VISITOR_PLAYER_SETS = 1 - 1;
 
     private static final Boolean DEFAULT_LOCAL_PLAYER_ABANDONED = false;
     private static final Boolean UPDATED_LOCAL_PLAYER_ABANDONED = true;
@@ -308,11 +316,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSet1Result greater than or equals to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
-        defaultMatchShouldBeFound("localPlayerSet1Result.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result is greater than or equal to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.greaterThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where localPlayerSet1Result greater than or equals to UPDATED_LOCAL_PLAYER_SET_1_RESULT
-        defaultMatchShouldNotBeFound("localPlayerSet1Result.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
+        // Get all the matchList where localPlayerSet1Result is greater than or equal to UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.greaterThanOrEqual=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet1ResultIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet1Result is less than or equal to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.lessThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
+
+        // Get all the matchList where localPlayerSet1Result is less than or equal to SMALLER_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.lessThanOrEqual=" + SMALLER_LOCAL_PLAYER_SET_1_RESULT);
     }
 
     @Test
@@ -321,11 +342,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSet1Result less than or equals to DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        // Get all the matchList where localPlayerSet1Result is less than DEFAULT_LOCAL_PLAYER_SET_1_RESULT
         defaultMatchShouldNotBeFound("localPlayerSet1Result.lessThan=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where localPlayerSet1Result less than or equals to UPDATED_LOCAL_PLAYER_SET_1_RESULT
+        // Get all the matchList where localPlayerSet1Result is less than UPDATED_LOCAL_PLAYER_SET_1_RESULT
         defaultMatchShouldBeFound("localPlayerSet1Result.lessThan=" + UPDATED_LOCAL_PLAYER_SET_1_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet1ResultIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet1Result is greater than DEFAULT_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet1Result.greaterThan=" + DEFAULT_LOCAL_PLAYER_SET_1_RESULT);
+
+        // Get all the matchList where localPlayerSet1Result is greater than SMALLER_LOCAL_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("localPlayerSet1Result.greaterThan=" + SMALLER_LOCAL_PLAYER_SET_1_RESULT);
     }
 
 
@@ -374,11 +408,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSet1Result greater than or equals to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
-        defaultMatchShouldBeFound("visitorPlayerSet1Result.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result is greater than or equal to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.greaterThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where visitorPlayerSet1Result greater than or equals to UPDATED_VISITOR_PLAYER_SET_1_RESULT
-        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
+        // Get all the matchList where visitorPlayerSet1Result is greater than or equal to UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.greaterThanOrEqual=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet1ResultIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet1Result is less than or equal to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.lessThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
+
+        // Get all the matchList where visitorPlayerSet1Result is less than or equal to SMALLER_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.lessThanOrEqual=" + SMALLER_VISITOR_PLAYER_SET_1_RESULT);
     }
 
     @Test
@@ -387,11 +434,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSet1Result less than or equals to DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        // Get all the matchList where visitorPlayerSet1Result is less than DEFAULT_VISITOR_PLAYER_SET_1_RESULT
         defaultMatchShouldNotBeFound("visitorPlayerSet1Result.lessThan=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
 
-        // Get all the matchList where visitorPlayerSet1Result less than or equals to UPDATED_VISITOR_PLAYER_SET_1_RESULT
+        // Get all the matchList where visitorPlayerSet1Result is less than UPDATED_VISITOR_PLAYER_SET_1_RESULT
         defaultMatchShouldBeFound("visitorPlayerSet1Result.lessThan=" + UPDATED_VISITOR_PLAYER_SET_1_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet1ResultIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet1Result is greater than DEFAULT_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet1Result.greaterThan=" + DEFAULT_VISITOR_PLAYER_SET_1_RESULT);
+
+        // Get all the matchList where visitorPlayerSet1Result is greater than SMALLER_VISITOR_PLAYER_SET_1_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet1Result.greaterThan=" + SMALLER_VISITOR_PLAYER_SET_1_RESULT);
     }
 
 
@@ -440,11 +500,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSet2Result greater than or equals to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
-        defaultMatchShouldBeFound("localPlayerSet2Result.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
+        // Get all the matchList where localPlayerSet2Result is greater than or equal to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.greaterThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where localPlayerSet2Result greater than or equals to UPDATED_LOCAL_PLAYER_SET_2_RESULT
-        defaultMatchShouldNotBeFound("localPlayerSet2Result.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
+        // Get all the matchList where localPlayerSet2Result is greater than or equal to UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.greaterThanOrEqual=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet2ResultIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet2Result is less than or equal to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.lessThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
+
+        // Get all the matchList where localPlayerSet2Result is less than or equal to SMALLER_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.lessThanOrEqual=" + SMALLER_LOCAL_PLAYER_SET_2_RESULT);
     }
 
     @Test
@@ -453,11 +526,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSet2Result less than or equals to DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        // Get all the matchList where localPlayerSet2Result is less than DEFAULT_LOCAL_PLAYER_SET_2_RESULT
         defaultMatchShouldNotBeFound("localPlayerSet2Result.lessThan=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where localPlayerSet2Result less than or equals to UPDATED_LOCAL_PLAYER_SET_2_RESULT
+        // Get all the matchList where localPlayerSet2Result is less than UPDATED_LOCAL_PLAYER_SET_2_RESULT
         defaultMatchShouldBeFound("localPlayerSet2Result.lessThan=" + UPDATED_LOCAL_PLAYER_SET_2_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet2ResultIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet2Result is greater than DEFAULT_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet2Result.greaterThan=" + DEFAULT_LOCAL_PLAYER_SET_2_RESULT);
+
+        // Get all the matchList where localPlayerSet2Result is greater than SMALLER_LOCAL_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("localPlayerSet2Result.greaterThan=" + SMALLER_LOCAL_PLAYER_SET_2_RESULT);
     }
 
 
@@ -506,11 +592,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSet2Result greater than or equals to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
-        defaultMatchShouldBeFound("visitorPlayerSet2Result.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result is greater than or equal to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.greaterThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where visitorPlayerSet2Result greater than or equals to UPDATED_VISITOR_PLAYER_SET_2_RESULT
-        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
+        // Get all the matchList where visitorPlayerSet2Result is greater than or equal to UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.greaterThanOrEqual=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet2ResultIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet2Result is less than or equal to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.lessThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
+
+        // Get all the matchList where visitorPlayerSet2Result is less than or equal to SMALLER_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.lessThanOrEqual=" + SMALLER_VISITOR_PLAYER_SET_2_RESULT);
     }
 
     @Test
@@ -519,11 +618,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSet2Result less than or equals to DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        // Get all the matchList where visitorPlayerSet2Result is less than DEFAULT_VISITOR_PLAYER_SET_2_RESULT
         defaultMatchShouldNotBeFound("visitorPlayerSet2Result.lessThan=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
 
-        // Get all the matchList where visitorPlayerSet2Result less than or equals to UPDATED_VISITOR_PLAYER_SET_2_RESULT
+        // Get all the matchList where visitorPlayerSet2Result is less than UPDATED_VISITOR_PLAYER_SET_2_RESULT
         defaultMatchShouldBeFound("visitorPlayerSet2Result.lessThan=" + UPDATED_VISITOR_PLAYER_SET_2_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet2ResultIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet2Result is greater than DEFAULT_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet2Result.greaterThan=" + DEFAULT_VISITOR_PLAYER_SET_2_RESULT);
+
+        // Get all the matchList where visitorPlayerSet2Result is greater than SMALLER_VISITOR_PLAYER_SET_2_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet2Result.greaterThan=" + SMALLER_VISITOR_PLAYER_SET_2_RESULT);
     }
 
 
@@ -572,11 +684,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSet3Result greater than or equals to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
-        defaultMatchShouldBeFound("localPlayerSet3Result.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet3Result is greater than or equal to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.greaterThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
 
-        // Get all the matchList where localPlayerSet3Result greater than or equals to UPDATED_LOCAL_PLAYER_SET_3_RESULT
-        defaultMatchShouldNotBeFound("localPlayerSet3Result.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+        // Get all the matchList where localPlayerSet3Result is greater than or equal to UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.greaterThanOrEqual=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result is less than or equal to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.lessThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where localPlayerSet3Result is less than or equal to SMALLER_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.lessThanOrEqual=" + SMALLER_LOCAL_PLAYER_SET_3_RESULT);
     }
 
     @Test
@@ -585,11 +710,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSet3Result less than or equals to DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        // Get all the matchList where localPlayerSet3Result is less than DEFAULT_LOCAL_PLAYER_SET_3_RESULT
         defaultMatchShouldNotBeFound("localPlayerSet3Result.lessThan=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
 
-        // Get all the matchList where localPlayerSet3Result less than or equals to UPDATED_LOCAL_PLAYER_SET_3_RESULT
+        // Get all the matchList where localPlayerSet3Result is less than UPDATED_LOCAL_PLAYER_SET_3_RESULT
         defaultMatchShouldBeFound("localPlayerSet3Result.lessThan=" + UPDATED_LOCAL_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSet3ResultIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSet3Result is greater than DEFAULT_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("localPlayerSet3Result.greaterThan=" + DEFAULT_LOCAL_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where localPlayerSet3Result is greater than SMALLER_LOCAL_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("localPlayerSet3Result.greaterThan=" + SMALLER_LOCAL_PLAYER_SET_3_RESULT);
     }
 
 
@@ -638,11 +776,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSet3Result greater than or equals to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
-        defaultMatchShouldBeFound("visitorPlayerSet3Result.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet3Result is greater than or equal to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.greaterThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
 
-        // Get all the matchList where visitorPlayerSet3Result greater than or equals to UPDATED_VISITOR_PLAYER_SET_3_RESULT
-        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+        // Get all the matchList where visitorPlayerSet3Result is greater than or equal to UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.greaterThanOrEqual=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result is less than or equal to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.lessThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where visitorPlayerSet3Result is less than or equal to SMALLER_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.lessThanOrEqual=" + SMALLER_VISITOR_PLAYER_SET_3_RESULT);
     }
 
     @Test
@@ -651,11 +802,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSet3Result less than or equals to DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        // Get all the matchList where visitorPlayerSet3Result is less than DEFAULT_VISITOR_PLAYER_SET_3_RESULT
         defaultMatchShouldNotBeFound("visitorPlayerSet3Result.lessThan=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
 
-        // Get all the matchList where visitorPlayerSet3Result less than or equals to UPDATED_VISITOR_PLAYER_SET_3_RESULT
+        // Get all the matchList where visitorPlayerSet3Result is less than UPDATED_VISITOR_PLAYER_SET_3_RESULT
         defaultMatchShouldBeFound("visitorPlayerSet3Result.lessThan=" + UPDATED_VISITOR_PLAYER_SET_3_RESULT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSet3ResultIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSet3Result is greater than DEFAULT_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldNotBeFound("visitorPlayerSet3Result.greaterThan=" + DEFAULT_VISITOR_PLAYER_SET_3_RESULT);
+
+        // Get all the matchList where visitorPlayerSet3Result is greater than SMALLER_VISITOR_PLAYER_SET_3_RESULT
+        defaultMatchShouldBeFound("visitorPlayerSet3Result.greaterThan=" + SMALLER_VISITOR_PLAYER_SET_3_RESULT);
     }
 
 
@@ -704,11 +868,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSets greater than or equals to DEFAULT_LOCAL_PLAYER_SETS
-        defaultMatchShouldBeFound("localPlayerSets.greaterOrEqualThan=" + DEFAULT_LOCAL_PLAYER_SETS);
+        // Get all the matchList where localPlayerSets is greater than or equal to DEFAULT_LOCAL_PLAYER_SETS
+        defaultMatchShouldBeFound("localPlayerSets.greaterThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SETS);
 
-        // Get all the matchList where localPlayerSets greater than or equals to UPDATED_LOCAL_PLAYER_SETS
-        defaultMatchShouldNotBeFound("localPlayerSets.greaterOrEqualThan=" + UPDATED_LOCAL_PLAYER_SETS);
+        // Get all the matchList where localPlayerSets is greater than or equal to UPDATED_LOCAL_PLAYER_SETS
+        defaultMatchShouldNotBeFound("localPlayerSets.greaterThanOrEqual=" + UPDATED_LOCAL_PLAYER_SETS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSetsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSets is less than or equal to DEFAULT_LOCAL_PLAYER_SETS
+        defaultMatchShouldBeFound("localPlayerSets.lessThanOrEqual=" + DEFAULT_LOCAL_PLAYER_SETS);
+
+        // Get all the matchList where localPlayerSets is less than or equal to SMALLER_LOCAL_PLAYER_SETS
+        defaultMatchShouldNotBeFound("localPlayerSets.lessThanOrEqual=" + SMALLER_LOCAL_PLAYER_SETS);
     }
 
     @Test
@@ -717,11 +894,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where localPlayerSets less than or equals to DEFAULT_LOCAL_PLAYER_SETS
+        // Get all the matchList where localPlayerSets is less than DEFAULT_LOCAL_PLAYER_SETS
         defaultMatchShouldNotBeFound("localPlayerSets.lessThan=" + DEFAULT_LOCAL_PLAYER_SETS);
 
-        // Get all the matchList where localPlayerSets less than or equals to UPDATED_LOCAL_PLAYER_SETS
+        // Get all the matchList where localPlayerSets is less than UPDATED_LOCAL_PLAYER_SETS
         defaultMatchShouldBeFound("localPlayerSets.lessThan=" + UPDATED_LOCAL_PLAYER_SETS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByLocalPlayerSetsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where localPlayerSets is greater than DEFAULT_LOCAL_PLAYER_SETS
+        defaultMatchShouldNotBeFound("localPlayerSets.greaterThan=" + DEFAULT_LOCAL_PLAYER_SETS);
+
+        // Get all the matchList where localPlayerSets is greater than SMALLER_LOCAL_PLAYER_SETS
+        defaultMatchShouldBeFound("localPlayerSets.greaterThan=" + SMALLER_LOCAL_PLAYER_SETS);
     }
 
 
@@ -770,11 +960,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSets greater than or equals to DEFAULT_VISITOR_PLAYER_SETS
-        defaultMatchShouldBeFound("visitorPlayerSets.greaterOrEqualThan=" + DEFAULT_VISITOR_PLAYER_SETS);
+        // Get all the matchList where visitorPlayerSets is greater than or equal to DEFAULT_VISITOR_PLAYER_SETS
+        defaultMatchShouldBeFound("visitorPlayerSets.greaterThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SETS);
 
-        // Get all the matchList where visitorPlayerSets greater than or equals to UPDATED_VISITOR_PLAYER_SETS
-        defaultMatchShouldNotBeFound("visitorPlayerSets.greaterOrEqualThan=" + UPDATED_VISITOR_PLAYER_SETS);
+        // Get all the matchList where visitorPlayerSets is greater than or equal to UPDATED_VISITOR_PLAYER_SETS
+        defaultMatchShouldNotBeFound("visitorPlayerSets.greaterThanOrEqual=" + UPDATED_VISITOR_PLAYER_SETS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSetsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSets is less than or equal to DEFAULT_VISITOR_PLAYER_SETS
+        defaultMatchShouldBeFound("visitorPlayerSets.lessThanOrEqual=" + DEFAULT_VISITOR_PLAYER_SETS);
+
+        // Get all the matchList where visitorPlayerSets is less than or equal to SMALLER_VISITOR_PLAYER_SETS
+        defaultMatchShouldNotBeFound("visitorPlayerSets.lessThanOrEqual=" + SMALLER_VISITOR_PLAYER_SETS);
     }
 
     @Test
@@ -783,11 +986,24 @@ public class MatchResourceIT {
         // Initialize the database
         matchRepository.saveAndFlush(match);
 
-        // Get all the matchList where visitorPlayerSets less than or equals to DEFAULT_VISITOR_PLAYER_SETS
+        // Get all the matchList where visitorPlayerSets is less than DEFAULT_VISITOR_PLAYER_SETS
         defaultMatchShouldNotBeFound("visitorPlayerSets.lessThan=" + DEFAULT_VISITOR_PLAYER_SETS);
 
-        // Get all the matchList where visitorPlayerSets less than or equals to UPDATED_VISITOR_PLAYER_SETS
+        // Get all the matchList where visitorPlayerSets is less than UPDATED_VISITOR_PLAYER_SETS
         defaultMatchShouldBeFound("visitorPlayerSets.lessThan=" + UPDATED_VISITOR_PLAYER_SETS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByVisitorPlayerSetsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where visitorPlayerSets is greater than DEFAULT_VISITOR_PLAYER_SETS
+        defaultMatchShouldNotBeFound("visitorPlayerSets.greaterThan=" + DEFAULT_VISITOR_PLAYER_SETS);
+
+        // Get all the matchList where visitorPlayerSets is greater than SMALLER_VISITOR_PLAYER_SETS
+        defaultMatchShouldBeFound("visitorPlayerSets.greaterThan=" + SMALLER_VISITOR_PLAYER_SETS);
     }
 
 
@@ -951,6 +1167,7 @@ public class MatchResourceIT {
     @Transactional
     public void getAllMatchesByRoundIsEqualToSomething() throws Exception {
         // Initialize the database
+        matchRepository.saveAndFlush(match);
         Round round = RoundResourceIT.createEntity(em);
         em.persist(round);
         em.flush();
@@ -970,6 +1187,7 @@ public class MatchResourceIT {
     @Transactional
     public void getAllMatchesByVisitorPlayerIsEqualToSomething() throws Exception {
         // Initialize the database
+        matchRepository.saveAndFlush(match);
         Player visitorPlayer = PlayerResourceIT.createEntity(em);
         em.persist(visitorPlayer);
         em.flush();
@@ -989,6 +1207,7 @@ public class MatchResourceIT {
     @Transactional
     public void getAllMatchesByLocalPlayerIsEqualToSomething() throws Exception {
         // Initialize the database
+        matchRepository.saveAndFlush(match);
         Player localPlayer = PlayerResourceIT.createEntity(em);
         em.persist(localPlayer);
         em.flush();
