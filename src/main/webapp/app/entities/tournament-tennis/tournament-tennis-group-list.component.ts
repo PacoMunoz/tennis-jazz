@@ -7,6 +7,8 @@ import { TournamentGroupTennisService } from 'app/entities/tournament-group-tenn
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { PlayerTennisService } from 'app/entities/player-tennis';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { RankingTennisService } from 'app/entities/ranking-tennis';
+import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-list',
@@ -20,6 +22,7 @@ export class TournamentTennisGroupListComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private tournamentGroupTennisService: TournamentGroupTennisService,
     private playerTennisService: PlayerTennisService,
+    private rankingTennisService: RankingTennisService,
     private jhiAlertService: JhiAlertService
   ) {
     this.groups = [];
@@ -36,15 +39,20 @@ export class TournamentTennisGroupListComponent implements OnInit {
       .subscribe(
         (res: HttpResponse<ITournamentGroupTennis[]>) => {
           this.setTournamentGroups(res.body);
-          this.setPlayersTennis();
+          //this.setPlayersTennis();
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.rankingTennisService
+      .query({
+        sort: 'points,desc'
+      })
+      .subscribe((res: HttpResponse<IRankingTennis[]>) => console.log('El numero de ranking es ' + res.body.length));
   }
 
   protected setTournamentGroups(data: ITournamentGroupTennis[]) {
     for (let i = 0; i < data.length; i++) {
-      console.log('El valor del id es: ' + data[i].id);
       this.groups.push(data[i]);
     }
   }
@@ -67,7 +75,6 @@ export class TournamentTennisGroupListComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       this.groups[groupId].players.push(data[i]);
     }
-    console.log('Jugador es: ' + this.groups[groupId].players[0].name);
   }
 
   protected onError(errorMessage: string) {
