@@ -14,6 +14,7 @@ import {
   tournamentPopupRoute
 } from './';
 import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
+import { TournamentTennisGroupRankingComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-ranking.component';
 
 const ENTITY_STATES = [...tournamentRoute, ...tournamentPopupRoute];
 
@@ -25,7 +26,8 @@ const ENTITY_STATES = [...tournamentRoute, ...tournamentPopupRoute];
     TournamentTennisUpdateComponent,
     TournamentTennisDeleteDialogComponent,
     TournamentTennisDeletePopupComponent,
-    TournamentTennisGroupListComponent
+    TournamentTennisGroupListComponent,
+    TournamentTennisGroupRankingComponent
   ],
   entryComponents: [
     TournamentTennisComponent,
