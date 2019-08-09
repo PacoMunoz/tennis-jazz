@@ -1,5 +1,48 @@
 <jhi-alert></jhi-alert>
 
+<!--<div class="content"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxFlexFill >
+
+    <div fxFlex="15" class="sec1" fxFlex.xs="55">
+        first-section
+    </div>
+    <div fxFlex="30" class="sec2" >
+        second-section
+    </div>
+    <div fxFlex="55" class="sec3" fxFlex.xs="15">
+        third-section
+    </div>
+
+</div> -->
+
+<div fxLayout="column" fxLayoutAlign="space-between" >
+    <div *ngFor="let group of groups" class="card puntero">
+        <div class="card-header bg-secondary">
+            <h5 class="card-title">{{group.name}}</h5>
+        </div>
+        <div class="row card-body">
+            <jhi-tournament-tennis-group-ranking [group]="group"></jhi-tournament-tennis-group-ranking>
+        </div>
+        <div class="row card-body">
+            <button type="submit"
+                    class="btn btn-info btn-sm"
+                    [routerLink]="">
+                Clasificacion
+            </button>
+            <button type="submit"
+                    class="btn btn-info btn-sm"
+                    [routerLink]="['/tournament-group-tennis', group.id, 'view-rounds' ]">
+                Rounds
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!--
+
 <div class="container">
     <div class="card-columns m-5 animated fadeIn">
         <div *ngFor="let group of groups" class="card puntero">
@@ -22,9 +65,12 @@
                     </button>
                 </div>
             </div>
+
+
             <div class="row card-body">
                 <jhi-tournament-tennis-group-ranking [group]="group"></jhi-tournament-tennis-group-ranking>
             </div>
         </div>
     </div>
 </div>
+-->

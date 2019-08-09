@@ -15,11 +15,12 @@ import {
 } from './';
 import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
 import { TournamentTennisGroupRankingComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-ranking.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const ENTITY_STATES = [...tournamentRoute, ...tournamentPopupRoute];
 
 @NgModule({
-  imports: [TennisJazzSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [TennisJazzSharedModule, RouterModule.forChild(ENTITY_STATES), FlexLayoutModule],
   declarations: [
     TournamentTennisComponent,
     TournamentTennisDetailComponent,

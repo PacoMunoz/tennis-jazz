@@ -32,7 +32,12 @@
     "rxjs": "6.5.2",
     "swagger-ui": "2.2.10",
     "tslib": "1.10.0",
-    "zone.js": "0.9.1"
+    "zone.js": "0.9.1",
+    "@angular/animations": "latest",
+    "hammerjs": "latest",
+    "@angular/material": "latest",
+    "@angular/cdk": "latest",
+    "@angular/flex-layout": "latest"
   },
   "devDependencies": {
     "@angular/cli": "8.0.2",
