@@ -27,10 +27,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
     NgJhipsterModule.forRoot({
       // set below to true to make alerts look like toast

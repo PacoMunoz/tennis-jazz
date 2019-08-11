@@ -3,10 +3,10 @@ import { TennisJazzSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDi
 
 import { JhMaterialModule } from 'app/shared/jh-material.module';
 @NgModule({
-  imports: [JhMaterialModule, JhMaterialModule, TennisJazzSharedCommonModule],
+  imports: [JhMaterialModule, TennisJazzSharedCommonModule],
   declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
   entryComponents: [JhiLoginModalComponent],
-  exports: [JhMaterialModule, JhMaterialModule, TennisJazzSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective],
+  exports: [JhMaterialModule, TennisJazzSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TennisJazzSharedModule {

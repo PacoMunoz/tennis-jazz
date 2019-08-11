@@ -1,5 +1,5 @@
-<table  class="table table-striped table-bordered">
-    <tbody >
+<table class="table table-striped table-bordered">
+    <tbody>
     <tr>
         <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
         <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
@@ -10,9 +10,9 @@
     </tr>
     </tbody>
 </table>
-<button *ngIf="ranking.length > 4 && !showLessButton" type="submit"
-        class="btn btn-info btn-sm"
-        (click)="showMore()"><fa-icon [icon]="'plus'"></fa-icon><span class="d-none d-md-inline" jhiTranslate="showMore">Show More</span></button>
-<button *ngIf="ranking.length > 4 && showLessButton" type="submit"
-        class="btn btn-info btn-sm"
-        (click)="showLess()"><fa-icon [icon]="'plus'"></fa-icon><span class="d-none d-md-inline" jhiTranslate="showLess">Show Less</span></button>
+<button *ngIf="ranking.length > 4 && !showLessButton" mat-button (click)="showMore()">
+    <fa-icon [icon]="'plus'"></fa-icon>
+    <span class="d-none d-md-inline" jhiTranslate="showMore"> Show More</span></button>
+<button *ngIf="ranking.length > 4 && showLessButton" mat-button (click)="showLess()">
+    <fa-icon [icon]="['far','clock']"></fa-icon>
+    <span class="d-none d-md-inline" jhiTranslate="showLess"> Show Less</span></button>
