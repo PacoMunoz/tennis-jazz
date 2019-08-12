@@ -13,6 +13,7 @@
       "delete": {
         "question": "Are you sure you want to delete Tournament {{ id }}?"
       },
+      "back": "VOLVER A TORNEOS",
       "detail": {
         "title": "Tournament"
       },

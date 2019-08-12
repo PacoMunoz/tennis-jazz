@@ -1,4 +1,4 @@
-<div class="alert alert-warning" *ngIf="tournaments?.length === 0">
+<div class="alert alert-warning" *ngIf="ranking?.length === 0">
     <span jhiTranslate="tennisJazzApp.ranking.home.notFound">No Rankings found</span>
 </div>
 <div class="table-responsive" *ngIf="ranking?.length > 0">
@@ -9,7 +9,7 @@
                 <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
                 <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Mat.Played</span></th>
                 <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.matchesWon">Mat.Won</span></th>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsWin">Sets.Won</span></th>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsWon">Sets.Won</span></th>
                 <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets.Loss</span></th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                 <td>{{playerRank.points}}</td>
                 <td>{{playerRank.matchesPlayed}}</td>
                 <td>{{playerRank.matchesWon}}</td>
-                <td>{{playerRank.setsWin}}</td>
+                <td>{{playerRank.setsWon}}</td>
                 <td>{{playerRank.setsLoss}}</td>
             </tr>
         </tbody>

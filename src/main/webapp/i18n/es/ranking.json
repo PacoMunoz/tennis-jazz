@@ -17,9 +17,9 @@
         "title": "Ranking"
       },
       "points": "Points",
-      "gamesWin": "Games Win",
+      "gamesWon": "Games Won",
       "gamesLoss": "Games Loss",
-      "setsWin": "Sets Win",
+      "setsWon": "Sets Won",
       "setsLoss": "Sets Loss",
       "matchesPlayed": "Matches Played",
       "matchesWon": "Matches Won",

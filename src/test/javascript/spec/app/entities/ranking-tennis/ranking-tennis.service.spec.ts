@@ -60,9 +60,9 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             points: 1,
-            gamesWin: 1,
+            gamesWon: 1,
             gamesLoss: 1,
-            setsWin: 1,
+            setsWon: 1,
             setsLoss: 1,
             matchesPlayed: 1,
             matchesWon: 1,
@@ -87,9 +87,9 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             points: 1,
-            gamesWin: 1,
+            gamesWon: 1,
             gamesLoss: 1,
-            setsWin: 1,
+            setsWon: 1,
             setsLoss: 1,
             matchesPlayed: 1,
             matchesWon: 1,

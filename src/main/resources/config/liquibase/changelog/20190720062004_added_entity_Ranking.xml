@@ -20,7 +20,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="games_win" type="integer">
+            <column name="games_won" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -28,7 +28,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="sets_win" type="integer">
+            <column name="sets_won" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -89,9 +89,9 @@
                   tableName="ranking">
             <column name="id" type="numeric"/>
             <column name="points" type="numeric"/>
-            <column name="games_win" type="numeric"/>
+            <column name="games_won" type="numeric"/>
             <column name="games_loss" type="numeric"/>
-            <column name="sets_win" type="numeric"/>
+            <column name="sets_won" type="numeric"/>
             <column name="sets_loss" type="numeric"/>
             <column name="matches_played" type="numeric"/>
             <column name="matches_won" type="numeric"/>

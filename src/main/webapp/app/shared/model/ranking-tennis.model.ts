@@ -4,9 +4,9 @@ import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 export interface IRankingTennis {
   id?: number;
   points?: number;
-  gamesWin?: number;
+  gamesWon?: number;
   gamesLoss?: number;
-  setsWin?: number;
+  setsWon?: number;
   setsLoss?: number;
   matchesPlayed?: number;
   matchesWon?: number;
@@ -21,9 +21,9 @@ export class RankingTennis implements IRankingTennis {
   constructor(
     public id?: number,
     public points?: number,
-    public gamesWin?: number,
+    public gamesWon?: number,
     public gamesLoss?: number,
-    public setsWin?: number,
+    public setsWon?: number,
     public setsLoss?: number,
     public matchesPlayed?: number,
     public matchesWon?: number,

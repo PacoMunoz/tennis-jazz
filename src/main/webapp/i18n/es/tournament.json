@@ -13,6 +13,7 @@
       "delete": {
         "question": "¿Seguro que quiere eliminar Tournament {{ id }}?"
       },
+      "back": "VOLVER A TORNEOS",
       "detail": {
         "title": "Tournament"
       },

@@ -1,5 +1,5 @@
 <jhi-alert></jhi-alert>
-<div class="container" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between stretch" >
+<div class="container" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch" >
     <div *ngFor="let group of groups">
         <mat-card>
             <mat-card-header>
@@ -11,45 +11,10 @@
                 <jhi-tournament-tennis-group-ranking [group]="group"></jhi-tournament-tennis-group-ranking>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button>CLASIFICACIÓN</button>
-                <button mat-button [routerLink]="['/tournament-group-tennis', group.id, 'view-rounds' ]">ROUNDS</button>
+                <button mat-button [routerLink]="['/tournament-group-tennis', group.id, 'view-rounds' ]">
+                    <span class="d-md-inline" jhiTranslate="tennisJazzApp.round.home.title">ROUNDS</span></button>
             </mat-card-actions>
         </mat-card>
     </div>
+    <button mat-button (click)="previousState()"><span class="d-md-inline" jhiTranslate="tennisJazzApp.tournament.back">BACK T0 TOURNAMENT</span></button>
 </div>
-
-
-
-<!--
-
-<div class="container">
-    <div class="card-columns m-5 animated fadeIn">
-        <div *ngFor="let group of groups" class="card puntero">
-            <div class="card-header bg-secondary">
-                <h5 class="card-title">{{group.name}}</h5>
-            </div>
-            <div class="row text-white card-body">
-                <div class="p-2 bg-primary col-md-6">
-                    <button type="submit"
-                            class="btn btn-info btn-sm"
-                            [routerLink]="">
-                        Clasificacion
-                    </button>
-                </div>
-                <div class="p-2 bg-warning col-md-6">
-                    <button type="submit"
-                            class="btn btn-info btn-sm"
-                            [routerLink]="['/tournament-group-tennis', group.id, 'view-rounds' ]">
-                        Rounds
-                    </button>
-                </div>
-            </div>
-
-
-            <div class="row card-body">
-                <jhi-tournament-tennis-group-ranking [group]="group"></jhi-tournament-tennis-group-ranking>
-            </div>
-        </div>
-    </div>
-</div>
--->

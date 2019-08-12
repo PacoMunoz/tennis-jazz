@@ -28,11 +28,11 @@ public class RankingCriteria implements Serializable, Criteria {
 
     private IntegerFilter points;
 
-    private IntegerFilter gamesWin;
+    private IntegerFilter gamesWon;
 
     private IntegerFilter gamesLoss;
 
-    private IntegerFilter setsWin;
+    private IntegerFilter setsWon;
 
     private IntegerFilter setsLoss;
 
@@ -56,9 +56,9 @@ public class RankingCriteria implements Serializable, Criteria {
     public RankingCriteria(RankingCriteria other){
         this.id = other.id == null ? null : other.id.copy();
         this.points = other.points == null ? null : other.points.copy();
-        this.gamesWin = other.gamesWin == null ? null : other.gamesWin.copy();
+        this.gamesWon = other.gamesWon == null ? null : other.gamesWon.copy();
         this.gamesLoss = other.gamesLoss == null ? null : other.gamesLoss.copy();
-        this.setsWin = other.setsWin == null ? null : other.setsWin.copy();
+        this.setsWon = other.setsWon == null ? null : other.setsWon.copy();
         this.setsLoss = other.setsLoss == null ? null : other.setsLoss.copy();
         this.matchesPlayed = other.matchesPlayed == null ? null : other.matchesPlayed.copy();
         this.matchesWon = other.matchesWon == null ? null : other.matchesWon.copy();
@@ -90,12 +90,12 @@ public class RankingCriteria implements Serializable, Criteria {
         this.points = points;
     }
 
-    public IntegerFilter getGamesWin() {
-        return gamesWin;
+    public IntegerFilter getGamesWon() {
+        return gamesWon;
     }
 
-    public void setGamesWin(IntegerFilter gamesWin) {
-        this.gamesWin = gamesWin;
+    public void setGamesWon(IntegerFilter gamesWon) {
+        this.gamesWon = gamesWon;
     }
 
     public IntegerFilter getGamesLoss() {
@@ -106,12 +106,12 @@ public class RankingCriteria implements Serializable, Criteria {
         this.gamesLoss = gamesLoss;
     }
 
-    public IntegerFilter getSetsWin() {
-        return setsWin;
+    public IntegerFilter getSetsWon() {
+        return setsWon;
     }
 
-    public void setSetsWin(IntegerFilter setsWin) {
-        this.setsWin = setsWin;
+    public void setSetsWon(IntegerFilter setsWon) {
+        this.setsWon = setsWon;
     }
 
     public IntegerFilter getSetsLoss() {
@@ -191,9 +191,9 @@ public class RankingCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(points, that.points) &&
-            Objects.equals(gamesWin, that.gamesWin) &&
+            Objects.equals(gamesWon, that.gamesWon) &&
             Objects.equals(gamesLoss, that.gamesLoss) &&
-            Objects.equals(setsWin, that.setsWin) &&
+            Objects.equals(setsWon, that.setsWon) &&
             Objects.equals(setsLoss, that.setsLoss) &&
             Objects.equals(matchesPlayed, that.matchesPlayed) &&
             Objects.equals(matchesWon, that.matchesWon) &&
@@ -209,9 +209,9 @@ public class RankingCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         points,
-        gamesWin,
+        gamesWon,
         gamesLoss,
-        setsWin,
+        setsWon,
         setsLoss,
         matchesPlayed,
         matchesWon,
@@ -228,9 +228,9 @@ public class RankingCriteria implements Serializable, Criteria {
         return "RankingCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (points != null ? "points=" + points + ", " : "") +
-                (gamesWin != null ? "gamesWin=" + gamesWin + ", " : "") +
+                (gamesWon != null ? "gamesWon=" + gamesWon + ", " : "") +
                 (gamesLoss != null ? "gamesLoss=" + gamesLoss + ", " : "") +
-                (setsWin != null ? "setsWin=" + setsWin + ", " : "") +
+                (setsWon != null ? "setsWon=" + setsWon + ", " : "") +
                 (setsLoss != null ? "setsLoss=" + setsLoss + ", " : "") +
                 (matchesPlayed != null ? "matchesPlayed=" + matchesPlayed + ", " : "") +
                 (matchesWon != null ? "matchesWon=" + matchesWon + ", " : "") +
