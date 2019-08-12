@@ -1,18 +1,33 @@
-<table class="table table-striped table-bordered">
-    <tbody>
-    <tr>
-        <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
-        <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
-    </tr>
-    <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd">
-        <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
-        <td>{{playerRank.points}}</td>
-    </tr>
-    </tbody>
-</table>
-<button *ngIf="ranking.length > 4 && !showLessButton" mat-button (click)="showMore()">
-    <fa-icon [icon]="'plus'"></fa-icon>
-    <span class="d-none d-md-inline" jhiTranslate="showMore"> Show More</span></button>
-<button *ngIf="ranking.length > 4 && showLessButton" mat-button (click)="showLess()">
-    <fa-icon [icon]="['far','clock']"></fa-icon>
-    <span class="d-none d-md-inline" jhiTranslate="showLess"> Show Less</span></button>
+<div class="alert alert-warning" *ngIf="tournaments?.length === 0">
+    <span jhiTranslate="tennisJazzApp.ranking.home.notFound">No Rankings found</span>
+</div>
+<div class="table-responsive" *ngIf="ranking?.length > 0">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Mat.Played</span></th>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.matchesWon">Mat.Won</span></th>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsWin">Sets.Won</span></th>
+                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets.Loss</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd">
+                <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
+                <td>{{playerRank.points}}</td>
+                <td>{{playerRank.matchesPlayed}}</td>
+                <td>{{playerRank.matchesWon}}</td>
+                <td>{{playerRank.setsWin}}</td>
+                <td>{{playerRank.setsLoss}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button *ngIf="ranking.length > 4 && !showLessButton" mat-button (click)="showMore()">
+        <fa-icon [icon]="'plus'"></fa-icon>
+        <span class="d-none d-md-inline" jhiTranslate="showMore"> Show More</span></button>
+    <button *ngIf="ranking.length > 4 && showLessButton" mat-button (click)="showLess()">
+        <fa-icon [icon]="'minus'"></fa-icon>
+        <span class="d-none d-md-inline" jhiTranslate="showLess"> Show Less</span></button>
+</div>
