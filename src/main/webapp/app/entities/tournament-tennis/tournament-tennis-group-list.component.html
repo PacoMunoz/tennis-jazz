@@ -1,10 +1,9 @@
 <jhi-alert></jhi-alert>
-<div class="container" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch" >
+<div class="container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch" >
     <div *ngFor="let group of groups">
         <mat-card>
-            <mat-card-header>
-                <div mat-card-avatar ></div>
-                <mat-card-title>{{group.name}}</mat-card-title>
+            <mat-card-header style="background-color:#6aa6d69c">
+                <mat-card-title >{{group.name}}</mat-card-title>
                 <mat-card-subtitle>{{group.tournament.name}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>

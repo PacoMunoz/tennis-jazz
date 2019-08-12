@@ -4,24 +4,40 @@
 <div class="table-responsive" *ngIf="ranking?.length > 0">
     <table class="table table-striped table-bordered">
         <thead>
-            <tr>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Mat.Played</span></th>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.matchesWon">Mat.Won</span></th>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsWon">Sets.Won</span></th>
-                <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets.Loss</span></th>
-            </tr>
+        <tr>
+            <th scope="row"><span class="d-md-inline" jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
+            <th scope="row"><span class="d-inline d-md-none"
+                                  jhiTranslate="tennisJazzApp.ranking.xs.points">Pt.</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
+            <th scope="row"><span class="d-inline d-md-none"
+                                  jhiTranslate="tennisJazzApp.ranking.xs.matchesPlayed">M.P</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Mat.Played</span></th>
+            <th scope="row"><span class="d-inline d-md-none"
+                                  jhiTranslate="tennisJazzApp.ranking.xs.matchesWon">M.W</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesWon">Mat.Won</span></th>
+            <th scope="row"><span class="d-inline d-md-none"
+                                  jhiTranslate="tennisJazzApp.ranking.xs.setsWon">S.W</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.setsWon">Sets.Won</span></th>
+            <th scope="row"><span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.setsLoss">S.L</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets.Loss</span></th>
+            <th scope="row"><span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.gamesWon">G.W</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.gamesWon">Games.Won</span></th>
+            <th scope="row"><span class="d-inline d-md-none"
+                                  jhiTranslate="tennisJazzApp.ranking.xs.gamesLoss">G.L</span><span
+                class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games.Loss</span></th>
+        </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd">
-                <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
-                <td>{{playerRank.points}}</td>
-                <td>{{playerRank.matchesPlayed}}</td>
-                <td>{{playerRank.matchesWon}}</td>
-                <td>{{playerRank.setsWon}}</td>
-                <td>{{playerRank.setsLoss}}</td>
-            </tr>
+        <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd">
+            <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
+            <td>{{playerRank.points}}</td>
+            <td>{{playerRank.matchesPlayed}}</td>
+            <td>{{playerRank.matchesWon}}</td>
+            <td>{{playerRank.setsWon}}</td>
+            <td>{{playerRank.setsLoss}}</td>
+            <td>{{playerRank.gamesWon}}</td>
+            <td>{{playerRank.gamesLoss}}</td>
+        </tr>
         </tbody>
     </table>
     <button *ngIf="ranking.length > 4 && !showLessButton" mat-button (click)="showMore()">

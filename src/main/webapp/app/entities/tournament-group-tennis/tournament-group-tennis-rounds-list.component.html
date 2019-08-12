@@ -1,8 +1,8 @@
 <jhi-alert></jhi-alert>
-<div class="container" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch" >
+<div class="container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch" >
     <div *ngFor="let round of rounds">
         <mat-card>
-            <mat-card-header>
+            <mat-card-header style="background-color:#6aa6d69c" >
                 <div mat-card-avatar ></div>
                 <mat-card-title>{{round.name}}</mat-card-title>
                 <mat-card-subtitle>Del {{round.startDate|date}} al {{round.endDate|date}}</mat-card-subtitle>

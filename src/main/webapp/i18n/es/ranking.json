@@ -16,18 +16,30 @@
       "detail": {
         "title": "Ranking"
       },
-      "points": "Points",
-      "gamesWon": "Games Won",
-      "gamesLoss": "Games Loss",
-      "setsWon": "Sets Won",
-      "setsLoss": "Sets Loss",
-      "matchesPlayed": "Matches Played",
-      "matchesWon": "Matches Won",
-      "matchesLoss": "Matches Loss",
-      "matchesNotPresent": "Matches Not Present",
-      "matchesAbandoned": "Matches Abandoned",
-      "tournamentGroup": "Tournament Group",
-      "player": "Player"
+      "points": "Puntos",
+      "gamesWon": "Juegos Ganados",
+      "gamesLoss": "Juegos Perdidos",
+      "setsWon": "Sets Ganados",
+      "setsLoss": "Sets Perdidos",
+      "matchesPlayed": "Partidos Jugados",
+      "matchesWon": "Partidos Ganados",
+      "matchesLoss": "Partidos Perdidos",
+      "matchesNotPresent": "Partidos No Presentados",
+      "matchesAbandoned": "Partidos Abandonados",
+      "tournamentGroup": "Grupo",
+      "player": "Jugador",
+      "xs": {
+        "points": "Pt.",
+        "gamesWon": "J.G.",
+        "gamesLoss": "J.P",
+        "setsWon": "S.G",
+        "setsLoss": "S.P",
+        "matchesPlayed": "P.J",
+        "matchesWon": "P.G",
+        "matchesLoss": "P.P",
+        "matchesNotPresent": "N.P",
+        "matchesAbandoned": "Aband."
+      }
     }
   }
 }

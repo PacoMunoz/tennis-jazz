@@ -27,7 +27,19 @@
       "matchesNotPresent": "Matches Not Present",
       "matchesAbandoned": "Matches Abandoned",
       "tournamentGroup": "Tournament Group",
-      "player": "Player"
+      "player": "Player",
+      "xs": {
+        "points": "Pt.",
+        "gamesWon": "G.W",
+        "gamesLoss": "G.L",
+        "setsWon": "S.W",
+        "setsLoss": "S.L",
+        "matchesPlayed": "M.P",
+        "matchesWon": "M.W",
+        "matchesLoss": "M.L",
+        "matchesNotPresent": "N.P",
+        "matchesAbandoned": "Aband."
+      }
     }
   }
 }
