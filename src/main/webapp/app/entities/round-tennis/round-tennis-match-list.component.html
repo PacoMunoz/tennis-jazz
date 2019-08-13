@@ -1,18 +1,19 @@
 <div class="alert alert-warning" *ngIf="matches?.length === 0">
     <span jhiTranslate="tennisJazzApp.match.home.notFound">No Matches found</span>
 </div>
-
-<div class="Draw-round">
-    <div class="Draw-round__name Draw-round__name--left">R32</div>
-<div>
-<div class="Match">
+<div *ngFor="let match of matches">
+<div class="Match" >
     <div class="Match__body">
         <div class="Match__line Match__line--winner">
             <div class="Match__player__holder">
-                <div class="Match__player"><span class="Match__player__fn">Gael</span><span
-                    class="Match__player__i">G.</span>&nbsp;<span
-                    class="Match__player__ln">Monfils</span> <span class="Match__player__seed">[16]</span> <!----></div>
-                <!----></div> <!---->
+                <div class="Match__player">
+                    <span class="Match__player__fn">{{match.localPlayer.name}}</span>
+                    &nbsp;
+                    <!--<span class="Match__player__i">G.</span>&nbsp;-->
+                    <span class="Match__player__ln">{{match.localPlayer.surname}}</span>
+                    <!--<span class="Match__player__seed">[16]</span> -->
+                </div>
+            </div>
             <div class="Match__winner">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -49,24 +50,6 @@
     </div>
 </div>
 </div>
-</div>
 
-<div class="table-responsive" *ngIf="matches?.length > 0">
-    <table *ngFor="let match of matches" class="table table-striped ">
-        <tbody>
-        <tr>
-            <th scope="row">{{match.localPlayer.name}} {{match.localPlayer.surname}}</th>
-            <td>{{match.localPlayerSet1Result}}</td>
-            <td>{{match.localPlayerSet2Result}}</td>
-            <td>{{match.localPlayerSet3Result}}</td>
-        </tr>
-        <tr>
-            <th scope="row">{{match.visitorPlayer.name}} {{match.visitorPlayer.surname}}</th>
-            <td>{{match.visitorPlayerSet1Result}}</td>
-            <td>{{match.visitorPlayerSet2Result}}</td>
-            <td>{{match.visitorPlayerSet3Result}}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
 

@@ -1,15 +1,9 @@
 <jhi-alert></jhi-alert>
-<div class="container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch" >
+<div class="container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch">
     <div *ngFor="let round of rounds">
-        <mat-card>
-            <mat-card-header style="background-color:#6aa6d69c" >
-                <div mat-card-avatar ></div>
-                <mat-card-title>{{round.name}}</mat-card-title>
-                <mat-card-subtitle>Del {{round.startDate|date}} al {{round.endDate|date}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <jhi-round-tennis-match-list [round]="round"></jhi-round-tennis-match-list>
-            </mat-card-content>
-        </mat-card>
+        <div class="Draw-round">
+            <div class="Draw-round__name Draw-round__name--left">{{round.name}}</div>
+            <jhi-round-tennis-match-list [round]="round"></jhi-round-tennis-match-list>
+        </div>
     </div>
 </div>
