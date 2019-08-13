@@ -1,21 +1,71 @@
 <div class="alert alert-warning" *ngIf="matches?.length === 0">
     <span jhiTranslate="tennisJazzApp.match.home.notFound">No Matches found</span>
 </div>
+
+<div class="Draw-round">
+    <div class="Draw-round__name Draw-round__name--left">R32</div>
+<div>
+<div class="Match">
+    <div class="Match__body">
+        <div class="Match__line Match__line--winner">
+            <div class="Match__player__holder">
+                <div class="Match__player"><span class="Match__player__fn">Gael</span><span
+                    class="Match__player__i">G.</span>&nbsp;<span
+                    class="Match__player__ln">Monfils</span> <span class="Match__player__seed">[16]</span> <!----></div>
+                <!----></div> <!---->
+            <div class="Match__winner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="m5.23685955 13.7247081-4.23685955-6.05086255 1.63830409-1.14715287 2.869736 4.09840772 8.62510041-8.6251004 1.4142136 1.41421356z"></path>
+                </svg>
+            </div>
+            <div class="Match__set">
+                <ul><!---->
+                    <li>
+                        6<!----></li>
+                    <li>
+                        3<sup></sup></li>
+                    <li>
+                        7<!----></li>
+                </ul>
+            </div>
+        </div>
+        <div class="Match__line">
+            <div class="Match__player__holder">
+                <div class="Match__player"><span class="Match__player__fn">Roberto</span><span
+                    class="Match__player__i">R.</span>&nbsp;<span class="Match__player__ln">Bautista Agut</span> <span
+                    class="Match__player__seed">[10]</span> <!----></div> <!----></div> <!----> <!---->
+            <div class="Match__set">
+                <ul><!---->
+                    <li>
+                        4<sup></sup></li>
+                    <li>
+                        6<!----></li>
+                    <li>
+                        6<sup>2</sup></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
 <div class="table-responsive" *ngIf="matches?.length > 0">
     <table *ngFor="let match of matches" class="table table-striped ">
-        <tbody >
-            <tr>
-                <th scope="row">{{match.localPlayer.name}} {{match.localPlayer.surname}}</th>
-                <td>{{match.localPlayerSet1Result}}</td>
-                <td>{{match.localPlayerSet2Result}}</td>
-                <td>{{match.localPlayerSet3Result}}</td>
-            </tr>
-            <tr>
-                <th scope="row">{{match.visitorPlayer.name}} {{match.visitorPlayer.surname}}</th>
-                <td>{{match.visitorPlayerSet1Result}}</td>
-                <td>{{match.visitorPlayerSet2Result}}</td>
-                <td>{{match.visitorPlayerSet3Result}}</td>
-            </tr>
+        <tbody>
+        <tr>
+            <th scope="row">{{match.localPlayer.name}} {{match.localPlayer.surname}}</th>
+            <td>{{match.localPlayerSet1Result}}</td>
+            <td>{{match.localPlayerSet2Result}}</td>
+            <td>{{match.localPlayerSet3Result}}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{match.visitorPlayer.name}} {{match.visitorPlayer.surname}}</th>
+            <td>{{match.visitorPlayerSet1Result}}</td>
+            <td>{{match.visitorPlayerSet2Result}}</td>
+            <td>{{match.visitorPlayerSet3Result}}</td>
+        </tr>
         </tbody>
     </table>
 </div>

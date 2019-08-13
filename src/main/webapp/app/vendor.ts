@@ -1,7 +1,6 @@
 /* after changing this file run 'npm run webpack:build' */
 /* tslint:disable */
 import '../content/scss/vendor.scss';
-
 // Imports all fontawesome core and solid icons
 
 import { library } from '@fortawesome/fontawesome-svg-core';

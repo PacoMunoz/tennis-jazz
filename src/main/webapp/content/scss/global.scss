@@ -164,3 +164,140 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+/* ==========================================================================
+custom css styles
+========================================================================== */
+
+.Match__body {
+  padding: 0 16px 8px;
+  border: 2px solid #ebedf0;
+  background-color: #fff;
+}
+.Match__line:not(:last-child) {
+  border-bottom: 2px solid #ebedf0;
+}
+.Match__line {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  min-height: 64px;
+}
+.Match__player__holder {
+  position: relative;
+  -webkit-box-flex: 1;
+  flex: 1;
+}
+.Match__player:last-child {
+  margin-bottom: 0;
+}
+.Match__player:first-child {
+  margin-bottom: 4px;
+}
+.Match__line--winner .Match__player,
+.Match__line--winner .Match__set {
+  font-weight: 700;
+}
+.Match__player {
+  color: #1e1e1e;
+  font-size: 14px;
+  line-height: 24px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.Match__player__i {
+  display: none;
+}
+@media screen and (max-width: 1023px) {
+  .Match__player__fn {
+    display: none;
+  }
+  .Match__player__i {
+    display: inline-block;
+  }
+}
+.Match__winner {
+  margin-right: 16px;
+}
+.Match__winner svg * {
+  fill: #da291c;
+}
+.Match__winner svg {
+  display: -webkit-inline-box;
+  display: inline-flex;
+}
+.Match__line--winner .Match__player,
+.Match__line--winner .Match__set {
+  font-weight: 700;
+}
+.Match__set {
+  color: #1e1e1e;
+  font-size: 14px;
+  line-height: 24px;
+}
+.Match__set ul {
+  display: -webkit-box;
+  display: flex;
+}
+.Match__set li {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  width: 20px;
+  text-align: center;
+}
+ol,
+ul {
+  list-style-type: none;
+}
+ul {
+  list-style: none;
+}
+.Draw-round:first-child > div {
+  padding-right: 64px;
+}
+.Draw-round {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+  position: relative;
+  padding-top: 58px;
+}
+.Draw-round > div {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.Draw-round__name--left {
+  width: calc(100% - 64px);
+}
+.Draw-round__name {
+  font-size: 13px;
+  line-height: 16px;
+  color: #da291c;
+  font-weight: 700;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #da291c;
+  width: 100%;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 0 !important;
+}
+@media screen and (max-width: 767px) {
+  .Draw-round:first-child {
+    width: 100%;
+  }
+  .Draw-round:first-child > div {
+    padding-right: 0;
+  }
+}
