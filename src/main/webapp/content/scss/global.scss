@@ -297,10 +297,6 @@ ul {
   list-style: none;
 }
 
-.Draw-round:first-child > div {
-  //padding-right: 64px;
-}
-
 .Draw-round {
   display: -webkit-box;
   display: flex;
@@ -351,4 +347,57 @@ ul {
   .Draw-round:first-child > div {
     padding-right: 0;
   }
+}
+
+@media screen and (min-width: 1024px) {
+  .Draw-round:first-child {
+    width: 40%;
+  }
+}
+
+/* ================== round selector style ============================= */
+
+.rogers-scoring-bar__holder {
+  padding-top: 12px;
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #ebedf0;
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+.rogers-scoring-bar__holder--rounds {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.Draw-rounds,
+.Draw-rounds ul {
+  display: -webkit-box;
+  display: flex;
+}
+
+.Draw-rounds {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.Draw-rounds li {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.Draw-rounds a.selected {
+  color: #1e1e1e;
+  border: 2px solid #1e1e1e;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+.Draw-rounds a {
+  text-decoration: none;
+  color: inherit;
 }
