@@ -8,8 +8,7 @@
             <div class="Match__player__holder">
                 <div class="Match__player">
                     <span class="Match__player__fn">{{match.localPlayer.name}}</span>
-                    &nbsp;
-                    <!--<span class="Match__player__i">G.</span>&nbsp;-->
+                    <span class="Match__player__i">{{match.localPlayer.name|slice : 0 : 1}}.</span>&nbsp;
                     <span class="Match__player__ln">{{match.localPlayer.surname}}</span>
                     <!--<span class="Match__player__seed">[16]</span> -->
                 </div>
@@ -23,27 +22,31 @@
             <div class="Match__set">
                 <ul><!---->
                     <li>
-                        6<!----></li>
+                        {{match.localPlayerSet1Result}}<!----></li>
                     <li>
-                        3<sup></sup></li>
-                    <li>
-                        7<!----></li>
+                        {{match.localPlayerSet2Result}}<sup></sup></li>
+                    <li *ngIf="match.localPlayerSet3Result != null">
+                        {{match.localPlayerSet3Result}}<!----></li>
                 </ul>
             </div>
         </div>
         <div class="Match__line">
             <div class="Match__player__holder">
-                <div class="Match__player"><span class="Match__player__fn">Roberto</span><span
-                    class="Match__player__i">R.</span>&nbsp;<span class="Match__player__ln">Bautista Agut</span> <span
-                    class="Match__player__seed">[10]</span> <!----></div> <!----></div> <!----> <!---->
+                <div class="Match__player">
+                    <span class="Match__player__fn">{{match.visitorPlayer.name}}</span>
+                    <span class="Match__player__i">{{match.visitorPlayer.name|slice : 0 : 1}}.</span>&nbsp;
+                    <span class="Match__player__ln">{{match.visitorPlayer.surname}}</span>
+                    <!--<span class="Match__player__seed">[16]</span> -->
+                </div>
+            </div>
             <div class="Match__set">
                 <ul><!---->
                     <li>
-                        4<sup></sup></li>
+                        {{match.visitorPlayerSet1Result}}<sup></sup></li>
                     <li>
-                        6<!----></li>
-                    <li>
-                        6<sup>2</sup></li>
+                        {{match.visitorPlayerSet2Result}}<!----></li>
+                    <li *ngIf="match.visitorPlayerSet3Result != null">
+                        {{match.visitorPlayerSet3Result}}<sup></sup></li>
                 </ul>
             </div>
         </div>

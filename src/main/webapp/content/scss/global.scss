@@ -177,6 +177,12 @@ ui bootstrap tweaks
 custom css styles
 ========================================================================== */
 
+/* ================== match and round styles ============================= */
+
+.Match__selector > div {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
 .Match__body {
   padding: 0 16px 8px;
   border: 2px solid #ebedf0;
@@ -292,7 +298,7 @@ ul {
 }
 
 .Draw-round:first-child > div {
-  padding-right: 64px;
+  //padding-right: 64px;
 }
 
 .Draw-round {
@@ -329,6 +335,13 @@ ul {
   top: 0;
   left: 0;
   padding-left: 0 !important;
+}
+
+.Draw-round__date {
+  color: #1e1e1e;
+  position: relative;
+  font-size: 80%;
+  vertical-align: baseline;
 }
 
 @media screen and (max-width: 767px) {

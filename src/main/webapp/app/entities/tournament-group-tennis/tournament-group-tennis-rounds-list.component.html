@@ -1,9 +1,15 @@
 <jhi-alert></jhi-alert>
-<div class="container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between stretch">
-    <div *ngFor="let round of rounds">
+<div class="container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxFlexOffset="20px" fxLayoutGap="5px" fxLayoutAlign="space-between stretch">
+    <div  style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh;" *ngFor="let round of rounds">
         <div class="Draw-round">
-            <div class="Draw-round__name Draw-round__name--left">{{round.name}}</div>
-            <jhi-round-tennis-match-list [round]="round"></jhi-round-tennis-match-list>
+            <div class="Draw-round__name Draw-round__name--left">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <div fxFlex>{{round.name}}</div>
+                    <div fxFlex fxLayoutAlign="end" fxLayoutAlign.xs="start" fxLayoutAlign.sm="start"><span
+                        class="Draw-round__date">Del {{round.startDate|date}} al {{round.endDate|date}}</span></div>
+                </div>
+            </div>
+            <jhi-round-tennis-match-list class="Match__selector" [round]="round"></jhi-round-tennis-match-list>
         </div>
     </div>
 </div>
