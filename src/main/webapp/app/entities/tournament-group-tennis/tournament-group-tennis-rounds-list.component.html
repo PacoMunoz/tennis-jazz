@@ -2,16 +2,27 @@
     <div class="rogers-scoring-bar__holder rogers-scoring-bar__holder--rounds">
         <div class="Draw-rounds">
             <ul>
-                <li><a href="#" class="selected"><span>R64</span></a></li>
-                <li><a href="#" class=""><span>R32</span></a></li>
-                <li><a href="#" class=""><span>R16</span></a></li>
-                <li><a href="#" class=""><span>Quarterfinals</span></a></li>
-                <li><a href="#" class=""><span>Semifinals</span></a></li>
-                <li><a href="#" class=""><span>Final</span></a></li>
+                <li *ngFor="let round of rounds; index as i">
+                    <a href="#"  ><span>{{round.name}}</span></a>
+                    //*ngClass="{'selected' : i === 0}"
+                </li>
             </ul>
         </div>
         <div class="wrapper Draw-rounds__mobile">
-            <select id="s2roundSelector" name="s2roundSelector" data-select2-id="s2roundSelector" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+            <mat-form-field>
+                <mat-label>Rounds</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let round of rounds" [value]="round.id">
+                        {{round.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+       <!-- <div class="wrapper Draw-rounds__mobile">
+            <select id="s2roundSelector" name="s2roundSelector"  tabindex="-1"
+                    class="select2-hidden-accessible" >
                 <option value="R64" data-select2-id="22">R64</option>
                 <option value="R32" data-select2-id="23">R32</option>
                 <option value="R16" data-select2-id="24">R16</option>
@@ -19,16 +30,39 @@
                 <option value="Semifinals" data-select2-id="26">Semifinals</option>
                 <option value="Final" data-select2-id="27">Final</option>
             </select>
-            <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="28" style="width: 100%;">
+            <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="28"
+                  style="width: 100%;">
                 <span class="selection">
-                    <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-s2roundSelector-container">
-                        <span class="select2-selection__rendered" id="select2-s2roundSelector-container" role="textbox" aria-readonly="true" title="R64">R64</span>
+                    <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true"
+                          aria-expanded="false" tabindex="0" aria-labelledby="select2-s2roundSelector-container">
+                        <span class="select2-selection__rendered" id="select2-s2roundSelector-container" role="textbox"
+                              aria-readonly="true" title="R64">R64</span>
                         <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
                     </span>
                 </span>
-                <span class="dropdown-wrapper" aria-hidden="true"></span>
+                <span class="dropdown-wrapper" aria-hidden="true">
+                        <span class="select2-dropdown select2-dropdown--above" dir="ltr">
+                            <span class="select2-search select2-search--dropdown">
+                                <input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off"
+                                autocapitalize="none" spellcheck="false" role="textbox">
+                            </span>
+                            <span class="select2-results"><ul class="select2-results__options" role="tree"
+                                                        id="select2-s2roundSelector-results" aria-expanded="true"
+                                                        aria-hidden="false"><li
+                            class="select2-results__option select2-results__option--highlighted" role="treeitem"
+                            aria-selected="true" data-select2-id="101">R64</li><li class="select2-results__option"
+                                                                                   role="treeitem" aria-selected="false"
+                                                                                   data-select2-id="102">R32</li><li
+                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="103">R16</li><li
+                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="104">Quarterfinals</li><li
+                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="105">Semifinals</li><li
+                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="106">Final</li></ul></span></span>
+
+
+
+                </span>
             </span>
-        </div>
+        </div>-->
     </div>
 
     <jhi-alert></jhi-alert>
@@ -52,3 +86,4 @@
     </div>
 
 </div>
+
