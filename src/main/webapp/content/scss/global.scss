@@ -177,6 +177,51 @@ ui bootstrap tweaks
 custom css styles
 ========================================================================== */
 
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 1280px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .wrapper {
+    padding-left: 32px;
+    padding-right: 32px;
+    max-width: 1264px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 1248px;
+  }
+}
+.wrapper {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1240px;
+}
+
+.container-fluid {
+  padding: 0px !important;
+}
+
+.jh-card {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 /* ================== match and round styles ============================= */
 
 .Match__selector > div {
@@ -208,6 +253,11 @@ custom css styles
   min-height: 64px;
 }
 
+.Match__line--winner .Match__player,
+.Match__line--winner .Match__set {
+  font-weight: 700;
+}
+
 .Match__player__holder {
   position: relative;
   -webkit-box-flex: 1;
@@ -220,11 +270,6 @@ custom css styles
 
 .Match__player:first-child {
   margin-bottom: 4px;
-}
-
-.Match__line--winner .Match__player,
-.Match__line--winner .Match__set {
-  font-weight: 700;
 }
 
 .Match__player {
@@ -306,7 +351,7 @@ ul {
   justify-content: space-around;
   width: 50%;
   position: relative;
-  padding-top: 58px;
+  padding-top: 70px;
 }
 
 .Draw-round > div {
@@ -357,16 +402,12 @@ ul {
 
 /* ================== round selector style ============================= */
 
-.rogers-scoring-bar__holder {
+.round-selector-bar {
   padding-top: 12px;
   background-color: #f7f7f7;
   border-bottom: 2px solid #ebedf0;
   -webkit-transition: all 0.5s linear;
   transition: all 0.5s linear;
-}
-.rogers-scoring-bar__holder--rounds {
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 .Draw-rounds,
@@ -376,7 +417,7 @@ ul {
 }
 
 .Draw-rounds {
-  font-size: 60%;
+  font-size: 75%;
   line-height: 16px;
   font-weight: 700;
   color: #888;
@@ -402,10 +443,36 @@ ul {
   color: inherit;
 }
 
-.wrapper {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  max-width: 1240px;
+.Draw-rounds_xs {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .Draw-rounds_xs {
+    display: none;
+  }
+}
+@media screen and (max-width: 767px) {
+  .Draw-rounds {
+    display: none;
+  }
+}
+
+/* ================== material select styles ============================= */
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #da291c;
+}
+.mat-form-field.mat-focused {
+  color: #da291c !important;
+}
+.mat-form-field-label {
+  color: #da291c !important;
+}
+.mat-form-field.mat-focused.mat-primary {
+  color: #da291c !important;
+}
+
+.mat-form-field-ripple {
+  background-color: #da291c !important;
 }

@@ -1,89 +1,71 @@
-<div class="Tournament-rounds container" fxLayout="column" fxLayoutAlign="space-between stretch">
-    <div class="rogers-scoring-bar__holder rogers-scoring-bar__holder--rounds">
-        <div class="Draw-rounds">
+<div class="Tournament-rounds" fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div class="round-selector-bar ">
+        <div class="Draw-rounds wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap.xs="15px"  >
+            <div fxFlex fxLayoutAlign="start">{{group.tournament.name}}</div>
+            <div fxFlex fxLayoutAlign="end" fxLayoutAlign.xs="start" fxLayoutAlign.sm="start"><span
+                class="Draw-round__date">Club LigadoXElTenis</span></div>
+        </div>
+    </div>
+    <div class="round-selector-bar ">
+        <div class="Draw-rounds wrapper">
             <ul>
-                <li *ngFor="let round of rounds; index as i">
-                    <a href="#"  ><span>{{round.name}}</span></a>
-                    //*ngClass="{'selected' : i === 0}"
+                <li >
+                    <a [routerLink]="['/tournament-group-tennis', group.id, 'view-rounds' ]"> id=""><span>Jornadas</span></a>
+                </li>
+                <li >
+                    <a id=""><span>Clasificación</span></a>
+                </li>
+                <li >
+                    <a id=""><span>Jugadores</span></a>
                 </li>
             </ul>
         </div>
-        <div class="wrapper Draw-rounds__mobile">
+        <div class="Draw-rounds_xs center-content">
             <mat-form-field>
                 <mat-label>Rounds</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let round of rounds" [value]="round.id">
-                        {{round.name}}
+                    <mat-option *ngFor="let tournamentGroup of tournamentGroups" [value]="tournamentGroup.id">
+                        {{tournamentGroup.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-
-
-       <!-- <div class="wrapper Draw-rounds__mobile">
-            <select id="s2roundSelector" name="s2roundSelector"  tabindex="-1"
-                    class="select2-hidden-accessible" >
-                <option value="R64" data-select2-id="22">R64</option>
-                <option value="R32" data-select2-id="23">R32</option>
-                <option value="R16" data-select2-id="24">R16</option>
-                <option value="Quarterfinals" data-select2-id="25">Quarterfinals</option>
-                <option value="Semifinals" data-select2-id="26">Semifinals</option>
-                <option value="Final" data-select2-id="27">Final</option>
-            </select>
-            <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="28"
-                  style="width: 100%;">
-                <span class="selection">
-                    <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true"
-                          aria-expanded="false" tabindex="0" aria-labelledby="select2-s2roundSelector-container">
-                        <span class="select2-selection__rendered" id="select2-s2roundSelector-container" role="textbox"
-                              aria-readonly="true" title="R64">R64</span>
-                        <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
-                    </span>
-                </span>
-                <span class="dropdown-wrapper" aria-hidden="true">
-                        <span class="select2-dropdown select2-dropdown--above" dir="ltr">
-                            <span class="select2-search select2-search--dropdown">
-                                <input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off"
-                                autocapitalize="none" spellcheck="false" role="textbox">
-                            </span>
-                            <span class="select2-results"><ul class="select2-results__options" role="tree"
-                                                        id="select2-s2roundSelector-results" aria-expanded="true"
-                                                        aria-hidden="false"><li
-                            class="select2-results__option select2-results__option--highlighted" role="treeitem"
-                            aria-selected="true" data-select2-id="101">R64</li><li class="select2-results__option"
-                                                                                   role="treeitem" aria-selected="false"
-                                                                                   data-select2-id="102">R32</li><li
-                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="103">R16</li><li
-                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="104">Quarterfinals</li><li
-                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="105">Semifinals</li><li
-                            class="select2-results__option" role="treeitem" aria-selected="false" data-select2-id="106">Final</li></ul></span></span>
-
-
-
-                </span>
-            </span>
-        </div>-->
+    </div>
+    <div class="round-selector-bar ">
+        <div class="Draw-rounds wrapper">
+            <ul>
+                <li *ngFor="let tournamentGroup of tournamentGroups; index as i">
+                    <a id="drawRound_{{i}}"  [className]="tournamentGroup.id === group.id ? 'selected': ''"  ><span>{{tournamentGroup.name}}</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="Draw-rounds_xs center-content">
+            <mat-form-field>
+                <mat-label>Rounds</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let tournamentGroup of tournamentGroups" [value]="tournamentGroup.id">
+                        {{tournamentGroup.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
 
     <jhi-alert></jhi-alert>
 
-    <div class="Rounds-wrapper container m-0 m-sm-2 p-0 p-sm-2" fxLayout="column" fxFlexOffset="20px" fxLayoutGap="5px"
-         fxLayoutAlign="space-between stretch">
-        <div class="Round"
-             style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh;"
-             *ngFor="let round of rounds">
+    <div class="Rounds-wrapper container" >
+        <div class="Round center-content" *ngFor="let round of rounds">
             <div class="Draw-round">
                 <div class="Draw-round__name Draw-round__name--left">
-                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap.xs="15px"  >
                         <div fxFlex fxLayoutAlign="start">{{round.name}}</div>
                         <div fxFlex fxLayoutAlign="end" fxLayoutAlign.xs="start" fxLayoutAlign.sm="start"><span
                             class="Draw-round__date">Del {{round.startDate|date}} al {{round.endDate|date}}</span></div>
                     </div>
                 </div>
-                <jhi-round-tennis-match-list class="Match__selector" [round]="round"></jhi-round-tennis-match-list>
+                <jhi-round-tennis-match-list class="Match__selector"  [round]="round"></jhi-round-tennis-match-list>
             </div>
         </div>
     </div>
-
 </div>
 
