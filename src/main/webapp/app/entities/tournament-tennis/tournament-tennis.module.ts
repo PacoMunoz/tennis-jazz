@@ -16,6 +16,10 @@ import {
 import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
 import { TournamentTennisGroupRankingComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-ranking.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TournamentTennisViewComponent } from 'app/entities/tournament-tennis/tournament-tennis-view-component';
+import { TournamentTennisGroupRounds } from 'app/entities/tournament-tennis/tournament-tennis-group-rounds';
+import { TournamentTennisGroupRoundMatchComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-round-match.component';
+import { TournamentTennisGroupPlayerComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-player.component';
 
 const ENTITY_STATES = [...tournamentRoute, ...tournamentPopupRoute];
 
@@ -28,7 +32,11 @@ const ENTITY_STATES = [...tournamentRoute, ...tournamentPopupRoute];
     TournamentTennisDeleteDialogComponent,
     TournamentTennisDeletePopupComponent,
     TournamentTennisGroupListComponent,
-    TournamentTennisGroupRankingComponent
+    TournamentTennisViewComponent,
+    TournamentTennisGroupRankingComponent,
+    TournamentTennisGroupRounds,
+    TournamentTennisGroupRoundMatchComponent,
+    TournamentTennisGroupPlayerComponent
   ],
   entryComponents: [
     TournamentTennisComponent,

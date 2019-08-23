@@ -1,15 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
 import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
-import { ActivatedRoute } from '@angular/router';
 import { JhiAlertService } from 'ng-jhipster';
-import { TournamentGroupTennisService } from 'app/entities/tournament-group-tennis';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { PlayerTennisService } from 'app/entities/player-tennis';
-import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-ranking',

@@ -12,6 +12,7 @@ import { TournamentTennisUpdateComponent } from './tournament-tennis-update.comp
 import { TournamentTennisDeletePopupComponent } from './tournament-tennis-delete-dialog.component';
 import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
 import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
+import { TournamentTennisViewComponent } from 'app/entities/tournament-tennis/tournament-tennis-view-component';
 
 @Injectable({ providedIn: 'root' })
 export class TournamentTennisResolve implements Resolve<ITournamentTennis> {
@@ -41,7 +42,7 @@ export const tournamentRoute: Routes = [
   },
   {
     path: ':id/view',
-    component: TournamentTennisDetailComponent,
+    component: TournamentTennisViewComponent,
     resolve: {
       tournament: TournamentTennisResolve
     },

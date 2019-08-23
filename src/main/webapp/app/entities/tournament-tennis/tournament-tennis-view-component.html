@@ -1,0 +1,40 @@
+<jhi-alert></jhi-alert>
+<mat-grid-list cols="2" rowHeight="50px" >
+    <mat-grid-tile>{{tournament.name}}</mat-grid-tile>
+    <mat-grid-tile>Club LigadoXElTenis</mat-grid-tile>
+</mat-grid-list>
+
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="block">thumb_down</mat-icon>Clasificación
+        </ng-template>
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab *ngFor="let tournamentGroup of tournamentGroups;"  label="{{tournamentGroup.name}}">
+                <jhi-tournament-tennis-group-ranking [group]="tournamentGroup"></jhi-tournament-tennis-group-ranking>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>thumb_down</mat-icon>Jornadas
+        </ng-template>
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab *ngFor="let tournamentGroup of tournamentGroups;"  label="{{tournamentGroup.name}}">
+                <jhi-tournament-tennis-group-rounds [group]="tournamentGroup"></jhi-tournament-tennis-group-rounds>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>thumb_down</mat-icon>Jugadores
+        </ng-template>
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab *ngFor="let tournamentGroup of tournamentGroups;"  label="{{tournamentGroup.name}}">
+                <jhi-tournament-tennis-group-player [group]="tournamentGroup"></jhi-tournament-tennis-group-player>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+</mat-tab-group>
+
+
