@@ -11,7 +11,6 @@ import { TournamentTennisDetailComponent } from './tournament-tennis-detail.comp
 import { TournamentTennisUpdateComponent } from './tournament-tennis-update.component';
 import { TournamentTennisDeletePopupComponent } from './tournament-tennis-delete-dialog.component';
 import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
-import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
 import { TournamentTennisViewComponent } from 'app/entities/tournament-tennis/tournament-tennis-view-component';
 
 @Injectable({ providedIn: 'root' })
@@ -43,18 +42,6 @@ export const tournamentRoute: Routes = [
   {
     path: ':id/view',
     component: TournamentTennisViewComponent,
-    resolve: {
-      tournament: TournamentTennisResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'tennisJazzApp.tournament.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/view-groups',
-    component: TournamentTennisGroupListComponent,
     resolve: {
       tournament: TournamentTennisResolve
     },

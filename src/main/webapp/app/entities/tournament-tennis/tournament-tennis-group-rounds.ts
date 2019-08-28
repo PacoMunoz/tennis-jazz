@@ -36,7 +36,7 @@ export class TournamentTennisGroupRounds implements OnInit {
   }
 
   sort() {
-    const result = ['startDate' + ',' + 'asc'];
+    const result = ['startDate' + ',' + 'desc'];
     return result;
   }
 

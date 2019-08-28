@@ -224,14 +224,19 @@ custom css styles
 
 /* ================== match and round styles ============================= */
 
-.Match__selector > div {
+/*.Match__selector > div {
   margin-top: 12px;
   margin-bottom: 12px;
-}
+}*/
 .Match__body {
   padding: 0 16px 8px;
   border: 2px solid #ebedf0;
   background-color: #fff;
+}
+
+.Match_wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .Match__body:hover {
@@ -349,7 +354,7 @@ ul {
   -webkit-box-direction: normal;
   flex-direction: column;
   justify-content: space-around;
-  width: 50%;
+  //width: 50%;
   position: relative;
   padding-top: 70px;
 }
@@ -387,7 +392,7 @@ ul {
 
 @media screen and (max-width: 767px) {
   .Draw-round:first-child {
-    width: 100%;
+    //width: 100%;
   }
   .Draw-round:first-child > div {
     padding-right: 0;
@@ -396,12 +401,12 @@ ul {
 
 @media screen and (min-width: 1024px) {
   .Draw-round:first-child {
-    width: 40%;
+    //width: 50%;
   }
 }
 
 /* ================== round selector style ============================= */
-
+/*
 .round-selector-bar {
   padding-top: 12px;
   background-color: #f7f7f7;
@@ -457,9 +462,9 @@ ul {
     display: none;
   }
 }
-
+*/
 /* ================== material select styles ============================= */
-
+/*
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #da291c;
 }
@@ -475,4 +480,25 @@ ul {
 
 .mat-form-field-ripple {
   background-color: #da291c !important;
+}
+*/
+
+/* ===================================== custom mat-tab-group ============================= */
+
+.mat-tab-header {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1e1e1e;
+}
+.tournament-mat-tab-body {
+  margin-top: 15px;
+}
+
+/* ===================================== custom mat-card-example ============================= */
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

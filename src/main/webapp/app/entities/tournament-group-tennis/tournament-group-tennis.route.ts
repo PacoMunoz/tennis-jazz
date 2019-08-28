@@ -11,7 +11,6 @@ import { TournamentGroupTennisDetailComponent } from './tournament-group-tennis-
 import { TournamentGroupTennisUpdateComponent } from './tournament-group-tennis-update.component';
 import { TournamentGroupTennisDeletePopupComponent } from './tournament-group-tennis-delete-dialog.component';
 import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
-import { TournamentGroupTennisRoundsListComponent } from 'app/entities/tournament-group-tennis/tournament-group-tennis-rounds-list.component';
 
 @Injectable({ providedIn: 'root' })
 export class TournamentGroupTennisResolve implements Resolve<ITournamentGroupTennis> {
@@ -42,18 +41,6 @@ export const tournamentGroupRoute: Routes = [
   {
     path: ':id/view',
     component: TournamentGroupTennisDetailComponent,
-    resolve: {
-      tournamentGroup: TournamentGroupTennisResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'tennisJazzApp.tournamentGroup.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/view-rounds',
-    component: TournamentGroupTennisRoundsListComponent,
     resolve: {
       tournamentGroup: TournamentGroupTennisResolve
     },

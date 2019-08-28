@@ -1,7 +1,8 @@
 <div class="alert alert-warning" *ngIf="ranking?.length === 0">
     <span jhiTranslate="tennisJazzApp.ranking.home.notFound">No Rankings found</span>
 </div>
-<div class="table-responsive" *ngIf="ranking?.length > 0">
+
+<div class="table-responsive container" *ngIf="ranking?.length > 0">
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
@@ -28,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd">
+        <tr *ngFor="let playerRank of ranking ">
             <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
             <td>{{playerRank.points}}</td>
             <td>{{playerRank.matchesPlayed}}</td>
@@ -40,10 +41,4 @@
         </tr>
         </tbody>
     </table>
-    <button *ngIf="ranking.length > 4 && !showLessButton" mat-button (click)="showMore()">
-        <fa-icon [icon]="'plus'"></fa-icon>
-        <span class="d-none d-md-inline" jhiTranslate="showMore"> Show More</span></button>
-    <button *ngIf="ranking.length > 4 && showLessButton" mat-button (click)="showLess()">
-        <fa-icon [icon]="'minus'"></fa-icon>
-        <span class="d-none d-md-inline" jhiTranslate="showLess"> Show Less</span></button>
 </div>

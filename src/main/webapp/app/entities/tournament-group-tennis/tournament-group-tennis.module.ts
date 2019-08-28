@@ -13,8 +13,6 @@ import {
   tournamentGroupRoute,
   tournamentGroupPopupRoute
 } from './';
-import { TournamentGroupTennisRoundsListComponent } from 'app/entities/tournament-group-tennis/tournament-group-tennis-rounds-list.component';
-import { RoundTennisMatchListComponent } from 'app/entities/round-tennis/round-tennis-match-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 const ENTITY_STATES = [...tournamentGroupRoute, ...tournamentGroupPopupRoute];
@@ -26,9 +24,7 @@ const ENTITY_STATES = [...tournamentGroupRoute, ...tournamentGroupPopupRoute];
     TournamentGroupTennisDetailComponent,
     TournamentGroupTennisUpdateComponent,
     TournamentGroupTennisDeleteDialogComponent,
-    TournamentGroupTennisDeletePopupComponent,
-    TournamentGroupTennisRoundsListComponent,
-    RoundTennisMatchListComponent
+    TournamentGroupTennisDeletePopupComponent
   ],
   entryComponents: [
     TournamentGroupTennisComponent,

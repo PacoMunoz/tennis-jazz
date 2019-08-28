@@ -12,14 +12,9 @@ import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
 export class TournamentTennisGroupRankingComponent implements OnInit {
   @Input() group: ITournamentGroupTennis;
   ranking: IRankingTennis[];
-  sliceEnd: number;
-  showLessButton: boolean;
-  sliceEndValue: number = 4;
 
   constructor(private rankingTennisService: RankingTennisService, private jhiAlertService: JhiAlertService) {
     this.ranking = [];
-    this.sliceEnd = this.sliceEndValue;
-    this.showLessButton = false;
   }
 
   ngOnInit(): void {
@@ -43,15 +38,5 @@ export class TournamentTennisGroupRankingComponent implements OnInit {
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  showMore() {
-    this.sliceEnd = this.ranking.length;
-    this.showLessButton = true;
-  }
-
-  showLess() {
-    this.sliceEnd = this.sliceEndValue;
-    this.showLessButton = false;
   }
 }

@@ -1,39 +1,40 @@
 <jhi-alert></jhi-alert>
-<mat-grid-list cols="2" rowHeight="50px" >
-    <mat-grid-tile>{{tournament.name}}</mat-grid-tile>
-    <mat-grid-tile>Club LigadoXElTenis</mat-grid-tile>
+<mat-grid-list  class="text-uppercase border-bottom" cols="1" rowHeight="40px" >
+    <mat-grid-tile><h4>{{tournament.name}}</h4></mat-grid-tile>
 </mat-grid-list>
-
 <mat-tab-group mat-align-tabs="center">
-    <mat-tab>
-        <ng-template mat-tab-label>
-            <mat-icon class="block">thumb_down</mat-icon>Clasificación
+    <mat-tab label="Clasificación">
+        <ng-template matTabContent>
+            <mat-tab-group>
+                <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">
+                    <div class="tournament-mat-tab-body">
+                        <jhi-tournament-tennis-group-ranking [group]="tournamentGroup"></jhi-tournament-tennis-group-ranking>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </ng-template>
-        <mat-tab-group mat-align-tabs="center">
-            <mat-tab *ngFor="let tournamentGroup of tournamentGroups;"  label="{{tournamentGroup.name}}">
-                <jhi-tournament-tennis-group-ranking [group]="tournamentGroup"></jhi-tournament-tennis-group-ranking>
-            </mat-tab>
-        </mat-tab-group>
     </mat-tab>
-    <mat-tab>
-        <ng-template mat-tab-label>
-            <mat-icon>thumb_down</mat-icon>Jornadas
+    <mat-tab label="Jornadas">
+        <ng-template matTabContent>
+            <mat-tab-group>
+                <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">
+                    <div class="tournament-mat-tab-body">
+                        <jhi-tournament-tennis-group-rounds [group]="tournamentGroup"></jhi-tournament-tennis-group-rounds>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </ng-template>
-        <mat-tab-group mat-align-tabs="center">
-            <mat-tab *ngFor="let tournamentGroup of tournamentGroups;"  label="{{tournamentGroup.name}}">
-                <jhi-tournament-tennis-group-rounds [group]="tournamentGroup"></jhi-tournament-tennis-group-rounds>
-            </mat-tab>
-        </mat-tab-group>
     </mat-tab>
-    <mat-tab>
-        <ng-template mat-tab-label>
-            <mat-icon>thumb_down</mat-icon>Jugadores
+    <mat-tab label="Jugadores">
+        <ng-template matTabContent>
+            <mat-tab-group>
+                <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">
+                    <div class="tournament-mat-tab-body">
+                        <jhi-tournament-tennis-group-player [group]="tournamentGroup"></jhi-tournament-tennis-group-player>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </ng-template>
-        <mat-tab-group mat-align-tabs="center">
-            <mat-tab *ngFor="let tournamentGroup of tournamentGroups;"  label="{{tournamentGroup.name}}">
-                <jhi-tournament-tennis-group-player [group]="tournamentGroup"></jhi-tournament-tennis-group-player>
-            </mat-tab>
-        </mat-tab-group>
     </mat-tab>
 </mat-tab-group>
 
