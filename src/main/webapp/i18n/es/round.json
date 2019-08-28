@@ -2,7 +2,7 @@
   "tennisJazzApp": {
     "round": {
       "home": {
-        "title": "Rounds",
+        "title": "Jornadas",
         "createLabel": "Crear nuevo Round",
         "createOrEditLabel": "Crear o editar Round",
         "notFound": "No Rounds found"

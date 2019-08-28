@@ -2,7 +2,7 @@
   "tennisJazzApp": {
     "ranking": {
       "home": {
-        "title": "Rankings",
+        "title": "Clasificación",
         "createLabel": "Crear nuevo Ranking",
         "createOrEditLabel": "Crear o editar Ranking",
         "notFound": "No Rankings found"

@@ -2,7 +2,7 @@
   "tennisJazzApp": {
     "player": {
       "home": {
-        "title": "Players",
+        "title": "Jugadores",
         "createLabel": "Crear nuevo Player",
         "createOrEditLabel": "Crear o editar Player",
         "notFound": "No Players found"
