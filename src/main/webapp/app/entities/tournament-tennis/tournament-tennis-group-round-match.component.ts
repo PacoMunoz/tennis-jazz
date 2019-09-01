@@ -10,7 +10,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
   templateUrl: './tournament-tennis-group-round-match.component.html'
 })
 export class TournamentTennisGroupRoundMatchComponent implements OnInit {
-  @Input() round: IRoundTennis;
+  @Input() round;
   matches: IMatchTennis[];
 
   constructor(protected matchTennisService: MatchTennisService, protected jhiAlertService: JhiAlertService) {
