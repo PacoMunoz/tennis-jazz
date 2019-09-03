@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
 import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
@@ -10,7 +9,7 @@ import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
   templateUrl: './tournament-tennis-group-ranking.component.html'
 })
 export class TournamentTennisGroupRankingComponent implements OnInit {
-  @Input() group: ITournamentGroupTennis;
+  @Input() group;
   ranking: IRankingTennis[];
 
   constructor(private rankingTennisService: RankingTennisService, private jhiAlertService: JhiAlertService) {

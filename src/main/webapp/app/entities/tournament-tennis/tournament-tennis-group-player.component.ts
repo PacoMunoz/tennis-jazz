@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis';
-import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
 import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
@@ -10,7 +9,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
   templateUrl: './tournament-tennis-group-player.component.html'
 })
 export class TournamentTennisGroupPlayerComponent implements OnInit {
-  @Input() group: ITournamentGroupTennis;
+  @Input() group;
   players: IPlayerTennis[];
 
   constructor(protected playerTennisService: PlayerTennisService, protected jhiAlertService: JhiAlertService) {

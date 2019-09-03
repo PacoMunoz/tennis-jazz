@@ -1,17 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IRoundTennis } from 'app/shared/model/round-tennis.model';
-import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
 import { RoundTennisService } from 'app/entities/round-tennis';
 import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-rounds',
-  templateUrl: './tournament-tennis-group-rounds.html'
+  templateUrl: './tournament-tennis-group-rounds.component.html'
 })
-export class TournamentTennisGroupRounds implements OnInit {
-  @Input() group: ITournamentGroupTennis;
+export class TournamentTennisGroupRoundsComponent implements OnInit {
+  @Input() group;
   rounds: IRoundTennis[];
 
   constructor(protected roundTennisService: RoundTennisService, protected jhiAlertService: JhiAlertService) {
@@ -36,8 +34,7 @@ export class TournamentTennisGroupRounds implements OnInit {
   }
 
   sort() {
-    const result = ['startDate' + ',' + 'desc'];
-    return result;
+    return ['startDate' + ',' + 'desc'];
   }
 
   protected onError(errorMessage: string) {
