@@ -13,6 +13,7 @@
         "roundTennis": "Round",
         "matchTennis": "Match",
         "rankingTennis": "Ranking",
+        "genderTennis": "Gender",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

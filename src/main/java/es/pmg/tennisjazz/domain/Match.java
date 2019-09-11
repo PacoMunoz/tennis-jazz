@@ -27,6 +27,24 @@ public class Match implements Serializable {
     @Column(name = "visitor_player_set_1_result")
     private Integer visitorPlayerSet1Result;
 
+    @Column(name = "local_player_tb_set_1_result")
+    private Integer localPlayerTBSet1Result;
+
+    @Column(name = "visitor_player_tb_set_1_result")
+    private Integer visitorPlayerTBSet1Result;
+
+    @Column(name = "local_player_tb_set_2_result")
+    private Integer localPlayerTBSet2Result;
+
+    @Column(name = "visitor_player_tb_set_2_result")
+    private Integer visitorPlayerTBSet2Result;
+
+    @Column(name = "local_player_tb_set_3_result")
+    private Integer localPlayerTBSet3Result;
+
+    @Column(name = "visitor_player_tb_set_3_result")
+    private Integer visitorPlayerTBSet3Result;
+
     @Column(name = "local_player_set_2_result")
     private Integer localPlayerSet2Result;
 
@@ -102,6 +120,84 @@ public class Match implements Serializable {
 
     public void setVisitorPlayerSet1Result(Integer visitorPlayerSet1Result) {
         this.visitorPlayerSet1Result = visitorPlayerSet1Result;
+    }
+
+    public Integer getLocalPlayerTBSet1Result() {
+        return localPlayerTBSet1Result;
+    }
+
+    public Match localPlayerTBSet1Result(Integer localPlayerTBSet1Result) {
+        this.localPlayerTBSet1Result = localPlayerTBSet1Result;
+        return this;
+    }
+
+    public void setLocalPlayerTBSet1Result(Integer localPlayerTBSet1Result) {
+        this.localPlayerTBSet1Result = localPlayerTBSet1Result;
+    }
+
+    public Integer getVisitorPlayerTBSet1Result() {
+        return visitorPlayerTBSet1Result;
+    }
+
+    public Match visitorPlayerTBSet1Result(Integer visitorPlayerTBSet1Result) {
+        this.visitorPlayerTBSet1Result = visitorPlayerTBSet1Result;
+        return this;
+    }
+
+    public void setVisitorPlayerTBSet1Result(Integer visitorPlayerTBSet1Result) {
+        this.visitorPlayerTBSet1Result = visitorPlayerTBSet1Result;
+    }
+
+    public Integer getLocalPlayerTBSet2Result() {
+        return localPlayerTBSet2Result;
+    }
+
+    public Match localPlayerTBSet2Result(Integer localPlayerTBSet2Result) {
+        this.localPlayerTBSet2Result = localPlayerTBSet2Result;
+        return this;
+    }
+
+    public void setLocalPlayerTBSet2Result(Integer localPlayerTBSet2Result) {
+        this.localPlayerTBSet2Result = localPlayerTBSet2Result;
+    }
+
+    public Integer getVisitorPlayerTBSet2Result() {
+        return visitorPlayerTBSet2Result;
+    }
+
+    public Match visitorPlayerTBSet2Result(Integer visitorPlayerTBSet2Result) {
+        this.visitorPlayerTBSet2Result = visitorPlayerTBSet2Result;
+        return this;
+    }
+
+    public void setVisitorPlayerTBSet2Result(Integer visitorPlayerTBSet2Result) {
+        this.visitorPlayerTBSet2Result = visitorPlayerTBSet2Result;
+    }
+
+    public Integer getLocalPlayerTBSet3Result() {
+        return localPlayerTBSet3Result;
+    }
+
+    public Match localPlayerTBSet3Result(Integer localPlayerTBSet3Result) {
+        this.localPlayerTBSet3Result = localPlayerTBSet3Result;
+        return this;
+    }
+
+    public void setLocalPlayerTBSet3Result(Integer localPlayerTBSet3Result) {
+        this.localPlayerTBSet3Result = localPlayerTBSet3Result;
+    }
+
+    public Integer getVisitorPlayerTBSet3Result() {
+        return visitorPlayerTBSet3Result;
+    }
+
+    public Match visitorPlayerTBSet3Result(Integer visitorPlayerTBSet3Result) {
+        this.visitorPlayerTBSet3Result = visitorPlayerTBSet3Result;
+        return this;
+    }
+
+    public void setVisitorPlayerTBSet3Result(Integer visitorPlayerTBSet3Result) {
+        this.visitorPlayerTBSet3Result = visitorPlayerTBSet3Result;
     }
 
     public Integer getLocalPlayerSet2Result() {
@@ -296,6 +392,12 @@ public class Match implements Serializable {
             "id=" + getId() +
             ", localPlayerSet1Result=" + getLocalPlayerSet1Result() +
             ", visitorPlayerSet1Result=" + getVisitorPlayerSet1Result() +
+            ", localPlayerTBSet1Result=" + getLocalPlayerTBSet1Result() +
+            ", visitorPlayerTBSet1Result=" + getVisitorPlayerTBSet1Result() +
+            ", localPlayerTBSet2Result=" + getLocalPlayerTBSet2Result() +
+            ", visitorPlayerTBSet2Result=" + getVisitorPlayerTBSet2Result() +
+            ", localPlayerTBSet3Result=" + getLocalPlayerTBSet3Result() +
+            ", visitorPlayerTBSet3Result=" + getVisitorPlayerTBSet3Result() +
             ", localPlayerSet2Result=" + getLocalPlayerSet2Result() +
             ", visitorPlayerSet2Result=" + getVisitorPlayerSet2Result() +
             ", localPlayerSet3Result=" + getLocalPlayerSet3Result() +

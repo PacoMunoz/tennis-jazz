@@ -28,6 +28,8 @@
             <th jhiSortBy="matchesLoss"><span jhiTranslate="tennisJazzApp.ranking.matchesLoss">Matches Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesNotPresent"><span jhiTranslate="tennisJazzApp.ranking.matchesNotPresent">Matches Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesAbandoned"><span jhiTranslate="tennisJazzApp.ranking.matchesAbandoned">Matches Abandoned</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tieBreaksPlayed"><span jhiTranslate="tennisJazzApp.ranking.tieBreaksPlayed">Tie Breaks Played</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tieBreaksWon"><span jhiTranslate="tennisJazzApp.ranking.tieBreaksWon">Tie Breaks Won</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tournamentGroup.id"><span jhiTranslate="tennisJazzApp.ranking.tournamentGroup">Tournament Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="player.id"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -46,6 +48,8 @@
                 <td>{{ranking.matchesLoss}}</td>
                 <td>{{ranking.matchesNotPresent}}</td>
                 <td>{{ranking.matchesAbandoned}}</td>
+                <td>{{ranking.tieBreaksPlayed}}</td>
+                <td>{{ranking.tieBreaksWon}}</td>
                 <td>
                     <div *ngIf="ranking.tournamentGroup">
                         <a [routerLink]="['/tournament-group-tennis', ranking.tournamentGroup?.id, 'view' ]" >{{ranking.tournamentGroup?.id}}</a>

@@ -1,5 +1,6 @@
 package es.pmg.tennisjazz.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,14 +32,24 @@ public class Player implements Serializable {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "email")
+    @NotNull
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone")
+    @NotNull
+    @Column(name = "phone", nullable = false)
     private String phone;
 
     @Column(name = "other")
     private String other;
+
+    
+    @Lob
+    @Column(name = "avatar")
+    private byte[] avatar;
+
+    @Column(name = "avatar_content_type")
+    private String avatarContentType;
 
     @OneToMany(mappedBy = "visitorPlayer")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -51,6 +62,10 @@ public class Player implements Serializable {
     @OneToMany(mappedBy = "player")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Ranking> rankings = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("players")
+    private Gender gender;
 
     @ManyToMany(mappedBy = "players")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -131,6 +146,32 @@ public class Player implements Serializable {
         this.other = other;
     }
 
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public Player avatar(byte[] avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public Player avatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+        return this;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+    }
+
     public Set<Match> getVisitorMatches() {
         return visitorMatches;
     }
@@ -206,6 +247,19 @@ public class Player implements Serializable {
         this.rankings = rankings;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Player gender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     public Set<TournamentGroup> getGroups() {
         return groups;
     }
@@ -257,6 +311,8 @@ public class Player implements Serializable {
             ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
             ", other='" + getOther() + "'" +
+            ", avatar='" + getAvatar() + "'" +
+            ", avatarContentType='" + getAvatarContentType() + "'" +
             "}";
     }
 }

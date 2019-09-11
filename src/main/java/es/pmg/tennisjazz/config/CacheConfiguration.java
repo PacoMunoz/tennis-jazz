@@ -58,6 +58,8 @@ public class CacheConfiguration {
             createCache(cm, es.pmg.tennisjazz.domain.TournamentGroup.class.getName() + ".rankings");
             createCache(cm, es.pmg.tennisjazz.domain.Player.class.getName() + ".rankings");
             createCache(cm, es.pmg.tennisjazz.domain.Ranking.class.getName());
+            createCache(cm, es.pmg.tennisjazz.domain.Gender.class.getName());
+            createCache(cm, es.pmg.tennisjazz.domain.Round.class.getName() + ".matches");
             // jhipster-needle-ehcache-add-entry
         };
     }

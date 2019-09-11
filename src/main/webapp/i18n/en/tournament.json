@@ -13,16 +13,17 @@
       "delete": {
         "question": "Are you sure you want to delete Tournament {{ id }}?"
       },
-      "back": "VOLVER A TORNEOS",
       "detail": {
         "title": "Tournament"
       },
       "name": "Name",
       "startDate": "Start Date",
+      "endDate": "End Date",
       "inProgress": "In Progress",
       "winPoints": "Win Points",
       "lossPoints": "Loss Points",
       "notPresentPoints": "Not Present Points",
+      "injuredPoints": "Injured Points",
       "groups": "Groups"
     }
   }

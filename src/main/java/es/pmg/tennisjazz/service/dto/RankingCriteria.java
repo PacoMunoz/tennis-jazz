@@ -46,6 +46,10 @@ public class RankingCriteria implements Serializable, Criteria {
 
     private IntegerFilter matchesAbandoned;
 
+    private IntegerFilter tieBreaksPlayed;
+
+    private IntegerFilter tieBreaksWon;
+
     private LongFilter tournamentGroupId;
 
     private LongFilter playerId;
@@ -65,6 +69,8 @@ public class RankingCriteria implements Serializable, Criteria {
         this.matchesLoss = other.matchesLoss == null ? null : other.matchesLoss.copy();
         this.matchesNotPresent = other.matchesNotPresent == null ? null : other.matchesNotPresent.copy();
         this.matchesAbandoned = other.matchesAbandoned == null ? null : other.matchesAbandoned.copy();
+        this.tieBreaksPlayed = other.tieBreaksPlayed == null ? null : other.tieBreaksPlayed.copy();
+        this.tieBreaksWon = other.tieBreaksWon == null ? null : other.tieBreaksWon.copy();
         this.tournamentGroupId = other.tournamentGroupId == null ? null : other.tournamentGroupId.copy();
         this.playerId = other.playerId == null ? null : other.playerId.copy();
     }
@@ -162,6 +168,22 @@ public class RankingCriteria implements Serializable, Criteria {
         this.matchesAbandoned = matchesAbandoned;
     }
 
+    public IntegerFilter getTieBreaksPlayed() {
+        return tieBreaksPlayed;
+    }
+
+    public void setTieBreaksPlayed(IntegerFilter tieBreaksPlayed) {
+        this.tieBreaksPlayed = tieBreaksPlayed;
+    }
+
+    public IntegerFilter getTieBreaksWon() {
+        return tieBreaksWon;
+    }
+
+    public void setTieBreaksWon(IntegerFilter tieBreaksWon) {
+        this.tieBreaksWon = tieBreaksWon;
+    }
+
     public LongFilter getTournamentGroupId() {
         return tournamentGroupId;
     }
@@ -200,6 +222,8 @@ public class RankingCriteria implements Serializable, Criteria {
             Objects.equals(matchesLoss, that.matchesLoss) &&
             Objects.equals(matchesNotPresent, that.matchesNotPresent) &&
             Objects.equals(matchesAbandoned, that.matchesAbandoned) &&
+            Objects.equals(tieBreaksPlayed, that.tieBreaksPlayed) &&
+            Objects.equals(tieBreaksWon, that.tieBreaksWon) &&
             Objects.equals(tournamentGroupId, that.tournamentGroupId) &&
             Objects.equals(playerId, that.playerId);
     }
@@ -218,6 +242,8 @@ public class RankingCriteria implements Serializable, Criteria {
         matchesLoss,
         matchesNotPresent,
         matchesAbandoned,
+        tieBreaksPlayed,
+        tieBreaksWon,
         tournamentGroupId,
         playerId
         );
@@ -237,6 +263,8 @@ public class RankingCriteria implements Serializable, Criteria {
                 (matchesLoss != null ? "matchesLoss=" + matchesLoss + ", " : "") +
                 (matchesNotPresent != null ? "matchesNotPresent=" + matchesNotPresent + ", " : "") +
                 (matchesAbandoned != null ? "matchesAbandoned=" + matchesAbandoned + ", " : "") +
+                (tieBreaksPlayed != null ? "tieBreaksPlayed=" + tieBreaksPlayed + ", " : "") +
+                (tieBreaksWon != null ? "tieBreaksWon=" + tieBreaksWon + ", " : "") +
                 (tournamentGroupId != null ? "tournamentGroupId=" + tournamentGroupId + ", " : "") +
                 (playerId != null ? "playerId=" + playerId + ", " : "") +
             "}";

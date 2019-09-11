@@ -23,6 +23,8 @@
             <th jhiSortBy="email"><span jhiTranslate="tennisJazzApp.player.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="phone"><span jhiTranslate="tennisJazzApp.player.phone">Phone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="other"><span jhiTranslate="tennisJazzApp.player.other">Other</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="avatar"><span jhiTranslate="tennisJazzApp.player.avatar">Avatar</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gender.id"><span jhiTranslate="tennisJazzApp.player.gender">Gender</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -34,6 +36,17 @@
                 <td>{{player.email}}</td>
                 <td>{{player.phone}}</td>
                 <td>{{player.other}}</td>
+                <td>
+                    <a *ngIf="player.avatar" (click)="openFile(player.avatarContentType, player.avatar)">
+                        <img [src]="'data:' + player.avatarContentType + ';base64,' + player.avatar" style="max-height: 30px;" alt="player image"/>
+                    </a>
+                    <span *ngIf="player.avatar">{{player.avatarContentType}}, {{byteSize(player.avatar)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="player.gender">
+                        <a [routerLink]="['/gender-tennis', player.gender?.id, 'view' ]" >{{player.gender?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

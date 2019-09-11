@@ -3,6 +3,7 @@ import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis';
 import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-player',
@@ -12,7 +13,11 @@ export class TournamentTennisGroupPlayerComponent implements OnInit {
   @Input() group;
   players: IPlayerTennis[];
 
-  constructor(protected playerTennisService: PlayerTennisService, protected jhiAlertService: JhiAlertService) {
+  constructor(
+    protected playerTennisService: PlayerTennisService,
+    protected jhiAlertService: JhiAlertService,
+    protected sanitizer: DomSanitizer
+  ) {
     this.players = [];
   }
 
@@ -29,6 +34,8 @@ export class TournamentTennisGroupPlayerComponent implements OnInit {
 
   protected setPlayers(data: IPlayerTennis[]) {
     for (let i = 0; i < data.length; i++) {
+      let thumbnail = 'data:' + data[i].avatarContentType + ';base64,' + data[i].avatar;
+      data[i].avatar = this.sanitizer.bypassSecurityTrustUrl(thumbnail);
       this.players.push(data[i]);
     }
   }

@@ -28,6 +28,7 @@
     <include file="config/liquibase/changelog/20190720062003_added_entity_Match.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190720062004_added_entity_Ranking.xml" relativeToChangelogFile="false"/>
 
+    <include file="config/liquibase/changelog/20190903211729_added_entity_Gender.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!--<include file="config/liquibase/changelog/20190717204920_added_entity_constraints_TournamentGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190717204922_added_entity_constraints_Round.xml" relativeToChangelogFile="false"/>
@@ -41,5 +42,6 @@
 
 
 
+    <include file="config/liquibase/changelog/20190720062001_added_entity_constraints_Player.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

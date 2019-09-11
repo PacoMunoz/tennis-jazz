@@ -51,6 +51,12 @@ public class Ranking implements Serializable {
     @Column(name = "matches_abandoned")
     private Integer matchesAbandoned;
 
+    @Column(name = "tie_breaks_played")
+    private Integer tieBreaksPlayed;
+
+    @Column(name = "tie_breaks_won")
+    private Integer tieBreaksWon;
+
     @ManyToOne
     @JsonIgnoreProperties("rankings")
     private TournamentGroup tournamentGroup;
@@ -198,6 +204,32 @@ public class Ranking implements Serializable {
         this.matchesAbandoned = matchesAbandoned;
     }
 
+    public Integer getTieBreaksPlayed() {
+        return tieBreaksPlayed;
+    }
+
+    public Ranking tieBreaksPlayed(Integer tieBreaksPlayed) {
+        this.tieBreaksPlayed = tieBreaksPlayed;
+        return this;
+    }
+
+    public void setTieBreaksPlayed(Integer tieBreaksPlayed) {
+        this.tieBreaksPlayed = tieBreaksPlayed;
+    }
+
+    public Integer getTieBreaksWon() {
+        return tieBreaksWon;
+    }
+
+    public Ranking tieBreaksWon(Integer tieBreaksWon) {
+        this.tieBreaksWon = tieBreaksWon;
+        return this;
+    }
+
+    public void setTieBreaksWon(Integer tieBreaksWon) {
+        this.tieBreaksWon = tieBreaksWon;
+    }
+
     public TournamentGroup getTournamentGroup() {
         return tournamentGroup;
     }
@@ -255,6 +287,8 @@ public class Ranking implements Serializable {
             ", matchesLoss=" + getMatchesLoss() +
             ", matchesNotPresent=" + getMatchesNotPresent() +
             ", matchesAbandoned=" + getMatchesAbandoned() +
+            ", tieBreaksPlayed=" + getTieBreaksPlayed() +
+            ", tieBreaksWon=" + getTieBreaksWon() +
             "}";
     }
 }

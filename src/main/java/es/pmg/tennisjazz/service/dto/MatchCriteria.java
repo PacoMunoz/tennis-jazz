@@ -30,6 +30,18 @@ public class MatchCriteria implements Serializable, Criteria {
 
     private IntegerFilter visitorPlayerSet1Result;
 
+    private IntegerFilter localPlayerTBSet1Result;
+
+    private IntegerFilter visitorPlayerTBSet1Result;
+
+    private IntegerFilter localPlayerTBSet2Result;
+
+    private IntegerFilter visitorPlayerTBSet2Result;
+
+    private IntegerFilter localPlayerTBSet3Result;
+
+    private IntegerFilter visitorPlayerTBSet3Result;
+
     private IntegerFilter localPlayerSet2Result;
 
     private IntegerFilter visitorPlayerSet2Result;
@@ -63,6 +75,12 @@ public class MatchCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.localPlayerSet1Result = other.localPlayerSet1Result == null ? null : other.localPlayerSet1Result.copy();
         this.visitorPlayerSet1Result = other.visitorPlayerSet1Result == null ? null : other.visitorPlayerSet1Result.copy();
+        this.localPlayerTBSet1Result = other.localPlayerTBSet1Result == null ? null : other.localPlayerTBSet1Result.copy();
+        this.visitorPlayerTBSet1Result = other.visitorPlayerTBSet1Result == null ? null : other.visitorPlayerTBSet1Result.copy();
+        this.localPlayerTBSet2Result = other.localPlayerTBSet2Result == null ? null : other.localPlayerTBSet2Result.copy();
+        this.visitorPlayerTBSet2Result = other.visitorPlayerTBSet2Result == null ? null : other.visitorPlayerTBSet2Result.copy();
+        this.localPlayerTBSet3Result = other.localPlayerTBSet3Result == null ? null : other.localPlayerTBSet3Result.copy();
+        this.visitorPlayerTBSet3Result = other.visitorPlayerTBSet3Result == null ? null : other.visitorPlayerTBSet3Result.copy();
         this.localPlayerSet2Result = other.localPlayerSet2Result == null ? null : other.localPlayerSet2Result.copy();
         this.visitorPlayerSet2Result = other.visitorPlayerSet2Result == null ? null : other.visitorPlayerSet2Result.copy();
         this.localPlayerSet3Result = other.localPlayerSet3Result == null ? null : other.localPlayerSet3Result.copy();
@@ -105,6 +123,54 @@ public class MatchCriteria implements Serializable, Criteria {
 
     public void setVisitorPlayerSet1Result(IntegerFilter visitorPlayerSet1Result) {
         this.visitorPlayerSet1Result = visitorPlayerSet1Result;
+    }
+
+    public IntegerFilter getLocalPlayerTBSet1Result() {
+        return localPlayerTBSet1Result;
+    }
+
+    public void setLocalPlayerTBSet1Result(IntegerFilter localPlayerTBSet1Result) {
+        this.localPlayerTBSet1Result = localPlayerTBSet1Result;
+    }
+
+    public IntegerFilter getVisitorPlayerTBSet1Result() {
+        return visitorPlayerTBSet1Result;
+    }
+
+    public void setVisitorPlayerTBSet1Result(IntegerFilter visitorPlayerTBSet1Result) {
+        this.visitorPlayerTBSet1Result = visitorPlayerTBSet1Result;
+    }
+
+    public IntegerFilter getLocalPlayerTBSet2Result() {
+        return localPlayerTBSet2Result;
+    }
+
+    public void setLocalPlayerTBSet2Result(IntegerFilter localPlayerTBSet2Result) {
+        this.localPlayerTBSet2Result = localPlayerTBSet2Result;
+    }
+
+    public IntegerFilter getVisitorPlayerTBSet2Result() {
+        return visitorPlayerTBSet2Result;
+    }
+
+    public void setVisitorPlayerTBSet2Result(IntegerFilter visitorPlayerTBSet2Result) {
+        this.visitorPlayerTBSet2Result = visitorPlayerTBSet2Result;
+    }
+
+    public IntegerFilter getLocalPlayerTBSet3Result() {
+        return localPlayerTBSet3Result;
+    }
+
+    public void setLocalPlayerTBSet3Result(IntegerFilter localPlayerTBSet3Result) {
+        this.localPlayerTBSet3Result = localPlayerTBSet3Result;
+    }
+
+    public IntegerFilter getVisitorPlayerTBSet3Result() {
+        return visitorPlayerTBSet3Result;
+    }
+
+    public void setVisitorPlayerTBSet3Result(IntegerFilter visitorPlayerTBSet3Result) {
+        this.visitorPlayerTBSet3Result = visitorPlayerTBSet3Result;
     }
 
     public IntegerFilter getLocalPlayerSet2Result() {
@@ -225,6 +291,12 @@ public class MatchCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(localPlayerSet1Result, that.localPlayerSet1Result) &&
             Objects.equals(visitorPlayerSet1Result, that.visitorPlayerSet1Result) &&
+            Objects.equals(localPlayerTBSet1Result, that.localPlayerTBSet1Result) &&
+            Objects.equals(visitorPlayerTBSet1Result, that.visitorPlayerTBSet1Result) &&
+            Objects.equals(localPlayerTBSet2Result, that.localPlayerTBSet2Result) &&
+            Objects.equals(visitorPlayerTBSet2Result, that.visitorPlayerTBSet2Result) &&
+            Objects.equals(localPlayerTBSet3Result, that.localPlayerTBSet3Result) &&
+            Objects.equals(visitorPlayerTBSet3Result, that.visitorPlayerTBSet3Result) &&
             Objects.equals(localPlayerSet2Result, that.localPlayerSet2Result) &&
             Objects.equals(visitorPlayerSet2Result, that.visitorPlayerSet2Result) &&
             Objects.equals(localPlayerSet3Result, that.localPlayerSet3Result) &&
@@ -246,6 +318,12 @@ public class MatchCriteria implements Serializable, Criteria {
         id,
         localPlayerSet1Result,
         visitorPlayerSet1Result,
+        localPlayerTBSet1Result,
+        visitorPlayerTBSet1Result,
+        localPlayerTBSet2Result,
+        visitorPlayerTBSet2Result,
+        localPlayerTBSet3Result,
+        visitorPlayerTBSet3Result,
         localPlayerSet2Result,
         visitorPlayerSet2Result,
         localPlayerSet3Result,
@@ -268,6 +346,12 @@ public class MatchCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (localPlayerSet1Result != null ? "localPlayerSet1Result=" + localPlayerSet1Result + ", " : "") +
                 (visitorPlayerSet1Result != null ? "visitorPlayerSet1Result=" + visitorPlayerSet1Result + ", " : "") +
+                (localPlayerTBSet1Result != null ? "localPlayerTBSet1Result=" + localPlayerTBSet1Result + ", " : "") +
+                (visitorPlayerTBSet1Result != null ? "visitorPlayerTBSet1Result=" + visitorPlayerTBSet1Result + ", " : "") +
+                (localPlayerTBSet2Result != null ? "localPlayerTBSet2Result=" + localPlayerTBSet2Result + ", " : "") +
+                (visitorPlayerTBSet2Result != null ? "visitorPlayerTBSet2Result=" + visitorPlayerTBSet2Result + ", " : "") +
+                (localPlayerTBSet3Result != null ? "localPlayerTBSet3Result=" + localPlayerTBSet3Result + ", " : "") +
+                (visitorPlayerTBSet3Result != null ? "visitorPlayerTBSet3Result=" + visitorPlayerTBSet3Result + ", " : "") +
                 (localPlayerSet2Result != null ? "localPlayerSet2Result=" + localPlayerSet2Result + ", " : "") +
                 (visitorPlayerSet2Result != null ? "visitorPlayerSet2Result=" + visitorPlayerSet2Result + ", " : "") +
                 (localPlayerSet3Result != null ? "localPlayerSet3Result=" + localPlayerSet3Result + ", " : "") +

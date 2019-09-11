@@ -91,6 +91,24 @@ public class MatchQueryService extends QueryService<Match> {
             if (criteria.getVisitorPlayerSet1Result() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerSet1Result(), Match_.visitorPlayerSet1Result));
             }
+            if (criteria.getLocalPlayerTBSet1Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerTBSet1Result(), Match_.localPlayerTBSet1Result));
+            }
+            if (criteria.getVisitorPlayerTBSet1Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerTBSet1Result(), Match_.visitorPlayerTBSet1Result));
+            }
+            if (criteria.getLocalPlayerTBSet2Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerTBSet2Result(), Match_.localPlayerTBSet2Result));
+            }
+            if (criteria.getVisitorPlayerTBSet2Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerTBSet2Result(), Match_.visitorPlayerTBSet2Result));
+            }
+            if (criteria.getLocalPlayerTBSet3Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerTBSet3Result(), Match_.localPlayerTBSet3Result));
+            }
+            if (criteria.getVisitorPlayerTBSet3Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerTBSet3Result(), Match_.visitorPlayerTBSet3Result));
+            }
             if (criteria.getLocalPlayerSet2Result() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSet2Result(), Match_.localPlayerSet2Result));
             }

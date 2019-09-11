@@ -112,6 +112,10 @@ public class PlayerQueryService extends QueryService<Player> {
                 specification = specification.and(buildSpecification(criteria.getRankingsId(),
                     root -> root.join(Player_.rankings, JoinType.LEFT).get(Ranking_.id)));
             }
+            if (criteria.getGenderId() != null) {
+                specification = specification.and(buildSpecification(criteria.getGenderId(),
+                    root -> root.join(Player_.gender, JoinType.LEFT).get(Gender_.id)));
+            }
             if (criteria.getGroupsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getGroupsId(),
                     root -> root.join(Player_.groups, JoinType.LEFT).get(TournamentGroup_.id)));

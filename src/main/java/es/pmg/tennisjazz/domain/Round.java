@@ -41,7 +41,7 @@ public class Round implements Serializable {
 
     @OneToMany(mappedBy = "round")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Match> matchs = new HashSet<>();
+    private Set<Match> matches = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -104,29 +104,29 @@ public class Round implements Serializable {
         this.tournamentGroup = tournamentGroup;
     }
 
-    public Set<Match> getMatchs() {
-        return matchs;
+    public Set<Match> getMatches() {
+        return matches;
     }
 
-    public Round matchs(Set<Match> matches) {
-        this.matchs = matches;
+    public Round matches(Set<Match> matches) {
+        this.matches = matches;
         return this;
     }
 
-    public Round addMatchs(Match match) {
-        this.matchs.add(match);
+    public Round addMatches(Match match) {
+        this.matches.add(match);
         match.setRound(this);
         return this;
     }
 
-    public Round removeMatchs(Match match) {
-        this.matchs.remove(match);
+    public Round removeMatches(Match match) {
+        this.matches.remove(match);
         match.setRound(null);
         return this;
     }
 
-    public void setMatchs(Set<Match> matches) {
-        this.matchs = matches;
+    public void setMatches(Set<Match> matches) {
+        this.matches = matches;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

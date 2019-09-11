@@ -2,7 +2,7 @@
   "tennisJazzApp": {
     "round": {
       "home": {
-        "title": "Jornadas",
+        "title": "Rounds",
         "createLabel": "Crear nuevo Round",
         "createOrEditLabel": "Crear o editar Round",
         "notFound": "No Rounds found"
@@ -20,7 +20,7 @@
       "startDate": "Start Date",
       "endDate": "End Date",
       "tournamentGroup": "Tournament Group",
-      "matchs": "Matchs"
+      "matches": "Matches"
     }
   }
 }

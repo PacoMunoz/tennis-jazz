@@ -28,6 +28,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'ranking-tennis',
         loadChildren: () => import('./ranking-tennis/ranking-tennis.module').then(m => m.TennisJazzRankingTennisModule)
+      },
+      {
+        path: 'gender-tennis',
+        loadChildren: () => import('./gender-tennis/gender-tennis.module').then(m => m.TennisJazzGenderTennisModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

@@ -35,6 +35,8 @@ export class RankingTennisUpdateComponent implements OnInit {
     matchesLoss: [],
     matchesNotPresent: [],
     matchesAbandoned: [],
+    tieBreaksPlayed: [],
+    tieBreaksWon: [],
     tournamentGroup: [],
     player: []
   });
@@ -82,6 +84,8 @@ export class RankingTennisUpdateComponent implements OnInit {
       matchesLoss: ranking.matchesLoss,
       matchesNotPresent: ranking.matchesNotPresent,
       matchesAbandoned: ranking.matchesAbandoned,
+      tieBreaksPlayed: ranking.tieBreaksPlayed,
+      tieBreaksWon: ranking.tieBreaksWon,
       tournamentGroup: ranking.tournamentGroup,
       player: ranking.player
     });
@@ -115,6 +119,8 @@ export class RankingTennisUpdateComponent implements OnInit {
       matchesLoss: this.editForm.get(['matchesLoss']).value,
       matchesNotPresent: this.editForm.get(['matchesNotPresent']).value,
       matchesAbandoned: this.editForm.get(['matchesAbandoned']).value,
+      tieBreaksPlayed: this.editForm.get(['tieBreaksPlayed']).value,
+      tieBreaksWon: this.editForm.get(['tieBreaksWon']).value,
       tournamentGroup: this.editForm.get(['tournamentGroup']).value,
       player: this.editForm.get(['player']).value
     };

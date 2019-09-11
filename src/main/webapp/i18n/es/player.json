@@ -2,7 +2,7 @@
   "tennisJazzApp": {
     "player": {
       "home": {
-        "title": "Jugadores",
+        "title": "Players",
         "createLabel": "Crear nuevo Player",
         "createOrEditLabel": "Crear o editar Player",
         "notFound": "No Players found"
@@ -21,9 +21,11 @@
       "email": "Email",
       "phone": "Phone",
       "other": "Other",
+      "avatar": "Avatar",
       "visitorMatches": "Visitor Matches",
       "localMatches": "Local Matches",
       "rankings": "Rankings",
+      "gender": "Gender",
       "groups": "Groups"
     }
   }

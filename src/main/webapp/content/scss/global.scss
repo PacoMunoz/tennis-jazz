@@ -496,9 +496,12 @@ ul {
   margin-top: 15px;
 }
 
-/* ===================================== custom mat-card-example ============================= */
+/* ===================================== custom mat-card for players ============================= */
 
 .example-header-image {
-  background-image: url('../images/josh-calabrese-zcYRw547Dps-unsplash.jpg');
   background-size: cover;
+}
+.player-card-phone-number {
+  position: relative;
+  bottom: 5px;
 }

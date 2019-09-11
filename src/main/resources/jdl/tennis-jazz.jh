@@ -1,0 +1,104 @@
+entity Tournament{
+	name String required
+    startDate LocalDate required
+    endDate LocalDate
+    inProgress Boolean
+    winPoints Integer required
+    lossPoints Integer required
+    notPresentPoints Integer
+    injuredPoints Integer
+}
+
+entity TournamentGroup{
+	name String required
+}
+
+entity Player{
+	name String required
+    surname String
+    email String required
+    phone String required
+    other String
+    avatar ImageBlob maxbytes(30000)
+}
+
+entity Gender {
+    name String required
+}
+
+entity Round{
+	name String required
+    startDate LocalDate
+    endDate LocalDate
+}
+
+entity Match{
+	localPlayerSet1Result Integer
+    visitorPlayerSet1Result Integer
+    localPlayerTBSet1Result Integer,
+    visitorPlayerTBSet1Result Integer,
+    localPlayerTBSet2Result Integer,
+    visitorPlayerTBSet2Result Integer,
+    localPlayerTBSet3Result Integer,
+    visitorPlayerTBSet3Result Integer,
+    localPlayerSet2Result Integer
+    visitorPlayerSet2Result Integer
+    localPlayerSet3Result Integer
+    visitorPlayerSet3Result Integer
+    localPlayerSets Integer
+    visitorPlayerSets Integer
+    localPlayerAbandoned Boolean
+    visitorPlayerAbandoned Boolean
+    localPlayerNotPresent Boolean
+    visitorPlayerNotPresent Boolean
+}
+
+entity Ranking{
+	points Integer
+    gamesWon Integer
+    gamesLoss Integer
+    setsWon Integer
+    setsLoss Integer
+    matchesPlayed Integer
+    matchesWon Integer
+    matchesLoss Integer
+    matchesNotPresent Integer
+    matchesAbandoned Integer
+    tieBreaksPlayed Integer
+    tieBreaksWon Integer
+}
+
+relationship ManyToOne {
+    Player {gender} to Gender,
+}
+
+relationship OneToMany {
+	Tournament {groups} to TournamentGroup,
+    TournamentGroup {rounds} to Round,
+    TournamentGroup {rankings} to Ranking,
+    Round {matches} to Match,
+    Player {visitorMatches} to Match {visitorPlayer},
+    Player {localMatches} to Match {localPlayer},
+    Player {rankings} to Ranking
+}
+
+relationship ManyToMany {
+	TournamentGroup {players} to Player {groups}
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with tennis
+
+filter Tournament
+filter TournamentGroup
+filter Player
+filter Round
+filter Match
+filter Ranking
+filter Gender
+

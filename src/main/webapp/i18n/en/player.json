@@ -21,9 +21,11 @@
       "email": "Email",
       "phone": "Phone",
       "other": "Other",
+      "avatar": "Avatar",
       "visitorMatches": "Visitor Matches",
       "localMatches": "Local Matches",
       "rankings": "Rankings",
+      "gender": "Gender",
       "groups": "Groups"
     }
   }

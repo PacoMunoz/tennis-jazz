@@ -25,6 +25,21 @@
                 <dd>
                     <span>{{player.other}}</span>
                 </dd>
+                <dt><span jhiTranslate="tennisJazzApp.player.avatar">Avatar</span></dt>
+                <dd>
+                    <div *ngIf="player.avatar">
+                        <a (click)="openFile(player.avatarContentType, player.avatar)">
+                            <img [src]="'data:' + player.avatarContentType + ';base64,' + player.avatar" style="max-width: 100%;" alt="player image"/>
+                        </a>
+                        {{player.avatarContentType}}, {{byteSize(player.avatar)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tennisJazzApp.player.gender">Gender</span></dt>
+                <dd>
+                    <div *ngIf="player.gender">
+                        <a [routerLink]="['/gender-tennis', player.gender?.id, 'view']">{{player.gender?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

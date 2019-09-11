@@ -1,14 +1,15 @@
 <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px"  >
         <mat-card class="mw-50 mb-3" fxFlex="30%" fxFlex.lt-md="45%" fxFlex.lt-sm="100%" *ngFor="let player of players" >
             <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
+                <img mat-card-avatar class="example-header-image" [src]="player.avatar" />
                 <mat-card-title> {{player.name}} {{player.surname}} </mat-card-title>
                 <mat-card-subtitle> {{player.email}} </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <mat-card-subtitle >
                     <span>
-                    <mat-icon class="pt-3" aria-hidden="false" aria-label="phone">smartphone</mat-icon> <span> {{player.phone}} </span>
+                        <mat-icon aria-hidden="false" aria-label="phone">smartphone</mat-icon>
+                        <span class="player-card-phone-number" > {{player.phone}} </span>
                     </span>
                 </mat-card-subtitle>
             </mat-card-content>
