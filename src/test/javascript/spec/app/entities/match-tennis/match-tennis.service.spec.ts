@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(MatchTennisService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new MatchTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, false);
+      elemDefault = new MatchTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, false);
     });
 
     describe('Service methods', () => {
@@ -61,6 +61,12 @@ describe('Service Tests', () => {
           {
             localPlayerSet1Result: 1,
             visitorPlayerSet1Result: 1,
+            localPlayerTBSet1Result: 1,
+            visitorPlayerTBSet1Result: 1,
+            localPlayerTBSet2Result: 1,
+            visitorPlayerTBSet2Result: 1,
+            localPlayerTBSet3Result: 1,
+            visitorPlayerTBSet3Result: 1,
             localPlayerSet2Result: 1,
             visitorPlayerSet2Result: 1,
             localPlayerSet3Result: 1,
@@ -90,6 +96,12 @@ describe('Service Tests', () => {
           {
             localPlayerSet1Result: 1,
             visitorPlayerSet1Result: 1,
+            localPlayerTBSet1Result: 1,
+            visitorPlayerTBSet1Result: 1,
+            localPlayerTBSet2Result: 1,
+            visitorPlayerTBSet2Result: 1,
+            localPlayerTBSet3Result: 1,
+            visitorPlayerTBSet3Result: 1,
             localPlayerSet2Result: 1,
             visitorPlayerSet2Result: 1,
             localPlayerSet3Result: 1,

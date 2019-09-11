@@ -40,6 +40,14 @@
         {
             "fieldName": "matchesAbandoned",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tieBreaksPlayed",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tieBreaksWon",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [

@@ -28,7 +28,7 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "match",
             "otherEntityRelationshipName": "round",
-            "relationshipName": "matchs"
+            "relationshipName": "matches"
         }
     ],
     "changelogDate": "20190720062002",

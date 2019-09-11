@@ -10,6 +10,30 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "localPlayerTBSet1Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerTBSet1Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "localPlayerTBSet2Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerTBSet2Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "localPlayerTBSet3Result",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "visitorPlayerTBSet3Result",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "localPlayerSet2Result",
             "fieldType": "Integer"
         },
@@ -22,7 +46,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "visitorPlayer Set3Result",
+            "fieldName": "visitorPlayerSet3Result",
             "fieldType": "Integer"
         },
         {

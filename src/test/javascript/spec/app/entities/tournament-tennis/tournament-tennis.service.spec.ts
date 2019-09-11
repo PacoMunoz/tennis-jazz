@@ -27,14 +27,15 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new TournamentTennis(0, 'AAAAAAA', currentDate, false, 0, 0, 0);
+      elemDefault = new TournamentTennis(0, 'AAAAAAA', currentDate, currentDate, false, 0, 0, 0, 0);
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
         const returnedFromService = Object.assign(
           {
-            startDate: currentDate.format(DATE_FORMAT)
+            startDate: currentDate.format(DATE_FORMAT),
+            endDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -52,13 +53,15 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            startDate: currentDate.format(DATE_FORMAT)
+            startDate: currentDate.format(DATE_FORMAT),
+            endDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
         const expected = Object.assign(
           {
-            startDate: currentDate
+            startDate: currentDate,
+            endDate: currentDate
           },
           returnedFromService
         );
@@ -76,17 +79,20 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             startDate: currentDate.format(DATE_FORMAT),
+            endDate: currentDate.format(DATE_FORMAT),
             inProgress: true,
             winPoints: 1,
             lossPoints: 1,
-            notPresentPoints: 1
+            notPresentPoints: 1,
+            injuredPoints: 1
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            startDate: currentDate
+            startDate: currentDate,
+            endDate: currentDate
           },
           returnedFromService
         );
@@ -104,16 +110,19 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             startDate: currentDate.format(DATE_FORMAT),
+            endDate: currentDate.format(DATE_FORMAT),
             inProgress: true,
             winPoints: 1,
             lossPoints: 1,
-            notPresentPoints: 1
+            notPresentPoints: 1,
+            injuredPoints: 1
           },
           elemDefault
         );
         const expected = Object.assign(
           {
-            startDate: currentDate
+            startDate: currentDate,
+            endDate: currentDate
           },
           returnedFromService
         );
