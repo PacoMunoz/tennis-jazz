@@ -16,6 +16,12 @@
       "detail": {
         "title": "Match"
       },
+      "Set1": "Set One",
+      "Set2": "Set Two",
+      "Set3": "Set Three",
+      "TieBreak": "Tie Break",
+      "Summary": "Summary",
+      "OtherData": "Other Data",
       "localPlayerSet1Result": "Local Player Set 1 Result",
       "visitorPlayerSet1Result": "Visitor Player Set 1 Result",
       "localPlayerTBSet1Result": "Local Player TB Set 1 Result",

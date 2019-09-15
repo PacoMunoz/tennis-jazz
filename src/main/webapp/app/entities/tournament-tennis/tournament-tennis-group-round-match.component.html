@@ -52,4 +52,13 @@
             </div>
         </div>
     </div>
+    <div style="height: 40px;">
+        <button id="jh-create-entity" class="btn-xs btn-primary btn-xs float-left jh-create-entity create-tournament-tennis"
+                [routerLink]="['/match-tennis', match.id, 'new-update']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="tennisJazzApp.match.home.createOrEditLabel">
+                Create or edit a Match
+                </span>
+        </button>
+    </div>
 </div>

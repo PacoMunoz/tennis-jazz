@@ -486,14 +486,17 @@ ul {
 /* ===================================== custom mat-tab-group ============================= */
 
 .mat-tab-header {
-  padding-bottom: 20px;
-  padding-top: 20px;
   font-weight: 700;
   text-transform: uppercase;
   color: #1e1e1e;
 }
 .tournament-mat-tab-body {
   margin-top: 15px;
+}
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: red;
+  height: 5px;
 }
 
 /* ===================================== custom mat-card for players ============================= */
@@ -506,5 +509,29 @@ ul {
   bottom: 5px;
 }
 
+/* ===================================== custom styles ========================================== */
+
+hr {
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  //border: 0;
+  border-top: 0px solid rgba(0, 0, 0, 0.1);
+  border-color: #da291c;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: #1e1e1e;
+}
 //colores principal #3f1052, verde #00ff87 y #e90052
 //colores principal #3f1052, verde #00ff87 y #e90052
