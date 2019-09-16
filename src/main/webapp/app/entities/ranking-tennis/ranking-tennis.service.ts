@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
+import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
 
 type EntityResponseType = HttpResponse<IRankingTennis>;
 type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
@@ -34,5 +36,17 @@ export class RankingTennisService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  updateTournamentPlayerRanking(player: IPlayerTennis, group: ITournamentGroupTennis) {
+    let points: number;
+    let gamesWon: number;
+    let gamesLoss: number;
+    let setsWon: number;
+    let setsLoss: number;
+    let matchesLoss: number;
+    let matchesWon: number;
+    let notPresentMatches: number;
+    let abandonedMathes: number;
   }
 }
