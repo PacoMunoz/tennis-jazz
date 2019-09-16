@@ -48,5 +48,15 @@ export class RankingTennisService {
     let matchesWon: number;
     let notPresentMatches: number;
     let abandonedMathes: number;
+
+    gamesWon = caculateWonGames(player, group);
+    gamesLoss = calculateLossGames(player, group);
+    setsWon = calculateWonSets(player, group);
+    setsLoss = calculateLossSets(player, group);
+    matchesLoss = calculateMatchesLoss(player, group);
+    matchesWon = calculateMatchesWon(player, group);
+    notPresentMatches = calculateNotPresentMatches(player, group);
+    abandonedMathes = calculateAbandonedMatches(player, group);
+    points = calculatePoints(player, group);
   }
 }
