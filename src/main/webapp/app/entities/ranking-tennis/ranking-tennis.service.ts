@@ -7,6 +7,9 @@ import { createRequestOption } from 'app/shared';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
+import { IMatchTennis } from 'app/shared/model/match-tennis.model';
+import { MatchTennisService } from 'app/entities/match-tennis';
+import { IRoundTennis } from 'app/shared/model/round-tennis.model';
 
 type EntityResponseType = HttpResponse<IRankingTennis>;
 type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
@@ -15,7 +18,7 @@ type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
 export class RankingTennisService {
   public resourceUrl = SERVER_API_URL + 'api/rankings';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, protected matchesService: MatchTennisService) {}
 
   create(ranking: IRankingTennis): Observable<EntityResponseType> {
     return this.http.post<IRankingTennis>(this.resourceUrl, ranking, { observe: 'response' });
@@ -48,8 +51,16 @@ export class RankingTennisService {
     let matchesWon: number;
     let notPresentMatches: number;
     let abandonedMathes: number;
+    let playerMathes: IMatchTennis[];
+    let rounds: IRoundTennis[];
 
-    gamesWon = caculateWonGames(player, group);
+    const visitorMatches = this.matchesService.query({
+      'visitorPlayerId.equals': player.id
+
+      //'localPlayerId.equals':
+    });
+
+    /*gamesWon = caculateWonGames(player, group);
     gamesLoss = calculateLossGames(player, group);
     setsWon = calculateWonSets(player, group);
     setsLoss = calculateLossSets(player, group);
@@ -57,6 +68,6 @@ export class RankingTennisService {
     matchesWon = calculateMatchesWon(player, group);
     notPresentMatches = calculateNotPresentMatches(player, group);
     abandonedMathes = calculateAbandonedMatches(player, group);
-    points = calculatePoints(player, group);
+    points = calculatePoints(player, group);*/
   }
 }

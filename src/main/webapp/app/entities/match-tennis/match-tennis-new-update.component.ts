@@ -14,13 +14,15 @@ import { ActivatedRoute } from '@angular/router';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis';
 import { filter, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, merge, concat } from 'rxjs';
 
 @Component({
   selector: 'jhi-match-tennis-newUpdate',
   templateUrl: './match-tennis-new-update.component.html'
 })
 export class MatchTennisNewUpdateComponent implements OnInit {
+  matches: IMatchTennis[];
+
   isSaving: boolean;
 
   rounds: IRoundTennis[];
@@ -59,7 +61,9 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     protected playerService: PlayerTennisService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.matches = [];
+  }
 
   ngOnInit() {
     this.isSaving = false;
@@ -114,13 +118,68 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   save() {
-    this.isSaving = true;
-    const match = this.createFromForm();
-    if (match.id !== undefined) {
-      this.subscribeToSaveResponse(this.matchService.update(match));
-    } else {
-      this.subscribeToSaveResponse(this.matchService.create(match));
-    }
+    let rounds: IRoundTennis[];
+
+    const roundsObservable = this.roundService.query({
+      'tournamentGroupId.equals': 1
+    });
+
+    const matchesObservable1 = this.matchService
+      .query({
+        'localPlayerId.equals': 1,
+        'roundId.equals': 1
+      })
+      .pipe(
+        map((res: HttpResponse<IMatchTennis[]>) => res.body),
+        map((response: IMatchTennis[]) => {
+          this.matches.concat(response);
+          console.log('Tamaño parcial =  ' + response.length);
+        })
+      );
+
+    const matchesObservable2 = this.matchService
+      .query({
+        'localPlayerId.equals': 1,
+        'roundId.equals': 2
+      })
+      .pipe(
+        map((res: HttpResponse<IMatchTennis[]>) => res.body),
+        map((response: IMatchTennis[]) => this.matches.concat(response))
+      );
+
+    const matchesObservable3 = this.matchService
+      .query({
+        'visitorPlayerId.equals': 1,
+        'roundId.equals': 1
+      })
+      .pipe(
+        map((res: HttpResponse<IMatchTennis[]>) => res.body),
+        map((response: IMatchTennis[]) => this.matches.concat(response))
+      );
+
+    const matchesObservable4 = this.matchService
+      .query({
+        'visitorPlayerId.equals': 1,
+        'roundId.equals': 2
+      })
+      .pipe(
+        map((res: HttpResponse<IMatchTennis[]>) => res.body),
+        map((response: IMatchTennis[]) => this.matches.concat(response))
+      );
+
+    concat(matchesObservable1, matchesObservable2, matchesObservable3, matchesObservable4).subscribe(() =>
+      console.log('Numero de partidos: ' + this.matches.length)
+    );
+
+    /*
+        Real save method
+        this.isSaving = true;
+        const match = this.createFromForm();
+        if (match.id !== undefined) {
+            this.subscribeToSaveResponse(this.matchService.update(match));
+        } else {
+            this.subscribeToSaveResponse(this.matchService.create(match));
+        }*/
   }
 
   private createFromForm(): IMatchTennis {
@@ -163,6 +222,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   protected onSaveError() {
     this.isSaving = false;
   }
+
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
