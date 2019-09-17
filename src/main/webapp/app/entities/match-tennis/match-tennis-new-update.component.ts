@@ -131,10 +131,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       })
       .pipe(
         map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => {
-          this.matches.concat(response);
-          console.log('Tamaño parcial =  ' + response.length);
-        })
+        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
       );
 
     const matchesObservable2 = this.matchService
@@ -144,7 +141,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       })
       .pipe(
         map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => this.matches.concat(response))
+        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
       );
 
     const matchesObservable3 = this.matchService
@@ -154,7 +151,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       })
       .pipe(
         map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => this.matches.concat(response))
+        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
       );
 
     const matchesObservable4 = this.matchService
@@ -164,11 +161,13 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       })
       .pipe(
         map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => this.matches.concat(response))
+        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
       );
 
-    concat(matchesObservable1, matchesObservable2, matchesObservable3, matchesObservable4).subscribe(() =>
-      console.log('Numero de partidos: ' + this.matches.length)
+    concat(matchesObservable1, matchesObservable2, matchesObservable3, matchesObservable4).subscribe(
+      () => console.log('next'),
+      () => console.log('Error'),
+      () => console.log('Tamaño final de los partirdos : ' + this.matches.length)
     );
 
     /*
