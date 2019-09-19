@@ -21,8 +21,6 @@ import { Observable, merge, concat } from 'rxjs';
   templateUrl: './match-tennis-new-update.component.html'
 })
 export class MatchTennisNewUpdateComponent implements OnInit {
-  matches: IMatchTennis[];
-
   isSaving: boolean;
 
   rounds: IRoundTennis[];
@@ -61,9 +59,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     protected playerService: PlayerTennisService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {
-    this.matches = [];
-  }
+  ) {}
 
   ngOnInit() {
     this.isSaving = false;
@@ -118,67 +114,66 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   save() {
-    let rounds: IRoundTennis[];
+    const group = 1;
 
-    const roundsObservable = this.roundService.query({
-      'tournamentGroupId.equals': 1
-    });
+    const player = 1;
+
+    let groups: ITournamentGroupTennis[] = [];
+
+    let rounds: IRoundTennis[] = [];
+
+    let matches: IMatchTennis[] = [];
+
+    let round: number[] = [];
+
+    const roundsObservable = this.roundService
+      .query({
+        'tournamentGroupId.equals': group
+      })
+      .pipe(
+        map((res: HttpResponse<IRoundTennis[]>) => res.body),
+        map((response: IRoundTennis[]) => {
+          console.log('Los rounds son : ' + response.length);
+          for (let i = 0; i < response.length; i++) {
+            round.push(response[i].id);
+          }
+          console.log(' Tras Los rounds son: ' + round);
+        })
+      );
 
     const matchesObservable1 = this.matchService
       .query({
-        'localPlayerId.equals': 1,
-        'roundId.equals': 1
+        'localPlayerId.equals': player,
+        'roundId.in': round
       })
       .pipe(
         map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
-      );
-
-    const matchesObservable2 = this.matchService
-      .query({
-        'localPlayerId.equals': 1,
-        'roundId.equals': 2
-      })
-      .pipe(
-        map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
+        map((response: IMatchTennis[]) => (matches = matches.concat(response)))
       );
 
     const matchesObservable3 = this.matchService
       .query({
-        'visitorPlayerId.equals': 1,
-        'roundId.equals': 1
+        'visitorPlayerId.equals': player,
+        'roundId.in': round
       })
       .pipe(
         map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
+        map((response: IMatchTennis[]) => (matches = matches.concat(response)))
       );
 
-    const matchesObservable4 = this.matchService
-      .query({
-        'visitorPlayerId.equals': 1,
-        'roundId.equals': 2
-      })
-      .pipe(
-        map((res: HttpResponse<IMatchTennis[]>) => res.body),
-        map((response: IMatchTennis[]) => (this.matches = this.matches.concat(response)))
-      );
+    const getMatches = merge(matchesObservable1, matchesObservable3);
 
-    concat(matchesObservable1, matchesObservable2, matchesObservable3, matchesObservable4).subscribe(
-      () => console.log('next'),
-      () => console.log('Error'),
-      () => console.log('Tamaño final de los partirdos : ' + this.matches.length)
-    );
+    concat(roundsObservable, getMatches).subscribe(() => console.log('El numero de partidos es: ' + matches.length));
 
     /*
-        Real save method
-        this.isSaving = true;
-        const match = this.createFromForm();
-        if (match.id !== undefined) {
-            this.subscribeToSaveResponse(this.matchService.update(match));
-        } else {
-            this.subscribeToSaveResponse(this.matchService.create(match));
-        }*/
+            Real save method
+            this.isSaving = true;
+            const match = this.createFromForm();
+            if (match.id !== undefined) {
+                this.subscribeToSaveResponse(this.matchService.update(match));
+            } else {
+                this.subscribeToSaveResponse(this.matchService.create(match));
+            }*/
   }
 
   private createFromForm(): IMatchTennis {
