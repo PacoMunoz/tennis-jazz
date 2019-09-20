@@ -90,6 +90,29 @@ public class RankingResource {
     }
 
     /**
+     * {@code GET  /updateRanking} : update player ranking in group
+     *
+     * @param idPlayer the player id which ranking must update
+     * @param idGroup the group id which player ranking must update
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rankings in body.
+     */
+    @GetMapping("/updateRanking")
+    public ResponseEntity<Void> updateRanking(@RequestParam long idPlayer, @RequestParam long idGroup) {
+        log.debug("REST request to update Ranking to player with id: " + idPlayer + " and idGroup " + idGroup);
+        //Get player matches in the groups
+            // -> Use searchcriteria in Match repository and dinamyc query https://www.baeldung.com/spring-data-jpa-query
+            // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.special-parameters
+        //Calculate data with all the matches
+        //Generate ranking object to save
+        //create o update ranking
+
+
+        Page<Ranking> page = rankingQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.noContent().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /rankings} : get all the rankings.
      *
 
