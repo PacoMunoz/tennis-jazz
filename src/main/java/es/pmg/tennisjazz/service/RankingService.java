@@ -1,7 +1,9 @@
 package es.pmg.tennisjazz.service;
 
+import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.domain.Ranking;
 
+import es.pmg.tennisjazz.domain.TournamentGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -43,4 +45,12 @@ public interface RankingService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * update player ranking in group
+     *
+     * @param player the player which ranking must update
+     * @param group the group which player ranking must update
+     */
+    void updateRanking(Player player, TournamentGroup group);
 }

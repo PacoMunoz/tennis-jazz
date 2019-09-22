@@ -1,14 +1,16 @@
 package es.pmg.tennisjazz.web.rest;
 
-import es.pmg.tennisjazz.domain.Ranking;
-import es.pmg.tennisjazz.service.RankingService;
+import es.pmg.tennisjazz.domain.*;
+import es.pmg.tennisjazz.service.*;
+import es.pmg.tennisjazz.service.dto.RoundCriteria;
 import es.pmg.tennisjazz.web.rest.errors.BadRequestAlertException;
 import es.pmg.tennisjazz.service.dto.RankingCriteria;
-import es.pmg.tennisjazz.service.RankingQueryService;
 
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,8 +25,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link es.pmg.tennisjazz.domain.Ranking}.
@@ -44,9 +48,16 @@ public class RankingResource {
 
     private final RankingQueryService rankingQueryService;
 
-    public RankingResource(RankingService rankingService, RankingQueryService rankingQueryService) {
+    private final TournamentGroupService tournamentGroupService;
+
+    private final PlayerService playerService;
+
+    public RankingResource(RankingService rankingService, RankingQueryService rankingQueryService,
+                           TournamentGroupService tournamentGroupService, PlayerService playerService ) {
         this.rankingService = rankingService;
         this.rankingQueryService = rankingQueryService;
+        this.playerService = playerService;
+        this.tournamentGroupService = tournamentGroupService;
     }
 
     /**
@@ -97,19 +108,30 @@ public class RankingResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rankings in body.
      */
     @GetMapping("/updateRanking")
-    public ResponseEntity<Void> updateRanking(@RequestParam long idPlayer, @RequestParam long idGroup) {
+    public ResponseEntity<Void> updateRanking(@RequestParam Long idPlayer, @RequestParam Long idGroup) throws URISyntaxException {
         log.debug("REST request to update Ranking to player with id: " + idPlayer + " and idGroup " + idGroup);
+        if (idGroup == null || idPlayer == null) {
+            throw new BadRequestAlertException("Invalid id", "Group or Player", "idnull");
+        }
+        Optional<TournamentGroup> groupO = tournamentGroupService.findOne(idGroup);
+        Optional<Player> playerO =  playerService.findOne(idPlayer);
+        if (!playerO.isPresent() || !groupO.isPresent()) {
+            throw new BadRequestAlertException("Invalid id", "Group or Player", "idNoValid");
+        }
+
+        rankingService.updateRanking(playerO.get(), groupO.get());
         //Get player matches in the groups
             // -> Use searchcriteria in Match repository and dinamyc query https://www.baeldung.com/spring-data-jpa-query
             // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.special-parameters
+
         //Calculate data with all the matches
         //Generate ranking object to save
         //create o update ranking
 
-
-        Page<Ranking> page = rankingQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.noContent().headers(headers).body(page.getContent());
+       /* Page<Ranking> page = rankingQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);*/
+        //return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, idPlayer.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "Ranking update", "player: " + idPlayer + " group: " + idGroup) ).build();
     }
 
     /**

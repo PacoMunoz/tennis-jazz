@@ -5,10 +5,9 @@ import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.domain.TournamentGroup;
 import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.repository.RankingRepository;
-import es.pmg.tennisjazz.service.RankingService;
+import es.pmg.tennisjazz.service.*;
 import es.pmg.tennisjazz.web.rest.errors.ExceptionTranslator;
 import es.pmg.tennisjazz.service.dto.RankingCriteria;
-import es.pmg.tennisjazz.service.RankingQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,6 +95,12 @@ public class RankingResourceIT {
     private RankingQueryService rankingQueryService;
 
     @Autowired
+    private PlayerService playerService;
+
+    @Autowired
+    TournamentGroupService tournamentGroupService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -117,7 +122,8 @@ public class RankingResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RankingResource rankingResource = new RankingResource(rankingService, rankingQueryService);
+
+        final RankingResource rankingResource = new RankingResource(rankingService, rankingQueryService, tournamentGroupService, playerService);
         this.restRankingMockMvc = MockMvcBuilders.standaloneSetup(rankingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -249,7 +255,7 @@ public class RankingResourceIT {
             .andExpect(jsonPath("$.[*].tieBreaksPlayed").value(hasItem(DEFAULT_TIE_BREAKS_PLAYED)))
             .andExpect(jsonPath("$.[*].tieBreaksWon").value(hasItem(DEFAULT_TIE_BREAKS_WON)));
     }
-    
+
     @Test
     @Transactional
     public void getRanking() throws Exception {

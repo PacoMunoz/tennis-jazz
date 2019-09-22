@@ -1,6 +1,7 @@
 package es.pmg.tennisjazz.repository;
 
 import es.pmg.tennisjazz.domain.Match;
+import es.pmg.tennisjazz.repository.custom.CustomizedMatchRepository;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MatchRepository extends JpaRepository<Match, Long>, JpaSpecificationExecutor<Match> {
+public interface MatchRepository extends JpaRepository<Match, Long>, JpaSpecificationExecutor<Match>, CustomizedMatchRepository {
+
 
 
 

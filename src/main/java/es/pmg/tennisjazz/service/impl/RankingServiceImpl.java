@@ -1,8 +1,13 @@
 package es.pmg.tennisjazz.service.impl;
 
+import es.pmg.tennisjazz.domain.*;
+import es.pmg.tennisjazz.repository.MatchRepository;
 import es.pmg.tennisjazz.service.RankingService;
-import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.repository.RankingRepository;
+import es.pmg.tennisjazz.service.RoundQueryService;
+import es.pmg.tennisjazz.service.RoundService;
+import es.pmg.tennisjazz.service.dto.RoundCriteria;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -24,8 +30,14 @@ public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
 
-    public RankingServiceImpl(RankingRepository rankingRepository) {
+    private final MatchRepository matchRepository;
+
+    private final RoundQueryService roundQueryService;
+
+    public RankingServiceImpl(RankingRepository rankingRepository, MatchRepository matchRepository, RoundQueryService roundQueryService) {
         this.rankingRepository = rankingRepository;
+        this.matchRepository = matchRepository;
+        this.roundQueryService = roundQueryService;
     }
 
     /**
@@ -77,4 +89,51 @@ public class RankingServiceImpl implements RankingService {
         log.debug("Request to delete Ranking : {}", id);
         rankingRepository.deleteById(id);
     }
+
+    /**
+     * Update player ranking in a group
+     *
+     * @param player the player which ranking must update
+     * @param group the group which player ranking must update
+     */
+    @Override
+    public void updateRanking(Player player, TournamentGroup group) {
+        log.debug("Request to update Ranking of player: " + player.getId() + " in group : " + group.getId());
+        //get all player match in group
+        RoundCriteria criteria = new RoundCriteria();
+        LongFilter groupId = new LongFilter();
+        groupId.setEquals(group.getId());
+        criteria.setTournamentGroupId(groupId);
+        List<Round> rounds =  this.roundQueryService.findByCriteria(criteria);
+        this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
+        //calculate total player points
+
+        //calculate total games won
+
+        //calculate total games loss
+
+        //calculate set won
+
+        //calculate matches played
+
+        //calculate matches won
+
+        //calculate matches loss
+
+        //calculate matches not present
+
+        //calculate matches abandoned
+
+        //calculate tieBreaksPlayed
+
+        //calculate tieBreaksWon
+
+        Ranking ranking = new Ranking();
+        this.rankingRepository.save(ranking);
+
+
+    }
+
 }
+
+
