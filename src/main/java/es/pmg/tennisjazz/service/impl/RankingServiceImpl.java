@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,10 +103,13 @@ public class RankingServiceImpl implements RankingService {
         //get all player match in group
         RoundCriteria criteria = new RoundCriteria();
         LongFilter groupId = new LongFilter();
+        List<Round> rounds = new ArrayList<>();
+        List<Match> matches = new ArrayList<>();
+
         groupId.setEquals(group.getId());
         criteria.setTournamentGroupId(groupId);
-        List<Round> rounds =  this.roundQueryService.findByCriteria(criteria);
-        this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
+        rounds =  this.roundQueryService.findByCriteria(criteria);
+        matches =  this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
         //calculate total player points
 
         //calculate total games won
