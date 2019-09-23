@@ -7,6 +7,7 @@ import es.pmg.tennisjazz.repository.RankingRepository;
 import es.pmg.tennisjazz.service.RoundQueryService;
 import es.pmg.tennisjazz.service.RoundService;
 import es.pmg.tennisjazz.service.dto.RoundCriteria;
+import es.pmg.tennisjazz.service.util.RankingCalculateUtil;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,11 +112,11 @@ public class RankingServiceImpl implements RankingService {
         rounds =  this.roundQueryService.findByCriteria(criteria);
         matches =  this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
         //calculate total player points
-
+        RankingCalculateUtil.calculatePoints(player, matches);
         //calculate total games won
-
+        RankingCalculateUtil.calculateGamesWon(player, matches);
         //calculate total games loss
-
+        RankingCalculateUtil.calculateGamesLoss(player, matches);
         //calculate set won
 
         //calculate matches played
