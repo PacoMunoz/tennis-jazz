@@ -98,7 +98,7 @@ public class RankingResourceIT {
     private PlayerService playerService;
 
     @Autowired
-    TournamentGroupService tournamentGroupService;
+    private TournamentGroupQueryService tournamentGroupQueryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -123,7 +123,7 @@ public class RankingResourceIT {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        final RankingResource rankingResource = new RankingResource(rankingService, rankingQueryService, tournamentGroupService, playerService);
+        final RankingResource rankingResource = new RankingResource(rankingService, rankingQueryService, playerService, tournamentGroupQueryService);
         this.restRankingMockMvc = MockMvcBuilders.standaloneSetup(rankingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -15,6 +15,7 @@ import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis';
 import { filter, map } from 'rxjs/operators';
 import { Observable, merge, concat } from 'rxjs';
+import { RankingTennisService } from 'app/entities/ranking-tennis';
 
 @Component({
   selector: 'jhi-match-tennis-newUpdate',
@@ -57,6 +58,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     protected matchService: MatchTennisService,
     protected roundService: RoundTennisService,
     protected playerService: PlayerTennisService,
+    protected rankingService: RankingTennisService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -166,15 +168,20 @@ export class MatchTennisNewUpdateComponent implements OnInit {
 
         concat(roundsObservable, getMatches).subscribe(() => console.log('El numero de partidos es: ' + matches.length));
         */
-    /*
-                Real save method
-                this.isSaving = true;
-                const match = this.createFromForm();
-                if (match.id !== undefined) {
-                    this.subscribeToSaveResponse(this.matchService.update(match));
-                } else {
-                    this.subscribeToSaveResponse(this.matchService.create(match));
-                }*/
+
+    this.isSaving = true;
+    const match = this.createFromForm();
+    if (match.id !== undefined) {
+      //this.subscribeToSaveResponse(this.matchService.update(match));
+      const updateMatchO = this.matchService.update(match);
+      const updateRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
+      this.subscribeToSaveUpdateResponse(concat(updateMatchO, updateRankingO));
+    } else {
+      //this.subscribeToSaveResponse(this.matchService.create(match));
+      const createO = this.matchService.create(match);
+      const updateRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
+      this.subscribeToSaveUpdateResponse(concat(createO, updateRankingO));
+    }
   }
 
   private createFromForm(): IMatchTennis {
@@ -205,7 +212,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IMatchTennis>>) {
+  protected subscribeToSaveUpdateResponse(result: Observable<HttpResponse<IMatchTennis>>) {
     result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 

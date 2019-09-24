@@ -6,7 +6,6 @@ import es.pmg.tennisjazz.service.RankingQueryService;
 import es.pmg.tennisjazz.service.RankingService;
 import es.pmg.tennisjazz.repository.RankingRepository;
 import es.pmg.tennisjazz.service.RoundQueryService;
-import es.pmg.tennisjazz.service.RoundService;
 import es.pmg.tennisjazz.service.dto.RankingCriteria;
 import es.pmg.tennisjazz.service.dto.RoundCriteria;
 import es.pmg.tennisjazz.service.util.RankingCalculateUtil;

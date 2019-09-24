@@ -5,11 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
-import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
-import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
-import { IMatchTennis } from 'app/shared/model/match-tennis.model';
 import { MatchTennisService } from 'app/entities/match-tennis';
-import { IRoundTennis } from 'app/shared/model/round-tennis.model';
 
 type EntityResponseType = HttpResponse<IRankingTennis>;
 type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
@@ -41,33 +37,9 @@ export class RankingTennisService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  updateTournamentPlayerRanking(player: IPlayerTennis, group: ITournamentGroupTennis) {
-    let points: number;
-    let gamesWon: number;
-    let gamesLoss: number;
-    let setsWon: number;
-    let setsLoss: number;
-    let matchesLoss: number;
-    let matchesWon: number;
-    let notPresentMatches: number;
-    let abandonedMathes: number;
-    let playerMathes: IMatchTennis[];
-    let rounds: IRoundTennis[];
-
-    const visitorMatches = this.matchesService.query({
-      'visitorPlayerId.equals': player.id
-
-      //'localPlayerId.equals':
-    });
-
-    /*gamesWon = caculateWonGames(player, group);
-    gamesLoss = calculateLossGames(player, group);
-    setsWon = calculateWonSets(player, group);
-    setsLoss = calculateLossSets(player, group);
-    matchesLoss = calculateMatchesLoss(player, group);
-    matchesWon = calculateMatchesWon(player, group);
-    notPresentMatches = calculateNotPresentMatches(player, group);
-    abandonedMathes = calculateAbandonedMatches(player, group);
-    points = calculatePoints(player, group);*/
+  updateTournamentPlayerRanking(idPlayer: number, idRound: number) {
+    console.log('***************** Update Tournament Player Ranking for Player: ' + idPlayer + ' y round: ' + idRound);
+    const options = createRequestOption({ idPlayer: idPlayer, idRound: idRound });
+    return this.http.get<any>(this.resourceUrl, { params: options, observe: 'response' });
   }
 }

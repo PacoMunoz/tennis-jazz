@@ -2,7 +2,7 @@ package es.pmg.tennisjazz.web.rest;
 
 import es.pmg.tennisjazz.domain.*;
 import es.pmg.tennisjazz.service.*;
-import es.pmg.tennisjazz.service.dto.RoundCriteria;
+import es.pmg.tennisjazz.service.dto.TournamentGroupCriteria;
 import es.pmg.tennisjazz.web.rest.errors.BadRequestAlertException;
 import es.pmg.tennisjazz.service.dto.RankingCriteria;
 
@@ -10,14 +10,12 @@ import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * REST controller for managing {@link es.pmg.tennisjazz.domain.Ranking}.
@@ -48,16 +44,17 @@ public class RankingResource {
 
     private final RankingQueryService rankingQueryService;
 
-    private final TournamentGroupService tournamentGroupService;
+    private final TournamentGroupQueryService tournamentGroupQueryService;
 
     private final PlayerService playerService;
 
     public RankingResource(RankingService rankingService, RankingQueryService rankingQueryService,
-                           TournamentGroupService tournamentGroupService, PlayerService playerService ) {
+                           PlayerService playerService,
+                           TournamentGroupQueryService tournamentGroupQueryService) {
         this.rankingService = rankingService;
         this.rankingQueryService = rankingQueryService;
         this.playerService = playerService;
-        this.tournamentGroupService = tournamentGroupService;
+        this.tournamentGroupQueryService = tournamentGroupQueryService;
     }
 
     /**
@@ -104,16 +101,23 @@ public class RankingResource {
      * {@code GET  /updateRanking} : update player ranking in group
      *
      * @param idPlayer the player id which ranking must update
-     * @param idGroup the group id which player ranking must update
+     * @param idRound the round of the group which player ranking must update
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rankings in body.
      */
     @GetMapping("/updateRanking")
-    public ResponseEntity<Void> updateRanking(@RequestParam Long idPlayer, @RequestParam Long idGroup) throws URISyntaxException {
-        log.debug("REST request to update Ranking to player with id: " + idPlayer + " and idGroup " + idGroup);
-        if (idGroup == null || idPlayer == null) {
-            throw new BadRequestAlertException("Invalid id", "Group or Player", "idnull");
+    public ResponseEntity<Void> updateRanking(@RequestParam Long idPlayer, @RequestParam Long idRound) throws URISyntaxException {
+        log.debug("REST request to update Ranking of player with id: " + idPlayer + " in the group of round " + idRound);
+        if (idRound == null || idPlayer == null) {
+            throw new BadRequestAlertException("Invalid id", "Round or Player", "idnull");
         }
-        Optional<TournamentGroup> groupO = tournamentGroupService.findOne(idGroup);
+
+        TournamentGroupCriteria groupCriteria = new TournamentGroupCriteria();
+        LongFilter roundIdLongFilter = new LongFilter();
+        roundIdLongFilter.setEquals(idRound);
+        groupCriteria.setRoundsId(roundIdLongFilter);
+        List<TournamentGroup> lstGroups = this.tournamentGroupQueryService.findByCriteria(groupCriteria);
+        Optional<TournamentGroup> groupO = Optional.ofNullable(lstGroups.get(0));
+
         Optional<Player> playerO =  playerService.findOne(idPlayer);
         if (!playerO.isPresent() || !groupO.isPresent()) {
             throw new BadRequestAlertException("Invalid id", "Group or Player", "idNoValid");
@@ -131,7 +135,7 @@ public class RankingResource {
        /* Page<Ranking> page = rankingQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);*/
         //return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, idPlayer.toString())).build();
-        return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "Ranking update", "player: " + idPlayer + " group: " + idGroup) ).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "Ranking update", "player: " + idPlayer + " group of round: " + idRound) ).build();
     }
 
     /**
