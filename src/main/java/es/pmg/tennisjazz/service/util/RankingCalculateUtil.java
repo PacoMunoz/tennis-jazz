@@ -2,6 +2,7 @@ package es.pmg.tennisjazz.service.util;
 
 import es.pmg.tennisjazz.domain.Match;
 import es.pmg.tennisjazz.domain.Player;
+import org.graalvm.compiler.nodes.calc.IntegerTestNode;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public final class RankingCalculateUtil {
 
     /**
      * Calculate point won for a player in a sets of matches
-     * @param player
-     * @param mathes
+     * @param player the player
+     * @param matches the matches to see
      * @return total points won.
      */
     public static Integer calculatePoints(Player player, List<Match> matches) {
@@ -50,8 +51,8 @@ public final class RankingCalculateUtil {
 
     /**
      * Calculate games won for a player in a set of matches
-     * @param player
-     * @param matches
+     * @param player the player
+     * @param matches the matches to see
      * @return total won games
      */
     public static Integer calculateGamesWon(Player player, List<Match> matches) {
@@ -70,8 +71,8 @@ public final class RankingCalculateUtil {
 
     /**
      * Calculate games loss for a player in a set of matches
-     * @param player
-     * @param matches
+     * @param player the player
+     * @param matches the matches to see
      * @return total loss games
      */
     public static Integer calculateGamesLoss(Player player, List<Match> matches) {
@@ -89,8 +90,171 @@ public final class RankingCalculateUtil {
     }
 
     /**
+     * Calculate total set won by a player in a sets of matches
+     * @param player the player
+     * @param matches the matches
+     * @return total sets won
+     */
+    public static Integer calculateSetsWon(Player player, List<Match> matches) {
+        Integer totalSetsWon = 0;
+        for (Match match: matches) {
+            if (isMatchPlayed(match)) {
+                if (isLocalPlayer(player, match)) {
+                    totalSetsWon = totalSetsWon + match.getLocalPlayerSets();
+                } else {
+                    totalSetsWon = totalSetsWon + match.getVisitorPlayerSets();
+                }
+            }
+        }
+        return totalSetsWon;
+    }
+
+    /**
+     * Calculate total sets loss by a player in a set of matches
+     * @param player the player
+     * @param matches the matches
+     * @return the total sets loss
+     */
+    public static Integer calculateSetsLoss(Player player, List<Match> matches) {
+        Integer totalSetsLoss = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)) {
+                if (isLocalPlayer(player, match)) {
+                    totalSetsLoss = totalSetsLoss + match.getVisitorPlayerSets();
+                } else {
+                    totalSetsLoss = totalSetsLoss + match.getLocalPlayerSets();
+                }
+            }
+        }
+        return totalSetsLoss;
+    }
+
+    /**
+     * Calculate the player loss matches in a set of matches
+     * @param player the player
+     * @param matches the matches
+     * @return the total won matches
+     */
+    public static Integer calculateMatchesWon(Player player, List<Match> matches) {
+        Integer totalMatchesWon = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)){
+                if (getMatchResult(player, match).equals(WON)){
+                    totalMatchesWon ++;
+                }
+            }
+        }
+        return totalMatchesWon;
+    }
+
+    /**
+     * Calculate the player loss matches in a set of matches
+     * @param player the player
+     * @param matches the matches
+     * @return the total loss matches
+     */
+    public static Integer calculateMatchesLoss(Player player, List<Match> matches) {
+        Integer totalMatchesLoss = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)) {
+                if (getMatchResult(player, match).equals(LOSS)) {
+                    totalMatchesLoss++;
+                }
+            }
+        }
+        return totalMatchesLoss;
+    }
+
+    /**
+     * Calculate the player no present matches in a sets of matches
+     * @param player the player
+     * @param matches the matches
+     * @return total not present matches
+     */
+    public static Integer calculateMatchesNotPresent(Player player, List<Match> matches) {
+        Integer totalMatchesNotPresent = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)) {
+                if (getMatchResult(player, match).equals(NOPRESENT)) {
+                    totalMatchesNotPresent++;
+                }
+            }
+        }
+        return totalMatchesNotPresent;
+    }
+
+    /**
+     * Calculate the player abandoned matches in a set of matches
+     * @param player the player
+     * @param matches the matches
+     * @return total abandoned matches
+     */
+    public static Integer calculateMatchesAbandoned(Player player, List<Match> matches) {
+        Integer totalMatchesAbandoned = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)) {
+                if (getMatchResult(player, match).equals(ABANDONED)) {
+                    totalMatchesAbandoned++;
+                }
+            }
+        }
+        return totalMatchesAbandoned;
+    }
+
+    /**
+     * Calculate the number of tie breaks played in a set of matches
+     *
+     * @param matches the matches
+     * @return total of played tie breaks
+     */
+    public static Integer calculateTieBreaksPlayed(List<Match> matches) {
+        Integer totalTieBreaksPlayed = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)) {
+                totalTieBreaksPlayed = totalTieBreaksPlayed + calculateTieBreaksPlayed(match);
+            }
+        }
+        return totalTieBreaksPlayed;
+    }
+
+    /**
+     * Calculate tie breaks won by a player in a set of matches
+     * @param player the player
+     * @param matches the matches
+     * @return total tie breaks won
+     */
+    public static Integer calculateTieBreaksWon(Player player, List<Match> matches) {
+        Integer totalTieBreaksWon = 0;
+        for (Match match : matches){
+            if (isMatchPlayed(match)) {
+                if (isLocalPlayer(player, match)) {
+                    totalTieBreaksWon = totalTieBreaksWon + calculateLocalPlayerTieBreaksWon(match);
+                } else {
+                    totalTieBreaksWon = totalTieBreaksWon + calculateVisitorPlayerTieBreaksWon(match);
+                }
+            }
+        }
+        return totalTieBreaksWon;
+    }
+
+    /**
+     * Calculate the number of matches played from a set of math
+     * @param matches the matches
+     * @return total matches played
+     */
+    public static Integer calculateMatchesPlayed (List<Match> matches) {
+        Integer totalMatchesPlayed = 0;
+        for (Match match : matches) {
+            if (isMatchPlayed(match)) {
+                totalMatchesPlayed ++;
+            }
+        }
+        return totalMatchesPlayed;
+    }
+
+    /**
      * Sum total local player games won in three sets
-     * @param match
+     * @param match the matches
      * @return total games won
      */
     private static Integer calculateLocalPlayerGamesWon(Match match) {
@@ -102,7 +266,7 @@ public final class RankingCalculateUtil {
 
     /**
      * Sum total visitor player games in three sets
-     * @param match
+     * @param match the match
      * @return total games
      */
     private static Integer calculateVisitorPlayerGamesWon(Match match) {
@@ -113,9 +277,74 @@ public final class RankingCalculateUtil {
     }
 
     /**
+     * Calculate the local player won tie breaks in one match
+     * @param match the match
+     * @return total won tie breaks
+     */
+    private static Integer calculateLocalPlayerTieBreaksWon(Match match) {
+        Integer totalTieBreaksWon = 0;
+        if (isSet1TieBreaksPlayed(match)) {
+            if (match.getLocalPlayerTBSet1Result() > match.getVisitorPlayerTBSet1Result()) totalTieBreaksWon ++;
+        }
+        if (isSet2TieBreaksPlayed(match)) {
+            if (match.getLocalPlayerTBSet2Result() > match.getVisitorPlayerTBSet2Result()) totalTieBreaksWon ++;
+        }
+        if (isSet3TieBreaksPlayed(match)) {
+            if (match.getLocalPlayerTBSet3Result() > match.getVisitorPlayerTBSet3Result()) totalTieBreaksWon ++;
+        }
+        return totalTieBreaksWon;
+    }
+
+    /**
+     * Calculate the visitor player won tie breaks in one match
+     * @param match the match
+     * @return total won tie breaks
+     */
+    private static Integer calculateVisitorPlayerTieBreaksWon(Match match) {
+        Integer totalTieBreaksWon = 0;
+        if (isSet1TieBreaksPlayed(match)) {
+            if (match.getLocalPlayerTBSet1Result() < match.getVisitorPlayerTBSet1Result()) totalTieBreaksWon ++;
+        }
+        if (isSet2TieBreaksPlayed(match)) {
+            if (match.getLocalPlayerTBSet2Result() < match.getVisitorPlayerTBSet2Result()) totalTieBreaksWon ++;
+        }
+        if (isSet3TieBreaksPlayed(match)) {
+            if (match.getLocalPlayerTBSet3Result() < match.getVisitorPlayerTBSet3Result()) totalTieBreaksWon ++;
+        }
+        return totalTieBreaksWon;
+    }
+
+    /**
+     * Check if tie break was played in first set
+     * @param match the match
+     * @return true is played
+     */
+    private static boolean isSet1TieBreaksPlayed(Match match) {
+        return match.getLocalPlayerTBSet1Result() != null && match.getVisitorPlayerTBSet1Result() != null;
+    }
+
+    /**
+     * Check if tie break was played in second set
+     * @param match the match
+     * @return true is played
+     */
+    private static boolean isSet2TieBreaksPlayed(Match match) {
+        return match.getLocalPlayerTBSet2Result() != null && match.getVisitorPlayerTBSet2Result() != null;
+    }
+
+    /**
+     * Check if tie break was played in third set
+     * @param match the match
+     * @return true is played
+     */
+    private static boolean isSet3TieBreaksPlayed(Match match) {
+        return match.getLocalPlayerTBSet3Result() != null && match.getVisitorPlayerTBSet3Result() != null;
+    }
+
+    /**
      * Get the match result for a player
-     * @param player
-     * @param match
+     * @param player the player
+     * @param match the match
      * @return String that represent the result
      */
     private static String getMatchResult(Player player, Match match){
@@ -138,9 +367,9 @@ public final class RankingCalculateUtil {
     }
 
     /**
-     * Check if palyer is the local in match
-     * @param player
-     * @param match
+     * Check if player is the local in match
+     * @param player the player
+     * @param match the match
      * @return true if local
      */
     private static boolean isLocalPlayer(Player player, Match match){
@@ -149,7 +378,7 @@ public final class RankingCalculateUtil {
 
     /**
      * Check if match has been played
-     * @param match
+     * @param match the match
      * @return true if played
      */
     private static boolean isMatchPlayed(Match match) {
@@ -158,4 +387,16 @@ public final class RankingCalculateUtil {
             || (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null);
     }
 
+    /**
+     * Calculate the number of tie breaks played in a match
+     * @param match the match
+     * @return total tie breaks played.
+     */
+    private static Integer calculateTieBreaksPlayed(Match match) {
+        Integer totalTieBreaksPlayed = 0;
+        if (match.getLocalPlayerTBSet1Result() != null) totalTieBreaksPlayed ++;
+        if (match.getLocalPlayerTBSet2Result() != null) totalTieBreaksPlayed ++;
+        if (match.getLocalPlayerTBSet3Result() != null) totalTieBreaksPlayed ++;
+        return totalTieBreaksPlayed;
+    }
 }

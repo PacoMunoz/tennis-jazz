@@ -2,10 +2,12 @@ package es.pmg.tennisjazz.service.impl;
 
 import es.pmg.tennisjazz.domain.*;
 import es.pmg.tennisjazz.repository.MatchRepository;
+import es.pmg.tennisjazz.service.RankingQueryService;
 import es.pmg.tennisjazz.service.RankingService;
 import es.pmg.tennisjazz.repository.RankingRepository;
 import es.pmg.tennisjazz.service.RoundQueryService;
 import es.pmg.tennisjazz.service.RoundService;
+import es.pmg.tennisjazz.service.dto.RankingCriteria;
 import es.pmg.tennisjazz.service.dto.RoundCriteria;
 import es.pmg.tennisjazz.service.util.RankingCalculateUtil;
 import io.github.jhipster.service.filter.LongFilter;
@@ -32,14 +34,17 @@ public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
 
+    private final RankingQueryService rankingQueryService;
+
     private final MatchRepository matchRepository;
 
     private final RoundQueryService roundQueryService;
 
-    public RankingServiceImpl(RankingRepository rankingRepository, MatchRepository matchRepository, RoundQueryService roundQueryService) {
+    public RankingServiceImpl(RankingRepository rankingRepository, MatchRepository matchRepository, RoundQueryService roundQueryService, RankingQueryService rankingQueryService) {
         this.rankingRepository = rankingRepository;
         this.matchRepository = matchRepository;
         this.roundQueryService = roundQueryService;
+        this.rankingQueryService = rankingQueryService;
     }
 
     /**
@@ -101,42 +106,80 @@ public class RankingServiceImpl implements RankingService {
     @Override
     public void updateRanking(Player player, TournamentGroup group) {
         log.debug("Request to update Ranking of player: " + player.getId() + " in group : " + group.getId());
-        //get all player match in group
-        RoundCriteria criteria = new RoundCriteria();
+
+        //get player ranking in group or create it if not exist
+        Optional<Ranking> oRanking = findByPlayerAndGroup(player, group);
+        Ranking ranking = null;
+        if (oRanking.isPresent()) {
+            ranking = oRanking.get();
+        } else {
+            ranking = new Ranking();
+        }
+        //get all matches played by a player in group
+        List<Match> matches = getMatches(player, group);
+        //calculate total player points
+        ranking.setPoints(RankingCalculateUtil.calculatePoints(player, matches));
+        //calculate total games won
+        ranking.setGamesWon(RankingCalculateUtil.calculateGamesWon(player, matches));
+        //calculate total games loss
+        ranking.setGamesLoss(RankingCalculateUtil.calculateGamesLoss(player, matches));
+        //calculate set won
+        ranking.setSetsWon(RankingCalculateUtil.calculateSetsWon(player, matches));
+        //calculate matches played
+        ranking.setMatchesPlayed(RankingCalculateUtil.calculateMatchesPlayed(matches));
+        //calculate matches won
+        ranking.setMatchesWon(RankingCalculateUtil.calculateMatchesWon(player, matches));
+        //calculate matches loss
+        ranking.setMatchesLoss(RankingCalculateUtil.calculateMatchesLoss(player, matches));
+        //calculate matches not present
+        ranking.setMatchesNotPresent(RankingCalculateUtil.calculateMatchesNotPresent(player, matches));
+        //calculate matches abandoned
+        ranking.setMatchesAbandoned(RankingCalculateUtil.calculateMatchesAbandoned(player, matches));
+        //calculate tieBreaksPlayed
+        ranking.setTieBreaksPlayed(RankingCalculateUtil.calculateTieBreaksPlayed(matches));
+        //calculate tieBreaksWon
+        ranking.setTieBreaksWon(RankingCalculateUtil.calculateGamesWon(player, matches));
+
+        //update or create ranking
+        this.rankingRepository.save(ranking);
+    }
+
+    /**
+     * Get Ranking of a player in a group
+     * @param player the player
+     * @param group the group
+     * @return the entity
+     */
+    private Optional<Ranking> findByPlayerAndGroup(Player player, TournamentGroup group) {
+        RankingCriteria rankingCriteria = new RankingCriteria();
+        LongFilter groupIdFilter = new LongFilter();
+        LongFilter playerIdFilter = new LongFilter();
+        groupIdFilter.setEquals(group.getId());
+
+        playerIdFilter.setEquals(player.getId());
+        rankingCriteria.setPlayerId(playerIdFilter);
+        rankingCriteria.setTournamentGroupId(groupIdFilter);
+        List<Ranking> rankings = rankingQueryService.findByCriteria(rankingCriteria);
+
+        return Optional.ofNullable(rankings.get(0));
+    }
+
+    /**
+     * Get all matches of a player in one group
+     * @param player the player
+     * @param group the matches
+     * @return List of match
+     */
+    private List<Match> getMatches(Player player, TournamentGroup group) {
+        RoundCriteria roundCriteria = new RoundCriteria();
         LongFilter groupId = new LongFilter();
         List<Round> rounds = new ArrayList<>();
-        List<Match> matches = new ArrayList<>();
 
         groupId.setEquals(group.getId());
-        criteria.setTournamentGroupId(groupId);
-        rounds =  this.roundQueryService.findByCriteria(criteria);
-        matches =  this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
-        //calculate total player points
-        RankingCalculateUtil.calculatePoints(player, matches);
-        //calculate total games won
-        RankingCalculateUtil.calculateGamesWon(player, matches);
-        //calculate total games loss
-        RankingCalculateUtil.calculateGamesLoss(player, matches);
-        //calculate set won
+        roundCriteria.setTournamentGroupId(groupId);
+        rounds =  this.roundQueryService.findByCriteria(roundCriteria);
 
-        //calculate matches played
-
-        //calculate matches won
-
-        //calculate matches loss
-
-        //calculate matches not present
-
-        //calculate matches abandoned
-
-        //calculate tieBreaksPlayed
-
-        //calculate tieBreaksWon
-
-        Ranking ranking = new Ranking();
-        this.rankingRepository.save(ranking);
-
-
+        return  this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
     }
 
 }
