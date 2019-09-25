@@ -113,6 +113,8 @@ public class RankingServiceImpl implements RankingService {
             ranking = oRanking.get();
         } else {
             ranking = new Ranking();
+            ranking.setPlayer(player);
+            ranking.setTournamentGroup(group);
         }
         //get all matches played by a player in group
         List<Match> matches = getMatches(player, group);
@@ -122,8 +124,10 @@ public class RankingServiceImpl implements RankingService {
         ranking.setGamesWon(RankingCalculateUtil.calculateGamesWon(player, matches));
         //calculate total games loss
         ranking.setGamesLoss(RankingCalculateUtil.calculateGamesLoss(player, matches));
-        //calculate set won
+        //calculate sets won
         ranking.setSetsWon(RankingCalculateUtil.calculateSetsWon(player, matches));
+        //calculate sets loss
+        ranking.setSetsLoss(RankingCalculateUtil.calculateSetsLoss(player, matches));
         //calculate matches played
         ranking.setMatchesPlayed(RankingCalculateUtil.calculateMatchesPlayed(matches));
         //calculate matches won
@@ -160,7 +164,7 @@ public class RankingServiceImpl implements RankingService {
         rankingCriteria.setTournamentGroupId(groupIdFilter);
         List<Ranking> rankings = rankingQueryService.findByCriteria(rankingCriteria);
 
-        return Optional.ofNullable(rankings.get(0));
+        return Optional.ofNullable(rankings.size() == 0 ? null : rankings.get(0));
     }
 
     /**

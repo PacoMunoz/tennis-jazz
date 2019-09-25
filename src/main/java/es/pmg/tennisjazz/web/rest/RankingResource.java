@@ -104,7 +104,7 @@ public class RankingResource {
      * @param idRound the round of the group which player ranking must update
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rankings in body.
      */
-    @GetMapping("/updateRanking")
+    @GetMapping("/rankings/update")
     public ResponseEntity<Void> updateRanking(@RequestParam Long idPlayer, @RequestParam Long idRound) throws URISyntaxException {
         log.debug("REST request to update Ranking of player with id: " + idPlayer + " in the group of round " + idRound);
         if (idRound == null || idPlayer == null) {

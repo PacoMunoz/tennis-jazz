@@ -13,6 +13,7 @@ type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
 @Injectable({ providedIn: 'root' })
 export class RankingTennisService {
   public resourceUrl = SERVER_API_URL + 'api/rankings';
+  public resourceUrlUpdate = SERVER_API_URL + 'api/rankings/update';
 
   constructor(protected http: HttpClient, protected matchesService: MatchTennisService) {}
 
@@ -40,6 +41,6 @@ export class RankingTennisService {
   updateTournamentPlayerRanking(idPlayer: number, idRound: number) {
     console.log('***************** Update Tournament Player Ranking for Player: ' + idPlayer + ' y round: ' + idRound);
     const options = createRequestOption({ idPlayer: idPlayer, idRound: idRound });
-    return this.http.get<any>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<any>(this.resourceUrlUpdate, { params: options, observe: 'response' });
   }
 }

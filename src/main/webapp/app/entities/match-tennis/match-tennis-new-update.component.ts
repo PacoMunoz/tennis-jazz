@@ -116,71 +116,18 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   save() {
-    /* Approach from observables
-        const group = 1;
-
-        const player = 1;
-
-        let groups: ITournamentGroupTennis[] = [];
-
-        let rounds: IRoundTennis[] = [];
-
-        let matches: IMatchTennis[] = [];
-
-        let round: number[] = [];
-
-        const roundsObservable = this.roundService
-            .query({
-                'tournamentGroupId.equals': group
-            })
-            .pipe(
-                map((res: HttpResponse<IRoundTennis[]>) => res.body),
-                map((response: IRoundTennis[]) => {
-                    console.log('Los rounds son : ' + response.length);
-                    for (let i = 0; i < response.length; i++) {
-                        round.push(response[i].id);
-                    }
-                    console.log(' Tras Los rounds son: ' + round);
-                })
-            );
-
-        const matchesObservable1 = this.matchService
-            .query({
-                'localPlayerId.equals': player,
-                'roundId.in': round
-            })
-            .pipe(
-                map((res: HttpResponse<IMatchTennis[]>) => res.body),
-                map((response: IMatchTennis[]) => (matches = matches.concat(response)))
-            );
-
-        const matchesObservable3 = this.matchService
-            .query({
-                'visitorPlayerId.equals': player,
-                'roundId.in': round
-            })
-            .pipe(
-                map((res: HttpResponse<IMatchTennis[]>) => res.body),
-                map((response: IMatchTennis[]) => (matches = matches.concat(response)))
-            );
-
-        const getMatches = merge(matchesObservable1, matchesObservable3);
-
-        concat(roundsObservable, getMatches).subscribe(() => console.log('El numero de partidos es: ' + matches.length));
-        */
-
     this.isSaving = true;
     const match = this.createFromForm();
+    const updateLocalRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
+    const updateVisitorRankingO = this.rankingService.updateTournamentPlayerRanking(match.visitorPlayer.id, match.round.id);
     if (match.id !== undefined) {
       //this.subscribeToSaveResponse(this.matchService.update(match));
       const updateMatchO = this.matchService.update(match);
-      const updateRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
-      this.subscribeToSaveUpdateResponse(concat(updateMatchO, updateRankingO));
+      this.subscribeToSaveUpdateResponse(concat(updateMatchO, updateLocalRankingO, updateVisitorRankingO));
     } else {
       //this.subscribeToSaveResponse(this.matchService.create(match));
       const createO = this.matchService.create(match);
-      const updateRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
-      this.subscribeToSaveUpdateResponse(concat(createO, updateRankingO));
+      this.subscribeToSaveUpdateResponse(concat(createO, updateLocalRankingO, updateVisitorRankingO));
     }
   }
 

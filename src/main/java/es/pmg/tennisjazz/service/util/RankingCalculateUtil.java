@@ -99,9 +99,9 @@ public final class RankingCalculateUtil {
         for (Match match: matches) {
             if (isMatchPlayed(match)) {
                 if (isLocalPlayer(player, match)) {
-                    totalSetsWon = totalSetsWon + match.getLocalPlayerSets();
+                    totalSetsWon = totalSetsWon + calculateLocalPlayerSetsWon(match);
                 } else {
-                    totalSetsWon = totalSetsWon + match.getVisitorPlayerSets();
+                    totalSetsWon = totalSetsWon + calculateVisitorPlayerSetsWon(match);
                 }
             }
         }
@@ -119,9 +119,9 @@ public final class RankingCalculateUtil {
         for (Match match : matches) {
             if (isMatchPlayed(match)) {
                 if (isLocalPlayer(player, match)) {
-                    totalSetsLoss = totalSetsLoss + match.getVisitorPlayerSets();
+                    totalSetsLoss = totalSetsLoss + calculateVisitorPlayerSetsWon(match);
                 } else {
-                    totalSetsLoss = totalSetsLoss + match.getLocalPlayerSets();
+                    totalSetsLoss = totalSetsLoss + calculateLocalPlayerSetsWon(match);
                 }
             }
         }
@@ -252,6 +252,26 @@ public final class RankingCalculateUtil {
     }
 
     /**
+     * Calculate the number of sets won by a local player in a match
+     *
+     * @param match the match
+     * @return total sets won
+     */
+    private static Integer calculateLocalPlayerSetsWon(Match match) {
+        return match.getLocalPlayerSets() != null ? match.getLocalPlayerSets() : 0;
+    }
+
+    /**
+     * Calculate the number of sets won by a visitor player in a match
+     *
+     * @param match the match
+     * @return total sets won
+     */
+    private static Integer calculateVisitorPlayerSetsWon(Match match) {
+        return match.getVisitorPlayerSets() != null ? match.getVisitorPlayerSets() : 0;
+    }
+
+    /**
      * Sum total local player games won in three sets
      * @param match the matches
      * @return total games won
@@ -349,15 +369,16 @@ public final class RankingCalculateUtil {
     private static String getMatchResult(Player player, Match match){
         if (isMatchPlayed(match)) {
             if (isLocalPlayer(player, match)) {
-                if (match.isLocalPlayerAbandoned()) return ABANDONED;
-                if (match.isLocalPlayerNotPresent()) return NOPRESENT;
-                if (match.getLocalPlayerSets() > match.getVisitorPlayerSets()) return WON;
-                if (match.getLocalPlayerSets() < match.getVisitorPlayerSets()) return LOSS;
+                if (match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned()) return ABANDONED;
+                if (match.isLocalPlayerNotPresent() != null && match.isLocalPlayerNotPresent()) return NOPRESENT;
+                if (match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned()) return WON;
+                if (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() > match.getVisitorPlayerSets()) return WON;
+                if (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() < match.getVisitorPlayerSets()) return LOSS;
             } else {
-                if (match.isVisitorPlayerAbandoned()) return ABANDONED;
-                if (match.isVisitorPlayerNotPresent()) return NOPRESENT;
-                if (match.getVisitorPlayerSets() > match.getLocalPlayerSets()) return WON;
-                if (match.getVisitorPlayerSets() < match.getLocalPlayerSets()) return LOSS;
+                if (match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned()) return ABANDONED;
+                if (match.isVisitorPlayerNotPresent() != null && match.isVisitorPlayerNotPresent()) return NOPRESENT;
+                if (match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() > match.getLocalPlayerSets()) return WON;
+                if (match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() < match.getLocalPlayerSets()) return LOSS;
             }
             return NN;
         } else {
@@ -381,8 +402,8 @@ public final class RankingCalculateUtil {
      * @return true if played
      */
     private static boolean isMatchPlayed(Match match) {
-        return match.isLocalPlayerAbandoned() != null || match.isVisitorPlayerAbandoned()
-            || match.isLocalPlayerNotPresent() || match.isVisitorPlayerNotPresent()
+        return match.isLocalPlayerAbandoned() != null || match.isVisitorPlayerAbandoned() != null
+            || match.isLocalPlayerNotPresent() != null || match.isVisitorPlayerNotPresent() != null
             || (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null);
     }
 
