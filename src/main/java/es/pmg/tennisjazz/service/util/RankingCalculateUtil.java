@@ -370,13 +370,16 @@ public final class RankingCalculateUtil {
         if (isMatchPlayed(match)) {
             if (isLocalPlayer(player, match)) {
                 if (match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned()) return ABANDONED;
-                if (match.isLocalPlayerNotPresent() != null && match.isLocalPlayerNotPresent()) return NOPRESENT;
                 if (match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned()) return WON;
+                if (match.isLocalPlayerNotPresent() != null && match.isLocalPlayerNotPresent()) return NOPRESENT;
+                if (match.isVisitorPlayerNotPresent() != null && match.isVisitorPlayerNotPresent()) return WON;
                 if (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() > match.getVisitorPlayerSets()) return WON;
                 if (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() < match.getVisitorPlayerSets()) return LOSS;
             } else {
                 if (match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned()) return ABANDONED;
+                if (match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned()) return WON;
                 if (match.isVisitorPlayerNotPresent() != null && match.isVisitorPlayerNotPresent()) return NOPRESENT;
+                if (match.isLocalPlayerNotPresent() != null && match.isLocalPlayerNotPresent()) return WON;
                 if (match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() > match.getLocalPlayerSets()) return WON;
                 if (match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() < match.getLocalPlayerSets()) return LOSS;
             }

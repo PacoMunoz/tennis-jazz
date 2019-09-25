@@ -111,21 +111,15 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     });
   }
 
-  previousState() {
-    window.history.back();
-  }
-
   save() {
     this.isSaving = true;
     const match = this.createFromForm();
     const updateLocalRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
     const updateVisitorRankingO = this.rankingService.updateTournamentPlayerRanking(match.visitorPlayer.id, match.round.id);
     if (match.id !== undefined) {
-      //this.subscribeToSaveResponse(this.matchService.update(match));
       const updateMatchO = this.matchService.update(match);
       this.subscribeToSaveUpdateResponse(concat(updateMatchO, updateLocalRankingO, updateVisitorRankingO));
     } else {
-      //this.subscribeToSaveResponse(this.matchService.create(match));
       const createO = this.matchService.create(match);
       this.subscribeToSaveUpdateResponse(concat(createO, updateLocalRankingO, updateVisitorRankingO));
     }
@@ -174,6 +168,10 @@ export class MatchTennisNewUpdateComponent implements OnInit {
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  previousState() {
+    window.history.back();
   }
 
   trackRoundById(index: number, item: IRoundTennis) {
