@@ -3,8 +3,7 @@
     <mat-grid-tile><h4>{{tournament.name}}</h4></mat-grid-tile>
 </mat-grid-list>
 <mat-tab-group mat-align-tabs="center">
-    <mat-tab  label="{{ 'tennisJazzApp.ranking.home.title' | translate }}">
-
+    <mat-tab  label="{{ 'tennisJazzApp.ranking.home.title' | translate }}" >
         <ng-template matTabContent>
             <mat-tab-group>
                 <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">

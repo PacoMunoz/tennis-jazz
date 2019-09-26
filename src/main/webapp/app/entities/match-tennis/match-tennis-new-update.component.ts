@@ -125,6 +125,38 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     }
   }
 
+  protected subscribeToSaveUpdateResponse(result: Observable<HttpResponse<IMatchTennis>>) {
+    result.subscribe(() => console.log('Correct saving/update process.'), () => this.onSaveError());
+    this.onSaveSuccess();
+  }
+
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  previousState() {
+    console.log('***************************** History back');
+
+    window.history.back();
+  }
+
+  trackRoundById(index: number, item: IRoundTennis) {
+    return item.id;
+  }
+
+  trackPlayerById(index: number, item: IPlayerTennis) {
+    return item.id;
+  }
+
   private createFromForm(): IMatchTennis {
     return {
       ...new MatchTennis(),
@@ -151,34 +183,5 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       visitorPlayer: this.editForm.get(['visitorPlayer']).value,
       localPlayer: this.editForm.get(['localPlayer']).value
     };
-  }
-
-  protected subscribeToSaveUpdateResponse(result: Observable<HttpResponse<IMatchTennis>>) {
-    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
-  }
-
-  protected onSaveSuccess() {
-    this.isSaving = false;
-    this.previousState();
-  }
-
-  protected onSaveError() {
-    this.isSaving = false;
-  }
-
-  protected onError(errorMessage: string) {
-    this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  previousState() {
-    window.history.back();
-  }
-
-  trackRoundById(index: number, item: IRoundTennis) {
-    return item.id;
-  }
-
-  trackPlayerById(index: number, item: IPlayerTennis) {
-    return item.id;
   }
 }
