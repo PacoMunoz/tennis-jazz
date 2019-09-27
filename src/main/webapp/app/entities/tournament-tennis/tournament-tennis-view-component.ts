@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
 import { ActivatedRoute } from '@angular/router';
 import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
-import { map, switchMap } from 'rxjs/operators';
 import { TournamentGroupTennisService } from 'app/entities/tournament-group-tennis';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { JhiAlertService } from 'ng-jhipster';

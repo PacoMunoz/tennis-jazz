@@ -27,6 +27,27 @@ export class TournamentTennisGroupRoundsComponent implements OnInit {
       );
   }
 
+  changeRounds() {
+    this.roundTennisService
+      .query({
+        'tournamentGroupId.equals': this.group.id,
+        'startDate.greaterThanOrEqual': this.formatDate(new Date()),
+        sort: this.sort()
+      })
+      .subscribe(
+        (res: HttpResponse<IRoundTennis[]>) => this.setRounds(res.body),
+        (error: HttpErrorResponse) => this.onError(error.message)
+      );
+  }
+
+  formatDate(date: Date) {
+    var day = date.getDay().toString();
+    var month = date.getMonth().toString();
+    var year = date.getFullYear();
+
+    return year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0');
+  }
+
   protected setRounds(data: IRoundTennis[]) {
     for (let i = 0; i < data.length; i++) {
       this.rounds.push(data[i]);
