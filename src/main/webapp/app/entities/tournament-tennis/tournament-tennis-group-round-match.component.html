@@ -1,7 +1,7 @@
-<div class="alert alert-warning" *ngIf="matches?.length === 0">
+<div *ngIf="matches?.length === 0" class="alert alert-warning">
     <span jhiTranslate="tennisJazzApp.match.home.notFound">No Matches found</span>
 </div>
-<div class="Match_wrapper container" *ngFor="let match of matches">
+<div *ngFor="let match of matches" class="Match_wrapper container">
     <div class="Match" >
         <div class="Match__body">
             <div class="Match__line Match__line--winner">

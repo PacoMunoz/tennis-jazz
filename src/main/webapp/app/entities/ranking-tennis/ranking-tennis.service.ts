@@ -39,7 +39,6 @@ export class RankingTennisService {
   }
 
   updateTournamentPlayerRanking(idPlayer: number, idRound: number) {
-    console.log('***************** Update Tournament Player Ranking for Player: ' + idPlayer + ' y round: ' + idRound);
     const options = createRequestOption({ idPlayer: idPlayer, idRound: idRound });
     return this.http.get<any>(this.resourceUrlUpdate, { params: options, observe: 'response' });
   }

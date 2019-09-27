@@ -29,7 +29,17 @@
       "tieBreaksPlayed": "Tie Breaks Played",
       "tieBreaksWon": "Tie Breaks Won",
       "tournamentGroup": "Tournament Group",
-      "player": "Player"
+      "player": "Player",
+      "xs": {
+        "points": "PT.",
+        "matchesPlayed": "PJ.",
+        "matchesWon": "PG.",
+        "matchesLoss": "PP.",
+        "setsWon": "SG.",
+        "setsLoss": "SP.",
+        "gamesWon": "JG.",
+        "gamesLoss": "JP."
+      }
     }
   }
 }

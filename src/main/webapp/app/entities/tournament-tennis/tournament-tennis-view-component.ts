@@ -15,6 +15,9 @@ export class TournamentTennisViewComponent implements OnInit {
   tournament: ITournamentTennis;
   tournamentGroups: ITournamentGroupTennis[];
 
+  selectedPrincipalTab: number = 0;
+  selectedGroupTab: number = 0;
+
   constructor(
     protected activatedRoute: ActivatedRoute,
     protected tournamentGroupTennisService: TournamentGroupTennisService,
@@ -24,6 +27,11 @@ export class TournamentTennisViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(param => {
+      if (param['fromsu'] != null) {
+        this.selectedPrincipalTab = 1;
+      }
+    });
     this.activatedRoute.data.subscribe(({ tournament }) => {
       this.tournament = tournament;
       this.tournamentGroupTennisService
@@ -36,21 +44,6 @@ export class TournamentTennisViewComponent implements OnInit {
           (res: HttpErrorResponse) => this.onError(res.message)
         );
     });
-    /* this.activatedRoute.data.subscribe(
-            map(
-                tournament => {
-                    this.tournament = tournament;
-                    this.tournamentGroupTennisService
-                        .query({
-                            'tournamentId.equals': this.tournament.id
-                        })
-                        .subscribe(
-                            (res: HttpResponse<ITournamentGroupTennis[]>) => this.setTournamentGroups(res.body),
-                            (res: HttpErrorResponse) => this.onError(res.message)
-                        );
-                }
-            )
-        )*/
   }
 
   protected setTournamentGroups(data: ITournamentGroupTennis[]) {

@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
-import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
 import { IRoundTennis } from 'app/shared/model/round-tennis.model';
 import { IMatchTennis, MatchTennis } from 'app/shared/model/match-tennis.model';
-import { TournamentTennisService } from 'app/entities/tournament-tennis';
-import { TournamentGroupTennisService } from 'app/entities/tournament-group-tennis';
 import { RoundTennisService } from 'app/entities/round-tennis';
 import { MatchTennisService } from 'app/entities/match-tennis/match-tennis.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { JhiAlertService } from 'ng-jhipster';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis';
 import { filter, map } from 'rxjs/operators';
-import { Observable, merge, concat } from 'rxjs';
+import { Observable, concat } from 'rxjs';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
 
 @Component({
@@ -60,6 +56,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     protected playerService: PlayerTennisService,
     protected rankingService: RankingTennisService,
     protected activatedRoute: ActivatedRoute,
+    protected router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -144,9 +141,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   previousState() {
-    console.log('***************************** History back');
-
-    window.history.back();
+    this.router.navigate(['tournament-tennis', 1, 'view'], { queryParams: { fromsu: 2 } });
   }
 
   trackRoundById(index: number, item: IRoundTennis) {
