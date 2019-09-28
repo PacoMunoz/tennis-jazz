@@ -11,11 +11,18 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 export class TournamentTennisGroupRoundsComponent implements OnInit {
   @Input() group;
   rounds: IRoundTennis[];
+  isShowingAllRounds: boolean;
 
   constructor(protected roundTennisService: RoundTennisService, protected jhiAlertService: JhiAlertService) {
     this.rounds = [];
   }
+
   ngOnInit(): void {
+    this.getCurrentRound();
+  }
+
+  getAllRounds() {
+    this.isShowingAllRounds = true;
     this.roundTennisService
       .query({
         'tournamentGroupId.equals': this.group.id,
@@ -27,11 +34,13 @@ export class TournamentTennisGroupRoundsComponent implements OnInit {
       );
   }
 
-  changeRounds() {
+  getCurrentRound() {
+    this.isShowingAllRounds = false;
     this.roundTennisService
       .query({
         'tournamentGroupId.equals': this.group.id,
-        'startDate.greaterThanOrEqual': this.formatDate(new Date()),
+        'startDate.lessThanOrEqual': this.formatDate(new Date()),
+        'endDate.greaterThanOrEqual': this.formatDate(new Date()),
         sort: this.sort()
       })
       .subscribe(
@@ -40,22 +49,23 @@ export class TournamentTennisGroupRoundsComponent implements OnInit {
       );
   }
 
-  formatDate(date: Date) {
-    var day = date.getDay().toString();
-    var month = date.getMonth().toString();
-    var year = date.getFullYear();
+  protected formatDate(date: Date) {
+    const day = date.getDate().toString();
+    const month = (date.getMonth() + 1).toString();
+    const year = date.getFullYear();
 
     return year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0');
   }
 
   protected setRounds(data: IRoundTennis[]) {
+    this.rounds = [];
     for (let i = 0; i < data.length; i++) {
       this.rounds.push(data[i]);
     }
   }
 
   sort() {
-    return ['startDate' + ',' + 'desc'];
+    return ['startDate' + ',' + 'asc'];
   }
 
   protected onError(errorMessage: string) {
