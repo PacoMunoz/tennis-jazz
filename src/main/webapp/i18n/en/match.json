@@ -4,7 +4,7 @@
       "home": {
         "title": "Matches",
         "createLabel": "Create a new Match",
-        "createOrEditLabel": "Create or edit a Match",
+        "editLabel": "Edit Match",
         "notFound": "No Matches found"
       },
       "created": "A new Match is created with identifier {{ param }}",

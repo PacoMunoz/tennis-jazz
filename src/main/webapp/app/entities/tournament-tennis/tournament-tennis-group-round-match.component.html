@@ -1,7 +1,7 @@
 <div *ngIf="matches?.length === 0" class="alert alert-warning">
     <span jhiTranslate="tennisJazzApp.match.home.notFound">No Matches found</span>
 </div>
-<div *ngFor="let match of matches" class="Match_wrapper container">
+<div *ngFor="let match of matches" class="Match_wrapper container" [ngSwitch]="isAuthenticated()">
     <div class="Match" >
         <div class="Match__body">
             <div class="Match__line Match__line--winner">
@@ -52,12 +52,12 @@
             </div>
         </div>
     </div>
-    <div style="height: 40px;">
+    <div class="row center-content" *ngSwitchCase="true" >
         <button id="jh-create-entity" class="btn-xs btn-primary btn-xs float-left jh-create-entity create-tournament-tennis"
                 [routerLink]="['/match-tennis', match.id, 'new-update']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="tennisJazzApp.match.home.createOrEditLabel">
-                Create or edit a Match
+            <span  jhiTranslate="tennisJazzApp.match.home.editLabel">
+                Edit Match
                 </span>
         </button>
     </div>

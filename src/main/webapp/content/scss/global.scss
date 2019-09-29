@@ -184,6 +184,7 @@ custom css styles
   align-items: center;
   text-align: center;
 }
+
 @media screen and (min-width: 1280px) {
   .wrapper {
     padding-left: 40px;
@@ -191,6 +192,7 @@ custom css styles
     max-width: 1280px;
   }
 }
+
 @media screen and (min-width: 1024px) {
   .wrapper {
     padding-left: 32px;
@@ -198,6 +200,7 @@ custom css styles
     max-width: 1264px;
   }
 }
+
 @media screen and (min-width: 768px) {
   .wrapper {
     padding-left: 24px;
@@ -205,6 +208,7 @@ custom css styles
     max-width: 1248px;
   }
 }
+
 .wrapper {
   margin-right: auto;
   margin-left: auto;
@@ -488,22 +492,41 @@ ul {
 .mat-tab-header {
   font-weight: 700;
   text-transform: uppercase;
-  color: #1e1e1e;
 }
+
 .tournament-mat-tab-body {
   margin-top: 15px;
 }
+
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: red;
+  background-color: #9840f0;
+  height: 5px;
+}
+.mat-tab-group.mat-primary:hover .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary:hover .mat-ink-bar {
+  background-color: #9840f0;
   height: 5px;
 }
 
+.dropdown-item {
+  color: #ffffff !important;
+  background-color: #ee2982 !important;
+}
+.dropdown-item:hover {
+  text-decoration: underline !important;
+  background-color: #ee2982 !important;
+}
+
+.dropdown-menu {
+  padding: 0 !important;
+}
 /* ===================================== custom mat-card for players ============================= */
 
 .example-header-image {
   background-size: cover;
 }
+
 .player-card-phone-number {
   position: relative;
   bottom: 5px;
@@ -533,5 +556,54 @@ h6,
 .h6 {
   color: #1e1e1e;
 }
+
 //colores principal #3f1052, verde #00ff87 y #e90052
+
 //colores principal #3f1052, verde #00ff87 y #e90052
+.prueba {
+  color: #3f1052;
+}
+
+.prueba2 {
+  color: #00ff87;
+}
+
+.prueba3 {
+  color: #e90052;
+}
+
+.premier {
+  color: #ff2882;
+}
+
+.cabecera {
+  color: #38003c;
+  text-color: #ffffff;
+}
+
+.bg-purple {
+  background-image: none !important;
+  background-color: #38003c !important;
+}
+
+.btn-outline-purple,
+.btn-outline-purple:hover {
+  border-color: #38003c;
+}
+
+.btn-outline-purple {
+  border-radius: var(--border-radius);
+}
+
+.btn-outline-purple:hover {
+  box-shadow: inset 0 0 0 20rem var(--darken-1);
+}
+
+.btn-outline-purple:active {
+  box-shadow: inset 0 0 0 20rem var(--darken-2), inset 0 3px 4px 0 var(--darken-3), 0 0 1px var(--darken-2);
+}
+
+.btn-outline-purple:disabled,
+.btn-outline-purple.is-disabled {
+  opacity: 0.5;
+}

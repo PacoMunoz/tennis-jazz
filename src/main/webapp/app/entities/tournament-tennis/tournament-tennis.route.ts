@@ -7,7 +7,6 @@ import { filter, map } from 'rxjs/operators';
 import { TournamentTennis } from 'app/shared/model/tournament-tennis.model';
 import { TournamentTennisService } from './tournament-tennis.service';
 import { TournamentTennisComponent } from './tournament-tennis.component';
-import { TournamentTennisDetailComponent } from './tournament-tennis-detail.component';
 import { TournamentTennisUpdateComponent } from './tournament-tennis-update.component';
 import { TournamentTennisDeletePopupComponent } from './tournament-tennis-delete-dialog.component';
 import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
@@ -46,7 +45,7 @@ export const tournamentRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]

@@ -3,6 +3,9 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginModalService, AccountService, Account } from 'app/core';
+import { TournamentTennisService } from 'app/entities/tournament-tennis';
+import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-home',
@@ -10,13 +13,15 @@ import { LoginModalService, AccountService, Account } from 'app/core';
   styleUrls: ['home.scss']
 })
 export class HomeComponent implements OnInit {
+  tournaments: ITournamentTennis[];
   account: Account;
   modalRef: NgbModalRef;
 
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
-    private eventManager: JhiEventManager
+    private eventManager: JhiEventManager,
+    private tournamentService: TournamentTennisService
   ) {}
 
   ngOnInit() {
@@ -24,6 +29,12 @@ export class HomeComponent implements OnInit {
       this.account = account;
     });
     this.registerAuthenticationSuccess();
+    this.tournamentService
+      .query()
+      .subscribe(
+        (res: HttpResponse<ITournamentTennis[]>) => (this.tournaments = res.body),
+        (error: HttpErrorResponse) => console.error(error.message)
+      );
   }
 
   registerAuthenticationSuccess() {

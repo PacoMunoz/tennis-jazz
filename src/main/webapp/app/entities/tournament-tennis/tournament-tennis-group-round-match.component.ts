@@ -3,6 +3,7 @@ import { IMatchTennis } from 'app/shared/model/match-tennis.model';
 import { MatchTennisService } from 'app/entities/match-tennis';
 import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { AccountService } from 'app/core';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-round-match',
@@ -12,7 +13,11 @@ export class TournamentTennisGroupRoundMatchComponent implements OnInit {
   @Input() round;
   matches: IMatchTennis[];
 
-  constructor(protected matchTennisService: MatchTennisService, protected jhiAlertService: JhiAlertService) {
+  constructor(
+    protected matchTennisService: MatchTennisService,
+    protected jhiAlertService: JhiAlertService,
+    protected accountService: AccountService
+  ) {
     this.matches = [];
   }
 
@@ -35,5 +40,9 @@ export class TournamentTennisGroupRoundMatchComponent implements OnInit {
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
   }
 }

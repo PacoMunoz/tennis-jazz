@@ -4,6 +4,7 @@ import { PlayerTennisService } from 'app/entities/player-tennis';
 import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AccountService } from 'app/core';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-player',
@@ -16,7 +17,8 @@ export class TournamentTennisGroupPlayerComponent implements OnInit {
   constructor(
     protected playerTennisService: PlayerTennisService,
     protected jhiAlertService: JhiAlertService,
-    protected sanitizer: DomSanitizer
+    protected sanitizer: DomSanitizer,
+    protected accountService: AccountService
   ) {
     this.players = [];
   }
@@ -42,5 +44,9 @@ export class TournamentTennisGroupPlayerComponent implements OnInit {
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
   }
 }

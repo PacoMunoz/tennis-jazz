@@ -13,9 +13,7 @@ import { JhiAlertService } from 'ng-jhipster';
 export class TournamentTennisViewComponent implements OnInit {
   tournament: ITournamentTennis;
   tournamentGroups: ITournamentGroupTennis[];
-
   selectedPrincipalTab: number = 0;
-  selectedGroupTab: number = 0;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -56,7 +54,6 @@ export class TournamentTennisViewComponent implements OnInit {
   }
 
   sort() {
-    const result = ['name' + ',' + 'asc'];
-    return result;
+    return ['name' + ',' + 'asc'];
   }
 }

@@ -4,7 +4,7 @@
       "home": {
         "title": "Matches",
         "createLabel": "Crear nuevo Match",
-        "createOrEditLabel": "Crear o editar Match",
+        "editLabel": "Editar Partido",
         "notFound": "No Matches found"
       },
       "created": "Un nuevo Match ha sido creado con el identificador {{ param }}",
