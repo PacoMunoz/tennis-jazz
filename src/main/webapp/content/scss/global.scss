@@ -503,6 +503,7 @@ ul {
   background-color: #9840f0;
   height: 5px;
 }
+
 .mat-tab-group.mat-primary:hover .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary:hover .mat-ink-bar {
   background-color: #9840f0;
@@ -513,6 +514,7 @@ ul {
   color: #ffffff !important;
   background-color: #ee2982 !important;
 }
+
 .dropdown-item:hover {
   text-decoration: underline !important;
   background-color: #ee2982 !important;
@@ -521,6 +523,7 @@ ul {
 .dropdown-menu {
   padding: 0 !important;
 }
+
 /* ===================================== custom mat-card for players ============================= */
 
 .example-header-image {
@@ -532,12 +535,19 @@ ul {
   bottom: 5px;
 }
 
+.mat-card {
+  background-color: #ff2882;
+  color: #ffffff;
+}
+.mat-card-subtitle {
+  color: #37003c;
+}
+
 /* ===================================== custom styles ========================================== */
 
 hr {
   margin-top: 0rem;
   margin-bottom: 1rem;
-  //border: 0;
   border-top: 0px solid rgba(0, 0, 0, 0.1);
   border-color: #da291c;
 }
@@ -557,33 +567,22 @@ h6,
   color: #1e1e1e;
 }
 
-//colores principal #3f1052, verde #00ff87 y #e90052
+/* ===================================== custom styles ========================================== */
 
-//colores principal #3f1052, verde #00ff87 y #e90052
-.prueba {
+.colores {
   color: #3f1052;
-}
-
-.prueba2 {
   color: #00ff87;
-}
-
-.prueba3 {
   color: #e90052;
-}
-
-.premier {
   color: #ff2882;
 }
 
-.cabecera {
-  color: #38003c;
-  text-color: #ffffff;
+.text-pink {
+  color: #e90052;
 }
 
 .bg-purple {
   background-image: none !important;
-  background-color: #38003c !important;
+  background-color: #3f1052 !important;
 }
 
 .btn-outline-purple,
@@ -606,4 +605,33 @@ h6,
 .btn-outline-purple:disabled,
 .btn-outline-purple.is-disabled {
   opacity: 0.5;
+}
+
+/* ===================================== footer ========================================== */
+
+.footer {
+  background-color: #3f1052;
+}
+
+.footer-img {
+  margin: 25px;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.jazz-img {
+  background: url('../images/jazz-inverse-white.png') no-repeat center center;
+  background-size: contain;
+}
+
+.tennis-w-img {
+  background: url('../images/tennis-white.png') no-repeat center center;
+  background-size: contain;
+}
+
+.tennis-m-img {
+  background: url('../images/tennis-man-white.png') no-repeat center center;
+  background-size: contain;
 }

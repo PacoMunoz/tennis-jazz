@@ -1,22 +1,22 @@
 <div class="row">
     <div class="col-md-12 center-content">
         <div>
-            <span class="display-4 h1">Bienvenidos a <span jhiTranslate="global.title">Tennis & Jazz</span></span>
+            <span class="display-4 h1" jhiTranslate="global.title">Tennis & Jazz</span>
             <span class="h6"><kbd class="text">Beta</kbd></span>
         </div>
-        <p class="lead">Selecciona la liga que quieres consultar:</p>
+        <p class="lead">Gestor de Ligas de Tenis</p>
     </div>
     <div class="col-md-12">
         <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px">
             <mat-card class="mw-50 mb-3" style="cursor: pointer" fxFlex="30%" fxFlex.lt-md="45%" fxFlex.lt-sm="100%"
                       [routerLink]="['tournament-tennis', tournament.id, 'view']"
                       *ngFor="let tournament of tournaments">
-                <mat-card-header>
+                <mat-card-header class="center-content">
                     <mat-card-title> {{tournament.name}} </mat-card-title>
                     <mat-card-subtitle>Del {{tournament.startDate|date}}
                         al {{tournament.endDate|date}} </mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
+                <mat-card-content class="center-content">
                     <mat-card-subtitle>
                     <span>
                         <mat-icon aria-hidden="false" aria-label="phone">smartphone</mat-icon>
