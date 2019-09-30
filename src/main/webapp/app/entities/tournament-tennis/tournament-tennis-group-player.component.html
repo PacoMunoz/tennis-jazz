@@ -1,7 +1,7 @@
 <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px"  [ngSwitch]="isAuthenticated()">
         <mat-card class="mw-50 mb-3" fxFlex="30%" fxFlex.lt-md="45%" fxFlex.lt-sm="100%" *ngFor="let player of players" >
             <mat-card-header>
-                <img mat-card-avatar class="example-header-image" [src]="player.avatar" />
+                <img mat-card-avatar class="mat-card-avatar" [src]="player.avatar" />
                 <mat-card-title> {{player.name}} {{player.surname}} </mat-card-title>
                 <mat-card-subtitle *ngSwitchCase="true"> {{player.email}} </mat-card-subtitle>
             </mat-card-header>

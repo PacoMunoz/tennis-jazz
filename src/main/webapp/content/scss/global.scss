@@ -489,12 +489,12 @@ ul {
 
 /* ===================================== custom mat-tab-group ============================= */
 
-.mat-tab-header {
+.mat-tab-tournament-view .mat-tab-header {
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.tournament-mat-tab-body {
+.mat-tab-tournament-view .tournament-mat-tab-body {
   margin-top: 15px;
 }
 
@@ -504,11 +504,36 @@ ul {
   height: 5px;
 }
 
-.mat-tab-group.mat-primary:hover .mat-ink-bar,
-.mat-tab-nav-bar.mat-primary:hover .mat-ink-bar {
+/*.mat-tab-tournament-view .mat-tab-group.mat-primary:hover .mat-ink-bar,
+.mat-tab-tournament-view .mat-tab-nav-bar.mat-primary:hover .mat-ink-bar {
   background-color: #9840f0;
   height: 5px;
+}*/
+
+/* ===================================== custom tournament-card ============================= */
+
+.tournament-card .mat-card {
+  background-color: #ff2882;
+  color: #ffffff;
 }
+.tournament-card .mat-card-subtitle {
+  color: #37003c;
+}
+
+.tournament-card .mat-card-avatar {
+  background-size: cover;
+}
+
+.tournament-card .card-phone-number {
+  position: relative;
+  bottom: 5px;
+}
+.tournament-card mat-card-title {
+  font-size: 24px !important;
+  font-weight: 500;
+}
+
+/* ===================================== custom navigator ============================= */
 
 .dropdown-item {
   color: #ffffff !important;
@@ -525,23 +550,6 @@ ul {
 }
 
 /* ===================================== custom mat-card for players ============================= */
-
-.example-header-image {
-  background-size: cover;
-}
-
-.player-card-phone-number {
-  position: relative;
-  bottom: 5px;
-}
-
-.mat-card {
-  background-color: #ff2882;
-  color: #ffffff;
-}
-.mat-card-subtitle {
-  color: #37003c;
-}
 
 /* ===================================== custom styles ========================================== */
 
@@ -580,9 +588,24 @@ h6,
   color: #e90052;
 }
 
+.btn-white {
+  background-color: #fff;
+  color: #2f2f2f;
+}
+
+.btn-white:hover {
+  background-color: #00ff87;
+  color: #fff;
+}
+
 .bg-purple {
   background-image: none !important;
   background-color: #3f1052 !important;
+}
+
+.bg-pink {
+  background-image: none !important;
+  background-color: #ff2882 !important;
 }
 
 .btn-outline-purple,
