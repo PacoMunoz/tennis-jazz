@@ -244,7 +244,7 @@ custom css styles
 }
 
 .Match__body:hover {
-  border: 2px solid #da291c;
+  border: 2px solid #ff2882;
 }
 
 .Match__line:not(:last-child) {
@@ -309,7 +309,7 @@ custom css styles
 }
 
 .Match__winner svg * {
-  fill: #da291c;
+  fill: #ff2882;
 }
 
 .Match__winner svg {
@@ -375,10 +375,10 @@ ul {
 .Draw-round__name {
   font-size: 13px;
   line-height: 16px;
-  color: #da291c;
+  color: #ff2882;
   font-weight: 700;
   padding-bottom: 16px;
-  border-bottom: 2px solid #da291c;
+  border-bottom: 2px solid #ff2882;
   width: 100%;
   text-transform: uppercase;
   position: absolute;
@@ -584,10 +584,6 @@ h6,
   color: #ff2882;
 }
 
-.text-pink {
-  color: #e90052;
-}
-
 .btn-white {
   background-color: #fff;
   color: #2f2f2f;
@@ -608,26 +604,37 @@ h6,
   background-color: #ff2882 !important;
 }
 
-.btn-outline-purple,
-.btn-outline-purple:hover {
-  border-color: #38003c;
-}
+/* ===================================== custom outline bottom ========================================== */
 
 .btn-outline-purple {
-  border-radius: var(--border-radius);
+  color: #3f1052;
+  border-color: #3f1052;
 }
-
 .btn-outline-purple:hover {
-  box-shadow: inset 0 0 0 20rem var(--darken-1);
+  color: #fff;
+  background-color: #3f1052;
+  border-color: #3f1052;
 }
-
-.btn-outline-purple:active {
-  box-shadow: inset 0 0 0 20rem var(--darken-2), inset 0 3px 4px 0 var(--darken-3), 0 0 1px var(--darken-2);
+.btn-outline-purple:focus,
+.btn-outline-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(63, 16, 82, 0.5);
 }
-
-.btn-outline-purple:disabled,
-.btn-outline-purple.is-disabled {
-  opacity: 0.5;
+.btn-outline-purple.disabled,
+.btn-outline-purple:disabled {
+  color: #3f1052;
+  background-color: transparent;
+}
+.btn-outline-purple:not(:disabled):not(.disabled):active,
+.btn-outline-purple:not(:disabled):not(.disabled).active,
+.show > .btn-outline-purple.dropdown-toggle {
+  color: #fff;
+  background-color: #3f1052;
+  border-color: #3f1052;
+}
+.btn-outline-purple:not(:disabled):not(.disabled):active:focus,
+.btn-outline-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(63, 16, 82, 0.5);
 }
 
 /* ===================================== footer ========================================== */

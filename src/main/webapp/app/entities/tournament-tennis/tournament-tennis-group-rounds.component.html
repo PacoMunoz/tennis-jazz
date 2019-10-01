@@ -1,11 +1,11 @@
 <div class="center-content">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-danger" [ngClass]="isShowingAllRounds ? '' : 'active' ">
+        <label class="btn btn-outline-purple" [ngClass]="isShowingAllRounds ? '' : 'active' ">
             <input type="radio" name="options" id="option1" autocomplete="off" (click)="getCurrentRound()">
             <span class="d-md-inline"
                   jhiTranslate="tennisJazzApp.round.showCurrent">Show Current</span>
         </label>
-        <label class="btn btn-outline-danger" [ngClass]="isShowingAllRounds ? 'active' : '' ">
+        <label class="btn btn-outline-purple" [ngClass]="isShowingAllRounds ? 'active' : '' ">
             <input type="radio" name="options" id="option2" autocomplete="off" (click)="getAllRounds()" >
             <span class="d-md-inline"
                   jhiTranslate="tennisJazzApp.round.showAll">Show All</span>
