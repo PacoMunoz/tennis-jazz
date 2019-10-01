@@ -409,86 +409,6 @@ ul {
   }
 }
 
-/* ================== round selector style ============================= */
-/*
-.round-selector-bar {
-  padding-top: 12px;
-  background-color: #f7f7f7;
-  border-bottom: 2px solid #ebedf0;
-  -webkit-transition: all 0.5s linear;
-  transition: all 0.5s linear;
-}
-
-.Draw-rounds,
-.Draw-rounds ul {
-  display: -webkit-box;
-  display: flex;
-}
-
-.Draw-rounds {
-  font-size: 75%;
-  line-height: 16px;
-  font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-  -webkit-box-pack: center;
-  justify-content: center;
-}
-
-.Draw-rounds li {
-  padding-left: 6px;
-  padding-right: 6px;
-}
-
-.Draw-rounds a.selected {
-  color: #1e1e1e;
-  border: 2px solid #1e1e1e;
-  border-radius: 20px;
-  padding: 3px 10px;
-}
-
-.Draw-rounds a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.Draw-rounds_xs {
-  display: block;
-}
-
-@media screen and (min-width: 768px) {
-  .Draw-rounds_xs {
-    display: none;
-  }
-}
-@media screen and (max-width: 767px) {
-  .Draw-rounds {
-    display: none;
-  }
-}
-*/
-/* ================== material select styles ============================= */
-/*
-.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-  color: #da291c;
-}
-.mat-form-field.mat-focused {
-  color: #da291c !important;
-}
-.mat-form-field-label {
-  color: #da291c !important;
-}
-.mat-form-field.mat-focused.mat-primary {
-  color: #da291c !important;
-}
-
-.mat-form-field-ripple {
-  background-color: #da291c !important;
-}
-*/
-
-/* ===================================== custom mat-tab-group ============================= */
-
 .mat-tab-tournament-view .mat-tab-header {
   font-weight: 700;
   text-transform: uppercase;
@@ -503,12 +423,6 @@ ul {
   background-color: #9840f0;
   height: 5px;
 }
-
-/*.mat-tab-tournament-view .mat-tab-group.mat-primary:hover .mat-ink-bar,
-.mat-tab-tournament-view .mat-tab-nav-bar.mat-primary:hover .mat-ink-bar {
-  background-color: #9840f0;
-  height: 5px;
-}*/
 
 /* ===================================== custom tournament-card ============================= */
 
