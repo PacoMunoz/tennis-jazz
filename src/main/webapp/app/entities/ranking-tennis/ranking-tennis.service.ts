@@ -38,8 +38,9 @@ export class RankingTennisService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  updateTournamentPlayerRanking(idPlayer: number, idRound: number) {
-    const options = createRequestOption({ idPlayer: idPlayer, idRound: idRound });
+  updateTournamentPlayerRanking(playerid: number, roundid: number) {
+    const req = { idPlayer: playerid, idRound: roundid };
+    const options = createRequestOption(req);
     return this.http.get<any>(this.resourceUrlUpdate, { params: options, observe: 'response' });
   }
 }

@@ -36,7 +36,7 @@ export class TournamentTennisGroupPlayerComponent implements OnInit {
 
   protected setPlayers(data: IPlayerTennis[]) {
     for (let i = 0; i < data.length; i++) {
-      let thumbnail = 'data:' + data[i].avatarContentType + ';base64,' + data[i].avatar;
+      const thumbnail = 'data:' + data[i].avatarContentType + ';base64,' + data[i].avatar;
       data[i].avatar = this.sanitizer.bypassSecurityTrustUrl(thumbnail);
       this.players.push(data[i]);
     }

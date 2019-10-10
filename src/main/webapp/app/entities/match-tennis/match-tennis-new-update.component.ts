@@ -14,7 +14,7 @@ import { Observable, concat } from 'rxjs';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
 
 @Component({
-  selector: 'jhi-match-tennis-newUpdate',
+  selector: 'jhi-match-tennis-new-update',
   templateUrl: './match-tennis-new-update.component.html'
 })
 export class MatchTennisNewUpdateComponent implements OnInit {

@@ -13,7 +13,7 @@ import { JhiAlertService } from 'ng-jhipster';
 export class TournamentTennisViewComponent implements OnInit {
   tournament: ITournamentTennis;
   tournamentGroups: ITournamentGroupTennis[];
-  selectedPrincipalTab: number = 0;
+  selectedPrincipalTab = 0;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
