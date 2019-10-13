@@ -4,7 +4,7 @@
 <div *ngFor="let match of matches" class="Match_wrapper container" [ngSwitch]="isAuthenticated()">
     <div class="Match" >
         <div class="Match__body">
-            <div class="Match__line Match__line--winner">
+            <div class="Match__line" [ngClass]="{'Match__line--winner' : match.localPlayerSets > match.visitorPlayerSets || match.visitorPlayerAbandoned || match.visitorPlayerNotPresent}">
                 <div class="Match__player__holder">
                     <div class="Match__player">
                         <span class="Match__player__fn">{{match.localPlayer.name}}</span>
@@ -13,7 +13,7 @@
                         <!--<span class="Match__player__seed">[16]</span> -->
                     </div>
                 </div>
-                <div class="Match__winner">
+                <div class="Match__winner" *ngIf="match.localPlayerSets > match.visitorPlayerSets || match.visitorPlayerAbandoned || match.visitorPlayerNotPresent">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                               d="m5.23685955 13.7247081-4.23685955-6.05086255 1.63830409-1.14715287 2.869736 4.09840772 8.62510041-8.6251004 1.4142136 1.41421356z"></path>
@@ -30,7 +30,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="Match__line">
+            <div class="Match__line" [ngClass]="{'Match__line--winner' : match.localPlayerSets < match.visitorPlayerSets || match.localPlayerAbandoned || match.localPlayerNotPresent}">
                 <div class="Match__player__holder">
                     <div class="Match__player">
                         <span class="Match__player__fn">{{match.visitorPlayer.name}}</span>
@@ -38,6 +38,12 @@
                         <span class="Match__player__ln">{{match.visitorPlayer.surname}}</span>
                         <!--<span class="Match__player__seed">[16]</span> -->
                     </div>
+                </div>
+                <div class="Match__winner" *ngIf="match.visitorPlayerSets > match.localPlayerSets || match.localPlayerAbandoned || match.localPlayerNotPresent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="m5.23685955 13.7247081-4.23685955-6.05086255 1.63830409-1.14715287 2.869736 4.09840772 8.62510041-8.6251004 1.4142136 1.41421356z"></path>
+                    </svg>
                 </div>
                 <div class="Match__set">
                     <ul><!---->
