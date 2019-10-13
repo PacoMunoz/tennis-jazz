@@ -217,13 +217,15 @@ custom css styles
   max-width: 1240px;
 }
 
-.container-fluid {
-  padding: 0px !important;
-}
+@media screen and (max-width: 414px) {
+  .container-fluid {
+    padding: 0px !important;
+  }
 
-.jh-card {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+  .jh-card {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 
 /* ================== match and round styles ============================= */
