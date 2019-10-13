@@ -11,6 +11,18 @@ import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
 export class TournamentTennisGroupRankingComponent implements OnInit {
   @Input() group;
   ranking: IRankingTennis[];
+  displayedColumns = [
+    '#',
+    'name',
+    'points',
+    'matches-played',
+    'matches-won',
+    'matches-loss',
+    'sets-won',
+    'sets-loss',
+    'games-won',
+    'games-loss'
+  ];
 
   constructor(private rankingTennisService: RankingTennisService, private jhiAlertService: JhiAlertService) {
     this.ranking = [];

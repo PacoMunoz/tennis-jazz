@@ -581,3 +581,29 @@ h6,
   background: url('../images/tennis-man-white.png') no-repeat center center;
   background-size: contain;
 }
+
+/* ===================================== ranking table ========================================== */
+
+.ranking-table .position-col {
+  background-color: #fbfbfb;
+}
+
+.ranking-table table {
+  border: 1px solid #dee2e6;
+}
+
+.ranking-table thead {
+  background-color: #fbfbfb;
+}
+
+.ranking-table th {
+  vertical-align: middle;
+}
+
+.mat-table-sticky:nth-child(2) {
+  border-right: 1px solid #e0e0e0;
+}
+th.mat-column-points,
+td.mat-column-points {
+  padding-left: 25px !important;
+}
