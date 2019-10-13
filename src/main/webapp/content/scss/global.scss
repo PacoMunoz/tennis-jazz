@@ -414,15 +414,31 @@ ul {
 .mat-tab-tournament-view .mat-tab-header {
   font-weight: 700;
   text-transform: uppercase;
+  background-color: #3f1052;
+}
+
+.mat-tab-tournament-view .mat-tab-label,
+.mat-tab-link {
+  color: #ffffff;
 }
 
 .mat-tab-tournament-view .tournament-mat-tab-body {
-  margin-top: 15px;
+  margin-top: 25px;
+}
+.mat-tab-tournament-view .mat-bottom-tab-tournament-view .mat-tab-header {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.mat-tab-tournament-view .mat-tab-header,
+.mat-tab-tournament-view .mat-tab-nav-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 2px solid rgba(255, 255, 255, 0.12);
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: #9840f0;
+  background-color: #00ff87;
   height: 5px;
 }
 
@@ -432,6 +448,7 @@ ul {
   background-color: #ff2882;
   color: #ffffff;
 }
+
 .tournament-card .mat-card-subtitle {
   color: #37003c;
 }
@@ -444,6 +461,7 @@ ul {
   position: relative;
   bottom: 5px;
 }
+
 .tournament-card mat-card-title {
   font-size: 24px !important;
   font-weight: 500;
@@ -526,20 +544,24 @@ h6,
   color: #3f1052;
   border-color: #3f1052;
 }
+
 .btn-outline-purple:hover {
   color: #fff;
   background-color: #3f1052;
   border-color: #3f1052;
 }
+
 .btn-outline-purple:focus,
 .btn-outline-purple.focus {
   box-shadow: 0 0 0 0.2rem rgba(63, 16, 82, 0.5);
 }
+
 .btn-outline-purple.disabled,
 .btn-outline-purple:disabled {
   color: #3f1052;
   background-color: transparent;
 }
+
 .btn-outline-purple:not(:disabled):not(.disabled):active,
 .btn-outline-purple:not(:disabled):not(.disabled).active,
 .show > .btn-outline-purple.dropdown-toggle {
@@ -547,6 +569,7 @@ h6,
   background-color: #3f1052;
   border-color: #3f1052;
 }
+
 .btn-outline-purple:not(:disabled):not(.disabled):active:focus,
 .btn-outline-purple:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-purple.dropdown-toggle:focus {
@@ -584,25 +607,27 @@ h6,
 
 /* ===================================== ranking table ========================================== */
 
-.ranking-table .position-col {
-  background-color: #fbfbfb;
-}
-
 .ranking-table table {
   border: 1px solid #dee2e6;
+}
+
+.ranking-table .table thead th {
+  vertical-align: middle;
+}
+
+.ranking-table .table th,
+.table td {
+  vertical-align: middle;
 }
 
 .ranking-table thead {
   background-color: #fbfbfb;
 }
 
-.ranking-table th {
-  vertical-align: middle;
-}
-
 .mat-table-sticky:nth-child(2) {
   border-right: 1px solid #e0e0e0;
 }
+
 th.mat-column-points,
 td.mat-column-points {
   padding-left: 25px !important;
