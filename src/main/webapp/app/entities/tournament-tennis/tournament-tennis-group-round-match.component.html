@@ -26,11 +26,23 @@
                         <div class="Match__set">
                             <ul><!---->
                                 <li>
-                                    {{match.localPlayerSet1Result}}<!----></li>
+                                    {{match.localPlayerSet1Result}}
+                                    <sup *ngIf="match.localPlayerTBSet1Result != null">
+                                        {{match.localPlayerTBSet1Result}}
+                                    </sup>
+                                </li>
                                 <li>
-                                    {{match.localPlayerSet2Result}}<sup></sup></li>
+                                    {{match.localPlayerSet2Result}}
+                                    <sup *ngIf="match.localPlayerTBSet2Result != null">
+                                        {{match.localPlayerTBSet2Result}}
+                                    </sup>
+                                </li>
                                 <li *ngIf="match.localPlayerSet3Result != null">
-                                    {{match.localPlayerSet3Result}}<!----></li>
+                                    {{match.localPlayerSet3Result}}
+                                    <sup *ngIf="match.localPlayerTBSet3Result != null">
+                                        {{match.localPlayerTBSet3Result}}
+                                    </sup>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -54,11 +66,23 @@
                         <div class="Match__set">
                             <ul><!---->
                                 <li>
-                                    {{match.visitorPlayerSet1Result}}<sup></sup></li>
+                                    {{match.visitorPlayerSet1Result}}
+                                    <sup *ngIf="match.visitorPlayerTBSet1Result != null">
+                                        {{match.visitorPlayerTBSet1Result}}
+                                    </sup>
+                                </li>
                                 <li>
-                                    {{match.visitorPlayerSet2Result}}<!----></li>
+                                    {{match.visitorPlayerSet2Result}}
+                                    <sup *ngIf="match.visitorPlayerTBSet2Result != null">
+                                        {{match.visitorPlayerTBSet2Result}}
+                                    </sup>
+                                </li>
                                 <li *ngIf="match.visitorPlayerSet3Result != null">
-                                    {{match.visitorPlayerSet3Result}}<sup></sup></li>
+                                    {{match.visitorPlayerSet3Result}}
+                                    <sup *ngIf="match.visitorPlayerTBSet3Result != null">
+                                        {{match.visitorPlayerTBSet3Result}}
+                                    </sup>
+                                </li>
                             </ul>
                         </div>
                     </div>
