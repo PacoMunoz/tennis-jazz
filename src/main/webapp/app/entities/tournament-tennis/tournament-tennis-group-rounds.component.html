@@ -23,7 +23,7 @@
                         class="Draw-round__date">Del {{round.startDate|date}} al {{round.endDate|date}}</span></div>
                 </div>
             </div>
-            <jhi-tournament-tennis-group-round-match [round]="round"></jhi-tournament-tennis-group-round-match>
+            <jhi-tournament-tennis-group-round-match [isShowingAllRounds]="isShowingAllRounds" [round]="round"></jhi-tournament-tennis-group-round-match>
         </div>
     </div>
 </div>
