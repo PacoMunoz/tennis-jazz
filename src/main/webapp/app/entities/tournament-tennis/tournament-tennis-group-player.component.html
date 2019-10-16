@@ -1,5 +1,6 @@
 <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px"  [ngSwitch]="isAuthenticated()">
-        <mat-card class="mw-50 mb-3" fxFlex="30%" fxFlex.lt-md="45%" fxFlex.lt-sm="100%" *ngFor="let player of players" >
+    <div class="col-sm p-3" *ngFor="let player of players">
+        <mat-card>
             <mat-card-header>
                 <img mat-card-avatar class="mat-card-avatar" [src]="player.avatar" />
                 <mat-card-title> {{player.name}} {{player.surname}} </mat-card-title>
@@ -14,4 +15,25 @@
                 </mat-card-subtitle>
             </mat-card-content>
         </mat-card>
+    </div>
 </div>
+
+<!--
+<div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px"  [ngSwitch]="isAuthenticated()">
+    <mat-card class="mw-50 mb-3" fxFlex="30%" fxFlex.lt-md="45%" fxFlex.lt-sm="100%" *ngFor="let player of players" >
+        <mat-card-header>
+            <img mat-card-avatar class="mat-card-avatar" [src]="player.avatar" />
+            <mat-card-title> {{player.name}} {{player.surname}} </mat-card-title>
+            <mat-card-subtitle *ngSwitchCase="true"> {{player.email}} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle *ngSwitchCase="true">
+                    <span>
+                        <mat-icon aria-hidden="false" aria-label="phone">smartphone</mat-icon>
+                        <span class="player-card-phone-number" > {{player.phone}} </span>
+                    </span>
+            </mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+</div>
+-->

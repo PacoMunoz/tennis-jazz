@@ -11,6 +11,7 @@ import { AccountService } from 'app/core';
 })
 export class TournamentTennisGroupRoundMatchComponent implements OnInit {
   @Input() round;
+  @Input() isShowingAllRounds;
   matches: IMatchTennis[];
 
   constructor(
