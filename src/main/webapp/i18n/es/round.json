@@ -2,27 +2,27 @@
   "tennisJazzApp": {
     "round": {
       "home": {
-        "title": "Rounds",
-        "createLabel": "Crear nuevo Round",
-        "createOrEditLabel": "Crear o editar Round",
-        "notFound": "No Rounds found"
+        "title": "Jornada",
+        "createLabel": "Crear nueva Jornada",
+        "createOrEditLabel": "Crear o editar Jornada",
+        "notFound": "Ninguna Jornada Encontrada"
       },
-      "created": "Un nuevo Round ha sido creado con el identificador {{ param }}",
-      "updated": "Un Round ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Round ha sido eliminado con el identificador {{ param }}",
+      "created": "Una nueva Jornada ha sido creada con el identificador {{ param }}",
+      "updated": "Una Jornada ha sido actualizada con el identificador {{ param }}",
+      "deleted": "Una Jornada ha sido eliminada con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Round {{ id }}?"
+        "question": "¿Seguro que quiere eliminar la Jornada {{ id }}?"
       },
       "detail": {
-        "title": "Round"
+        "title": "Jornada"
       },
-      "name": "Name",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "tournamentGroup": "Tournament Group",
-      "matches": "Matches",
-      "showAll": "Show All",
-      "showCurrent": "Show Current"
+      "name": "Nombre",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Fin",
+      "tournamentGroup": "Grupo",
+      "matches": "Partidos",
+      "showAll": "Mostrar Todas",
+      "showCurrent": "Mostrar Actual"
     }
   }
 }

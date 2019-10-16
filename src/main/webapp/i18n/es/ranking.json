@@ -2,34 +2,34 @@
   "tennisJazzApp": {
     "ranking": {
       "home": {
-        "title": "Rankings",
-        "createLabel": "Crear nuevo Ranking",
-        "createOrEditLabel": "Crear o editar Ranking",
-        "notFound": "No Rankings found"
+        "title": "Clasificacion",
+        "createLabel": "Crear nueva Clasificacion",
+        "createOrEditLabel": "Crear o editar Clasificacion",
+        "notFound": "Ninguna Clasificacion encontrada"
       },
-      "created": "Un nuevo Ranking ha sido creado con el identificador {{ param }}",
-      "updated": "Un Ranking ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Ranking ha sido eliminado con el identificador {{ param }}",
+      "created": "Una nueva Clasificacion ha sido creado con el identificador {{ param }}",
+      "updated": "Una Clasificacion ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Una Clasificacion ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Ranking {{ id }}?"
+        "question": "¿Seguro que quiere eliminar la Clasificacion {{ id }}?"
       },
       "detail": {
-        "title": "Ranking"
+        "title": "Clasificacion"
       },
-      "points": "Points",
-      "gamesWon": "Games Won",
-      "gamesLoss": "Games Loss",
-      "setsWon": "Sets Won",
-      "setsLoss": "Sets Loss",
-      "matchesPlayed": "Matches Played",
-      "matchesWon": "Matches Won",
-      "matchesLoss": "Matches Loss",
-      "matchesNotPresent": "Matches Not Present",
-      "matchesAbandoned": "Matches Abandoned",
-      "tieBreaksPlayed": "Tie Breaks Played",
-      "tieBreaksWon": "Tie Breaks Won",
-      "tournamentGroup": "Tournament Group",
-      "player": "Player",
+      "points": "Puntos",
+      "gamesWon": "Partidos Ganados",
+      "gamesLoss": "Partidos Perdidos",
+      "setsWon": "Sets Ganados",
+      "setsLoss": "Sets Perdidos",
+      "matchesPlayed": "Partidos Jugados",
+      "matchesWon": "Partidos Ganados",
+      "matchesLoss": "Partidos Perdidos",
+      "matchesNotPresent": "Partidos no Presentados",
+      "matchesAbandoned": "Partidos Abandonados",
+      "tieBreaksPlayed": "Tie Breaks Jugados",
+      "tieBreaksWon": "Tie Breaks Ganados",
+      "tournamentGroup": "Grupo",
+      "player": "Jugador",
       "xs": {
         "points": "PT.",
         "matchesPlayed": "PJ.",

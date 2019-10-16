@@ -2,21 +2,21 @@
   "tennisJazzApp": {
     "gender": {
       "home": {
-        "title": "Genders",
-        "createLabel": "Crear nuevo Gender",
-        "createOrEditLabel": "Crear o editar Gender",
-        "notFound": "No Genders found"
+        "title": "Generos",
+        "createLabel": "Crear nuevo Genero",
+        "createOrEditLabel": "Crear o Editar Genero",
+        "notFound": "Ningun Genero Encontrado"
       },
-      "created": "Un nuevo Gender ha sido creado con el identificador {{ param }}",
-      "updated": "Un Gender ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Gender ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Genero ha sido creado con el identificador {{ param }}",
+      "updated": "Un Genero ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Genero ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Gender {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Genero {{ id }}?"
       },
       "detail": {
-        "title": "Gender"
+        "title": "Genero"
       },
-      "name": "Name"
+      "name": "Nombre"
     }
   }
 }

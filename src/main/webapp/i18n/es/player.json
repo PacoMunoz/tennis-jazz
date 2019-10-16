@@ -2,31 +2,31 @@
   "tennisJazzApp": {
     "player": {
       "home": {
-        "title": "Players",
-        "createLabel": "Crear nuevo Player",
-        "createOrEditLabel": "Crear o editar Player",
+        "title": "Jugadores",
+        "createLabel": "Crear nuevo Jugador",
+        "createOrEditLabel": "Crear o editar Jugador",
         "notFound": "No Players found"
       },
-      "created": "Un nuevo Player ha sido creado con el identificador {{ param }}",
-      "updated": "Un Player ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Player ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Jugador ha sido creado con el identificador {{ param }}",
+      "updated": "Un Jugador ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Jugador ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Player {{ id }}?"
+        "question": "¿Seguro que quiere eliminar el Jugador {{ id }}?"
       },
       "detail": {
-        "title": "Player"
+        "title": "Jugador"
       },
-      "name": "Name",
-      "surname": "Surname",
+      "name": "Nombre",
+      "surname": "Apellido",
       "email": "Email",
-      "phone": "Phone",
-      "other": "Other",
+      "phone": "Telefono",
+      "other": "Otros",
       "avatar": "Avatar",
-      "visitorMatches": "Visitor Matches",
-      "localMatches": "Local Matches",
-      "rankings": "Rankings",
-      "gender": "Gender",
-      "groups": "Groups"
+      "visitorMatches": "Partido como Visitante",
+      "localMatches": "Partidos como Local",
+      "rankings": "Clasificacion",
+      "gender": "Genero",
+      "groups": "Grupos"
     }
   }
 }
