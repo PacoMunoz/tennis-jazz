@@ -5,6 +5,7 @@
         "title": "Jugadores",
         "createLabel": "Crear nuevo Jugador",
         "createOrEditLabel": "Crear o editar Jugador",
+        "editLabel": "Editar Jugador",
         "notFound": "No Players found"
       },
       "created": "Un nuevo Jugador ha sido creado con el identificador {{ param }}",

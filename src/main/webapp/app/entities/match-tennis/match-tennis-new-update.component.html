@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-match-tennis-heading" jhiTranslate="tennisJazzApp.match.home.createOrEditLabel">Create or edit a Match</h2>
+            <h2 id="jhi-match-tennis-heading" jhiTranslate="tennisJazzApp.match.home.editLabel">Edit Match</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="true">
@@ -30,8 +30,9 @@
                         <option [ngValue]="playerOption.id === editForm.get('localPlayer').value?.id ? editForm.get('localPlayer').value : playerOption" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
                     </select>
                 </div>
-                <span id="jhi-set1-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Set1">Primer Set</span>
-                <hr/>
+                <div class="pink_subtitle my-3">
+                    <span id="jhi-set1-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Set1">Primer Set</span>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSet1Result" for="field_localPlayerSet1Result">Local Player Set 1 Result</label>
                     <input type="number" class="form-control" name="localPlayerSet1Result" id="field_localPlayerSet1Result"
@@ -52,8 +53,9 @@
                     <input type="number" class="form-control" name="visitorPlayerTBSet1Result" id="field_visitorPlayerTBSet1Result"
                            formControlName="visitorPlayerTBSet1Result"/>
                 </div>
-                <span id="jhi-set2-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Set2">Segundo Set</span>
-                <hr/>
+                <div class="pink_subtitle my-3">
+                    <span id="jhi-set2-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Set2">Segundo Set</span>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSet2Result" for="field_localPlayerSet2Result">Local Player Set 2 Result</label>
                     <input type="number" class="form-control" name="localPlayerSet2Result" id="field_localPlayerSet2Result"
@@ -74,8 +76,9 @@
                     <input type="number" class="form-control" name="visitorPlayerTBSet2Result" id="field_visitorPlayerTBSet2Result"
                            formControlName="visitorPlayerTBSet2Result"/>
                 </div>
-                <span id="jhi-set3-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Set3">Tercer Set</span>
-                <hr/>
+                <div class="pink_subtitle my-3">
+                    <span id="jhi-set3-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Set3">Tercer Set</span>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSet3Result" for="field_localPlayerSet3Result">Local Player Set 3 Result</label>
                     <input type="number" class="form-control" name="localPlayerSet3Result" id="field_localPlayerSet3Result"
@@ -96,8 +99,9 @@
                     <input type="number" class="form-control" name="visitorPlayerTBSet3Result" id="field_visitorPlayerTBSet3Result"
                            formControlName="visitorPlayerTBSet3Result"/>
                 </div>
-                <span id="jhi-summary-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Summary">Summary</span>
-                <hr/>
+                <div class="pink_subtitle my-3">
+                    <span id="jhi-summary-match-tennis-heading" jhiTranslate="tennisJazzApp.match.Summary">Summary</span>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerSets" for="field_localPlayerSets">Local Player Sets</label>
                     <input type="number" class="form-control" name="localPlayerSets" id="field_localPlayerSets"
@@ -108,8 +112,6 @@
                     <input type="number" class="form-control" name="visitorPlayerSets" id="field_visitorPlayerSets"
                            formControlName="visitorPlayerSets"/>
                 </div>
-                <span id="jhi-other-data-match-tennis-heading" jhiTranslate="tennisJazzApp.match.OtherData">Summary</span>
-                <hr/>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.match.localPlayerAbandoned" for="field_localPlayerAbandoned">Local Player Abandoned</label>
                     <input type="checkbox" class="form-control" name="localPlayerAbandoned" id="field_localPlayerAbandoned"

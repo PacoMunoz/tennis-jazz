@@ -2,19 +2,19 @@
   "tennisJazzApp": {
     "tournamentGroup": {
       "home": {
-        "title": "Tournament Groups",
-        "createLabel": "Create a new Tournament Group",
-        "createOrEditLabel": "Create or edit a Tournament Group",
-        "notFound": "No Tournament Groups found"
+        "title": "Groups",
+        "createLabel": "Create a new Group",
+        "createOrEditLabel": "Create or edit a Group",
+        "notFound": "No Groups found"
       },
-      "created": "A new Tournament Group is created with identifier {{ param }}",
-      "updated": "A Tournament Group is updated with identifier {{ param }}",
-      "deleted": "A Tournament Group is deleted with identifier {{ param }}",
+      "created": "A new Group is created with identifier {{ param }}",
+      "updated": "A Group is updated with identifier {{ param }}",
+      "deleted": "A Group is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Tournament Group {{ id }}?"
+        "question": "Are you sure you want to delete Group {{ id }}?"
       },
       "detail": {
-        "title": "Tournament Group"
+        "title": "Group"
       },
       "name": "Name",
       "tournament": "Tournament",

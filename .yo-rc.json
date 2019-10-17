@@ -4,7 +4,7 @@
       "packageName": "es.pmg.tennisjazz",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "6.2.0",
+    "jhipsterVersion": "6.3.1",
     "applicationType": "monolith",
     "baseName": "tennisJazz",
     "packageName": "es.pmg.tennisjazz",
@@ -36,6 +36,7 @@
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": ["en", "es"],
-    "blueprints": []
+    "blueprints": [],
+    "embeddableLaunchScript": false
   }
 }
