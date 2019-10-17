@@ -6,7 +6,32 @@
         </div>
         <p class="lead">Gestor de Ligas de Tenis</p>
     </div>
-    <div class="col-md-4">
+    <div class="container justify-content-center" [ngSwitch]="isAuthenticated()">
+        <div class="tournament-card col-md-6" *ngFor="let tournament of tournaments">
+            <mat-card >
+                <mat-card-header>
+                    <img mat-card-avatar class="mat-card-avatar d-none d-lg-block" src="/content/images/tennis-2players.png" />
+                    <mat-card-title><kbd> {{tournament.name}} </kbd></mat-card-title>
+                    <mat-card-subtitle class="text-white">
+                        Del {{tournament.startDate|date}} al {{tournament.endDate|date}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                    <span *ngSwitchCase="true">
+                        <mat-icon aria-hidden="false" aria-label="phone">smartphone</mat-icon>
+                        <span class="card-phone-number"> 662696151 </span>
+                    </span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="text-white">Zafra (Badajoz)</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-button class="btn btn-white btn-sm"
+                            [routerLink]="['tournament-tennis', tournament.id, 'view']">VER
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <!--<div class="col-md-4">
         <div class="container tournament-card" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px">
             <mat-card class="mb-3 center-content"
                       *ngFor="let tournament of tournaments">
@@ -31,7 +56,7 @@
                 </mat-card-actions>
             </mat-card>
         </div>
-    </div>
+    </div> -->
 </div>
 <!--<div class="row">
     <div class="col-md-3">
