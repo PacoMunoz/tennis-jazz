@@ -7,9 +7,9 @@
         <p class="lead">Gestor de Ligas de Tenis</p>
     </div>
     <div class="container justify-content-center" [ngSwitch]="isAuthenticated()">
-        <div class="tournament-card col-md-6" *ngFor="let tournament of tournaments">
+        <div class="tournament-card" *ngFor="let tournament of tournaments">
             <mat-card >
-                <mat-card-header>
+                <mat-card-header class="center-content">
                     <img mat-card-avatar class="mat-card-avatar d-none d-lg-block" src="/content/images/tennis-2players.png" />
                     <mat-card-title><kbd> {{tournament.name}} </kbd></mat-card-title>
                     <mat-card-subtitle class="text-white">
