@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.accountService.identity().then((account: Account) => {
       this.account = account;
+      console.log('El usuario tiene el siguiete login: ' + this.account.login);
     });
     this.registerAuthenticationSuccess();
     this.tournamentService

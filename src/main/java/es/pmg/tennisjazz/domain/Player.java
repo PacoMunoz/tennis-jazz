@@ -67,6 +67,10 @@ public class Player implements Serializable {
     @JsonIgnoreProperties("players")
     private Gender gender;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
     @ManyToMany(mappedBy = "players")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
@@ -258,6 +262,19 @@ public class Player implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Player user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<TournamentGroup> getGroups() {

@@ -75,10 +75,10 @@ public class PlayerQueryService extends QueryService<Player> {
     }
 
     /**
-     * Function to convert ConsumerCriteria to a {@link Specification}
+     * Function to convert {@link PlayerCriteria} to a {@link Specification}
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
-     */    
+     */
     protected Specification<Player> createSpecification(PlayerCriteria criteria) {
         Specification<Player> specification = Specification.where(null);
         if (criteria != null) {
@@ -115,6 +115,10 @@ public class PlayerQueryService extends QueryService<Player> {
             if (criteria.getGenderId() != null) {
                 specification = specification.and(buildSpecification(criteria.getGenderId(),
                     root -> root.join(Player_.gender, JoinType.LEFT).get(Gender_.id)));
+            }
+            if (criteria.getUserId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUserId(),
+                    root -> root.join(Player_.user, JoinType.LEFT).get(User_.id)));
             }
             if (criteria.getGroupsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getGroupsId(),

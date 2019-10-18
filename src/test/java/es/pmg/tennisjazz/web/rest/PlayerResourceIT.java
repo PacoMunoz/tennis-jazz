@@ -5,6 +5,7 @@ import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.domain.Match;
 import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.domain.Gender;
+import es.pmg.tennisjazz.domain.User;
 import es.pmg.tennisjazz.domain.TournamentGroup;
 import es.pmg.tennisjazz.repository.PlayerRepository;
 import es.pmg.tennisjazz.service.PlayerService;
@@ -551,6 +552,26 @@ public class PlayerResourceIT {
 
         // Get all the playerList where gender equals to genderId + 1
         defaultPlayerShouldNotBeFound("genderId.equals=" + (genderId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPlayersByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        playerRepository.saveAndFlush(player);
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        player.setUser(user);
+        playerRepository.saveAndFlush(player);
+        Long userId = user.getId();
+
+        // Get all the playerList where user equals to userId
+        defaultPlayerShouldBeFound("userId.equals=" + userId);
+
+        // Get all the playerList where user equals to userId + 1
+        defaultPlayerShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
 

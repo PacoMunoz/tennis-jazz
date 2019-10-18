@@ -14,7 +14,7 @@
         <span jhiTranslate="tennisJazzApp.player.home.notFound">No players found</span>
     </div>
     <div class="table-responsive" *ngIf="players?.length > 0">
-        <table class="table table-striped">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -25,6 +25,7 @@
             <th jhiSortBy="other"><span jhiTranslate="tennisJazzApp.player.other">Other</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="avatar"><span jhiTranslate="tennisJazzApp.player.avatar">Avatar</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="gender.id"><span jhiTranslate="tennisJazzApp.player.gender">Gender</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="tennisJazzApp.player.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -46,6 +47,9 @@
                     <div *ngIf="player.gender">
                         <a [routerLink]="['/gender-tennis', player.gender?.id, 'view' ]" >{{player.gender?.id}}</a>
                     </div>
+                </td>
+                <td>
+                    {{player.user?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">

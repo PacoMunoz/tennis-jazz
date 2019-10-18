@@ -67,6 +67,14 @@
             "otherEntityField": "id"
         },
         {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityName": "tournamentGroup",
             "otherEntityRelationshipName": "players",

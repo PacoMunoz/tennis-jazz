@@ -5,7 +5,6 @@
         "title": "Players",
         "createLabel": "Create a new Player",
         "createOrEditLabel": "Create or edit a Player",
-        "editLabel": "Edit Player",
         "notFound": "No Players found"
       },
       "created": "A new Player is created with identifier {{ param }}",
@@ -27,6 +26,7 @@
       "localMatches": "Local Matches",
       "rankings": "Rankings",
       "gender": "Gender",
+      "user": "User",
       "groups": "Groups"
     }
   }

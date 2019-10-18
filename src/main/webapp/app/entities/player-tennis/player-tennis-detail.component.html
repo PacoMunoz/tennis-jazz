@@ -40,6 +40,10 @@
                         <a [routerLink]="['/gender-tennis', player.gender?.id, 'view']">{{player.gender?.id}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="tennisJazzApp.player.user">User</span></dt>
+                <dd>
+                    {{player.user?.login}}
+                </dd>
             </dl>
 
             <button type="submit"

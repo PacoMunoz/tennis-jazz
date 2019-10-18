@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,9 +10,11 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IPlayerTennis, PlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from './player-tennis.service';
 import { IGenderTennis } from 'app/shared/model/gender-tennis.model';
-import { GenderTennisService } from 'app/entities/gender-tennis';
+import { GenderTennisService } from 'app/entities/gender-tennis/gender-tennis.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
-import { TournamentGroupTennisService } from 'app/entities/tournament-group-tennis';
+import { TournamentGroupTennisService } from 'app/entities/tournament-group-tennis/tournament-group-tennis.service';
 
 @Component({
   selector: 'jhi-player-tennis-update',
@@ -20,6 +24,8 @@ export class PlayerTennisUpdateComponent implements OnInit {
   isSaving: boolean;
 
   genders: IGenderTennis[];
+
+  users: IUser[];
 
   tournamentgroups: ITournamentGroupTennis[];
 
@@ -32,7 +38,8 @@ export class PlayerTennisUpdateComponent implements OnInit {
     other: [],
     avatar: [null, []],
     avatarContentType: [],
-    gender: []
+    gender: [],
+    user: []
   });
 
   constructor(
@@ -40,6 +47,7 @@ export class PlayerTennisUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected playerService: PlayerTennisService,
     protected genderService: GenderTennisService,
+    protected userService: UserService,
     protected tournamentGroupService: TournamentGroupTennisService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
@@ -58,6 +66,13 @@ export class PlayerTennisUpdateComponent implements OnInit {
         map((response: HttpResponse<IGenderTennis[]>) => response.body)
       )
       .subscribe((res: IGenderTennis[]) => (this.genders = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.userService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUser[]>) => response.body)
+      )
+      .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.tournamentGroupService
       .query()
       .pipe(
@@ -77,7 +92,8 @@ export class PlayerTennisUpdateComponent implements OnInit {
       other: player.other,
       avatar: player.avatar,
       avatarContentType: player.avatarContentType,
-      gender: player.gender
+      gender: player.gender,
+      user: player.user
     });
   }
 
@@ -92,8 +108,8 @@ export class PlayerTennisUpdateComponent implements OnInit {
   setFileData(event, field: string, isImage) {
     return new Promise((resolve, reject) => {
       if (event && event.target && event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
-        if (isImage && !/^image\//.test(file.type)) {
+        const file: File = event.target.files[0];
+        if (isImage && !file.type.startsWith('image/')) {
           reject(`File was expected to be an image but was found to be ${file.type}`);
         } else {
           const filedContentType: string = field + 'ContentType';
@@ -108,7 +124,8 @@ export class PlayerTennisUpdateComponent implements OnInit {
         reject(`Base64 data was not set as file could not be extracted from passed parameter: ${event}`);
       }
     }).then(
-      () => console.log('blob added'), // sucess
+      // eslint-disable-next-line no-console
+      () => console.log('blob added'), // success
       this.onError
     );
   }
@@ -148,7 +165,8 @@ export class PlayerTennisUpdateComponent implements OnInit {
       other: this.editForm.get(['other']).value,
       avatarContentType: this.editForm.get(['avatarContentType']).value,
       avatar: this.editForm.get(['avatar']).value,
-      gender: this.editForm.get(['gender']).value
+      gender: this.editForm.get(['gender']).value,
+      user: this.editForm.get(['user']).value
     };
   }
 
@@ -172,11 +190,15 @@ export class PlayerTennisUpdateComponent implements OnInit {
     return item.id;
   }
 
+  trackUserById(index: number, item: IUser) {
+    return item.id;
+  }
+
   trackTournamentGroupById(index: number, item: ITournamentGroupTennis) {
     return item.id;
   }
 
-  getSelected(selectedVals: Array<any>, option: any) {
+  getSelected(selectedVals: any[], option: any) {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
         if (option.id === selectedVals[i].id) {

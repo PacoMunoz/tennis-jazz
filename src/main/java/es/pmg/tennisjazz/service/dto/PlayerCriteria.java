@@ -44,6 +44,8 @@ public class PlayerCriteria implements Serializable, Criteria {
 
     private LongFilter genderId;
 
+    private LongFilter userId;
+
     private LongFilter groupsId;
 
     public PlayerCriteria(){
@@ -60,6 +62,7 @@ public class PlayerCriteria implements Serializable, Criteria {
         this.localMatchesId = other.localMatchesId == null ? null : other.localMatchesId.copy();
         this.rankingsId = other.rankingsId == null ? null : other.rankingsId.copy();
         this.genderId = other.genderId == null ? null : other.genderId.copy();
+        this.userId = other.userId == null ? null : other.userId.copy();
         this.groupsId = other.groupsId == null ? null : other.groupsId.copy();
     }
 
@@ -148,6 +151,14 @@ public class PlayerCriteria implements Serializable, Criteria {
         this.genderId = genderId;
     }
 
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
+    }
+
     public LongFilter getGroupsId() {
         return groupsId;
     }
@@ -177,6 +188,7 @@ public class PlayerCriteria implements Serializable, Criteria {
             Objects.equals(localMatchesId, that.localMatchesId) &&
             Objects.equals(rankingsId, that.rankingsId) &&
             Objects.equals(genderId, that.genderId) &&
+            Objects.equals(userId, that.userId) &&
             Objects.equals(groupsId, that.groupsId);
     }
 
@@ -193,6 +205,7 @@ public class PlayerCriteria implements Serializable, Criteria {
         localMatchesId,
         rankingsId,
         genderId,
+        userId,
         groupsId
         );
     }
@@ -210,6 +223,7 @@ public class PlayerCriteria implements Serializable, Criteria {
                 (localMatchesId != null ? "localMatchesId=" + localMatchesId + ", " : "") +
                 (rankingsId != null ? "rankingsId=" + rankingsId + ", " : "") +
                 (genderId != null ? "genderId=" + genderId + ", " : "") +
+                (userId != null ? "userId=" + userId + ", " : "") +
                 (groupsId != null ? "groupsId=" + groupsId + ", " : "") +
             "}";
     }
