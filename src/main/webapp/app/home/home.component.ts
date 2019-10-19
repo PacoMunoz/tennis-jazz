@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.accountService.identity().then((account: Account) => {
       this.account = account;
-      console.log('El usuario tiene el siguiete login: ' + this.account.login);
     });
     this.registerAuthenticationSuccess();
     this.tournamentService
@@ -36,6 +35,7 @@ export class HomeComponent implements OnInit {
         (res: HttpResponse<ITournamentTennis[]>) => (this.tournaments = res.body),
         (error: HttpErrorResponse) => console.error(error.message)
       );
+    //si el usuario esta autentificado y tiene asociado un jugador, se le muestran sus torneos y sus partidos
   }
 
   registerAuthenticationSuccess() {
