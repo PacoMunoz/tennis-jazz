@@ -6,8 +6,9 @@
         </div>
         <p class="lead">Gestor de Ligas de Tenis</p>
     </div>
-    <div class="container justify-content-center" [ngSwitch]="isAuthenticated()">
-        <div class="tournament-card" *ngFor="let tournament of tournaments">
+    <jhi-alert></jhi-alert>
+    <div class="container center-content" [ngSwitch]="isAuthenticated()">
+        <div class="tournament-card col-md-4" *ngFor="let tournament of tournaments">
             <mat-card >
                 <mat-card-header class="center-content">
                     <img mat-card-avatar class="mat-card-avatar d-none d-lg-block" src="/content/images/tennis-2players.png" />
