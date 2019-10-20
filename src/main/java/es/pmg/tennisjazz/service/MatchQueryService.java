@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import es.pmg.tennisjazz.service.dto.TournamentCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -78,7 +79,7 @@ public class MatchQueryService extends QueryService<Match> {
      * Function to convert ConsumerCriteria to a {@link Specification}
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
-     */    
+     */
     protected Specification<Match> createSpecification(MatchCriteria criteria) {
         Specification<Match> specification = Specification.where(null);
         if (criteria != null) {
@@ -153,5 +154,18 @@ public class MatchQueryService extends QueryService<Match> {
             }
         }
         return specification;
+    }
+
+    public Page<Match> findCurrentByPlayer(Long idPlayer, Pageable pageable) {
+        //obtener torneos en curso del jugador
+
+        //obtener jornada en curso de cada torneo
+
+        //obtener de cada jornada los partidos
+
+        //CUSTOM REPOSITORY WITH METHOD TO GET ALL MATCHES
+
+
+        return this.matchRepository.buscarPartidosEnCurso(idPlayer, pageable);
     }
 }

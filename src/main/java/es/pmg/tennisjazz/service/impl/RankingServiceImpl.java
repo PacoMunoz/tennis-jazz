@@ -105,7 +105,6 @@ public class RankingServiceImpl implements RankingService {
     @Override
     public void updateRanking(Player player, TournamentGroup group) {
         log.debug("Request to update Ranking of player: " + player.getId() + " in group : " + group.getId());
-
         //get player ranking in group or create it if not exist
         Optional<Ranking> oRanking = findByPlayerAndGroup(player, group);
         Ranking ranking = null;
@@ -142,7 +141,6 @@ public class RankingServiceImpl implements RankingService {
         ranking.setTieBreaksPlayed(RankingCalculateUtil.calculateTieBreaksPlayed(matches));
         //calculate tieBreaksWon
         ranking.setTieBreaksWon(RankingCalculateUtil.calculateGamesWon(player, matches));
-
         //update or create ranking
         this.rankingRepository.save(ranking);
     }
@@ -158,12 +156,10 @@ public class RankingServiceImpl implements RankingService {
         LongFilter groupIdFilter = new LongFilter();
         LongFilter playerIdFilter = new LongFilter();
         groupIdFilter.setEquals(group.getId());
-
         playerIdFilter.setEquals(player.getId());
         rankingCriteria.setPlayerId(playerIdFilter);
         rankingCriteria.setTournamentGroupId(groupIdFilter);
         List<Ranking> rankings = rankingQueryService.findByCriteria(rankingCriteria);
-
         return Optional.ofNullable(rankings.size() == 0 ? null : rankings.get(0));
     }
 
@@ -176,12 +172,9 @@ public class RankingServiceImpl implements RankingService {
     private List<Match> getMatches(Player player, TournamentGroup group) {
         RoundCriteria roundCriteria = new RoundCriteria();
         LongFilter groupId = new LongFilter();
-        List<Round> rounds = new ArrayList<>();
-
         groupId.setEquals(group.getId());
         roundCriteria.setTournamentGroupId(groupId);
-        rounds =  this.roundQueryService.findByCriteria(roundCriteria);
-
+        List<Round> rounds =  this.roundQueryService.findByCriteria(roundCriteria);
         return  this.matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
     }
 

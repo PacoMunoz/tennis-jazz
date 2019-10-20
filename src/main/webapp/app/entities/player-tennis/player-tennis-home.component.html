@@ -1,0 +1,9 @@
+<div class="content">
+    <div class="" *ngFor="let match of currentMatches">
+        <p>Torneo es : {{match.round.tournamentGroup.tournament.name}}</p>
+        <p>El Grupo es: {{match.round.tournamentGroup.name}}</p>
+        <p>La Jornada es: {{match.round.name}}</p>
+        <p>El partido es: {{match.localPlayer.name}}</p>
+        <p>El partido es: {{match.visitorPlayer.name}}</p>
+    </div>
+</div>

@@ -35,4 +35,9 @@ export class MatchTennisService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  findAllCurrent(req: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IMatchTennis[]>(`${this.resourceUrl}/current-matches`, { params: options, observe: 'response' });
+  }
 }

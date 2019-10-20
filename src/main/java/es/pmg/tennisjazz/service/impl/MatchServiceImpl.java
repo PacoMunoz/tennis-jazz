@@ -87,6 +87,4 @@ public class MatchServiceImpl implements MatchService {
         log.debug("Request to find all matches of a player: " + player.getId() + " in the sets of rounds: " + rounds);
         return matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
     }
-
-
 }

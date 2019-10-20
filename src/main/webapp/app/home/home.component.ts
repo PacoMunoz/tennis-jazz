@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
 import { LoginModalService, AccountService, Account } from 'app/core';
 import { TournamentTennisService } from 'app/entities/tournament-tennis';
 import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { MatchTennisService } from 'app/entities/match-tennis';
+import { IMatchTennis } from 'app/shared/model/match-tennis.model';
 
 @Component({
   selector: 'jhi-home',
@@ -14,6 +16,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   tournaments: ITournamentTennis[];
+  currentUserMatches: IMatchTennis[];
   account: Account;
   modalRef: NgbModalRef;
 
@@ -21,8 +24,13 @@ export class HomeComponent implements OnInit {
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private eventManager: JhiEventManager,
-    private tournamentService: TournamentTennisService
-  ) {}
+    private tournamentService: TournamentTennisService,
+    private matchService: MatchTennisService,
+    private jhiAlertService: JhiAlertService
+  ) {
+    this.tournaments = [];
+    this.currentUserMatches = [];
+  }
 
   ngOnInit() {
     this.accountService.identity().then((account: Account) => {
@@ -33,9 +41,18 @@ export class HomeComponent implements OnInit {
       .query()
       .subscribe(
         (res: HttpResponse<ITournamentTennis[]>) => (this.tournaments = res.body),
-        (error: HttpErrorResponse) => console.error(error.message)
+        (error: HttpErrorResponse) => this.onError(error.message)
       );
-    //si el usuario esta autentificado y tiene asociado un jugador, se le muestran sus torneos y sus partidos
+    // si el usuario esta autentificado y tiene asociado un jugador, se le muestran sus torneos y sus partidos
+
+    this.matchService
+      .findAllCurrent({
+        id: this.account.login
+      })
+      .subscribe(
+        (res: HttpResponse<IMatchTennis[]>) => (this.currentUserMatches = res.body),
+        (error: HttpErrorResponse) => this.onError(error.message)
+      );
   }
 
   registerAuthenticationSuccess() {
@@ -52,5 +69,9 @@ export class HomeComponent implements OnInit {
 
   login() {
     this.modalRef = this.loginModalService.open();
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
   }
 }

@@ -107,6 +107,20 @@ public class MatchResource {
     }
 
     /**
+     * {@code GET /current-matches}
+     * @param id
+     * @param pageable
+     * @return
+     */
+    @GetMapping("/matches/current-matches")
+    public ResponseEntity<List<Match>> getAllCurrentMatchesByPlayer(@RequestParam Long id, Pageable pageable) {
+        log.debug("REST request to get current Matches by criteria: {}", id);
+        Page<Match> page = matchQueryService.findCurrentByPlayer(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
     * {@code GET  /matches/count} : count all the matches.
     *
     * @param criteria the criteria which the requested entities should match.

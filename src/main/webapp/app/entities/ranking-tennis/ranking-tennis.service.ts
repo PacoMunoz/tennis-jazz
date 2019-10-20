@@ -39,7 +39,7 @@ export class RankingTennisService {
   }
 
   updateTournamentPlayerRanking(playerid: number, roundid: number) {
-    const req = { idPlayer: playerid, idRound: roundid };
+    const req = { idp: playerid, idr: roundid };
     const options = createRequestOption(req);
     return this.http.get<any>(this.resourceUrlUpdate, { params: options, observe: 'response' });
   }

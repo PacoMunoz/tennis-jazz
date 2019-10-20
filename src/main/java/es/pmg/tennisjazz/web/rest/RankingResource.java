@@ -98,27 +98,27 @@ public class RankingResource {
     }
 
     /**
-     * {@code GET  /updateRanking} : update player ranking in group
+     * {@code GET  /update} : update player ranking in group
      *
-     * @param idPlayer the player id which ranking must update
-     * @param idRound the round of the group which player ranking must update
+     * @param idp the player id which ranking must update
+     * @param idr the round of the group which player ranking must update
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rankings in body.
      */
     @GetMapping("/rankings/update")
-    public ResponseEntity<Void> updateRanking(@RequestParam Long idPlayer, @RequestParam Long idRound) throws URISyntaxException {
-        log.debug("REST request to update Ranking of player with id: " + idPlayer + " in the group of round " + idRound);
-        if (idRound == null || idPlayer == null) {
+    public ResponseEntity<Void> updateRanking(@RequestParam Long idp, @RequestParam Long idr) throws URISyntaxException {
+        log.debug("REST request to update Ranking of player with id: " + idp + " in the group of round " + idr);
+        if (idr == null || idp == null) {
             throw new BadRequestAlertException("Invalid id", "Round or Player", "idnull");
         }
 
         TournamentGroupCriteria groupCriteria = new TournamentGroupCriteria();
         LongFilter roundIdLongFilter = new LongFilter();
-        roundIdLongFilter.setEquals(idRound);
+        roundIdLongFilter.setEquals(idr);
         groupCriteria.setRoundsId(roundIdLongFilter);
         List<TournamentGroup> lstGroups = this.tournamentGroupQueryService.findByCriteria(groupCriteria);
         Optional<TournamentGroup> groupO = Optional.ofNullable(lstGroups.get(0));
 
-        Optional<Player> playerO =  playerService.findOne(idPlayer);
+        Optional<Player> playerO =  playerService.findOne(idp);
         if (!playerO.isPresent() || !groupO.isPresent()) {
             throw new BadRequestAlertException("Invalid id", "Group or Player", "idNoValid");
         }
@@ -135,7 +135,7 @@ public class RankingResource {
        /* Page<Ranking> page = rankingQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);*/
         //return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, idPlayer.toString())).build();
-        return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "Ranking update", "player: " + idPlayer + " group of round: " + idRound) ).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "Ranking update", "player: " + idp + " group of round: " + idr) ).build();
     }
 
     /**

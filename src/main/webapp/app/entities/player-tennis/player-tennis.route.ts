@@ -11,6 +11,7 @@ import { PlayerTennisDetailComponent } from './player-tennis-detail.component';
 import { PlayerTennisUpdateComponent } from './player-tennis-update.component';
 import { PlayerTennisDeletePopupComponent } from './player-tennis-delete-dialog.component';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { PlayerTennisHomeComponent } from 'app/entities/player-tennis/player-tennis-home.component';
 
 @Injectable({ providedIn: 'root' })
 export class PlayerTennisResolve implements Resolve<IPlayerTennis> {
@@ -32,6 +33,15 @@ export const playerRoute: Routes = [
   {
     path: '',
     component: PlayerTennisComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'tennisJazzApp.player.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'home',
+    component: PlayerTennisHomeComponent,
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'tennisJazzApp.player.home.title'
