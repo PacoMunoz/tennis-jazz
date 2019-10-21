@@ -4,6 +4,7 @@
       "home": {
         "title": "Players",
         "createLabel": "Crear nuevo Player",
+        "editLabel": "Editar Jugador",
         "createOrEditLabel": "Crear o editar Player",
         "notFound": "No Players found",
         "currentMatches": "Partidos en "

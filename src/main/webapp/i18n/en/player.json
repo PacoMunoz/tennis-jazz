@@ -5,6 +5,7 @@
         "title": "Players",
         "createLabel": "Create a new Player",
         "createOrEditLabel": "Create or edit a Player",
+        "editLabel": "Edit Player",
         "notFound": "No Players found",
         "currentMatches": "Current Matches"
       },

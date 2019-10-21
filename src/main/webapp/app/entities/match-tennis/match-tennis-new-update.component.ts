@@ -21,6 +21,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   isSaving: boolean;
 
   rounds: IRoundTennis[];
+  counter: number;
 
   players: IPlayerTennis[];
 
@@ -58,7 +59,9 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.counter = 0;
+  }
 
   ngOnInit() {
     this.isSaving = false;
@@ -123,8 +126,15 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveUpdateResponse(result: Observable<HttpResponse<IMatchTennis>>) {
-    result.subscribe(() => console.log('Correct saving/update process.'), () => this.onSaveError());
-    this.onSaveSuccess();
+    result.subscribe(
+      () => {
+        this.counter++;
+        if (this.counter == 3) {
+          this.onSaveSuccess();
+        }
+      },
+      () => this.onSaveError()
+    );
   }
 
   protected onSaveSuccess() {
@@ -141,7 +151,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   previousState() {
-    this.router.navigate(['tournament-tennis', 1, 'view'], { queryParams: { fromsu: 2 } });
+    window.history.back();
   }
 
   trackRoundById(index: number, item: IRoundTennis) {

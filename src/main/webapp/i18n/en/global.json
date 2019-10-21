@@ -19,6 +19,7 @@
       "account": {
         "main": "Account",
         "myAccount": "My Account",
+        "myTournaments": "My Tournaments",
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",
