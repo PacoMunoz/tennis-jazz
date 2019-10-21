@@ -157,15 +157,7 @@ public class MatchQueryService extends QueryService<Match> {
     }
 
     public Page<Match> findCurrentByPlayer(Long idPlayer, Pageable pageable) {
-        //obtener torneos en curso del jugador
-
-        //obtener jornada en curso de cada torneo
-
-        //obtener de cada jornada los partidos
-
-        //CUSTOM REPOSITORY WITH METHOD TO GET ALL MATCHES
-
-
+        log.debug("find current by playerId : {}", idPlayer);
         return this.matchRepository.buscarPartidosEnCurso(idPlayer, pageable);
     }
 }

@@ -16,7 +16,6 @@ import { IMatchTennis } from 'app/shared/model/match-tennis.model';
 })
 export class HomeComponent implements OnInit {
   tournaments: ITournamentTennis[];
-  currentUserMatches: IMatchTennis[];
   account: Account;
   modalRef: NgbModalRef;
 
@@ -29,7 +28,6 @@ export class HomeComponent implements OnInit {
     private jhiAlertService: JhiAlertService
   ) {
     this.tournaments = [];
-    this.currentUserMatches = [];
   }
 
   ngOnInit() {
@@ -41,16 +39,6 @@ export class HomeComponent implements OnInit {
       .query()
       .subscribe(
         (res: HttpResponse<ITournamentTennis[]>) => (this.tournaments = res.body),
-        (error: HttpErrorResponse) => this.onError(error.message)
-      );
-    // si el usuario esta autentificado y tiene asociado un jugador, se le muestran sus torneos y sus partidos
-
-    this.matchService
-      .findAllCurrent({
-        id: this.account.login
-      })
-      .subscribe(
-        (res: HttpResponse<IMatchTennis[]>) => (this.currentUserMatches = res.body),
         (error: HttpErrorResponse) => this.onError(error.message)
       );
   }
