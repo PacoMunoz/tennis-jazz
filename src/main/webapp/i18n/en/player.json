@@ -5,7 +5,8 @@
         "title": "Players",
         "createLabel": "Create a new Player",
         "createOrEditLabel": "Create or edit a Player",
-        "notFound": "No Players found"
+        "notFound": "No Players found",
+        "currentMatches": "Current Matches"
       },
       "created": "A new Player is created with identifier {{ param }}",
       "updated": "A Player is updated with identifier {{ param }}",
