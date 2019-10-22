@@ -1,23 +1,23 @@
-<h2 id="page-heading">
-    <span jhiTranslate="global.menu.account.myAccount">My Account</span>
-</h2>
+
+<h6 id="page-heading">
+    <span class="bg-green p-3 text-white" jhiTranslate="global.menu.account.myAccount">My Account</span>
+</h6>
 <jhi-alert></jhi-alert>
 <br/>
-<div class="content ml-3">
-    <h3 id="page-subheading">
+<div class="content p-3 bg-purple">
+    <h4 class="text-white ml-3" id="page-subheading">
         <span jhiTranslate="global.menu.account.myTournaments">My Tournaments</span>
-    </h3>
+    </h4>
 </div>
-
 <div class="Rounds-wrapper container mt-5" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="space-around"
      fxLayoutGap="10px">
-    <div *ngFor="let match of currentMatches" class="Round col-md">
-        <div class="col-md-12 center-content bg-pink rounded-top p-3">
-            <h1 class="text-white">{{match.round.tournamentGroup.tournament.name}}</h1>
+    <div *ngFor="let match of currentMatches" class="col-md-4">
+        <div class="col-md-12 bg-pink rounded-top p-3">
+            <h5 class="text-white">{{match.round.tournamentGroup.tournament.name}}</h5>
         </div>
         <div class="Draw-round">
             <div class="Draw-round__name Draw-round__name--left">
-                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap.xs="15px">
+                <div class="ml-3" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap.xs="15px">
                     <div fxFlex fxLayoutAlign="start">{{match.round.name}}</div>
                     <div fxFlex fxLayoutAlign="end" fxLayoutAlign.xs="start" fxLayoutAlign.sm="start"><span
                         class="Draw-round__date">Del {{match.round.startDate|date}}

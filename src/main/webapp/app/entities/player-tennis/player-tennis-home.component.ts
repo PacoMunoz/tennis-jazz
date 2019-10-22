@@ -4,7 +4,7 @@ import { MatchTennisService } from 'app/entities/match-tennis';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { JhiAlertService } from 'ng-jhipster';
 import { AccountService, IUser, UserService } from 'app/core';
-import { concatAll, concatMap, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis/player-tennis.service';
 
@@ -28,39 +28,37 @@ export class PlayerTennisHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.identity().then(account => {
-      this.currentAccount = account;
-      if (account != null) {
-        this.getHomeData(this.currentAccount.login);
-      }
-    });
+    this.accountService
+      .identity()
+      .then(account => {
+        this.currentAccount = account;
+      })
+      .finally(() => {
+        if (this.currentAccount != null) {
+          this.getHomeData(this.currentAccount.login);
+        }
+      });
   }
 
   protected getHomeData(login: any) {
-    this.userService.find(this.currentAccount.login).subscribe(
-      (res: HttpResponse<IUser>) => {
-        this.playerService
-          .query({
+    this.userService
+      .find(this.currentAccount.login)
+      .pipe(
+        switchMap((res: HttpResponse<IUser>) =>
+          this.playerService.query({
             'userId.equals': res.body.id
           })
-          .subscribe(
-            (res: HttpResponse<IPlayerTennis[]>) => {
-              if (res.body != null && res.body.length == 1) {
-                this.matchService
-                  .findAllCurrent({
-                    id: res.body[0].id
-                  })
-                  .subscribe(
-                    (res: HttpResponse<IMatchTennis[]>) => (this.currentMatches = res.body),
-                    (error: HttpErrorResponse) => this.onError(error.message)
-                  );
-              }
-            },
-            (error: HttpErrorResponse) => this.onError(error.message)
-          );
-      },
-      (error: HttpErrorResponse) => this.onError(error.message)
-    );
+        ),
+        switchMap((res: HttpResponse<IPlayerTennis[]>) =>
+          this.matchService.findAllCurrent({
+            id: res.body != null && res.body.length === 1 ? res.body[0].id : 0
+          })
+        )
+      )
+      .subscribe(
+        (res: HttpResponse<IMatchTennis[]>) => (this.currentMatches = res.body),
+        (error: HttpErrorResponse) => this.onError(error.message)
+      );
   }
 
   protected onError(errorMessage: string) {
