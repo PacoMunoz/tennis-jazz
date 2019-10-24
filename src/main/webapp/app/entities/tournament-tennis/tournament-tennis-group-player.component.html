@@ -15,7 +15,7 @@
                 </mat-card-subtitle>
             </mat-card-content>
         </mat-card>
-        <div class="row center-content" *ngSwitchCase="true">
+        <div class="row center-content" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']">
             <button id="jh-create-entity"
                     class="btn-xs btn-primary btn-xs float-left jh-create-entity"
                     [routerLink]="['/player-tennis', player.id, 'edit']">

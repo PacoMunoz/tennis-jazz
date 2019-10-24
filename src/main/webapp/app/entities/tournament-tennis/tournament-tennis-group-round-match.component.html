@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="Match_wrapper container" [ngClass]="{'col-md-6' : isShowingAllRounds == false}"
-             *ngFor="let match of matches" [ngSwitch]="isAuthenticated()">
+             *ngFor="let match of matches">
             <div class="Match">
                 <div class="Match__body">
                     <div class="Match__line"
@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row center-content" *ngSwitchCase="true">
+            <div class="row center-content" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']">
                 <button id="jh-create-entity"
                         class="btn-xs btn-primary btn-xs float-left jh-create-entity"
                         [routerLink]="['/match-tennis', match.id, 'new-update']">
