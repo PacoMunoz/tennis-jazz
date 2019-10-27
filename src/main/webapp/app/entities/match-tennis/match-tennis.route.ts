@@ -12,6 +12,7 @@ import { MatchTennisUpdateComponent } from './match-tennis-update.component';
 import { MatchTennisDeletePopupComponent } from './match-tennis-delete-dialog.component';
 import { IMatchTennis } from 'app/shared/model/match-tennis.model';
 import { MatchTennisNewUpdateComponent } from 'app/entities/match-tennis/match-tennis-new-update.component';
+import { MatchTennisRouteAccessService } from 'app/entities/match-tennis/match-tennis-route-access.service';
 
 @Injectable({ providedIn: 'root' })
 export class MatchTennisResolve implements Resolve<IMatchTennis> {
@@ -70,13 +71,13 @@ export const matchRoute: Routes = [
       match: MatchTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_MANAGER'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
-    path: ':id/new-update',
+    path: ':id/new-or-update',
     component: MatchTennisNewUpdateComponent,
     resolve: {
       match: MatchTennisResolve
@@ -86,6 +87,18 @@ export const matchRoute: Routes = [
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/new-or-update-current',
+    component: MatchTennisNewUpdateComponent,
+    resolve: {
+      match: MatchTennisResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'tennisJazzApp.match.home.title'
+    },
+    canActivate: [MatchTennisRouteAccessService]
   }
 ];
 
