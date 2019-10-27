@@ -12,15 +12,7 @@
     <property name="clobType" value="clob" dbms="h2"/>
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
-
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <!--<include file="config/liquibase/changelog/20190717204919_added_entity_Tournament.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190717204920_added_entity_TournamentGroup.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190717204921_added_entity_Player.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190717204922_added_entity_Round.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190717204923_added_entity_Match.xml" relativeToChangelogFile="false"/>-->
-
-
     <include file="config/liquibase/changelog/20190720061959_added_entity_Tournament.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190720062000_added_entity_TournamentGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190720062001_added_entity_Player.xml" relativeToChangelogFile="false"/>
