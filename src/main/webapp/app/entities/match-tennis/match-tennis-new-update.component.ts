@@ -19,10 +19,8 @@ import { RankingTennisService } from 'app/entities/ranking-tennis';
 })
 export class MatchTennisNewUpdateComponent implements OnInit {
   isSaving: boolean;
-
   rounds: IRoundTennis[];
   counter: number;
-
   players: IPlayerTennis[];
 
   editForm = this.fb.group({
@@ -129,7 +127,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     result.subscribe(
       () => {
         this.counter++;
-        if (this.counter == 3) {
+        if (this.counter === 3) {
           this.onSaveSuccess();
         }
       },
