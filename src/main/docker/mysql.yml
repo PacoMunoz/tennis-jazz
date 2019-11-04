@@ -6,8 +6,8 @@ services:
     #     - ~/volumes/jhipster/tennisJazz/mysql/:/var/lib/mysql/
     environment:
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=mysql
-      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      #- MYSQL_PASSWORD=mysql
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=tennisjazz
     ports:
       - 3306:3306
