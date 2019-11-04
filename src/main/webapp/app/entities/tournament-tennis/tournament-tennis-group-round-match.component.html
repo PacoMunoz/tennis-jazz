@@ -33,6 +33,8 @@
                             </svg>
                         </div>
                         <div class="Match__set">
+                            <div *ngIf="match.localPlayerAbandoned"><span jhiTranslate="tennisJazzApp.match.retired">retired</span></div>
+                            <div *ngIf="match.localPlayerNotPresent"><span jhiTranslate="tennisJazzApp.match.notAppear">not appear</span></div>
                             <ul><!---->
                                 <li>
                                     {{match.localPlayerSet1Result}}
@@ -80,6 +82,8 @@
                             </svg>
                         </div>
                         <div class="Match__set">
+                            <div *ngIf="match.visitorPlayerAbandoned"><span jhiTranslate="tennisJazzApp.match.retired">retired</span></div>
+                            <div *ngIf="match.visitorPlayerNotPresent"><span jhiTranslate="tennisJazzApp.match.notAppear">not appear</span></div>
                             <ul><!---->
                                 <li>
                                     {{match.visitorPlayerSet1Result}}
