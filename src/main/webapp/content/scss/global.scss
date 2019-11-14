@@ -293,19 +293,6 @@ custom css styles
   align-items: center;
 }
 
-.Match__player__i {
-  display: none;
-}
-
-@media screen and (max-width: 1023px) {
-  .Match__player__fn {
-    display: none;
-  }
-  .Match__player__i {
-    display: inline-block;
-  }
-}
-
 .Match__winner {
   margin-right: 16px;
 }
@@ -425,6 +412,7 @@ ul {
 .mat-tab-tournament-view .tournament-mat-tab-body {
   margin-top: 25px;
 }
+
 .mat-tab-tournament-view .mat-bottom-tab-tournament-view .mat-tab-header {
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
@@ -613,7 +601,8 @@ h6,
 /* ===================================== ranking table ========================================== */
 
 .ranking-table table {
-  border: 1px solid #dee2e6;
+  //border: 1px solid #dee2e6;
+  //border: 1px solid red;
 }
 
 .ranking-table .table thead th {
@@ -630,12 +619,16 @@ h6,
 }
 
 .mat-table-sticky:nth-child(2) {
-  border-right: 1px solid #e0e0e0;
+  //  border-right: 1px solid #e0e0e0;
 }
 
 th.mat-column-points,
 td.mat-column-points {
-  padding-left: 25px !important;
+  //padding-left: 25px !important;
+}
+
+.mat-column-- {
+  flex: 0 0 50px;
 }
 
 /* ===================================== ranking table end ========================================== */
@@ -651,6 +644,7 @@ td.mat-column-points {
   width: 40px !important;
   border-radius: 0 !important;
 }
+
 .tournament-card .mat-card-avatar {
   height: 144px !important;
   width: 190px !important;

@@ -2,12 +2,13 @@ version: '2'
 services:
   tennisjazz-mysql:
     image: mysql:8.0.16
-    # volumes:
-    #     - ~/volumes/jhipster/tennisJazz/mysql/:/var/lib/mysql/
+    volumes:
+      - ~/volumes/jhipster/tennisJazz/mysql/:/var/lib/mysql/
     environment:
-      - MYSQL_USER=root
-      #- MYSQL_PASSWORD=mysql
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      #- MYSQL_USER=root
+      #- MYSQL_PASSWORD=3QpZ(#ayR&3YFcG)
+      - MYSQL_ROOT_PASSWORD=3QpZ(#ayR&3YFcG)
+      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=tennisjazz
     ports:
       - 3306:3306
