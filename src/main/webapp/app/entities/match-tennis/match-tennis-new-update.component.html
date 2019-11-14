@@ -1,12 +1,14 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-match-tennis-heading" jhiTranslate="tennisJazzApp.match.home.editLabel">Edit Match</h2>
-            <h5>
-                {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                vs
-                {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-            </h5>
+            <span jhiTranslate="tennisJazzApp.match.home.editLabel">Edit Match</span>
+            <div class="mt-md-3 p-2 text-white bg-purple">
+                <span>
+                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                    vs
+                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                </span>
+            </div>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="true">
@@ -49,157 +51,165 @@
                 <div class="pink_subtitle my-3">
                     <span id="jhi-set1-match-tennis-heading" jhiTranslate="tennisJazzApp.match.set1">Primer Set</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
-                           for="field_localPlayerSet1Result">Games</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerSet1Result"
-                           id="field_localPlayerSet1Result"
-                           formControlName="localPlayerSet1Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
-                           for="field_visitorPlayerSet1Result">Games</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerSet1Result"
-                           id="field_visitorPlayerSet1Result"
-                           formControlName="visitorPlayerSet1Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
-                           for="field_localPlayerTBSet1Result">Tie Break Points</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerTBSet1Result"
-                           id="field_localPlayerTBSet1Result"
-                           formControlName="localPlayerTBSet1Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
-                           for="field_visitorPlayerTBSet1Result">Tie Break Point</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerTBSet1Result"
-                           id="field_visitorPlayerTBSet1Result"
-                           formControlName="visitorPlayerTBSet1Result"/>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
+                               for="field_localPlayerSet1Result">Games</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerSet1Result"
+                               id="field_localPlayerSet1Result"
+                               formControlName="localPlayerSet1Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
+                               for="field_visitorPlayerSet1Result">Games</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerSet1Result"
+                               id="field_visitorPlayerSet1Result"
+                               formControlName="visitorPlayerSet1Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
+                               for="field_localPlayerTBSet1Result">Tie Break Points</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerTBSet1Result"
+                               id="field_localPlayerTBSet1Result"
+                               formControlName="localPlayerTBSet1Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
+                               for="field_visitorPlayerTBSet1Result">Tie Break Point</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerTBSet1Result"
+                               id="field_visitorPlayerTBSet1Result"
+                               formControlName="visitorPlayerTBSet1Result"/>
+                    </div>
                 </div>
                 <div class="pink_subtitle my-3">
                     <span id="jhi-set2-match-tennis-heading" jhiTranslate="tennisJazzApp.match.set2">Segundo Set</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
-                           for="field_localPlayerSet2Result">Games</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerSet2Result"
-                           id="field_localPlayerSet2Result"
-                           formControlName="localPlayerSet2Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
-                           for="field_visitorPlayerSet2Result">Games</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerSet2Result"
-                           id="field_visitorPlayerSet2Result"
-                           formControlName="visitorPlayerSet2Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
-                           for="field_localPlayerTBSet2Result">Tie Break Points</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerTBSet2Result"
-                           id="field_localPlayerTBSet2Result"
-                           formControlName="localPlayerTBSet2Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
-                           for="field_visitorPlayerTBSet2Result">Tie Break Points</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerTBSet2Result"
-                           id="field_visitorPlayerTBSet2Result"
-                           formControlName="visitorPlayerTBSet2Result"/>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
+                               for="field_localPlayerSet2Result">Games</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerSet2Result"
+                               id="field_localPlayerSet2Result"
+                               formControlName="localPlayerSet2Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
+                               for="field_visitorPlayerSet2Result">Games</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerSet2Result"
+                               id="field_visitorPlayerSet2Result"
+                               formControlName="visitorPlayerSet2Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
+                               for="field_localPlayerTBSet2Result">Tie Break Points</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerTBSet2Result"
+                               id="field_localPlayerTBSet2Result"
+                               formControlName="localPlayerTBSet2Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
+                               for="field_visitorPlayerTBSet2Result">Tie Break Points</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerTBSet2Result"
+                               id="field_visitorPlayerTBSet2Result"
+                               formControlName="visitorPlayerTBSet2Result"/>
+                    </div>
                 </div>
                 <div class="pink_subtitle my-3">
                     <span id="jhi-set3-match-tennis-heading" jhiTranslate="tennisJazzApp.match.set3">Tercer Set</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
-                           for="field_localPlayerSet3Result">Games</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerSet3Result"
-                           id="field_localPlayerSet3Result"
-                           formControlName="localPlayerSet3Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
-                           for="field_visitorPlayerSet3Result">Games</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerSet3Result"
-                           id="field_visitorPlayerSet3Result"
-                           formControlName="visitorPlayerSet3Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
-                           for="field_localPlayerTBSet3Result">Tie Break Points</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerTBSet3Result"
-                           id="field_localPlayerTBSet3Result"
-                           formControlName="localPlayerTBSet3Result"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
-                           for="field_visitorPlayerTBSet3Result">Tie Break Points</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerTBSet3Result"
-                           id="field_visitorPlayerTBSet3Result"
-                           formControlName="visitorPlayerTBSet3Result"/>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
+                               for="field_localPlayerSet3Result">Games</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerSet3Result"
+                               id="field_localPlayerSet3Result"
+                               formControlName="localPlayerSet3Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.games"
+                               for="field_visitorPlayerSet3Result">Games</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerSet3Result"
+                               id="field_visitorPlayerSet3Result"
+                               formControlName="visitorPlayerSet3Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
+                               for="field_localPlayerTBSet3Result">Tie Break Points</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerTBSet3Result"
+                               id="field_localPlayerTBSet3Result"
+                               formControlName="localPlayerTBSet3Result"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.tieBreakPoints"
+                               for="field_visitorPlayerTBSet3Result">Tie Break Points</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerTBSet3Result"
+                               id="field_visitorPlayerTBSet3Result"
+                               formControlName="visitorPlayerTBSet3Result"/>
+                    </div>
                 </div>
                 <div class="pink_subtitle my-3">
                     <span id="jhi-summary-match-tennis-heading"
                           jhiTranslate="tennisJazzApp.match.summary">Summary</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.totalSets"
-                           for="field_localPlayerSets">Total Sets</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="localPlayerSets" id="field_localPlayerSets"
-                           formControlName="localPlayerSets"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.totalSets"
-                           for="field_visitorPlayerSets">Total Sets</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="number" class="form-control" name="visitorPlayerSets" id="field_visitorPlayerSets"
-                           formControlName="visitorPlayerSets"/>
-                </div>
-                <div class="form-group">
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.retired"
-                           for="field_localPlayerAbandoned">Retired</label>
-                    <input type="checkbox" class="form-control" name="localPlayerAbandoned"
-                           id="field_localPlayerAbandoned"
-                           formControlName="localPlayerAbandoned"/>
-                </div>
-                <div class="form-group">
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.retired"
-                           for="field_visitorPlayerAbandoned">Retired</label>
-                    <input type="checkbox" class="form-control" name="visitorPlayerAbandoned"
-                           id="field_visitorPlayerAbandoned"
-                           formControlName="visitorPlayerAbandoned"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.notAppear"
-                           for="field_localPlayerNotPresent">Not Appear</label>
-                    {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
-                    <input type="checkbox" class="form-control" name="localPlayerNotPresent"
-                           id="field_localPlayerNotPresent"
-                           formControlName="localPlayerNotPresent"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tennisJazzApp.match.notAppear"
-                           for="field_visitorPlayerNotPresent">Not Appear</label>
-                    {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                    <input type="checkbox" class="form-control" name="visitorPlayerNotPresent"
-                           id="field_visitorPlayerNotPresent"
-                           formControlName="visitorPlayerNotPresent"/>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.totalSets"
+                               for="field_localPlayerSets">Total Sets</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="localPlayerSets" id="field_localPlayerSets"
+                               formControlName="localPlayerSets"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.totalSets"
+                               for="field_visitorPlayerSets">Total Sets</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="number" class="form-control" name="visitorPlayerSets" id="field_visitorPlayerSets"
+                               formControlName="visitorPlayerSets" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.retired"
+                               for="field_localPlayerAbandoned">Retired</label>
+                        <input type="checkbox" class="form-control" name="localPlayerAbandoned"
+                               id="field_localPlayerAbandoned"
+                               formControlName="localPlayerAbandoned"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.retired"
+                               for="field_visitorPlayerAbandoned">Retired</label>
+                        <input type="checkbox" class="form-control" name="visitorPlayerAbandoned"
+                               id="field_visitorPlayerAbandoned"
+                               formControlName="visitorPlayerAbandoned"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.notAppear"
+                               for="field_localPlayerNotPresent">Not Appear</label>
+                        {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
+                        <input type="checkbox" class="form-control" name="localPlayerNotPresent"
+                               id="field_localPlayerNotPresent"
+                               formControlName="localPlayerNotPresent"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" jhiTranslate="tennisJazzApp.match.notAppear"
+                               for="field_visitorPlayerNotPresent">Not Appear</label>
+                        {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
+                        <input type="checkbox" class="form-control" name="visitorPlayerNotPresent"
+                               id="field_visitorPlayerNotPresent"
+                               formControlName="visitorPlayerNotPresent"/>
+                    </div>
                 </div>
             </div>
             <div>
