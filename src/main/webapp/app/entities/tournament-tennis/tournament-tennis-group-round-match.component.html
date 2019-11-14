@@ -15,8 +15,8 @@
                                      }">
                         <div class="Match__player__holder">
                             <div class="Match__player">
-                                <span class="Match__player__fn">{{match.localPlayer.name}}</span>
-                                <span class="Match__player__i">
+                                <span class="d-none d-md-inline">{{match.localPlayer.name}}</span>
+                                <span class="d-inline d-md-none">
                                     {{match.localPlayer.name|slice : 0 : 1}}.
                                 </span>&nbsp;
                                 <span class="Match__player__ln">{{match.localPlayer.surname}}</span>
@@ -64,8 +64,8 @@
                                                     || match.localPlayerNotPresent}">
                         <div class="Match__player__holder">
                             <div class="Match__player">
-                                <span class="Match__player__fn">{{match.visitorPlayer.name}}</span>
-                                <span class="Match__player__i">
+                                <span class="d-none d-md-inline">{{match.visitorPlayer.name}}</span>
+                                <span class="d-inline d-md-none">
                                     {{match.visitorPlayer.name|slice : 0 : 1}}.
                                 </span>&nbsp;
                                 <span class="Match__player__ln">{{match.visitorPlayer.surname}}</span>
