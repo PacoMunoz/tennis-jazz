@@ -600,11 +600,6 @@ h6,
 
 /* ===================================== ranking table ========================================== */
 
-.ranking-table table {
-  //border: 1px solid #dee2e6;
-  //border: 1px solid red;
-}
-
 .ranking-table .table thead th {
   vertical-align: middle;
 }
@@ -616,15 +611,6 @@ h6,
 
 .ranking-table thead {
   background-color: #fbfbfb;
-}
-
-.mat-table-sticky:nth-child(2) {
-  //  border-right: 1px solid #e0e0e0;
-}
-
-th.mat-column-points,
-td.mat-column-points {
-  //padding-left: 25px !important;
 }
 
 .mat-header-cell,
