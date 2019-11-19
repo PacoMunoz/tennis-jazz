@@ -627,8 +627,17 @@ td.mat-column-points {
   //padding-left: 25px !important;
 }
 
-.mat-column-- {
-  flex: 0 0 50px;
+.mat-header-cell,
+.mat-cell {
+  padding: 12px !important;
+}
+
+.mat-column-name {
+  padding: 18px !important;
+}
+
+.mat-column-points {
+  padding-left: 25px !important;
 }
 
 /* ===================================== ranking table end ========================================== */
