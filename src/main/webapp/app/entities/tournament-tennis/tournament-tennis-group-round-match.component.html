@@ -3,8 +3,9 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="Match_wrapper container" [ngClass]="{'col-md-6' : isShowingAllRounds == false}"
-             *ngFor="let match of matches">
+        <!--<div class="Match_wrapper container" [ngClass]="{'col-md-6' : isShowingAllRounds == false}"
+             *ngFor="let match of matches"> -->
+        <div class="Match_wrapper container col-md-6" *ngFor="let match of matches">
             <div class="Match">
                 <div class="Match__body">
                     <div class="Match__line"
