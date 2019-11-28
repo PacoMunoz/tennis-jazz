@@ -222,9 +222,9 @@ custom css styles
   padding-bottom: 50px !important;
 }
 @media screen and (max-width: 414px) {
-  //  .container-fluid {
-  //    padding: 0px !important;
-  //  }
+  .container-fluid {
+    padding: 0px !important;
+  }
   .jh-card {
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -618,7 +618,7 @@ h6,
 
 .mat-header-cell,
 .mat-cell {
-  padding: 12px !important;
+  padding: 8px !important;
 }
 
 .mat-column-name {
