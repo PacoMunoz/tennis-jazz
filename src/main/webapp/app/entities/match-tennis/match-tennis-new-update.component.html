@@ -57,7 +57,7 @@
                                for="field_localPlayerSet1Result">Games</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerSet1Result"
-                               id="field_localPlayerSet1Result"
+                               id="field_localPlayerSet1Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="localPlayerSet1Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -65,7 +65,7 @@
                                for="field_visitorPlayerSet1Result">Games</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerSet1Result"
-                               id="field_visitorPlayerSet1Result"
+                               id="field_visitorPlayerSet1Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="visitorPlayerSet1Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -73,7 +73,7 @@
                                for="field_localPlayerTBSet1Result">Tie Break Points</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerTBSet1Result"
-                               id="field_localPlayerTBSet1Result"
+                               id="field_localPlayerTBSet1Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="localPlayerTBSet1Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -81,7 +81,7 @@
                                for="field_visitorPlayerTBSet1Result">Tie Break Point</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerTBSet1Result"
-                               id="field_visitorPlayerTBSet1Result"
+                               id="field_visitorPlayerTBSet1Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="visitorPlayerTBSet1Result"/>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                                for="field_localPlayerSet2Result">Games</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerSet2Result"
-                               id="field_localPlayerSet2Result"
+                               id="field_localPlayerSet2Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="localPlayerSet2Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -102,7 +102,7 @@
                                for="field_visitorPlayerSet2Result">Games</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerSet2Result"
-                               id="field_visitorPlayerSet2Result"
+                               id="field_visitorPlayerSet2Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="visitorPlayerSet2Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -110,7 +110,7 @@
                                for="field_localPlayerTBSet2Result">Tie Break Points</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerTBSet2Result"
-                               id="field_localPlayerTBSet2Result"
+                               id="field_localPlayerTBSet2Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="localPlayerTBSet2Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -118,7 +118,7 @@
                                for="field_visitorPlayerTBSet2Result">Tie Break Points</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerTBSet2Result"
-                               id="field_visitorPlayerTBSet2Result"
+                               id="field_visitorPlayerTBSet2Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="visitorPlayerTBSet2Result"/>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                                for="field_localPlayerSet3Result">Games</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerSet3Result"
-                               id="field_localPlayerSet3Result"
+                               id="field_localPlayerSet3Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="localPlayerSet3Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -139,7 +139,7 @@
                                for="field_visitorPlayerSet3Result">Games</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerSet3Result"
-                               id="field_visitorPlayerSet3Result"
+                               id="field_visitorPlayerSet3Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="visitorPlayerSet3Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -147,7 +147,7 @@
                                for="field_localPlayerTBSet3Result">Tie Break Points</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerTBSet3Result"
-                               id="field_localPlayerTBSet3Result"
+                               id="field_localPlayerTBSet3Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="localPlayerTBSet3Result"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -155,7 +155,7 @@
                                for="field_visitorPlayerTBSet3Result">Tie Break Points</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerTBSet3Result"
-                               id="field_visitorPlayerTBSet3Result"
+                               id="field_visitorPlayerTBSet3Result" [attr.disabled]="editEnable ? null : '' "
                                formControlName="visitorPlayerTBSet3Result"/>
                     </div>
                 </div>
@@ -169,29 +169,29 @@
                                for="field_localPlayerSets">Total Sets</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="number" class="form-control" name="localPlayerSets" id="field_localPlayerSets"
-                               formControlName="localPlayerSets"/>
+                               formControlName="localPlayerSets" [attr.disabled]="editEnable ? null : '' "/>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-control-label" jhiTranslate="tennisJazzApp.match.totalSets"
                                for="field_visitorPlayerSets">Total Sets</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <input type="number" class="form-control" name="visitorPlayerSets" id="field_visitorPlayerSets"
-                               formControlName="visitorPlayerSets" />
+                               formControlName="visitorPlayerSets" [attr.disabled]="editEnable ? null : '' "/>
                     </div>
                     <div class="form-group col-md-6">
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <label class="form-control-label" jhiTranslate="tennisJazzApp.match.retired"
                                for="field_localPlayerAbandoned">Retired</label>
-                        <input type="checkbox" class="form-control" name="localPlayerAbandoned"
-                               id="field_localPlayerAbandoned"
+                        <input type="checkbox"  class="form-control radio" name="localPlayerAbandoned"
+                               id="field_localPlayerAbandoned" (click)="clickCheckBox($event)"
                                formControlName="localPlayerAbandoned"/>
                     </div>
                     <div class="form-group col-md-6">
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
                         <label class="form-control-label" jhiTranslate="tennisJazzApp.match.retired"
                                for="field_visitorPlayerAbandoned">Retired</label>
-                        <input type="checkbox" class="form-control" name="visitorPlayerAbandoned"
-                               id="field_visitorPlayerAbandoned"
+                        <input type="checkbox"  class="form-control" name="visitorPlayerAbandoned"
+                               id="field_visitorPlayerAbandoned" (click)="clickCheckBox($event)"
                                formControlName="visitorPlayerAbandoned"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -199,15 +199,15 @@
                                for="field_localPlayerNotPresent">Not Appear</label>
                         {{editForm.get('localPlayer').value?.name}} {{editForm.get('localPlayer').value?.surname}}
                         <input type="checkbox" class="form-control" name="localPlayerNotPresent"
-                               id="field_localPlayerNotPresent"
+                               id="field_localPlayerNotPresent" (click)="clickCheckBox($event)"
                                formControlName="localPlayerNotPresent"/>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-control-label" jhiTranslate="tennisJazzApp.match.notAppear"
                                for="field_visitorPlayerNotPresent">Not Appear</label>
                         {{editForm.get('visitorPlayer').value?.name}} {{editForm.get('visitorPlayer').value?.surname}}
-                        <input type="checkbox" class="form-control" name="visitorPlayerNotPresent"
-                               id="field_visitorPlayerNotPresent"
+                        <input type="checkbox"  class="form-control" name="visitorPlayerNotPresent"
+                               id="field_visitorPlayerNotPresent" (click)="clickCheckBox($event)"
                                formControlName="visitorPlayerNotPresent"/>
                     </div>
                 </div>

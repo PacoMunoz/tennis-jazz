@@ -19,6 +19,7 @@ import { RankingTennisService } from 'app/entities/ranking-tennis';
 })
 export class MatchTennisNewUpdateComponent implements OnInit {
   isSaving: boolean;
+  editEnable: boolean;
   rounds: IRoundTennis[];
   counter: number;
   players: IPlayerTennis[];
@@ -62,6 +63,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.editEnable = true;
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ match }) => {
       this.updateForm(match);
@@ -80,6 +82,74 @@ export class MatchTennisNewUpdateComponent implements OnInit {
         map((response: HttpResponse<IPlayerTennis[]>) => response.body)
       )
       .subscribe((res: IPlayerTennis[]) => (this.players = res), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  clickCheckBox(event: any) {
+    switch (event.target.name) {
+      case 'localPlayerAbandoned':
+        if (event.target.checked) {
+          this.editEnable = true;
+        }
+        this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
+        this.editForm.get(['localPlayerNotPresent']).setValue(false);
+        this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
+        break;
+      case 'visitorPlayerAbandoned':
+        if (event.target.checked) {
+          this.editEnable = true;
+        }
+        this.editForm.get(['localPlayerAbandoned']).setValue(false);
+        this.editForm.get(['localPlayerNotPresent']).setValue(false);
+        this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
+        break;
+      case 'localPlayerNotPresent':
+        if (event.target.checked) {
+          this.setCustomResults(0, 6, 0, 6, 0, 2);
+        } else {
+          this.clearCustomResult();
+        }
+        this.editForm.get(['localPlayerAbandoned']).setValue(false);
+        this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
+        this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
+        break;
+      case 'visitorPlayerNotPresent':
+        if (event.target.checked) {
+          this.setCustomResults(6, 0, 6, 0, 2, 0);
+        } else {
+          this.clearCustomResult();
+        }
+        this.editForm.get(['localPlayerAbandoned']).setValue(false);
+        this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
+        this.editForm.get(['localPlayerNotPresent']).setValue(false);
+        break;
+    }
+  }
+
+  setCustomResults(
+    localSet1: number,
+    visitorSet1: number,
+    localSet2: number,
+    visitorSet2: number,
+    localSets: number,
+    visitorResult: number
+  ) {
+    this.editEnable = false;
+    this.editForm.get(['localPlayerSet1Result']).setValue(localSet1);
+    this.editForm.get(['visitorPlayerSet1Result']).setValue(visitorSet1);
+    this.editForm.get(['localPlayerSet2Result']).setValue(localSet2);
+    this.editForm.get(['visitorPlayerSet2Result']).setValue(visitorSet2);
+    this.editForm.get(['localPlayerSets']).setValue(localSets);
+    this.editForm.get(['visitorPlayerSets']).setValue(visitorResult);
+  }
+
+  clearCustomResult() {
+    this.editEnable = true;
+    this.editForm.get(['localPlayerSet1Result']).setValue(null);
+    this.editForm.get(['visitorPlayerSet1Result']).setValue(null);
+    this.editForm.get(['localPlayerSet2Result']).setValue(null);
+    this.editForm.get(['visitorPlayerSet2Result']).setValue(null);
+    this.editForm.get(['localPlayerSets']).setValue(null);
+    this.editForm.get(['visitorPlayerSets']).setValue(null);
   }
 
   updateForm(match: IMatchTennis) {
@@ -112,6 +182,9 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const match = this.createFromForm();
+
+    console.log(match.localPlayerAbandoned);
+
     const updateLocalRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
     const updateVisitorRankingO = this.rankingService.updateTournamentPlayerRanking(match.visitorPlayer.id, match.round.id);
     if (match.id !== undefined) {
