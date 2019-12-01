@@ -405,9 +405,11 @@ public final class RankingCalculateUtil {
      * @return true if played
      */
     private static boolean isMatchPlayed(Match match) {
-        return match.isLocalPlayerAbandoned() != null || match.isVisitorPlayerAbandoned() != null
-            || match.isLocalPlayerNotPresent() != null || match.isVisitorPlayerNotPresent() != null
-            || (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null);
+        return ( match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned())        ||
+               ( match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned())    ||
+               ( match.isLocalPlayerNotPresent() != null && match.isLocalPlayerNotPresent() )     ||
+               ( match.isVisitorPlayerNotPresent() != null && match.isVisitorPlayerNotPresent())  ||
+               ( match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null);
     }
 
     /**
