@@ -110,19 +110,16 @@ public class RankingResource {
         if (idr == null || idp == null) {
             throw new BadRequestAlertException("Invalid id", "Round or Player", "idnull");
         }
-
         TournamentGroupCriteria groupCriteria = new TournamentGroupCriteria();
         LongFilter roundIdLongFilter = new LongFilter();
         roundIdLongFilter.setEquals(idr);
         groupCriteria.setRoundsId(roundIdLongFilter);
         List<TournamentGroup> lstGroups = this.tournamentGroupQueryService.findByCriteria(groupCriteria);
         Optional<TournamentGroup> groupO = Optional.ofNullable(lstGroups.get(0));
-
         Optional<Player> playerO =  playerService.findOne(idp);
         if (!playerO.isPresent() || !groupO.isPresent()) {
             throw new BadRequestAlertException("Invalid id", "Group or Player", "idNoValid");
         }
-
         rankingService.updateRanking(playerO.get(), groupO.get());
         //Get player matches in the groups
             // -> Use searchcriteria in Match repository and dinamyc query https://www.baeldung.com/spring-data-jpa-query
