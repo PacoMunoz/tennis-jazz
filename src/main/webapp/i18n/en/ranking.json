@@ -32,13 +32,17 @@
       "player": "Player",
       "xs": {
         "points": "PT.",
-        "matchesPlayed": "MP.",
-        "matchesWon": "MW.",
-        "matchesLoss": "ML.",
-        "setsWon": "SW.",
-        "setsLoss": "SL.",
-        "gamesWon": "GW.",
-        "gamesLoss": "GL."
+        "matchesPlayed": "M.P",
+        "matchesWon": "M.W",
+        "matchesLoss": "M.L",
+        "setsWon": "S.W",
+        "setsLoss": "S.L",
+        "gamesWon": "G.W",
+        "gamesLoss": "G.L",
+        "matchesNotPresent": "N.P",
+        "matchesAbandoned": "Ret.",
+        "tieBreaksPlayed": "TB.P",
+        "tieBreaksWon": "TB.W"
       }
     }
   }
