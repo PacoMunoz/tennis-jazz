@@ -18,10 +18,14 @@ export class TournamentTennisGroupRankingComponent implements OnInit {
     'matches-played',
     'matches-won',
     'matches-loss',
+    'matches-not-present',
+    'matches-abandoned',
     'sets-won',
     'sets-loss',
     'games-won',
-    'games-loss'
+    'games-loss',
+    'tie-breaks-played',
+    'tie-breaks-won'
   ];
 
   constructor(private rankingTennisService: RankingTennisService, private jhiAlertService: JhiAlertService) {
