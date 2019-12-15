@@ -221,22 +221,30 @@ custom css styles
   padding-top: 10px !important;
   padding-bottom: 50px !important;
 }
+
+.jh-card {
+  margin-top: 0 !important;
+  padding: 0 !important;
+}
+.container-ranking-table {
+  height: 600px;
+}
+
 @media screen and (max-width: 414px) {
   .container-fluid {
-    padding: 0px !important;
+    padding: 0 !important;
   }
   .jh-card {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .container-ranking-table {
+    height: 400px;
   }
 }
 
 /* ================== match and round styles ============================= */
 
-/*.Match__selector > div {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}*/
 .Match__body {
   padding: 0 16px 8px;
   border: 2px solid #ebedf0;
@@ -469,8 +477,7 @@ ul {
   text-decoration: underline !important;
   background-color: #ee2982 !important;
 }
-
-.dropdown-menu {
+container-fluid .dropdown-menu {
   padding: 0 !important;
 }
 
