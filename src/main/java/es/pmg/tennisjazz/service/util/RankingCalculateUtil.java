@@ -27,7 +27,7 @@ public final class RankingCalculateUtil {
      * @return total points won.
      */
     public static Integer calculatePoints(Player player, List<Match> matches) {
-        Integer totalPoints = 0;
+        int totalPoints = 0;
         for (Match match : matches) {
             switch (getMatchResult(player, match)) {
                 case WON:
