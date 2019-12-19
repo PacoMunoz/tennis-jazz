@@ -107,6 +107,12 @@ public class RankingServiceImpl implements RankingService {
         log.debug("Request to update Ranking of player: " + player.getId() + " in group : " + group.getId());
         //get player ranking in group or create it if not exist
         Optional<Ranking> oRanking = findByPlayerAndGroup(player, group);
+        //get tournament score rules
+        Integer wonPoints = group.getTournament().getWinPoints();
+        Integer lossPoints = group.getTournament().getLossPoints();
+        Integer injuredPoints = group.getTournament().getInjuredPoints();
+        Integer notPresentPoints = group.getTournament().getNotPresentPoints();
+
         Ranking ranking = null;
         if (oRanking.isPresent()) {
             ranking = oRanking.get();
@@ -118,7 +124,7 @@ public class RankingServiceImpl implements RankingService {
         //get all matches played by a player in group
         List<Match> matches = getMatches(player, group);
         //calculate total player points
-        ranking.setPoints(RankingCalculateUtil.calculatePoints(player, matches));
+        ranking.setPoints(RankingCalculateUtil.calculatePoints(player, matches, wonPoints, lossPoints, injuredPoints, notPresentPoints));
         //calculate total games won
         ranking.setGamesWon(RankingCalculateUtil.calculateGamesWon(player, matches));
         //calculate total games loss

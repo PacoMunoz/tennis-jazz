@@ -8,13 +8,9 @@ import java.util.List;
 public final class RankingCalculateUtil {
 
     private static final String ABANDONED = "Abandoned";
-    private static final Integer ABANDONED_POINTS = 1;
     private static final String NOPRESENT = "NoPresent";
-    private static final Integer NOPRESENT_POINTS = 0;
     private static final String WON = "Won";
-    private static final Integer WON_POINTS = 3;
     private static final String LOSS = "Loss";
-    private static final Integer LOSS_POINTS = 2;
     private static final String NN = "Nn";
 
     private RankingCalculateUtil() {
@@ -24,23 +20,28 @@ public final class RankingCalculateUtil {
      * Calculate point won for a player in a sets of matches
      * @param player the player
      * @param matches the matches to see
+     * @param won_points won match score
+     * @param loss_points loss match score
+     * @param abandoned_points abandoned match score
+     * @param notpresent_points not present match score
      * @return total points won.
      */
-    public static Integer calculatePoints(Player player, List<Match> matches) {
+
+    public static Integer calculatePoints(Player player, List<Match> matches, int won_points, int loss_points, int abandoned_points, int notpresent_points) {
         int totalPoints = 0;
         for (Match match : matches) {
             switch (getMatchResult(player, match)) {
                 case WON:
-                    totalPoints = totalPoints + WON_POINTS;
+                    totalPoints = totalPoints + won_points;
                     break;
                 case LOSS:
-                    totalPoints = totalPoints + LOSS_POINTS;
+                    totalPoints = totalPoints + loss_points;
                     break;
                 case ABANDONED:
-                    totalPoints = totalPoints + ABANDONED_POINTS;
+                    totalPoints = totalPoints + abandoned_points;
                     break;
                 case NOPRESENT:
-                    totalPoints = totalPoints + NOPRESENT_POINTS;
+                    totalPoints = totalPoints + notpresent_points;
                 default:
                     break;
             }
