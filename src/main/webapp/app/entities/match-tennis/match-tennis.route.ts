@@ -35,7 +35,7 @@ export const matchRoute: Routes = [
     path: '',
     component: MatchTennisComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -47,7 +47,7 @@ export const matchRoute: Routes = [
       match: MatchTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -59,7 +59,7 @@ export const matchRoute: Routes = [
       match: MatchTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -71,7 +71,7 @@ export const matchRoute: Routes = [
       match: MatchTennisResolve
     },
     data: {
-      authorities: ['ROLE_MANAGER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -83,7 +83,7 @@ export const matchRoute: Routes = [
       match: MatchTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -110,7 +110,7 @@ export const matchPopupRoute: Routes = [
       match: MatchTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.match.home.title'
     },
     canActivate: [UserRouteAccessService],

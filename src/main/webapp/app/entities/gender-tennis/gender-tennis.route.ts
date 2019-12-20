@@ -33,7 +33,7 @@ export const genderRoute: Routes = [
     path: '',
     component: GenderTennisComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.gender.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const genderRoute: Routes = [
       gender: GenderTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.gender.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const genderRoute: Routes = [
       gender: GenderTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.gender.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const genderRoute: Routes = [
       gender: GenderTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.gender.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const genderPopupRoute: Routes = [
       gender: GenderTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.gender.home.title'
     },
     canActivate: [UserRouteAccessService],

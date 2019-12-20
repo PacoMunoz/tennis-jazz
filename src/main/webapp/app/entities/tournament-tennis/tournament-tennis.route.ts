@@ -33,7 +33,7 @@ export const tournamentRoute: Routes = [
     path: '',
     component: TournamentTennisComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const tournamentRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const tournamentRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const tournamentPopupRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService],

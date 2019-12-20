@@ -34,7 +34,7 @@ export const playerRoute: Routes = [
     path: '',
     component: PlayerTennisComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.player.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -43,7 +43,7 @@ export const playerRoute: Routes = [
     path: 'home',
     component: PlayerTennisHomeComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'],
       pageTitle: 'tennisJazzApp.player.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -55,7 +55,7 @@ export const playerRoute: Routes = [
       player: PlayerTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.player.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -67,7 +67,7 @@ export const playerRoute: Routes = [
       player: PlayerTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.player.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -79,7 +79,7 @@ export const playerRoute: Routes = [
       player: PlayerTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.player.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -94,7 +94,7 @@ export const playerPopupRoute: Routes = [
       player: PlayerTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.player.home.title'
     },
     canActivate: [UserRouteAccessService],
