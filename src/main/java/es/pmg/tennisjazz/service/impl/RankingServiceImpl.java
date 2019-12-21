@@ -146,7 +146,7 @@ public class RankingServiceImpl implements RankingService {
         //calculate tieBreaksPlayed
         ranking.setTieBreaksPlayed(RankingCalculateUtil.calculateTieBreaksPlayed(matches));
         //calculate tieBreaksWon
-        ranking.setTieBreaksWon(RankingCalculateUtil.calculateGamesWon(player, matches));
+        ranking.setTieBreaksWon(RankingCalculateUtil.calculateTieBreaksWon(player, matches));
         //update or create ranking
         this.rankingRepository.save(ranking);
     }
