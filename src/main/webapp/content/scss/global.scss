@@ -220,12 +220,9 @@ custom css styles
 .container-fluid {
   padding-top: 10px !important;
   padding-bottom: 50px !important;
+  min-height: 550px;
 }
 
-.jh-card {
-  margin-top: 0 !important;
-  padding: 0 !important;
-}
 .container-ranking-table {
   height: 600px;
 }
@@ -477,6 +474,7 @@ ul {
   text-decoration: underline !important;
   background-color: #ee2982 !important;
 }
+
 container-fluid .dropdown-menu {
   padding: 0 !important;
 }
