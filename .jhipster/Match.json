@@ -73,6 +73,11 @@
             "fieldName": "visitorPlayerNotPresent",
             "fieldType": "Boolean"
         }
+        ,
+        {
+            "fieldName": "postponed",
+            "fieldType": "Boolean"
+        }
     ],
     "relationships": [
         {
