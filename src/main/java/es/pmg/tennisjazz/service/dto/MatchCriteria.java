@@ -62,6 +62,8 @@ public class MatchCriteria implements Serializable, Criteria {
 
     private BooleanFilter visitorPlayerNotPresent;
 
+    private BooleanFilter postponed;
+
     private LongFilter roundId;
 
     private LongFilter visitorPlayerId;
@@ -91,6 +93,7 @@ public class MatchCriteria implements Serializable, Criteria {
         this.visitorPlayerAbandoned = other.visitorPlayerAbandoned == null ? null : other.visitorPlayerAbandoned.copy();
         this.localPlayerNotPresent = other.localPlayerNotPresent == null ? null : other.localPlayerNotPresent.copy();
         this.visitorPlayerNotPresent = other.visitorPlayerNotPresent == null ? null : other.visitorPlayerNotPresent.copy();
+        this.postponed = other.postponed == null ? null : other.postponed.copy();
         this.roundId = other.roundId == null ? null : other.roundId.copy();
         this.visitorPlayerId = other.visitorPlayerId == null ? null : other.visitorPlayerId.copy();
         this.localPlayerId = other.localPlayerId == null ? null : other.localPlayerId.copy();
@@ -253,6 +256,14 @@ public class MatchCriteria implements Serializable, Criteria {
         this.visitorPlayerNotPresent = visitorPlayerNotPresent;
     }
 
+    public BooleanFilter getPostponed() {
+        return postponed;
+    }
+
+    public void setPostponed(BooleanFilter postponed) {
+        this.postponed = postponed;
+    }
+
     public LongFilter getRoundId() {
         return roundId;
     }
@@ -307,6 +318,7 @@ public class MatchCriteria implements Serializable, Criteria {
             Objects.equals(visitorPlayerAbandoned, that.visitorPlayerAbandoned) &&
             Objects.equals(localPlayerNotPresent, that.localPlayerNotPresent) &&
             Objects.equals(visitorPlayerNotPresent, that.visitorPlayerNotPresent) &&
+            Objects.equals(postponed, that.postponed) &&
             Objects.equals(roundId, that.roundId) &&
             Objects.equals(visitorPlayerId, that.visitorPlayerId) &&
             Objects.equals(localPlayerId, that.localPlayerId);
@@ -334,6 +346,7 @@ public class MatchCriteria implements Serializable, Criteria {
         visitorPlayerAbandoned,
         localPlayerNotPresent,
         visitorPlayerNotPresent,
+        postponed,
         roundId,
         visitorPlayerId,
         localPlayerId
@@ -362,6 +375,7 @@ public class MatchCriteria implements Serializable, Criteria {
                 (visitorPlayerAbandoned != null ? "visitorPlayerAbandoned=" + visitorPlayerAbandoned + ", " : "") +
                 (localPlayerNotPresent != null ? "localPlayerNotPresent=" + localPlayerNotPresent + ", " : "") +
                 (visitorPlayerNotPresent != null ? "visitorPlayerNotPresent=" + visitorPlayerNotPresent + ", " : "") +
+                (postponed != null ? "postponed=" + postponed + ", " : "") +
                 (roundId != null ? "roundId=" + roundId + ", " : "") +
                 (visitorPlayerId != null ? "visitorPlayerId=" + visitorPlayerId + ", " : "") +
                 (localPlayerId != null ? "localPlayerId=" + localPlayerId + ", " : "") +

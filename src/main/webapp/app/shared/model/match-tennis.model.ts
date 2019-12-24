@@ -21,6 +21,7 @@ export interface IMatchTennis {
   visitorPlayerAbandoned?: boolean;
   localPlayerNotPresent?: boolean;
   visitorPlayerNotPresent?: boolean;
+  postponed?: boolean;
   round?: IRoundTennis;
   visitorPlayer?: IPlayerTennis;
   localPlayer?: IPlayerTennis;
@@ -47,6 +48,7 @@ export class MatchTennis implements IMatchTennis {
     public visitorPlayerAbandoned?: boolean,
     public localPlayerNotPresent?: boolean,
     public visitorPlayerNotPresent?: boolean,
+    public postponed?: boolean,
     public round?: IRoundTennis,
     public visitorPlayer?: IPlayerTennis,
     public localPlayer?: IPlayerTennis
@@ -55,5 +57,6 @@ export class MatchTennis implements IMatchTennis {
     this.visitorPlayerAbandoned = this.visitorPlayerAbandoned || false;
     this.localPlayerNotPresent = this.localPlayerNotPresent || false;
     this.visitorPlayerNotPresent = this.visitorPlayerNotPresent || false;
+    this.postponed = this.postponed || false;
   }
 }

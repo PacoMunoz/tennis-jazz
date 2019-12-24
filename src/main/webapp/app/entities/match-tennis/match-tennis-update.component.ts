@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,9 +10,9 @@ import { JhiAlertService } from 'ng-jhipster';
 import { IMatchTennis, MatchTennis } from 'app/shared/model/match-tennis.model';
 import { MatchTennisService } from './match-tennis.service';
 import { IRoundTennis } from 'app/shared/model/round-tennis.model';
-import { RoundTennisService } from 'app/entities/round-tennis';
+import { RoundTennisService } from 'app/entities/round-tennis/round-tennis.service';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
-import { PlayerTennisService } from 'app/entities/player-tennis';
+import { PlayerTennisService } from 'app/entities/player-tennis/player-tennis.service';
 
 @Component({
   selector: 'jhi-match-tennis-update',
@@ -43,6 +45,7 @@ export class MatchTennisUpdateComponent implements OnInit {
     visitorPlayerAbandoned: [],
     localPlayerNotPresent: [],
     visitorPlayerNotPresent: [],
+    postponed: [],
     round: [],
     visitorPlayer: [],
     localPlayer: []
@@ -99,6 +102,7 @@ export class MatchTennisUpdateComponent implements OnInit {
       visitorPlayerAbandoned: match.visitorPlayerAbandoned,
       localPlayerNotPresent: match.localPlayerNotPresent,
       visitorPlayerNotPresent: match.visitorPlayerNotPresent,
+      postponed: match.postponed,
       round: match.round,
       visitorPlayer: match.visitorPlayer,
       localPlayer: match.localPlayer
@@ -141,6 +145,7 @@ export class MatchTennisUpdateComponent implements OnInit {
       visitorPlayerAbandoned: this.editForm.get(['visitorPlayerAbandoned']).value,
       localPlayerNotPresent: this.editForm.get(['localPlayerNotPresent']).value,
       visitorPlayerNotPresent: this.editForm.get(['visitorPlayerNotPresent']).value,
+      postponed: this.editForm.get(['postponed']).value,
       round: this.editForm.get(['round']).value,
       visitorPlayer: this.editForm.get(['visitorPlayer']).value,
       localPlayer: this.editForm.get(['localPlayer']).value

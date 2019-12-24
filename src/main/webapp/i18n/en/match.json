@@ -45,6 +45,7 @@
       "visitorPlayerAbandoned": "Visitor Player Abandoned",
       "localPlayerNotPresent": "Local Player Not Present",
       "visitorPlayerNotPresent": "Visitor Player Not Present",
+      "postponed": "Postponed",
       "round": "Round",
       "visitorPlayer": "Visitor Player",
       "localPlayer": "Local Player"

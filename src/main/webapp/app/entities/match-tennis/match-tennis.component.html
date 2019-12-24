@@ -14,7 +14,7 @@
         <span jhiTranslate="tennisJazzApp.match.home.notFound">No matches found</span>
     </div>
     <div class="table-responsive" *ngIf="matches?.length > 0">
-        <table class="table table-striped">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -36,6 +36,7 @@
             <th jhiSortBy="visitorPlayerAbandoned"><span jhiTranslate="tennisJazzApp.match.visitorPlayerAbandoned">Visitor Player Abandoned</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerNotPresent"><span jhiTranslate="tennisJazzApp.match.localPlayerNotPresent">Local Player Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayerNotPresent"><span jhiTranslate="tennisJazzApp.match.visitorPlayerNotPresent">Visitor Player Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="postponed"><span jhiTranslate="tennisJazzApp.match.postponed">Postponed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="round.id"><span jhiTranslate="tennisJazzApp.match.round">Round</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayer.id"><span jhiTranslate="tennisJazzApp.match.visitorPlayer">Visitor Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayer.id"><span jhiTranslate="tennisJazzApp.match.localPlayer">Local Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -63,6 +64,7 @@
                 <td>{{match.visitorPlayerAbandoned}}</td>
                 <td>{{match.localPlayerNotPresent}}</td>
                 <td>{{match.visitorPlayerNotPresent}}</td>
+                <td>{{match.postponed}}</td>
                 <td>
                     <div *ngIf="match.round">
                         <a [routerLink]="['/round-tennis', match.round?.id, 'view' ]" >{{match.round?.id}}</a>

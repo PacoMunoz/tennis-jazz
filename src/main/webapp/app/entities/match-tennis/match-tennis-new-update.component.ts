@@ -44,6 +44,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
     visitorPlayerAbandoned: [],
     localPlayerNotPresent: [],
     visitorPlayerNotPresent: [],
+    postponed: [],
     round: [],
     visitorPlayer: [],
     localPlayer: []
@@ -93,6 +94,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
         this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
         this.editForm.get(['localPlayerNotPresent']).setValue(false);
         this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
+        this.editForm.get(['postponed']).setValue(false);
         break;
       case 'visitorPlayerAbandoned':
         if (event.target.checked) {
@@ -101,6 +103,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
         this.editForm.get(['localPlayerAbandoned']).setValue(false);
         this.editForm.get(['localPlayerNotPresent']).setValue(false);
         this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
+        this.editForm.get(['postponed']).setValue(false);
         break;
       case 'localPlayerNotPresent':
         if (event.target.checked) {
@@ -111,6 +114,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
         this.editForm.get(['localPlayerAbandoned']).setValue(false);
         this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
         this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
+        this.editForm.get(['postponed']).setValue(false);
         break;
       case 'visitorPlayerNotPresent':
         if (event.target.checked) {
@@ -121,6 +125,16 @@ export class MatchTennisNewUpdateComponent implements OnInit {
         this.editForm.get(['localPlayerAbandoned']).setValue(false);
         this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
         this.editForm.get(['localPlayerNotPresent']).setValue(false);
+        this.editForm.get(['postponed']).setValue(false);
+        break;
+      case 'postponed':
+        if (event.target.checked) {
+          this.editEnable = true;
+        }
+        this.editForm.get(['localPlayerAbandoned']).setValue(false);
+        this.editForm.get(['visitorPlayerAbandoned']).setValue(false);
+        this.editForm.get(['localPlayerNotPresent']).setValue(false);
+        this.editForm.get(['visitorPlayerNotPresent']).setValue(false);
         break;
     }
   }
@@ -173,6 +187,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       visitorPlayerAbandoned: match.visitorPlayerAbandoned,
       localPlayerNotPresent: match.localPlayerNotPresent,
       visitorPlayerNotPresent: match.visitorPlayerNotPresent,
+      postponed: match.postponed,
       round: match.round,
       visitorPlayer: match.visitorPlayer,
       localPlayer: match.localPlayer
@@ -182,9 +197,6 @@ export class MatchTennisNewUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const match = this.createFromForm();
-
-    console.log(match.localPlayerAbandoned);
-
     const updateLocalRankingO = this.rankingService.updateTournamentPlayerRanking(match.localPlayer.id, match.round.id);
     const updateVisitorRankingO = this.rankingService.updateTournamentPlayerRanking(match.visitorPlayer.id, match.round.id);
     if (match.id !== undefined) {
@@ -255,6 +267,7 @@ export class MatchTennisNewUpdateComponent implements OnInit {
       visitorPlayerAbandoned: this.editForm.get(['visitorPlayerAbandoned']).value,
       localPlayerNotPresent: this.editForm.get(['localPlayerNotPresent']).value,
       visitorPlayerNotPresent: this.editForm.get(['visitorPlayerNotPresent']).value,
+      postponed: this.editForm.get(['postponed']).value,
       round: this.editForm.get(['round']).value,
       visitorPlayer: this.editForm.get(['visitorPlayer']).value,
       localPlayer: this.editForm.get(['localPlayer']).value

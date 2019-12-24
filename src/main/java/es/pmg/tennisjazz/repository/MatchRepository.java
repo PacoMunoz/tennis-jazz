@@ -20,12 +20,14 @@ public interface MatchRepository extends JpaRepository<Match, Long>, JpaSpecific
                     "INNER JOIN ROUND R \n" +
                     "ON M.ROUND_ID = R.ID \n" +
                     "WHERE (M.VISITOR_PLAYER_ID = ?1 OR M.LOCAL_PLAYER_ID = ?1)\n" +
-                        "AND (R.START_DATE  <= NOW() AND R.END_DATE >= NOW())",
+                        "AND ((R.START_DATE  <= NOW() AND R.END_DATE >= NOW())" +
+                            "OR (M.POSTPONED = TRUE))",
         countQuery = "SELECT COUNT(*) FROM JHI_MATCH M \n" +
-                        "INNER JOIN ROUND R \n" +
-                        "ON M.ROUND_ID = R.ID \n" +
-                        "WHERE (M.VISITOR_PLAYER_ID = ?1 OR M.LOCAL_PLAYER_ID = ?1)\n" +
-                            "AND (R.START_DATE  <= NOW() AND R.END_DATE >= NOW())",
+                    "INNER JOIN ROUND R \n" +
+                    "ON M.ROUND_ID = R.ID \n" +
+                    "WHERE (M.VISITOR_PLAYER_ID = ?1 OR M.LOCAL_PLAYER_ID = ?1)\n" +
+                        "AND ((R.START_DATE  <= NOW() AND R.END_DATE >= NOW())" +
+                            "OR (M.POSPONED = TRUE))",
         nativeQuery = true)
     Page<Match> buscarPartidosEnCurso(Long idPlayer, Pageable pageable);
 }

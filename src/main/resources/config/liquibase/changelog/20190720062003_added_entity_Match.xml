@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="autoIncrement" value="true"/>
+        <property name="autoIncrement" value="true"/>
 
     <!--
         Added the entity Match.
@@ -19,90 +19,71 @@
             <column name="local_player_set_1_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_set_1_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_tb_set_1_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_tb_set_1_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_tb_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_tb_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_tb_set_3_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_tb_set_3_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_set_3_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_set_3_result" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_sets" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_sets" type="integer">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_abandoned" type="boolean">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_abandoned" type="boolean">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_not_present" type="boolean">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_not_present" type="boolean">
                 <constraints nullable="true" />
             </column>
-
+            <column name="postponed" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="round_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
             <column name="visitor_player_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
             <column name="local_player_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
     </changeSet>
 
     <changeSet id="20190720062003-1-relations" author="jhipster">
@@ -142,6 +123,7 @@
             <column name="visitor_player_abandoned" type="boolean"/>
             <column name="local_player_not_present" type="boolean"/>
             <column name="visitor_player_not_present" type="boolean"/>
+            <column name="postponed" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

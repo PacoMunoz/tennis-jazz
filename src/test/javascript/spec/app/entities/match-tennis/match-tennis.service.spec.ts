@@ -1,8 +1,5 @@
-/* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { MatchTennisService } from 'app/entities/match-tennis/match-tennis.service';
 import { IMatchTennis, MatchTennis } from 'app/shared/model/match-tennis.model';
@@ -23,11 +20,11 @@ describe('Service Tests', () => {
       service = injector.get(MatchTennisService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new MatchTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, false);
+      elemDefault = new MatchTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, false, false);
     });
 
     describe('Service methods', () => {
-      it('should find an element', async () => {
+      it('should find an element', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         service
           .find(123)
@@ -39,7 +36,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: elemDefault });
       });
 
-      it('should create a MatchTennis', async () => {
+      it('should create a MatchTennis', () => {
         const returnedFromService = Object.assign(
           {
             id: 0
@@ -56,7 +53,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should update a MatchTennis', async () => {
+      it('should update a MatchTennis', () => {
         const returnedFromService = Object.assign(
           {
             localPlayerSet1Result: 1,
@@ -76,7 +73,8 @@ describe('Service Tests', () => {
             localPlayerAbandoned: true,
             visitorPlayerAbandoned: true,
             localPlayerNotPresent: true,
-            visitorPlayerNotPresent: true
+            visitorPlayerNotPresent: true,
+            postponed: true
           },
           elemDefault
         );
@@ -91,7 +89,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject({ body: expected });
       });
 
-      it('should return a list of MatchTennis', async () => {
+      it('should return a list of MatchTennis', () => {
         const returnedFromService = Object.assign(
           {
             localPlayerSet1Result: 1,
@@ -111,7 +109,8 @@ describe('Service Tests', () => {
             localPlayerAbandoned: true,
             visitorPlayerAbandoned: true,
             localPlayerNotPresent: true,
-            visitorPlayerNotPresent: true
+            visitorPlayerNotPresent: true,
+            postponed: true
           },
           elemDefault
         );
@@ -129,8 +128,8 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a MatchTennis', async () => {
-        const rxPromise = service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      it('should delete a MatchTennis', () => {
+        service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
         req.flush({ status: 200 });

@@ -15,6 +15,7 @@
         "matchTennis": "Partido",
         "rankingTennis": "Ranking",
         "genderTennis": "Género",
+        "matchTennis": "Match",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

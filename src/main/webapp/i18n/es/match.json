@@ -46,6 +46,7 @@
       "localPlayerNotPresent": "¿No presentado Jugador Local?",
       "visitorPlayerNotPresent": "¿No presentado Jugador Visitante?",
       "round": "Jornada",
+      "postponed": "Postponed",
       "visitorPlayer": "Visitante",
       "localPlayer": "Local"
     }

@@ -75,6 +75,9 @@ public class Match implements Serializable {
     @Column(name = "visitor_player_not_present")
     private Boolean visitorPlayerNotPresent;
 
+    @Column(name = "postponed")
+    private Boolean postponed;
+
     @ManyToOne
     @JsonIgnoreProperties("matches")
     private Round round;
@@ -330,6 +333,19 @@ public class Match implements Serializable {
         this.visitorPlayerNotPresent = visitorPlayerNotPresent;
     }
 
+    public Boolean isPostponed() {
+        return postponed;
+    }
+
+    public Match postponed(Boolean postponed) {
+        this.postponed = postponed;
+        return this;
+    }
+
+    public void setPostponed(Boolean postponed) {
+        this.postponed = postponed;
+    }
+
     public Round getRound() {
         return round;
     }
@@ -408,6 +424,7 @@ public class Match implements Serializable {
             ", visitorPlayerAbandoned='" + isVisitorPlayerAbandoned() + "'" +
             ", localPlayerNotPresent='" + isLocalPlayerNotPresent() + "'" +
             ", visitorPlayerNotPresent='" + isVisitorPlayerNotPresent() + "'" +
+            ", postponed='" + isPostponed() + "'" +
             "}";
     }
 }

@@ -12,6 +12,7 @@ public final class RankingCalculateUtil {
     private static final String WON = "Won";
     private static final String LOSS = "Loss";
     private static final String NN = "Nn";
+    private static final String POSTPONED = "Postponed";
 
     private RankingCalculateUtil() {
     }
@@ -376,6 +377,7 @@ public final class RankingCalculateUtil {
                 if (match.isVisitorPlayerNotPresent() != null && match.isVisitorPlayerNotPresent()) return WON;
                 if (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() > match.getVisitorPlayerSets()) return WON;
                 if (match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null && match.getLocalPlayerSets() < match.getVisitorPlayerSets()) return LOSS;
+                if (match.isPostponed() != null && match.isPostponed()) return POSTPONED;
             } else {
                 if (match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned()) return ABANDONED;
                 if (match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned()) return WON;
@@ -406,11 +408,12 @@ public final class RankingCalculateUtil {
      * @return true if played
      */
     private static boolean isMatchPlayed(Match match) {
-        return ( match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned())        ||
+        return (( match.isLocalPlayerAbandoned() != null && match.isLocalPlayerAbandoned())        ||
                ( match.isVisitorPlayerAbandoned() != null && match.isVisitorPlayerAbandoned())    ||
                ( match.isLocalPlayerNotPresent() != null && match.isLocalPlayerNotPresent() )     ||
                ( match.isVisitorPlayerNotPresent() != null && match.isVisitorPlayerNotPresent())  ||
-               ( match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null);
+               ( match.getLocalPlayerSets() != null && match.getVisitorPlayerSets() != null))     &&
+               ( match.isPostponed() == null || !match.isPostponed());
     }
 
     /**

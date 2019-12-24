@@ -76,7 +76,7 @@ public class MatchQueryService extends QueryService<Match> {
     }
 
     /**
-     * Function to convert ConsumerCriteria to a {@link Specification}
+     * Function to convert {@link MatchCriteria} to a {@link Specification}
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */
@@ -139,6 +139,9 @@ public class MatchQueryService extends QueryService<Match> {
             }
             if (criteria.getVisitorPlayerNotPresent() != null) {
                 specification = specification.and(buildSpecification(criteria.getVisitorPlayerNotPresent(), Match_.visitorPlayerNotPresent));
+            }
+            if (criteria.getPostponed() != null) {
+                specification = specification.and(buildSpecification(criteria.getPostponed(), Match_.postponed));
             }
             if (criteria.getRoundId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRoundId(),

@@ -9,10 +9,10 @@
         <span jhiTranslate="global.menu.account.myTournaments">My Tournaments</span>
     </h4>
 </div>
-<div class="Rounds-wrapper container mt-5" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="space-around"
+<div class="Rounds-wrapper container mt-5" fxLayout="row wrap"  fxLayoutAlign="space-around center"
      fxLayoutGap="10px">
-    <div *ngFor="let match of currentMatches" class="col-md-4">
-        <div class="col-md-12 bg-pink rounded-top p-3">
+    <div *ngFor="let match of currentMatches" class="col-md-6">
+        <div class="col-md bg-pink rounded-top p-3">
             <h5 class="text-white">{{match.round.tournamentGroup.tournament.name}}</h5>
         </div>
         <div class="Draw-round">
@@ -31,9 +31,10 @@
                             <div class="Match__body">
                                 <div class="Match__line"
                                      [ngClass]="{
-                                        'Match__line--winner' : match.localPlayerSets > match.visitorPlayerSets
+                                        'Match__line--winner' : (match.localPlayerSets > match.visitorPlayerSets
                                                                 || match.visitorPlayerAbandoned
-                                                                || match.visitorPlayerNotPresent}">
+                                                                || match.visitorPlayerNotPresent)
+                                                                && !match.postponed}">
                                     <div class="Match__player__holder">
                                         <div class="Match__player">
                                             <span class="d-none d-md-inline">{{match.localPlayer.name}}</span>
@@ -45,9 +46,10 @@
                                         </div>
                                     </div>
                                     <div class="Match__winner"
-                                         *ngIf="match.localPlayerSets > match.visitorPlayerSets
+                                         *ngIf="(match.localPlayerSets > match.visitorPlayerSets
                                                 || match.visitorPlayerAbandoned
-                                                || match.visitorPlayerNotPresent">
+                                                || match.visitorPlayerNotPresent)
+                                                && !match.postponed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
@@ -55,6 +57,7 @@
                                         </svg>
                                     </div>
                                     <div class="Match__set">
+                                        <div *ngIf="match.postponed" class="font-weight-bold"><span jhiTranslate="tennisJazzApp.match.postponed">postponed</span></div>
                                         <ul><!---->
                                             <li>
                                                 {{match.localPlayerSet1Result}}
@@ -79,9 +82,10 @@
                                 </div>
                                 <div class="Match__line"
                                      [ngClass]="{
-                                        'Match__line--winner' : match.localPlayerSets < match.visitorPlayerSets
+                                        'Match__line--winner' : (match.localPlayerSets < match.visitorPlayerSets
                                                                 || match.localPlayerAbandoned
-                                                                || match.localPlayerNotPresent}">
+                                                                || match.localPlayerNotPresent)
+                                                                && !match.postponed}">
                                     <div class="Match__player__holder">
                                         <div class="Match__player">
                                             <span class="d-none d-md-inline">{{match.visitorPlayer.name}}</span>
@@ -92,9 +96,10 @@
                                         </div>
                                     </div>
                                     <div class="Match__winner"
-                                         *ngIf="match.visitorPlayerSets > match.localPlayerSets
+                                         *ngIf="(match.visitorPlayerSets > match.localPlayerSets
                                                 || match.localPlayerAbandoned
-                                                || match.localPlayerNotPresent">
+                                                || match.localPlayerNotPresent)
+                                                && !match.postponed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
@@ -132,8 +137,8 @@
                                     [routerLink]="['/match-tennis', match.id, 'new-or-update-current']">
                                 <fa-icon [icon]="'plus'"></fa-icon>
                                 <span jhiTranslate="tennisJazzApp.match.home.editLabel">
-                            Edit Match
-                </span>
+                                    Edit Match
+                                </span>
                             </button>
                         </div>
                     </div>

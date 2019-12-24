@@ -106,6 +106,9 @@ public class MatchResourceIT {
     private static final Boolean DEFAULT_VISITOR_PLAYER_NOT_PRESENT = false;
     private static final Boolean UPDATED_VISITOR_PLAYER_NOT_PRESENT = true;
 
+    private static final Boolean DEFAULT_POSTPONED = false;
+    private static final Boolean UPDATED_POSTPONED = true;
+
     @Autowired
     private MatchRepository matchRepository;
 
@@ -171,7 +174,8 @@ public class MatchResourceIT {
             .localPlayerAbandoned(DEFAULT_LOCAL_PLAYER_ABANDONED)
             .visitorPlayerAbandoned(DEFAULT_VISITOR_PLAYER_ABANDONED)
             .localPlayerNotPresent(DEFAULT_LOCAL_PLAYER_NOT_PRESENT)
-            .visitorPlayerNotPresent(DEFAULT_VISITOR_PLAYER_NOT_PRESENT);
+            .visitorPlayerNotPresent(DEFAULT_VISITOR_PLAYER_NOT_PRESENT)
+            .postponed(DEFAULT_POSTPONED);
         return match;
     }
     /**
@@ -199,7 +203,8 @@ public class MatchResourceIT {
             .localPlayerAbandoned(UPDATED_LOCAL_PLAYER_ABANDONED)
             .visitorPlayerAbandoned(UPDATED_VISITOR_PLAYER_ABANDONED)
             .localPlayerNotPresent(UPDATED_LOCAL_PLAYER_NOT_PRESENT)
-            .visitorPlayerNotPresent(UPDATED_VISITOR_PLAYER_NOT_PRESENT);
+            .visitorPlayerNotPresent(UPDATED_VISITOR_PLAYER_NOT_PRESENT)
+            .postponed(UPDATED_POSTPONED);
         return match;
     }
 
@@ -241,6 +246,7 @@ public class MatchResourceIT {
         assertThat(testMatch.isVisitorPlayerAbandoned()).isEqualTo(DEFAULT_VISITOR_PLAYER_ABANDONED);
         assertThat(testMatch.isLocalPlayerNotPresent()).isEqualTo(DEFAULT_LOCAL_PLAYER_NOT_PRESENT);
         assertThat(testMatch.isVisitorPlayerNotPresent()).isEqualTo(DEFAULT_VISITOR_PLAYER_NOT_PRESENT);
+        assertThat(testMatch.isPostponed()).isEqualTo(DEFAULT_POSTPONED);
     }
 
     @Test
@@ -291,7 +297,8 @@ public class MatchResourceIT {
             .andExpect(jsonPath("$.[*].localPlayerAbandoned").value(hasItem(DEFAULT_LOCAL_PLAYER_ABANDONED.booleanValue())))
             .andExpect(jsonPath("$.[*].visitorPlayerAbandoned").value(hasItem(DEFAULT_VISITOR_PLAYER_ABANDONED.booleanValue())))
             .andExpect(jsonPath("$.[*].localPlayerNotPresent").value(hasItem(DEFAULT_LOCAL_PLAYER_NOT_PRESENT.booleanValue())))
-            .andExpect(jsonPath("$.[*].visitorPlayerNotPresent").value(hasItem(DEFAULT_VISITOR_PLAYER_NOT_PRESENT.booleanValue())));
+            .andExpect(jsonPath("$.[*].visitorPlayerNotPresent").value(hasItem(DEFAULT_VISITOR_PLAYER_NOT_PRESENT.booleanValue())))
+            .andExpect(jsonPath("$.[*].postponed").value(hasItem(DEFAULT_POSTPONED.booleanValue())));
     }
     
     @Test
@@ -322,7 +329,8 @@ public class MatchResourceIT {
             .andExpect(jsonPath("$.localPlayerAbandoned").value(DEFAULT_LOCAL_PLAYER_ABANDONED.booleanValue()))
             .andExpect(jsonPath("$.visitorPlayerAbandoned").value(DEFAULT_VISITOR_PLAYER_ABANDONED.booleanValue()))
             .andExpect(jsonPath("$.localPlayerNotPresent").value(DEFAULT_LOCAL_PLAYER_NOT_PRESENT.booleanValue()))
-            .andExpect(jsonPath("$.visitorPlayerNotPresent").value(DEFAULT_VISITOR_PLAYER_NOT_PRESENT.booleanValue()));
+            .andExpect(jsonPath("$.visitorPlayerNotPresent").value(DEFAULT_VISITOR_PLAYER_NOT_PRESENT.booleanValue()))
+            .andExpect(jsonPath("$.postponed").value(DEFAULT_POSTPONED.booleanValue()));
     }
 
     @Test
@@ -1771,6 +1779,45 @@ public class MatchResourceIT {
 
     @Test
     @Transactional
+    public void getAllMatchesByPostponedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where postponed equals to DEFAULT_POSTPONED
+        defaultMatchShouldBeFound("postponed.equals=" + DEFAULT_POSTPONED);
+
+        // Get all the matchList where postponed equals to UPDATED_POSTPONED
+        defaultMatchShouldNotBeFound("postponed.equals=" + UPDATED_POSTPONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPostponedIsInShouldWork() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where postponed in DEFAULT_POSTPONED or UPDATED_POSTPONED
+        defaultMatchShouldBeFound("postponed.in=" + DEFAULT_POSTPONED + "," + UPDATED_POSTPONED);
+
+        // Get all the matchList where postponed equals to UPDATED_POSTPONED
+        defaultMatchShouldNotBeFound("postponed.in=" + UPDATED_POSTPONED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllMatchesByPostponedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        matchRepository.saveAndFlush(match);
+
+        // Get all the matchList where postponed is not null
+        defaultMatchShouldBeFound("postponed.specified=true");
+
+        // Get all the matchList where postponed is null
+        defaultMatchShouldNotBeFound("postponed.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllMatchesByRoundIsEqualToSomething() throws Exception {
         // Initialize the database
         matchRepository.saveAndFlush(match);
@@ -1853,7 +1900,8 @@ public class MatchResourceIT {
             .andExpect(jsonPath("$.[*].localPlayerAbandoned").value(hasItem(DEFAULT_LOCAL_PLAYER_ABANDONED.booleanValue())))
             .andExpect(jsonPath("$.[*].visitorPlayerAbandoned").value(hasItem(DEFAULT_VISITOR_PLAYER_ABANDONED.booleanValue())))
             .andExpect(jsonPath("$.[*].localPlayerNotPresent").value(hasItem(DEFAULT_LOCAL_PLAYER_NOT_PRESENT.booleanValue())))
-            .andExpect(jsonPath("$.[*].visitorPlayerNotPresent").value(hasItem(DEFAULT_VISITOR_PLAYER_NOT_PRESENT.booleanValue())));
+            .andExpect(jsonPath("$.[*].visitorPlayerNotPresent").value(hasItem(DEFAULT_VISITOR_PLAYER_NOT_PRESENT.booleanValue())))
+            .andExpect(jsonPath("$.[*].postponed").value(hasItem(DEFAULT_POSTPONED.booleanValue())));
 
         // Check, that the count call also returns 1
         restMatchMockMvc.perform(get("/api/matches/count?sort=id,desc&" + filter))
@@ -1918,7 +1966,8 @@ public class MatchResourceIT {
             .localPlayerAbandoned(UPDATED_LOCAL_PLAYER_ABANDONED)
             .visitorPlayerAbandoned(UPDATED_VISITOR_PLAYER_ABANDONED)
             .localPlayerNotPresent(UPDATED_LOCAL_PLAYER_NOT_PRESENT)
-            .visitorPlayerNotPresent(UPDATED_VISITOR_PLAYER_NOT_PRESENT);
+            .visitorPlayerNotPresent(UPDATED_VISITOR_PLAYER_NOT_PRESENT)
+            .postponed(UPDATED_POSTPONED);
 
         restMatchMockMvc.perform(put("/api/matches")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -1947,6 +1996,7 @@ public class MatchResourceIT {
         assertThat(testMatch.isVisitorPlayerAbandoned()).isEqualTo(UPDATED_VISITOR_PLAYER_ABANDONED);
         assertThat(testMatch.isLocalPlayerNotPresent()).isEqualTo(UPDATED_LOCAL_PLAYER_NOT_PRESENT);
         assertThat(testMatch.isVisitorPlayerNotPresent()).isEqualTo(UPDATED_VISITOR_PLAYER_NOT_PRESENT);
+        assertThat(testMatch.isPostponed()).isEqualTo(UPDATED_POSTPONED);
     }
 
     @Test
