@@ -58,10 +58,13 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
+    host: smtp.jtenis.es
+    port: 587
+    username: gestion@jtenis.es
     password:
+    protocol: smtp
+    properties.mail.smtp:
+      starttls.enable: true
   thymeleaf:
     cache: true
 
@@ -118,7 +121,7 @@ jhipster:
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
+    base-url: http://jtenis.es # Modify according to your server's URL
   metrics:
     logs: # Reports metrics in the logs
       enabled: false
