@@ -35,7 +35,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/tennisJazz?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password:
+    password: 3QpZ(#ayR&3YFcG)
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -61,7 +61,7 @@ spring:
     host: smtp.jtenis.es
     port: 587
     username: gestion@jtenis.es
-    password:
+    password: xTqwUFhZM4EgDtu
     protocol: smtp
     properties.mail.smtp:
       starttls.enable: true

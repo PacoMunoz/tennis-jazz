@@ -15,7 +15,6 @@ import { PlayerTennisService } from 'app/entities/player-tennis/player-tennis.se
 export class PlayerTennisHomeComponent implements OnInit {
   currentMatches: IMatchTennis[];
   currentAccount: any;
-  player: IPlayerTennis;
 
   constructor(
     protected jhiAlertService: JhiAlertService,

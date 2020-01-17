@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { JhiLanguageService } from 'ng-jhipster';
+import { JhiAlertService, JhiLanguageService } from 'ng-jhipster';
 
-import { AccountService, JhiLanguageHelper } from 'app/core';
+import { AccountService, IUser, JhiLanguageHelper, UserService } from 'app/core';
 import { Account } from 'app/core/user/account.model';
+import { switchMap } from 'rxjs/operators';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { PlayerTennisService } from 'app/entities/player-tennis';
 
 @Component({
   selector: 'jhi-settings',
@@ -13,6 +17,8 @@ export class SettingsComponent implements OnInit {
   error: string;
   success: string;
   languages: any[];
+  currentAccount: any;
+  player: IPlayerTennis;
   settingsForm = this.fb.group({
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
@@ -28,16 +34,44 @@ export class SettingsComponent implements OnInit {
     private accountService: AccountService,
     private fb: FormBuilder,
     private languageService: JhiLanguageService,
-    private languageHelper: JhiLanguageHelper
+    private languageHelper: JhiLanguageHelper,
+    private userService: UserService,
+    private playerService: PlayerTennisService,
+    private jhiAlertService: JhiAlertService
   ) {}
 
   ngOnInit() {
-    this.accountService.identity().then(account => {
-      this.updateForm(account);
-    });
+    this.accountService
+      .identity()
+      .then(account => {
+        this.updateForm(account);
+        this.currentAccount = account;
+      })
+      .finally(() => {
+        if (this.currentAccount != null) {
+          this.getPlayer(this.currentAccount.login);
+        }
+      });
     this.languageHelper.getAll().then(languages => {
       this.languages = languages;
     });
+  }
+
+  getPlayer(login: any) {
+    console.log('**************************************************Entrando a obtener jugador');
+    this.userService
+      .find(login)
+      .pipe(
+        switchMap((res: HttpResponse<IUser>) =>
+          this.playerService.query({
+            'userId.equals': res.body.id
+          })
+        )
+      )
+      .subscribe(
+        (res: HttpResponse<IPlayerTennis[]>) => (this.player = res.body != null && res.body.length === 1 ? res.body[0] : null),
+        (error: HttpErrorResponse) => this.onError(error.message)
+      );
   }
 
   save() {
@@ -88,5 +122,8 @@ export class SettingsComponent implements OnInit {
       login: account.login,
       imageUrl: account.imageUrl
     });
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
   }
 }

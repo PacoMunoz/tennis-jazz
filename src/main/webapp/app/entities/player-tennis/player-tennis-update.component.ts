@@ -67,7 +67,9 @@ export class PlayerTennisUpdateComponent implements OnInit {
       )
       .subscribe((res: IGenderTennis[]) => (this.genders = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.userService
-      .query()
+      .query({
+        size: 100
+      })
       .pipe(
         filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
         map((response: HttpResponse<IUser[]>) => response.body)
