@@ -5,7 +5,8 @@
         "title": "Matches",
         "createLabel": "Create a new Match",
         "editLabel": "Edit Match",
-        "notFound": "No Matches found"
+        "notFound": "No Matches found",
+        "notCurrentFound": "No Current Matches found"
       },
       "created": "A new Match is created with identifier {{ param }}",
       "updated": "A Match is updated with identifier {{ param }}",
