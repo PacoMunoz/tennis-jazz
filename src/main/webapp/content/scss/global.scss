@@ -453,6 +453,12 @@ ul {
   background-size: cover;
 }
 
+.tournament-card .mat-card-avatar {
+  height: 144px !important;
+  width: 190px !important;
+  border-radius: 0 !important;
+}
+
 .tournament-card .card-phone-number {
   position: relative;
   bottom: 5px;
@@ -639,17 +645,4 @@ h6,
 .pink_subtitle {
   color: #ff2882;
   border-bottom: 2px solid #ff2882;
-}
-
-// codigo provisional. A modificar al ejecutar la tarea relacionada con la obtencion del avatar y su manipulacion.
-.mat-card-avatar {
-  height: 62px !important;
-  width: 40px !important;
-  border-radius: 0 !important;
-}
-
-.tournament-card .mat-card-avatar {
-  height: 144px !important;
-  width: 190px !important;
-  border-radius: 0 !important;
 }
