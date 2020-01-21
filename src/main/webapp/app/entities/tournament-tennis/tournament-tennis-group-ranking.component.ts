@@ -3,6 +3,8 @@ import { JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
+import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-ranking',
@@ -28,7 +30,11 @@ export class TournamentTennisGroupRankingComponent implements OnInit {
     'tie-breaks-won'
   ];
 
-  constructor(private rankingTennisService: RankingTennisService, private jhiAlertService: JhiAlertService) {
+  constructor(
+    private rankingTennisService: RankingTennisService,
+    protected sanitizer: DomSanitizer,
+    private jhiAlertService: JhiAlertService
+  ) {
     this.ranking = [];
   }
 
@@ -53,8 +59,14 @@ export class TournamentTennisGroupRankingComponent implements OnInit {
 
   protected setRanking(data: IRankingTennis[]) {
     for (let i = 0; i < data.length; i++) {
+      data[i].player.avatar = this.sanitizerAvatar(data[i].player);
       this.ranking.push(data[i]);
     }
+  }
+
+  protected sanitizerAvatar(data: IPlayerTennis): any {
+    const thumbnail = 'data:' + data.avatarContentType + ';base64,' + data.avatar;
+    return this.sanitizer.bypassSecurityTrustUrl(thumbnail);
   }
 
   protected onError(errorMessage: string) {
