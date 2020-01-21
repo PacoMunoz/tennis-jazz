@@ -7,6 +7,7 @@ import { AccountService, IUser, UserService } from 'app/core';
 import { switchMap } from 'rxjs/operators';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { PlayerTennisService } from 'app/entities/player-tennis/player-tennis.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-player-tennis-home',
@@ -21,6 +22,7 @@ export class PlayerTennisHomeComponent implements OnInit {
     protected accountService: AccountService,
     protected matchService: MatchTennisService,
     protected playerService: PlayerTennisService,
+    protected sanitizer: DomSanitizer,
     protected userService: UserService
   ) {
     this.currentMatches = [];
@@ -55,9 +57,22 @@ export class PlayerTennisHomeComponent implements OnInit {
         )
       )
       .subscribe(
-        (res: HttpResponse<IMatchTennis[]>) => (this.currentMatches = res.body),
+        (res: HttpResponse<IMatchTennis[]>) => this.setMatches(res.body),
         (error: HttpErrorResponse) => this.onError(error.message)
       );
+  }
+
+  protected setMatches(data: IMatchTennis[]) {
+    for (let i = 0; i < data.length; i++) {
+      data[i].localPlayer.avatar = this.sanitizerAvatar(data[i].localPlayer);
+      data[i].visitorPlayer.avatar = this.sanitizerAvatar(data[i].visitorPlayer);
+      this.currentMatches.push(data[i]);
+    }
+  }
+
+  protected sanitizerAvatar(data: IPlayerTennis): any {
+    const thumbnail = 'data:' + data.avatarContentType + ';base64,' + data.avatar;
+    return this.sanitizer.bypassSecurityTrustUrl(thumbnail);
   }
 
   protected onError(errorMessage: string) {
