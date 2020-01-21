@@ -14,7 +14,8 @@
                                                     && !match.postponed}">
                         <div class="Match__player__holder">
                             <div class="Match__player">
-                                <span class="d-none d-md-inline">{{match.localPlayer.name}}</span>
+                                <img mat-card-avatar class="mat-card-avatar" [src]="match.localPlayer.avatar" />
+                                <span class="d-none d-md-inline pl-1 pl-sm-2">{{match.localPlayer.name}}</span>
                                 <span class="d-inline d-md-none">
                                     {{match.localPlayer.name|slice : 0 : 1}}.
                                 </span>&nbsp;
@@ -66,7 +67,8 @@
                                                     && !match.postponed}">
                         <div class="Match__player__holder">
                             <div class="Match__player">
-                                <span class="d-none d-md-inline">{{match.visitorPlayer.name}}</span>
+                                <img mat-card-avatar class="mat-card-avatar" [src]="match.visitorPlayer.avatar" />
+                                <span class="d-none d-md-inline pl-1 pl-sm-2">{{match.visitorPlayer.name}}</span>
                                 <span class="d-inline d-md-none">
                                     {{match.visitorPlayer.name|slice : 0 : 1}}.
                                 </span>&nbsp;
