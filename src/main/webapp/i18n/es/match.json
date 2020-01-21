@@ -5,7 +5,8 @@
         "title": "Partidos",
         "createLabel": "Crear nuevo Partido",
         "editLabel": "Editar Partido",
-        "notFound": "Ningun Partido Encontrado"
+        "notFound": "Ningun Partido Encontrado",
+        "notCurrentFound": "No tiene Partidos Pendientes"
       },
       "created": "Un nuevo Partido ha sido creado con el identificador {{ param }}",
       "updated": "Un Partido ha sido actualizado con el identificador {{ param }}",
