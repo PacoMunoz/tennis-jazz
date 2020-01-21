@@ -2,19 +2,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2 jhiTranslate="settings.title" [translateValues]="{username: settingsForm.get('login').value}" *ngIf="settingsForm.get('login').value">User settings for [<b>{{settingsForm.get('login').value}}</b>]</h2>
-
             <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
                 <strong>Settings saved!</strong>
             </div>
-{{player.name}}
             <jhi-alert-error></jhi-alert-error>
-
             <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="settingsForm.get('login').value" novalidate>
 
                 <div class="form-group">
                     <label class="form-control-label" for="firstName" jhiTranslate="settings.form.firstname">First Name</label>
                     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
-                           formControlName="firstName">
+                           formControlName="firstName" oninput="this.value = this.value.toUpperCase()">
                     <div *ngIf="settingsForm.get('firstName').invalid && (settingsForm.get('firstName').dirty || settingsForm.get('firstName').touched)">
                         <small class="form-text text-danger"
                            *ngIf="settingsForm.get('firstName').errors.required" jhiTranslate="settings.messages.validate.firstname.required">
@@ -33,7 +30,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="lastName" jhiTranslate="settings.form.lastname">Last Name</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"
-                           formControlName="lastName">
+                           formControlName="lastName" oninput="this.value = this.value.toUpperCase()">
                     <div *ngIf="settingsForm.get('lastName').invalid && (settingsForm.get('lastName').dirty || settingsForm.get('lastName').touched)">
                         <small class="form-text text-danger"
                            *ngIf="settingsForm.get('lastName').errors.required" jhiTranslate="settings.messages.validate.lastname.required">
@@ -71,6 +68,46 @@
                             Your email cannot be longer than 100 characters.
                         </small>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="phone" jhiTranslate="tennisJazzApp.player.phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="{{'tennisJazzApp.player.phone.placeholder' | translate}}"
+                           formControlName="phone">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="other" jhiTranslate="tennisJazzApp.player.other">Other</label>
+                    <input type="text" class="form-control" id="other" name="other" placeholder="{{'tennisJazzApp.player.other.placeholder' | translate}}"
+                           formControlName="other">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.player.avatar" for="field_avatar">Avatar</label>
+                    <div>
+                        <img [src]="'data:' + settingsForm.get('avatarContentType').value + ';base64,' + settingsForm.get('avatar').value" style="max-height: 100px;" *ngIf="settingsForm.get('avatar').value" alt="player image"/>
+                        <div *ngIf="settingsForm.get('avatar').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{settingsForm.get('avatarContentType').value}}, {{byteSize(settingsForm.get('avatar').value)}}</span>
+                            <button type="button" (click)="clearInputImage('avatar', 'avatarContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_avatar" (change)="setFileData($event, 'avatar', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="avatar" id="field_avatar"
+                           formControlName="avatar"/>
+                    <input type="hidden" class="form-control" name="avatarContentType" id="field_avatarContentType"
+                           formControlName="avatarContentType" />
+                    <div *ngIf="settingsForm.get('avatar').invalid && (settingsForm.get('avatar').dirty || settingsForm.get('avatar').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="settingsForm.get('avatar').errors.maxbytes" jhiTranslate="entity.validation.maxbytes" [translateValues]="{ max: 30000 }">
+                            This field cannot be more than 30000.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.player.gender" for="field_gender">Gender</label>
+                    <select class="form-control" id="field_gender" name="gender" formControlName="gender">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="genderOption.id === settingsForm.get('gender').value?.id ? settingsForm.get('gender').value : genderOption" *ngFor="let genderOption of genders; trackBy: trackGenderById">{{genderOption.name}}</option>
+                    </select>
                 </div>
                 <div class="form-group" *ngIf="languages && languages.length > 0">
                     <label for="langKey" jhiTranslate="settings.form.language">Language</label>
