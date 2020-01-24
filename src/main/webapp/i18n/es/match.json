@@ -24,7 +24,7 @@
       "games": "Juegos",
       "retired": "Retirado",
       "notAppear": "No Presentado",
-      "tieBreakPoints": "Tie Break Points",
+      "tieBreakPoints": "Puntuación Tie Break",
       "tieBreak": "Tie Break",
       "summary": "Resumen",
       "otrosDatos": "Otros Datos",
@@ -47,7 +47,7 @@
       "localPlayerNotPresent": "¿No presentado Jugador Local?",
       "visitorPlayerNotPresent": "¿No presentado Jugador Visitante?",
       "round": "Jornada",
-      "postponed": "Postponed",
+      "postponed": "Suspendido",
       "visitorPlayer": "Visitante",
       "localPlayer": "Local"
     }
