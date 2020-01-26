@@ -29,7 +29,7 @@ export class SettingsComponent implements OnInit {
     langKey: ['en'],
     login: [],
     imageUrl: [],
-    phone: [null, [Validators.required]],
+    phone: [],
     other: [],
     avatar: [null, []],
     avatarContentType: [],
@@ -75,7 +75,9 @@ export class SettingsComponent implements OnInit {
 
   save() {
     window.scrollTo(0, 0);
-    this.savePlayer();
+    if (this.player != null) {
+      this.savePlayer();
+    }
     this.saveAccount();
   }
 
@@ -135,7 +137,9 @@ export class SettingsComponent implements OnInit {
       .subscribe(
         (res: HttpResponse<IPlayerTennis[]>) => {
           this.player = res.body != null && res.body.length === 1 ? res.body[0] : null;
-          this.updatePlayerForm(this.player);
+          if (this.player != null) {
+            this.updatePlayerForm(this.player);
+          }
         },
         (error: HttpErrorResponse) => this.onError(error.message)
       );
