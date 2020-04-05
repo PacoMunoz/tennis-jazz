@@ -28,11 +28,11 @@ public class RankingCriteria implements Serializable, Criteria {
 
     private IntegerFilter points;
 
-    private IntegerFilter gamesWin;
+    private IntegerFilter gamesWon;
 
     private IntegerFilter gamesLoss;
 
-    private IntegerFilter setsWin;
+    private IntegerFilter setsWon;
 
     private IntegerFilter setsLoss;
 
@@ -46,6 +46,10 @@ public class RankingCriteria implements Serializable, Criteria {
 
     private IntegerFilter matchesAbandoned;
 
+    private IntegerFilter tieBreaksPlayed;
+
+    private IntegerFilter tieBreaksWon;
+
     private LongFilter tournamentGroupId;
 
     private LongFilter playerId;
@@ -56,15 +60,17 @@ public class RankingCriteria implements Serializable, Criteria {
     public RankingCriteria(RankingCriteria other){
         this.id = other.id == null ? null : other.id.copy();
         this.points = other.points == null ? null : other.points.copy();
-        this.gamesWin = other.gamesWin == null ? null : other.gamesWin.copy();
+        this.gamesWon = other.gamesWon == null ? null : other.gamesWon.copy();
         this.gamesLoss = other.gamesLoss == null ? null : other.gamesLoss.copy();
-        this.setsWin = other.setsWin == null ? null : other.setsWin.copy();
+        this.setsWon = other.setsWon == null ? null : other.setsWon.copy();
         this.setsLoss = other.setsLoss == null ? null : other.setsLoss.copy();
         this.matchesPlayed = other.matchesPlayed == null ? null : other.matchesPlayed.copy();
         this.matchesWon = other.matchesWon == null ? null : other.matchesWon.copy();
         this.matchesLoss = other.matchesLoss == null ? null : other.matchesLoss.copy();
         this.matchesNotPresent = other.matchesNotPresent == null ? null : other.matchesNotPresent.copy();
         this.matchesAbandoned = other.matchesAbandoned == null ? null : other.matchesAbandoned.copy();
+        this.tieBreaksPlayed = other.tieBreaksPlayed == null ? null : other.tieBreaksPlayed.copy();
+        this.tieBreaksWon = other.tieBreaksWon == null ? null : other.tieBreaksWon.copy();
         this.tournamentGroupId = other.tournamentGroupId == null ? null : other.tournamentGroupId.copy();
         this.playerId = other.playerId == null ? null : other.playerId.copy();
     }
@@ -90,12 +96,12 @@ public class RankingCriteria implements Serializable, Criteria {
         this.points = points;
     }
 
-    public IntegerFilter getGamesWin() {
-        return gamesWin;
+    public IntegerFilter getGamesWon() {
+        return gamesWon;
     }
 
-    public void setGamesWin(IntegerFilter gamesWin) {
-        this.gamesWin = gamesWin;
+    public void setGamesWon(IntegerFilter gamesWon) {
+        this.gamesWon = gamesWon;
     }
 
     public IntegerFilter getGamesLoss() {
@@ -106,12 +112,12 @@ public class RankingCriteria implements Serializable, Criteria {
         this.gamesLoss = gamesLoss;
     }
 
-    public IntegerFilter getSetsWin() {
-        return setsWin;
+    public IntegerFilter getSetsWon() {
+        return setsWon;
     }
 
-    public void setSetsWin(IntegerFilter setsWin) {
-        this.setsWin = setsWin;
+    public void setSetsWon(IntegerFilter setsWon) {
+        this.setsWon = setsWon;
     }
 
     public IntegerFilter getSetsLoss() {
@@ -162,6 +168,22 @@ public class RankingCriteria implements Serializable, Criteria {
         this.matchesAbandoned = matchesAbandoned;
     }
 
+    public IntegerFilter getTieBreaksPlayed() {
+        return tieBreaksPlayed;
+    }
+
+    public void setTieBreaksPlayed(IntegerFilter tieBreaksPlayed) {
+        this.tieBreaksPlayed = tieBreaksPlayed;
+    }
+
+    public IntegerFilter getTieBreaksWon() {
+        return tieBreaksWon;
+    }
+
+    public void setTieBreaksWon(IntegerFilter tieBreaksWon) {
+        this.tieBreaksWon = tieBreaksWon;
+    }
+
     public LongFilter getTournamentGroupId() {
         return tournamentGroupId;
     }
@@ -191,15 +213,17 @@ public class RankingCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(points, that.points) &&
-            Objects.equals(gamesWin, that.gamesWin) &&
+            Objects.equals(gamesWon, that.gamesWon) &&
             Objects.equals(gamesLoss, that.gamesLoss) &&
-            Objects.equals(setsWin, that.setsWin) &&
+            Objects.equals(setsWon, that.setsWon) &&
             Objects.equals(setsLoss, that.setsLoss) &&
             Objects.equals(matchesPlayed, that.matchesPlayed) &&
             Objects.equals(matchesWon, that.matchesWon) &&
             Objects.equals(matchesLoss, that.matchesLoss) &&
             Objects.equals(matchesNotPresent, that.matchesNotPresent) &&
             Objects.equals(matchesAbandoned, that.matchesAbandoned) &&
+            Objects.equals(tieBreaksPlayed, that.tieBreaksPlayed) &&
+            Objects.equals(tieBreaksWon, that.tieBreaksWon) &&
             Objects.equals(tournamentGroupId, that.tournamentGroupId) &&
             Objects.equals(playerId, that.playerId);
     }
@@ -209,15 +233,17 @@ public class RankingCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         points,
-        gamesWin,
+        gamesWon,
         gamesLoss,
-        setsWin,
+        setsWon,
         setsLoss,
         matchesPlayed,
         matchesWon,
         matchesLoss,
         matchesNotPresent,
         matchesAbandoned,
+        tieBreaksPlayed,
+        tieBreaksWon,
         tournamentGroupId,
         playerId
         );
@@ -228,15 +254,17 @@ public class RankingCriteria implements Serializable, Criteria {
         return "RankingCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (points != null ? "points=" + points + ", " : "") +
-                (gamesWin != null ? "gamesWin=" + gamesWin + ", " : "") +
+                (gamesWon != null ? "gamesWon=" + gamesWon + ", " : "") +
                 (gamesLoss != null ? "gamesLoss=" + gamesLoss + ", " : "") +
-                (setsWin != null ? "setsWin=" + setsWin + ", " : "") +
+                (setsWon != null ? "setsWon=" + setsWon + ", " : "") +
                 (setsLoss != null ? "setsLoss=" + setsLoss + ", " : "") +
                 (matchesPlayed != null ? "matchesPlayed=" + matchesPlayed + ", " : "") +
                 (matchesWon != null ? "matchesWon=" + matchesWon + ", " : "") +
                 (matchesLoss != null ? "matchesLoss=" + matchesLoss + ", " : "") +
                 (matchesNotPresent != null ? "matchesNotPresent=" + matchesNotPresent + ", " : "") +
                 (matchesAbandoned != null ? "matchesAbandoned=" + matchesAbandoned + ", " : "") +
+                (tieBreaksPlayed != null ? "tieBreaksPlayed=" + tieBreaksPlayed + ", " : "") +
+                (tieBreaksWon != null ? "tieBreaksWon=" + tieBreaksWon + ", " : "") +
                 (tournamentGroupId != null ? "tournamentGroupId=" + tournamentGroupId + ", " : "") +
                 (playerId != null ? "playerId=" + playerId + ", " : "") +
             "}";

@@ -1,31 +1,41 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
-import { ITournamentGroupTennis } from 'app/shared/model/tournament-group-tennis.model';
-import { ActivatedRoute } from '@angular/router';
 import { JhiAlertService } from 'ng-jhipster';
-import { TournamentGroupTennisService } from 'app/entities/tournament-group-tennis';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { PlayerTennisService } from 'app/entities/player-tennis';
-import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
 import { RankingTennisService } from 'app/entities/ranking-tennis';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
-import { map } from 'rxjs/operators';
+import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-tournament-tennis-group-ranking',
   templateUrl: './tournament-tennis-group-ranking.component.html'
 })
 export class TournamentTennisGroupRankingComponent implements OnInit {
-  @Input() group: ITournamentGroupTennis;
+  @Input() group;
   ranking: IRankingTennis[];
-  sliceEnd: number;
-  showLessButton: boolean;
-  sliceEndValue: number = 4;
+  displayedColumns = [
+    '#',
+    'name',
+    'points',
+    'matches-played',
+    'matches-won',
+    'matches-loss',
+    'matches-not-present',
+    'matches-abandoned',
+    'sets-won',
+    'sets-loss',
+    'games-won',
+    'games-loss',
+    'tie-breaks-played',
+    'tie-breaks-won'
+  ];
 
-  constructor(private rankingTennisService: RankingTennisService, private jhiAlertService: JhiAlertService) {
+  constructor(
+    private rankingTennisService: RankingTennisService,
+    protected sanitizer: DomSanitizer,
+    private jhiAlertService: JhiAlertService
+  ) {
     this.ranking = [];
-    this.sliceEnd = this.sliceEndValue;
-    this.showLessButton = false;
   }
 
   ngOnInit(): void {
@@ -38,26 +48,28 @@ export class TournamentTennisGroupRankingComponent implements OnInit {
   }
 
   sort() {
-    return ['points' + ',' + 'desc'];
+    return [
+      'points' + ',' + 'desc',
+      'setsWon' + ',' + 'desc',
+      'setsLoss' + ',' + 'asc',
+      'gamesWon' + ',' + 'desc',
+      'gamesLoss' + ',' + 'asc'
+    ];
   }
 
   protected setRanking(data: IRankingTennis[]) {
     for (let i = 0; i < data.length; i++) {
+      data[i].player.avatar = this.sanitizerAvatar(data[i].player);
       this.ranking.push(data[i]);
     }
   }
 
+  protected sanitizerAvatar(data: IPlayerTennis): any {
+    const thumbnail = 'data:' + data.avatarContentType + ';base64,' + data.avatar;
+    return this.sanitizer.bypassSecurityTrustUrl(thumbnail);
+  }
+
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  showMore() {
-    this.sliceEnd = this.ranking.length;
-    this.showLessButton = true;
-  }
-
-  showLess() {
-    this.sliceEnd = this.sliceEndValue;
-    this.showLessButton = false;
   }
 }

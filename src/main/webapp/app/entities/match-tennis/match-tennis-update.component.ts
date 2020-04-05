@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,9 +10,9 @@ import { JhiAlertService } from 'ng-jhipster';
 import { IMatchTennis, MatchTennis } from 'app/shared/model/match-tennis.model';
 import { MatchTennisService } from './match-tennis.service';
 import { IRoundTennis } from 'app/shared/model/round-tennis.model';
-import { RoundTennisService } from 'app/entities/round-tennis';
+import { RoundTennisService } from 'app/entities/round-tennis/round-tennis.service';
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
-import { PlayerTennisService } from 'app/entities/player-tennis';
+import { PlayerTennisService } from 'app/entities/player-tennis/player-tennis.service';
 
 @Component({
   selector: 'jhi-match-tennis-update',
@@ -27,6 +29,12 @@ export class MatchTennisUpdateComponent implements OnInit {
     id: [],
     localPlayerSet1Result: [],
     visitorPlayerSet1Result: [],
+    localPlayerTBSet1Result: [],
+    visitorPlayerTBSet1Result: [],
+    localPlayerTBSet2Result: [],
+    visitorPlayerTBSet2Result: [],
+    localPlayerTBSet3Result: [],
+    visitorPlayerTBSet3Result: [],
     localPlayerSet2Result: [],
     visitorPlayerSet2Result: [],
     localPlayerSet3Result: [],
@@ -37,6 +45,7 @@ export class MatchTennisUpdateComponent implements OnInit {
     visitorPlayerAbandoned: [],
     localPlayerNotPresent: [],
     visitorPlayerNotPresent: [],
+    postponed: [],
     round: [],
     visitorPlayer: [],
     localPlayer: []
@@ -77,6 +86,12 @@ export class MatchTennisUpdateComponent implements OnInit {
       id: match.id,
       localPlayerSet1Result: match.localPlayerSet1Result,
       visitorPlayerSet1Result: match.visitorPlayerSet1Result,
+      localPlayerTBSet1Result: match.localPlayerTBSet1Result,
+      visitorPlayerTBSet1Result: match.visitorPlayerTBSet1Result,
+      localPlayerTBSet2Result: match.localPlayerTBSet2Result,
+      visitorPlayerTBSet2Result: match.visitorPlayerTBSet2Result,
+      localPlayerTBSet3Result: match.localPlayerTBSet3Result,
+      visitorPlayerTBSet3Result: match.visitorPlayerTBSet3Result,
       localPlayerSet2Result: match.localPlayerSet2Result,
       visitorPlayerSet2Result: match.visitorPlayerSet2Result,
       localPlayerSet3Result: match.localPlayerSet3Result,
@@ -87,6 +102,7 @@ export class MatchTennisUpdateComponent implements OnInit {
       visitorPlayerAbandoned: match.visitorPlayerAbandoned,
       localPlayerNotPresent: match.localPlayerNotPresent,
       visitorPlayerNotPresent: match.visitorPlayerNotPresent,
+      postponed: match.postponed,
       round: match.round,
       visitorPlayer: match.visitorPlayer,
       localPlayer: match.localPlayer
@@ -113,6 +129,12 @@ export class MatchTennisUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       localPlayerSet1Result: this.editForm.get(['localPlayerSet1Result']).value,
       visitorPlayerSet1Result: this.editForm.get(['visitorPlayerSet1Result']).value,
+      localPlayerTBSet1Result: this.editForm.get(['localPlayerTBSet1Result']).value,
+      visitorPlayerTBSet1Result: this.editForm.get(['visitorPlayerTBSet1Result']).value,
+      localPlayerTBSet2Result: this.editForm.get(['localPlayerTBSet2Result']).value,
+      visitorPlayerTBSet2Result: this.editForm.get(['visitorPlayerTBSet2Result']).value,
+      localPlayerTBSet3Result: this.editForm.get(['localPlayerTBSet3Result']).value,
+      visitorPlayerTBSet3Result: this.editForm.get(['visitorPlayerTBSet3Result']).value,
       localPlayerSet2Result: this.editForm.get(['localPlayerSet2Result']).value,
       visitorPlayerSet2Result: this.editForm.get(['visitorPlayerSet2Result']).value,
       localPlayerSet3Result: this.editForm.get(['localPlayerSet3Result']).value,
@@ -123,6 +145,7 @@ export class MatchTennisUpdateComponent implements OnInit {
       visitorPlayerAbandoned: this.editForm.get(['visitorPlayerAbandoned']).value,
       localPlayerNotPresent: this.editForm.get(['localPlayerNotPresent']).value,
       visitorPlayerNotPresent: this.editForm.get(['visitorPlayerNotPresent']).value,
+      postponed: this.editForm.get(['postponed']).value,
       round: this.editForm.get(['round']).value,
       visitorPlayer: this.editForm.get(['visitorPlayer']).value,
       localPlayer: this.editForm.get(['localPlayer']).value

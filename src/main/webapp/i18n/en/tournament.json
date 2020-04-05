@@ -18,10 +18,12 @@
       },
       "name": "Name",
       "startDate": "Start Date",
+      "endDate": "End Date",
       "inProgress": "In Progress",
       "winPoints": "Win Points",
       "lossPoints": "Loss Points",
       "notPresentPoints": "Not Present Points",
+      "injuredPoints": "Injured Points",
       "groups": "Groups"
     }
   }

@@ -51,7 +51,8 @@ export class TournamentTennisService {
 
   protected convertDateFromClient(tournament: ITournamentTennis): ITournamentTennis {
     const copy: ITournamentTennis = Object.assign({}, tournament, {
-      startDate: tournament.startDate != null && tournament.startDate.isValid() ? tournament.startDate.format(DATE_FORMAT) : null
+      startDate: tournament.startDate != null && tournament.startDate.isValid() ? tournament.startDate.format(DATE_FORMAT) : null,
+      endDate: tournament.endDate != null && tournament.endDate.isValid() ? tournament.endDate.format(DATE_FORMAT) : null
     });
     return copy;
   }
@@ -59,6 +60,7 @@ export class TournamentTennisService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.startDate = res.body.startDate != null ? moment(res.body.startDate) : null;
+      res.body.endDate = res.body.endDate != null ? moment(res.body.endDate) : null;
     }
     return res;
   }
@@ -67,6 +69,7 @@ export class TournamentTennisService {
     if (res.body) {
       res.body.forEach((tournament: ITournamentTennis) => {
         tournament.startDate = tournament.startDate != null ? moment(tournament.startDate) : null;
+        tournament.endDate = tournament.endDate != null ? moment(tournament.endDate) : null;
       });
     }
     return res;

@@ -91,6 +91,9 @@ public class TournamentQueryService extends QueryService<Tournament> {
             if (criteria.getStartDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStartDate(), Tournament_.startDate));
             }
+            if (criteria.getEndDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getEndDate(), Tournament_.endDate));
+            }
             if (criteria.getInProgress() != null) {
                 specification = specification.and(buildSpecification(criteria.getInProgress(), Tournament_.inProgress));
             }
@@ -102,6 +105,9 @@ public class TournamentQueryService extends QueryService<Tournament> {
             }
             if (criteria.getNotPresentPoints() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getNotPresentPoints(), Tournament_.notPresentPoints));
+            }
+            if (criteria.getInjuredPoints() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getInjuredPoints(), Tournament_.injuredPoints));
             }
             if (criteria.getGroupsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getGroupsId(),

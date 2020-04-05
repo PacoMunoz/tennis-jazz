@@ -1,5 +1,7 @@
 package es.pmg.tennisjazz.service.impl;
 
+import es.pmg.tennisjazz.domain.Player;
+import es.pmg.tennisjazz.domain.Round;
 import es.pmg.tennisjazz.service.MatchService;
 import es.pmg.tennisjazz.domain.Match;
 import es.pmg.tennisjazz.repository.MatchRepository;
@@ -11,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing {@link Match}.
@@ -76,5 +80,11 @@ public class MatchServiceImpl implements MatchService {
     public void delete(Long id) {
         log.debug("Request to delete Match : {}", id);
         matchRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Match> buscarTodosPorJugadorYJornadas(Player player, List<Round> rounds) {
+        log.debug("Request to find all matches of a player: " + player.getId() + " in the sets of rounds: " + rounds);
+        return matchRepository.buscarTodosPorJugadorYJornadas(player, rounds);
     }
 }

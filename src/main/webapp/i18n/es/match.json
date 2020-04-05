@@ -2,35 +2,54 @@
   "tennisJazzApp": {
     "match": {
       "home": {
-        "title": "Matches",
-        "createLabel": "Crear nuevo Match",
-        "createOrEditLabel": "Crear o editar Match",
-        "notFound": "No Matches found"
+        "title": "Partidos",
+        "createLabel": "Crear nuevo Partido",
+        "editLabel": "Editar Partido",
+        "notFound": "Ningun Partido Encontrado",
+        "notCurrentFound": "No tiene Partidos Pendientes"
       },
-      "created": "Un nuevo Match ha sido creado con el identificador {{ param }}",
-      "updated": "Un Match ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Match ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Partido ha sido creado con el identificador {{ param }}",
+      "updated": "Un Partido ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Partido ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Match {{ id }}?"
+        "question": "¿Seguro que quiere eliminar el Partido {{ id }}?"
       },
       "detail": {
-        "title": "Match"
+        "title": "Partido"
       },
-      "localPlayerSet1Result": "Local Player Set 1 Result",
-      "visitorPlayerSet1Result": "Visitor Player Set 1 Result",
-      "localPlayerSet2Result": "Local Player Set 2 Result",
-      "visitorPlayerSet2Result": "Visitor Player Set 2 Result",
-      "localPlayerSet3Result": "Local Player Set 3 Result",
-      "visitorPlayerSet3Result": "Visitor Player Set 3 Result",
-      "localPlayerSets": "Local Player Sets",
-      "visitorPlayerSets": "Visitor Player Sets",
-      "localPlayerAbandoned": "Local Player Abandoned",
-      "visitorPlayerAbandoned": "Visitor Player Abandoned",
-      "localPlayerNotPresent": "Local Player Not Present",
-      "visitorPlayerNotPresent": "Visitor Player Not Present",
-      "round": "Round",
-      "visitorPlayer": "Visitor Player",
-      "localPlayer": "Local Player"
+      "set1": "Primer Set",
+      "set2": "Segundo Set",
+      "set3": "Tercer Set",
+      "totalSets": "Sets totales",
+      "games": "Juegos",
+      "retired": "Retirado",
+      "notAppear": "No Presentado",
+      "tieBreakPoints": "Puntuación Tie Break",
+      "tieBreak": "Tie Break",
+      "summary": "Resumen",
+      "otrosDatos": "Otros Datos",
+      "localPlayerSet1Result": "Resultado Jugador Local Set 1",
+      "visitorPlayerSet1Result": "Resultado Jugador Visitante Set 1",
+      "localPlayerTBSet1Result": "Resultado Tie-Break Jugador Local Set 1",
+      "visitorPlayerTBSet1Result": "Resultado Tie-Break Jugador Visitante Set 1",
+      "localPlayerTBSet2Result": "Resultado Tie-Break Jugador Local Set 2",
+      "visitorPlayerTBSet2Result": "Resultado Tie-Break Jugador Visitante Set 2",
+      "localPlayerTBSet3Result": "Resultado Tie-Break Jugador Local Set 3",
+      "visitorPlayerTBSet3Result": "Resultado Tie-Break Jugador Visitante Set 3",
+      "localPlayerSet2Result": "Resultado Jugador Local Set 2",
+      "visitorPlayerSet2Result": "Resultado Jugador Visitante Set 2",
+      "localPlayerSet3Result": "Resultado Jugador Local Set 3",
+      "visitorPlayerSet3Result": "Resultado Jugador Visitante Set 3",
+      "localPlayerSets": "Total Sets Jugador Local",
+      "visitorPlayerSets": "Total Sets Jugador Visitante",
+      "localPlayerAbandoned": "¿Abandono Jugador Local?",
+      "visitorPlayerAbandoned": "¿Abandono Jugador Visitante?",
+      "localPlayerNotPresent": "¿No presentado Jugador Local?",
+      "visitorPlayerNotPresent": "¿No presentado Jugador Visitante?",
+      "round": "Jornada",
+      "postponed": "Suspendido",
+      "visitorPlayer": "Visitante",
+      "localPlayer": "Local"
     }
   }
 }

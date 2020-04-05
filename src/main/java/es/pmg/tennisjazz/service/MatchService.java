@@ -2,10 +2,14 @@ package es.pmg.tennisjazz.service;
 
 import es.pmg.tennisjazz.domain.Match;
 
+import es.pmg.tennisjazz.domain.Player;
+import es.pmg.tennisjazz.domain.Round;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link Match}.
@@ -43,4 +47,12 @@ public interface MatchService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Find all match of a player in a set of rounds
+     * @param player the player.
+     * @param rounds the ids of the rounds.
+     * @return list of Matches
+     */
+    List<Match> buscarTodosPorJugadorYJornadas(Player player, List<Round> rounds);
 }

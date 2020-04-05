@@ -88,14 +88,14 @@ public class RankingQueryService extends QueryService<Ranking> {
             if (criteria.getPoints() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPoints(), Ranking_.points));
             }
-            if (criteria.getGamesWin() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getGamesWin(), Ranking_.gamesWin));
+            if (criteria.getGamesWon() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getGamesWon(), Ranking_.gamesWon));
             }
             if (criteria.getGamesLoss() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getGamesLoss(), Ranking_.gamesLoss));
             }
-            if (criteria.getSetsWin() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSetsWin(), Ranking_.setsWin));
+            if (criteria.getSetsWon() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSetsWon(), Ranking_.setsWon));
             }
             if (criteria.getSetsLoss() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSetsLoss(), Ranking_.setsLoss));
@@ -114,6 +114,12 @@ public class RankingQueryService extends QueryService<Ranking> {
             }
             if (criteria.getMatchesAbandoned() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMatchesAbandoned(), Ranking_.matchesAbandoned));
+            }
+            if (criteria.getTieBreaksPlayed() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTieBreaksPlayed(), Ranking_.tieBreaksPlayed));
+            }
+            if (criteria.getTieBreaksWon() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTieBreaksWon(), Ranking_.tieBreaksWon));
             }
             if (criteria.getTournamentGroupId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTournamentGroupId(),

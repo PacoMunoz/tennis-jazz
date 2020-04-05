@@ -14,15 +14,30 @@
         },
         {
             "fieldName": "email",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "phone",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "other",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "avatar",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "maxbytes"
+            ],
+            "fieldValidateRulesMaxbytes": 30000
         }
     ],
     "relationships": [
@@ -43,6 +58,21 @@
             "otherEntityName": "ranking",
             "otherEntityRelationshipName": "player",
             "relationshipName": "rankings"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "gender",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "gender",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true
         },
         {
             "relationshipType": "many-to-many",

@@ -5,10 +5,9 @@ import es.pmg.tennisjazz.domain.Ranking;
 import es.pmg.tennisjazz.domain.TournamentGroup;
 import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.repository.RankingRepository;
-import es.pmg.tennisjazz.service.RankingService;
+import es.pmg.tennisjazz.service.*;
 import es.pmg.tennisjazz.web.rest.errors.ExceptionTranslator;
 import es.pmg.tennisjazz.service.dto.RankingCriteria;
-import es.pmg.tennisjazz.service.RankingQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,17 +41,17 @@ public class RankingResourceIT {
     private static final Integer UPDATED_POINTS = 2;
     private static final Integer SMALLER_POINTS = 1 - 1;
 
-    private static final Integer DEFAULT_GAMES_WIN = 1;
-    private static final Integer UPDATED_GAMES_WIN = 2;
-    private static final Integer SMALLER_GAMES_WIN = 1 - 1;
+    private static final Integer DEFAULT_GAMES_WON = 1;
+    private static final Integer UPDATED_GAMES_WON = 2;
+    private static final Integer SMALLER_GAMES_WON = 1 - 1;
 
     private static final Integer DEFAULT_GAMES_LOSS = 1;
     private static final Integer UPDATED_GAMES_LOSS = 2;
     private static final Integer SMALLER_GAMES_LOSS = 1 - 1;
 
-    private static final Integer DEFAULT_SETS_WIN = 1;
-    private static final Integer UPDATED_SETS_WIN = 2;
-    private static final Integer SMALLER_SETS_WIN = 1 - 1;
+    private static final Integer DEFAULT_SETS_WON = 1;
+    private static final Integer UPDATED_SETS_WON = 2;
+    private static final Integer SMALLER_SETS_WON = 1 - 1;
 
     private static final Integer DEFAULT_SETS_LOSS = 1;
     private static final Integer UPDATED_SETS_LOSS = 2;
@@ -78,6 +77,14 @@ public class RankingResourceIT {
     private static final Integer UPDATED_MATCHES_ABANDONED = 2;
     private static final Integer SMALLER_MATCHES_ABANDONED = 1 - 1;
 
+    private static final Integer DEFAULT_TIE_BREAKS_PLAYED = 1;
+    private static final Integer UPDATED_TIE_BREAKS_PLAYED = 2;
+    private static final Integer SMALLER_TIE_BREAKS_PLAYED = 1 - 1;
+
+    private static final Integer DEFAULT_TIE_BREAKS_WON = 1;
+    private static final Integer UPDATED_TIE_BREAKS_WON = 2;
+    private static final Integer SMALLER_TIE_BREAKS_WON = 1 - 1;
+
     @Autowired
     private RankingRepository rankingRepository;
 
@@ -86,6 +93,12 @@ public class RankingResourceIT {
 
     @Autowired
     private RankingQueryService rankingQueryService;
+
+    @Autowired
+    private PlayerService playerService;
+
+    @Autowired
+    private TournamentGroupQueryService tournamentGroupQueryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -109,7 +122,8 @@ public class RankingResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RankingResource rankingResource = new RankingResource(rankingService, rankingQueryService);
+
+        final RankingResource rankingResource = new RankingResource(rankingService, rankingQueryService, playerService, tournamentGroupQueryService);
         this.restRankingMockMvc = MockMvcBuilders.standaloneSetup(rankingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -127,15 +141,17 @@ public class RankingResourceIT {
     public static Ranking createEntity(EntityManager em) {
         Ranking ranking = new Ranking()
             .points(DEFAULT_POINTS)
-            .gamesWin(DEFAULT_GAMES_WIN)
+            .gamesWon(DEFAULT_GAMES_WON)
             .gamesLoss(DEFAULT_GAMES_LOSS)
-            .setsWin(DEFAULT_SETS_WIN)
+            .setsWon(DEFAULT_SETS_WON)
             .setsLoss(DEFAULT_SETS_LOSS)
             .matchesPlayed(DEFAULT_MATCHES_PLAYED)
             .matchesWon(DEFAULT_MATCHES_WON)
             .matchesLoss(DEFAULT_MATCHES_LOSS)
             .matchesNotPresent(DEFAULT_MATCHES_NOT_PRESENT)
-            .matchesAbandoned(DEFAULT_MATCHES_ABANDONED);
+            .matchesAbandoned(DEFAULT_MATCHES_ABANDONED)
+            .tieBreaksPlayed(DEFAULT_TIE_BREAKS_PLAYED)
+            .tieBreaksWon(DEFAULT_TIE_BREAKS_WON);
         return ranking;
     }
     /**
@@ -147,15 +163,17 @@ public class RankingResourceIT {
     public static Ranking createUpdatedEntity(EntityManager em) {
         Ranking ranking = new Ranking()
             .points(UPDATED_POINTS)
-            .gamesWin(UPDATED_GAMES_WIN)
+            .gamesWon(UPDATED_GAMES_WON)
             .gamesLoss(UPDATED_GAMES_LOSS)
-            .setsWin(UPDATED_SETS_WIN)
+            .setsWon(UPDATED_SETS_WON)
             .setsLoss(UPDATED_SETS_LOSS)
             .matchesPlayed(UPDATED_MATCHES_PLAYED)
             .matchesWon(UPDATED_MATCHES_WON)
             .matchesLoss(UPDATED_MATCHES_LOSS)
             .matchesNotPresent(UPDATED_MATCHES_NOT_PRESENT)
-            .matchesAbandoned(UPDATED_MATCHES_ABANDONED);
+            .matchesAbandoned(UPDATED_MATCHES_ABANDONED)
+            .tieBreaksPlayed(UPDATED_TIE_BREAKS_PLAYED)
+            .tieBreaksWon(UPDATED_TIE_BREAKS_WON);
         return ranking;
     }
 
@@ -180,15 +198,17 @@ public class RankingResourceIT {
         assertThat(rankingList).hasSize(databaseSizeBeforeCreate + 1);
         Ranking testRanking = rankingList.get(rankingList.size() - 1);
         assertThat(testRanking.getPoints()).isEqualTo(DEFAULT_POINTS);
-        assertThat(testRanking.getGamesWin()).isEqualTo(DEFAULT_GAMES_WIN);
+        assertThat(testRanking.getGamesWon()).isEqualTo(DEFAULT_GAMES_WON);
         assertThat(testRanking.getGamesLoss()).isEqualTo(DEFAULT_GAMES_LOSS);
-        assertThat(testRanking.getSetsWin()).isEqualTo(DEFAULT_SETS_WIN);
+        assertThat(testRanking.getSetsWon()).isEqualTo(DEFAULT_SETS_WON);
         assertThat(testRanking.getSetsLoss()).isEqualTo(DEFAULT_SETS_LOSS);
         assertThat(testRanking.getMatchesPlayed()).isEqualTo(DEFAULT_MATCHES_PLAYED);
         assertThat(testRanking.getMatchesWon()).isEqualTo(DEFAULT_MATCHES_WON);
         assertThat(testRanking.getMatchesLoss()).isEqualTo(DEFAULT_MATCHES_LOSS);
         assertThat(testRanking.getMatchesNotPresent()).isEqualTo(DEFAULT_MATCHES_NOT_PRESENT);
         assertThat(testRanking.getMatchesAbandoned()).isEqualTo(DEFAULT_MATCHES_ABANDONED);
+        assertThat(testRanking.getTieBreaksPlayed()).isEqualTo(DEFAULT_TIE_BREAKS_PLAYED);
+        assertThat(testRanking.getTieBreaksWon()).isEqualTo(DEFAULT_TIE_BREAKS_WON);
     }
 
     @Test
@@ -223,17 +243,19 @@ public class RankingResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ranking.getId().intValue())))
             .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS)))
-            .andExpect(jsonPath("$.[*].gamesWin").value(hasItem(DEFAULT_GAMES_WIN)))
+            .andExpect(jsonPath("$.[*].gamesWon").value(hasItem(DEFAULT_GAMES_WON)))
             .andExpect(jsonPath("$.[*].gamesLoss").value(hasItem(DEFAULT_GAMES_LOSS)))
-            .andExpect(jsonPath("$.[*].setsWin").value(hasItem(DEFAULT_SETS_WIN)))
+            .andExpect(jsonPath("$.[*].setsWon").value(hasItem(DEFAULT_SETS_WON)))
             .andExpect(jsonPath("$.[*].setsLoss").value(hasItem(DEFAULT_SETS_LOSS)))
             .andExpect(jsonPath("$.[*].matchesPlayed").value(hasItem(DEFAULT_MATCHES_PLAYED)))
             .andExpect(jsonPath("$.[*].matchesWon").value(hasItem(DEFAULT_MATCHES_WON)))
             .andExpect(jsonPath("$.[*].matchesLoss").value(hasItem(DEFAULT_MATCHES_LOSS)))
             .andExpect(jsonPath("$.[*].matchesNotPresent").value(hasItem(DEFAULT_MATCHES_NOT_PRESENT)))
-            .andExpect(jsonPath("$.[*].matchesAbandoned").value(hasItem(DEFAULT_MATCHES_ABANDONED)));
+            .andExpect(jsonPath("$.[*].matchesAbandoned").value(hasItem(DEFAULT_MATCHES_ABANDONED)))
+            .andExpect(jsonPath("$.[*].tieBreaksPlayed").value(hasItem(DEFAULT_TIE_BREAKS_PLAYED)))
+            .andExpect(jsonPath("$.[*].tieBreaksWon").value(hasItem(DEFAULT_TIE_BREAKS_WON)));
     }
-    
+
     @Test
     @Transactional
     public void getRanking() throws Exception {
@@ -246,15 +268,17 @@ public class RankingResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(ranking.getId().intValue()))
             .andExpect(jsonPath("$.points").value(DEFAULT_POINTS))
-            .andExpect(jsonPath("$.gamesWin").value(DEFAULT_GAMES_WIN))
+            .andExpect(jsonPath("$.gamesWon").value(DEFAULT_GAMES_WON))
             .andExpect(jsonPath("$.gamesLoss").value(DEFAULT_GAMES_LOSS))
-            .andExpect(jsonPath("$.setsWin").value(DEFAULT_SETS_WIN))
+            .andExpect(jsonPath("$.setsWon").value(DEFAULT_SETS_WON))
             .andExpect(jsonPath("$.setsLoss").value(DEFAULT_SETS_LOSS))
             .andExpect(jsonPath("$.matchesPlayed").value(DEFAULT_MATCHES_PLAYED))
             .andExpect(jsonPath("$.matchesWon").value(DEFAULT_MATCHES_WON))
             .andExpect(jsonPath("$.matchesLoss").value(DEFAULT_MATCHES_LOSS))
             .andExpect(jsonPath("$.matchesNotPresent").value(DEFAULT_MATCHES_NOT_PRESENT))
-            .andExpect(jsonPath("$.matchesAbandoned").value(DEFAULT_MATCHES_ABANDONED));
+            .andExpect(jsonPath("$.matchesAbandoned").value(DEFAULT_MATCHES_ABANDONED))
+            .andExpect(jsonPath("$.tieBreaksPlayed").value(DEFAULT_TIE_BREAKS_PLAYED))
+            .andExpect(jsonPath("$.tieBreaksWon").value(DEFAULT_TIE_BREAKS_WON));
     }
 
     @Test
@@ -351,93 +375,93 @@ public class RankingResourceIT {
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsEqualToSomething() throws Exception {
+    public void getAllRankingsByGamesWonIsEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin equals to DEFAULT_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.equals=" + DEFAULT_GAMES_WIN);
+        // Get all the rankingList where gamesWon equals to DEFAULT_GAMES_WON
+        defaultRankingShouldBeFound("gamesWon.equals=" + DEFAULT_GAMES_WON);
 
-        // Get all the rankingList where gamesWin equals to UPDATED_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.equals=" + UPDATED_GAMES_WIN);
+        // Get all the rankingList where gamesWon equals to UPDATED_GAMES_WON
+        defaultRankingShouldNotBeFound("gamesWon.equals=" + UPDATED_GAMES_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsInShouldWork() throws Exception {
+    public void getAllRankingsByGamesWonIsInShouldWork() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin in DEFAULT_GAMES_WIN or UPDATED_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.in=" + DEFAULT_GAMES_WIN + "," + UPDATED_GAMES_WIN);
+        // Get all the rankingList where gamesWon in DEFAULT_GAMES_WON or UPDATED_GAMES_WON
+        defaultRankingShouldBeFound("gamesWon.in=" + DEFAULT_GAMES_WON + "," + UPDATED_GAMES_WON);
 
-        // Get all the rankingList where gamesWin equals to UPDATED_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.in=" + UPDATED_GAMES_WIN);
+        // Get all the rankingList where gamesWon equals to UPDATED_GAMES_WON
+        defaultRankingShouldNotBeFound("gamesWon.in=" + UPDATED_GAMES_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsNullOrNotNull() throws Exception {
+    public void getAllRankingsByGamesWonIsNullOrNotNull() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin is not null
-        defaultRankingShouldBeFound("gamesWin.specified=true");
+        // Get all the rankingList where gamesWon is not null
+        defaultRankingShouldBeFound("gamesWon.specified=true");
 
-        // Get all the rankingList where gamesWin is null
-        defaultRankingShouldNotBeFound("gamesWin.specified=false");
+        // Get all the rankingList where gamesWon is null
+        defaultRankingShouldNotBeFound("gamesWon.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllRankingsByGamesWonIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin is greater than or equal to DEFAULT_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.greaterThanOrEqual=" + DEFAULT_GAMES_WIN);
+        // Get all the rankingList where gamesWon is greater than or equal to DEFAULT_GAMES_WON
+        defaultRankingShouldBeFound("gamesWon.greaterThanOrEqual=" + DEFAULT_GAMES_WON);
 
-        // Get all the rankingList where gamesWin is greater than or equal to UPDATED_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.greaterThanOrEqual=" + UPDATED_GAMES_WIN);
+        // Get all the rankingList where gamesWon is greater than or equal to UPDATED_GAMES_WON
+        defaultRankingShouldNotBeFound("gamesWon.greaterThanOrEqual=" + UPDATED_GAMES_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsLessThanOrEqualToSomething() throws Exception {
+    public void getAllRankingsByGamesWonIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin is less than or equal to DEFAULT_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.lessThanOrEqual=" + DEFAULT_GAMES_WIN);
+        // Get all the rankingList where gamesWon is less than or equal to DEFAULT_GAMES_WON
+        defaultRankingShouldBeFound("gamesWon.lessThanOrEqual=" + DEFAULT_GAMES_WON);
 
-        // Get all the rankingList where gamesWin is less than or equal to SMALLER_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.lessThanOrEqual=" + SMALLER_GAMES_WIN);
+        // Get all the rankingList where gamesWon is less than or equal to SMALLER_GAMES_WON
+        defaultRankingShouldNotBeFound("gamesWon.lessThanOrEqual=" + SMALLER_GAMES_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsLessThanSomething() throws Exception {
+    public void getAllRankingsByGamesWonIsLessThanSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin is less than DEFAULT_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.lessThan=" + DEFAULT_GAMES_WIN);
+        // Get all the rankingList where gamesWon is less than DEFAULT_GAMES_WON
+        defaultRankingShouldNotBeFound("gamesWon.lessThan=" + DEFAULT_GAMES_WON);
 
-        // Get all the rankingList where gamesWin is less than UPDATED_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.lessThan=" + UPDATED_GAMES_WIN);
+        // Get all the rankingList where gamesWon is less than UPDATED_GAMES_WON
+        defaultRankingShouldBeFound("gamesWon.lessThan=" + UPDATED_GAMES_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsByGamesWinIsGreaterThanSomething() throws Exception {
+    public void getAllRankingsByGamesWonIsGreaterThanSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where gamesWin is greater than DEFAULT_GAMES_WIN
-        defaultRankingShouldNotBeFound("gamesWin.greaterThan=" + DEFAULT_GAMES_WIN);
+        // Get all the rankingList where gamesWon is greater than DEFAULT_GAMES_WON
+        defaultRankingShouldNotBeFound("gamesWon.greaterThan=" + DEFAULT_GAMES_WON);
 
-        // Get all the rankingList where gamesWin is greater than SMALLER_GAMES_WIN
-        defaultRankingShouldBeFound("gamesWin.greaterThan=" + SMALLER_GAMES_WIN);
+        // Get all the rankingList where gamesWon is greater than SMALLER_GAMES_WON
+        defaultRankingShouldBeFound("gamesWon.greaterThan=" + SMALLER_GAMES_WON);
     }
 
 
@@ -535,93 +559,93 @@ public class RankingResourceIT {
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsEqualToSomething() throws Exception {
+    public void getAllRankingsBySetsWonIsEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin equals to DEFAULT_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.equals=" + DEFAULT_SETS_WIN);
+        // Get all the rankingList where setsWon equals to DEFAULT_SETS_WON
+        defaultRankingShouldBeFound("setsWon.equals=" + DEFAULT_SETS_WON);
 
-        // Get all the rankingList where setsWin equals to UPDATED_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.equals=" + UPDATED_SETS_WIN);
+        // Get all the rankingList where setsWon equals to UPDATED_SETS_WON
+        defaultRankingShouldNotBeFound("setsWon.equals=" + UPDATED_SETS_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsInShouldWork() throws Exception {
+    public void getAllRankingsBySetsWonIsInShouldWork() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin in DEFAULT_SETS_WIN or UPDATED_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.in=" + DEFAULT_SETS_WIN + "," + UPDATED_SETS_WIN);
+        // Get all the rankingList where setsWon in DEFAULT_SETS_WON or UPDATED_SETS_WON
+        defaultRankingShouldBeFound("setsWon.in=" + DEFAULT_SETS_WON + "," + UPDATED_SETS_WON);
 
-        // Get all the rankingList where setsWin equals to UPDATED_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.in=" + UPDATED_SETS_WIN);
+        // Get all the rankingList where setsWon equals to UPDATED_SETS_WON
+        defaultRankingShouldNotBeFound("setsWon.in=" + UPDATED_SETS_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsNullOrNotNull() throws Exception {
+    public void getAllRankingsBySetsWonIsNullOrNotNull() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin is not null
-        defaultRankingShouldBeFound("setsWin.specified=true");
+        // Get all the rankingList where setsWon is not null
+        defaultRankingShouldBeFound("setsWon.specified=true");
 
-        // Get all the rankingList where setsWin is null
-        defaultRankingShouldNotBeFound("setsWin.specified=false");
+        // Get all the rankingList where setsWon is null
+        defaultRankingShouldNotBeFound("setsWon.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllRankingsBySetsWonIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin is greater than or equal to DEFAULT_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.greaterThanOrEqual=" + DEFAULT_SETS_WIN);
+        // Get all the rankingList where setsWon is greater than or equal to DEFAULT_SETS_WON
+        defaultRankingShouldBeFound("setsWon.greaterThanOrEqual=" + DEFAULT_SETS_WON);
 
-        // Get all the rankingList where setsWin is greater than or equal to UPDATED_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.greaterThanOrEqual=" + UPDATED_SETS_WIN);
+        // Get all the rankingList where setsWon is greater than or equal to UPDATED_SETS_WON
+        defaultRankingShouldNotBeFound("setsWon.greaterThanOrEqual=" + UPDATED_SETS_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsLessThanOrEqualToSomething() throws Exception {
+    public void getAllRankingsBySetsWonIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin is less than or equal to DEFAULT_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.lessThanOrEqual=" + DEFAULT_SETS_WIN);
+        // Get all the rankingList where setsWon is less than or equal to DEFAULT_SETS_WON
+        defaultRankingShouldBeFound("setsWon.lessThanOrEqual=" + DEFAULT_SETS_WON);
 
-        // Get all the rankingList where setsWin is less than or equal to SMALLER_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.lessThanOrEqual=" + SMALLER_SETS_WIN);
+        // Get all the rankingList where setsWon is less than or equal to SMALLER_SETS_WON
+        defaultRankingShouldNotBeFound("setsWon.lessThanOrEqual=" + SMALLER_SETS_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsLessThanSomething() throws Exception {
+    public void getAllRankingsBySetsWonIsLessThanSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin is less than DEFAULT_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.lessThan=" + DEFAULT_SETS_WIN);
+        // Get all the rankingList where setsWon is less than DEFAULT_SETS_WON
+        defaultRankingShouldNotBeFound("setsWon.lessThan=" + DEFAULT_SETS_WON);
 
-        // Get all the rankingList where setsWin is less than UPDATED_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.lessThan=" + UPDATED_SETS_WIN);
+        // Get all the rankingList where setsWon is less than UPDATED_SETS_WON
+        defaultRankingShouldBeFound("setsWon.lessThan=" + UPDATED_SETS_WON);
     }
 
     @Test
     @Transactional
-    public void getAllRankingsBySetsWinIsGreaterThanSomething() throws Exception {
+    public void getAllRankingsBySetsWonIsGreaterThanSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
 
-        // Get all the rankingList where setsWin is greater than DEFAULT_SETS_WIN
-        defaultRankingShouldNotBeFound("setsWin.greaterThan=" + DEFAULT_SETS_WIN);
+        // Get all the rankingList where setsWon is greater than DEFAULT_SETS_WON
+        defaultRankingShouldNotBeFound("setsWon.greaterThan=" + DEFAULT_SETS_WON);
 
-        // Get all the rankingList where setsWin is greater than SMALLER_SETS_WIN
-        defaultRankingShouldBeFound("setsWin.greaterThan=" + SMALLER_SETS_WIN);
+        // Get all the rankingList where setsWon is greater than SMALLER_SETS_WON
+        defaultRankingShouldBeFound("setsWon.greaterThan=" + SMALLER_SETS_WON);
     }
 
 
@@ -1179,6 +1203,190 @@ public class RankingResourceIT {
 
     @Test
     @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed equals to DEFAULT_TIE_BREAKS_PLAYED
+        defaultRankingShouldBeFound("tieBreaksPlayed.equals=" + DEFAULT_TIE_BREAKS_PLAYED);
+
+        // Get all the rankingList where tieBreaksPlayed equals to UPDATED_TIE_BREAKS_PLAYED
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.equals=" + UPDATED_TIE_BREAKS_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsInShouldWork() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed in DEFAULT_TIE_BREAKS_PLAYED or UPDATED_TIE_BREAKS_PLAYED
+        defaultRankingShouldBeFound("tieBreaksPlayed.in=" + DEFAULT_TIE_BREAKS_PLAYED + "," + UPDATED_TIE_BREAKS_PLAYED);
+
+        // Get all the rankingList where tieBreaksPlayed equals to UPDATED_TIE_BREAKS_PLAYED
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.in=" + UPDATED_TIE_BREAKS_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed is not null
+        defaultRankingShouldBeFound("tieBreaksPlayed.specified=true");
+
+        // Get all the rankingList where tieBreaksPlayed is null
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed is greater than or equal to DEFAULT_TIE_BREAKS_PLAYED
+        defaultRankingShouldBeFound("tieBreaksPlayed.greaterThanOrEqual=" + DEFAULT_TIE_BREAKS_PLAYED);
+
+        // Get all the rankingList where tieBreaksPlayed is greater than or equal to UPDATED_TIE_BREAKS_PLAYED
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.greaterThanOrEqual=" + UPDATED_TIE_BREAKS_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed is less than or equal to DEFAULT_TIE_BREAKS_PLAYED
+        defaultRankingShouldBeFound("tieBreaksPlayed.lessThanOrEqual=" + DEFAULT_TIE_BREAKS_PLAYED);
+
+        // Get all the rankingList where tieBreaksPlayed is less than or equal to SMALLER_TIE_BREAKS_PLAYED
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.lessThanOrEqual=" + SMALLER_TIE_BREAKS_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsLessThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed is less than DEFAULT_TIE_BREAKS_PLAYED
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.lessThan=" + DEFAULT_TIE_BREAKS_PLAYED);
+
+        // Get all the rankingList where tieBreaksPlayed is less than UPDATED_TIE_BREAKS_PLAYED
+        defaultRankingShouldBeFound("tieBreaksPlayed.lessThan=" + UPDATED_TIE_BREAKS_PLAYED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksPlayedIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksPlayed is greater than DEFAULT_TIE_BREAKS_PLAYED
+        defaultRankingShouldNotBeFound("tieBreaksPlayed.greaterThan=" + DEFAULT_TIE_BREAKS_PLAYED);
+
+        // Get all the rankingList where tieBreaksPlayed is greater than SMALLER_TIE_BREAKS_PLAYED
+        defaultRankingShouldBeFound("tieBreaksPlayed.greaterThan=" + SMALLER_TIE_BREAKS_PLAYED);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon equals to DEFAULT_TIE_BREAKS_WON
+        defaultRankingShouldBeFound("tieBreaksWon.equals=" + DEFAULT_TIE_BREAKS_WON);
+
+        // Get all the rankingList where tieBreaksWon equals to UPDATED_TIE_BREAKS_WON
+        defaultRankingShouldNotBeFound("tieBreaksWon.equals=" + UPDATED_TIE_BREAKS_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsInShouldWork() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon in DEFAULT_TIE_BREAKS_WON or UPDATED_TIE_BREAKS_WON
+        defaultRankingShouldBeFound("tieBreaksWon.in=" + DEFAULT_TIE_BREAKS_WON + "," + UPDATED_TIE_BREAKS_WON);
+
+        // Get all the rankingList where tieBreaksWon equals to UPDATED_TIE_BREAKS_WON
+        defaultRankingShouldNotBeFound("tieBreaksWon.in=" + UPDATED_TIE_BREAKS_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon is not null
+        defaultRankingShouldBeFound("tieBreaksWon.specified=true");
+
+        // Get all the rankingList where tieBreaksWon is null
+        defaultRankingShouldNotBeFound("tieBreaksWon.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon is greater than or equal to DEFAULT_TIE_BREAKS_WON
+        defaultRankingShouldBeFound("tieBreaksWon.greaterThanOrEqual=" + DEFAULT_TIE_BREAKS_WON);
+
+        // Get all the rankingList where tieBreaksWon is greater than or equal to UPDATED_TIE_BREAKS_WON
+        defaultRankingShouldNotBeFound("tieBreaksWon.greaterThanOrEqual=" + UPDATED_TIE_BREAKS_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon is less than or equal to DEFAULT_TIE_BREAKS_WON
+        defaultRankingShouldBeFound("tieBreaksWon.lessThanOrEqual=" + DEFAULT_TIE_BREAKS_WON);
+
+        // Get all the rankingList where tieBreaksWon is less than or equal to SMALLER_TIE_BREAKS_WON
+        defaultRankingShouldNotBeFound("tieBreaksWon.lessThanOrEqual=" + SMALLER_TIE_BREAKS_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsLessThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon is less than DEFAULT_TIE_BREAKS_WON
+        defaultRankingShouldNotBeFound("tieBreaksWon.lessThan=" + DEFAULT_TIE_BREAKS_WON);
+
+        // Get all the rankingList where tieBreaksWon is less than UPDATED_TIE_BREAKS_WON
+        defaultRankingShouldBeFound("tieBreaksWon.lessThan=" + UPDATED_TIE_BREAKS_WON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRankingsByTieBreaksWonIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        rankingRepository.saveAndFlush(ranking);
+
+        // Get all the rankingList where tieBreaksWon is greater than DEFAULT_TIE_BREAKS_WON
+        defaultRankingShouldNotBeFound("tieBreaksWon.greaterThan=" + DEFAULT_TIE_BREAKS_WON);
+
+        // Get all the rankingList where tieBreaksWon is greater than SMALLER_TIE_BREAKS_WON
+        defaultRankingShouldBeFound("tieBreaksWon.greaterThan=" + SMALLER_TIE_BREAKS_WON);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllRankingsByTournamentGroupIsEqualToSomething() throws Exception {
         // Initialize the database
         rankingRepository.saveAndFlush(ranking);
@@ -1225,15 +1433,17 @@ public class RankingResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ranking.getId().intValue())))
             .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS)))
-            .andExpect(jsonPath("$.[*].gamesWin").value(hasItem(DEFAULT_GAMES_WIN)))
+            .andExpect(jsonPath("$.[*].gamesWon").value(hasItem(DEFAULT_GAMES_WON)))
             .andExpect(jsonPath("$.[*].gamesLoss").value(hasItem(DEFAULT_GAMES_LOSS)))
-            .andExpect(jsonPath("$.[*].setsWin").value(hasItem(DEFAULT_SETS_WIN)))
+            .andExpect(jsonPath("$.[*].setsWon").value(hasItem(DEFAULT_SETS_WON)))
             .andExpect(jsonPath("$.[*].setsLoss").value(hasItem(DEFAULT_SETS_LOSS)))
             .andExpect(jsonPath("$.[*].matchesPlayed").value(hasItem(DEFAULT_MATCHES_PLAYED)))
             .andExpect(jsonPath("$.[*].matchesWon").value(hasItem(DEFAULT_MATCHES_WON)))
             .andExpect(jsonPath("$.[*].matchesLoss").value(hasItem(DEFAULT_MATCHES_LOSS)))
             .andExpect(jsonPath("$.[*].matchesNotPresent").value(hasItem(DEFAULT_MATCHES_NOT_PRESENT)))
-            .andExpect(jsonPath("$.[*].matchesAbandoned").value(hasItem(DEFAULT_MATCHES_ABANDONED)));
+            .andExpect(jsonPath("$.[*].matchesAbandoned").value(hasItem(DEFAULT_MATCHES_ABANDONED)))
+            .andExpect(jsonPath("$.[*].tieBreaksPlayed").value(hasItem(DEFAULT_TIE_BREAKS_PLAYED)))
+            .andExpect(jsonPath("$.[*].tieBreaksWon").value(hasItem(DEFAULT_TIE_BREAKS_WON)));
 
         // Check, that the count call also returns 1
         restRankingMockMvc.perform(get("/api/rankings/count?sort=id,desc&" + filter))
@@ -1282,15 +1492,17 @@ public class RankingResourceIT {
         em.detach(updatedRanking);
         updatedRanking
             .points(UPDATED_POINTS)
-            .gamesWin(UPDATED_GAMES_WIN)
+            .gamesWon(UPDATED_GAMES_WON)
             .gamesLoss(UPDATED_GAMES_LOSS)
-            .setsWin(UPDATED_SETS_WIN)
+            .setsWon(UPDATED_SETS_WON)
             .setsLoss(UPDATED_SETS_LOSS)
             .matchesPlayed(UPDATED_MATCHES_PLAYED)
             .matchesWon(UPDATED_MATCHES_WON)
             .matchesLoss(UPDATED_MATCHES_LOSS)
             .matchesNotPresent(UPDATED_MATCHES_NOT_PRESENT)
-            .matchesAbandoned(UPDATED_MATCHES_ABANDONED);
+            .matchesAbandoned(UPDATED_MATCHES_ABANDONED)
+            .tieBreaksPlayed(UPDATED_TIE_BREAKS_PLAYED)
+            .tieBreaksWon(UPDATED_TIE_BREAKS_WON);
 
         restRankingMockMvc.perform(put("/api/rankings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -1302,15 +1514,17 @@ public class RankingResourceIT {
         assertThat(rankingList).hasSize(databaseSizeBeforeUpdate);
         Ranking testRanking = rankingList.get(rankingList.size() - 1);
         assertThat(testRanking.getPoints()).isEqualTo(UPDATED_POINTS);
-        assertThat(testRanking.getGamesWin()).isEqualTo(UPDATED_GAMES_WIN);
+        assertThat(testRanking.getGamesWon()).isEqualTo(UPDATED_GAMES_WON);
         assertThat(testRanking.getGamesLoss()).isEqualTo(UPDATED_GAMES_LOSS);
-        assertThat(testRanking.getSetsWin()).isEqualTo(UPDATED_SETS_WIN);
+        assertThat(testRanking.getSetsWon()).isEqualTo(UPDATED_SETS_WON);
         assertThat(testRanking.getSetsLoss()).isEqualTo(UPDATED_SETS_LOSS);
         assertThat(testRanking.getMatchesPlayed()).isEqualTo(UPDATED_MATCHES_PLAYED);
         assertThat(testRanking.getMatchesWon()).isEqualTo(UPDATED_MATCHES_WON);
         assertThat(testRanking.getMatchesLoss()).isEqualTo(UPDATED_MATCHES_LOSS);
         assertThat(testRanking.getMatchesNotPresent()).isEqualTo(UPDATED_MATCHES_NOT_PRESENT);
         assertThat(testRanking.getMatchesAbandoned()).isEqualTo(UPDATED_MATCHES_ABANDONED);
+        assertThat(testRanking.getTieBreaksPlayed()).isEqualTo(UPDATED_TIE_BREAKS_PLAYED);
+        assertThat(testRanking.getTieBreaksWon()).isEqualTo(UPDATED_TIE_BREAKS_WON);
     }
 
     @Test

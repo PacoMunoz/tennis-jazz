@@ -24,14 +24,14 @@ public class Ranking implements Serializable {
     @Column(name = "points")
     private Integer points;
 
-    @Column(name = "games_win")
-    private Integer gamesWin;
+    @Column(name = "games_won")
+    private Integer gamesWon;
 
     @Column(name = "games_loss")
     private Integer gamesLoss;
 
-    @Column(name = "sets_win")
-    private Integer setsWin;
+    @Column(name = "sets_won")
+    private Integer setsWon;
 
     @Column(name = "sets_loss")
     private Integer setsLoss;
@@ -50,6 +50,12 @@ public class Ranking implements Serializable {
 
     @Column(name = "matches_abandoned")
     private Integer matchesAbandoned;
+
+    @Column(name = "tie_breaks_played")
+    private Integer tieBreaksPlayed;
+
+    @Column(name = "tie_breaks_won")
+    private Integer tieBreaksWon;
 
     @ManyToOne
     @JsonIgnoreProperties("rankings")
@@ -81,17 +87,17 @@ public class Ranking implements Serializable {
         this.points = points;
     }
 
-    public Integer getGamesWin() {
-        return gamesWin;
+    public Integer getGamesWon() {
+        return gamesWon;
     }
 
-    public Ranking gamesWin(Integer gamesWin) {
-        this.gamesWin = gamesWin;
+    public Ranking gamesWon(Integer gamesWon) {
+        this.gamesWon = gamesWon;
         return this;
     }
 
-    public void setGamesWin(Integer gamesWin) {
-        this.gamesWin = gamesWin;
+    public void setGamesWon(Integer gamesWon) {
+        this.gamesWon = gamesWon;
     }
 
     public Integer getGamesLoss() {
@@ -107,17 +113,17 @@ public class Ranking implements Serializable {
         this.gamesLoss = gamesLoss;
     }
 
-    public Integer getSetsWin() {
-        return setsWin;
+    public Integer getSetsWon() {
+        return setsWon;
     }
 
-    public Ranking setsWin(Integer setsWin) {
-        this.setsWin = setsWin;
+    public Ranking setsWon(Integer setsWon) {
+        this.setsWon = setsWon;
         return this;
     }
 
-    public void setSetsWin(Integer setsWin) {
-        this.setsWin = setsWin;
+    public void setSetsWon(Integer setsWon) {
+        this.setsWon = setsWon;
     }
 
     public Integer getSetsLoss() {
@@ -198,6 +204,32 @@ public class Ranking implements Serializable {
         this.matchesAbandoned = matchesAbandoned;
     }
 
+    public Integer getTieBreaksPlayed() {
+        return tieBreaksPlayed;
+    }
+
+    public Ranking tieBreaksPlayed(Integer tieBreaksPlayed) {
+        this.tieBreaksPlayed = tieBreaksPlayed;
+        return this;
+    }
+
+    public void setTieBreaksPlayed(Integer tieBreaksPlayed) {
+        this.tieBreaksPlayed = tieBreaksPlayed;
+    }
+
+    public Integer getTieBreaksWon() {
+        return tieBreaksWon;
+    }
+
+    public Ranking tieBreaksWon(Integer tieBreaksWon) {
+        this.tieBreaksWon = tieBreaksWon;
+        return this;
+    }
+
+    public void setTieBreaksWon(Integer tieBreaksWon) {
+        this.tieBreaksWon = tieBreaksWon;
+    }
+
     public TournamentGroup getTournamentGroup() {
         return tournamentGroup;
     }
@@ -246,15 +278,17 @@ public class Ranking implements Serializable {
         return "Ranking{" +
             "id=" + getId() +
             ", points=" + getPoints() +
-            ", gamesWin=" + getGamesWin() +
+            ", gamesWon=" + getGamesWon() +
             ", gamesLoss=" + getGamesLoss() +
-            ", setsWin=" + getSetsWin() +
+            ", setsWon=" + getSetsWon() +
             ", setsLoss=" + getSetsLoss() +
             ", matchesPlayed=" + getMatchesPlayed() +
             ", matchesWon=" + getMatchesWon() +
             ", matchesLoss=" + getMatchesLoss() +
             ", matchesNotPresent=" + getMatchesNotPresent() +
             ", matchesAbandoned=" + getMatchesAbandoned() +
+            ", tieBreaksPlayed=" + getTieBreaksPlayed() +
+            ", tieBreaksWon=" + getTieBreaksWon() +
             "}";
     }
 }

@@ -8,7 +8,7 @@ export interface IRoundTennis {
   startDate?: Moment;
   endDate?: Moment;
   tournamentGroup?: ITournamentGroupTennis;
-  matchs?: IMatchTennis[];
+  matches?: IMatchTennis[];
 }
 
 export class RoundTennis implements IRoundTennis {
@@ -18,6 +18,6 @@ export class RoundTennis implements IRoundTennis {
     public startDate?: Moment,
     public endDate?: Moment,
     public tournamentGroup?: ITournamentGroupTennis,
-    public matchs?: IMatchTennis[]
+    public matches?: IMatchTennis[]
   ) {}
 }

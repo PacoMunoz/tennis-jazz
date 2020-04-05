@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRankingTennis } from 'app/shared/model/ranking-tennis.model';
+import { MatchTennisService } from 'app/entities/match-tennis';
 
 type EntityResponseType = HttpResponse<IRankingTennis>;
 type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
@@ -12,8 +13,9 @@ type EntityArrayResponseType = HttpResponse<IRankingTennis[]>;
 @Injectable({ providedIn: 'root' })
 export class RankingTennisService {
   public resourceUrl = SERVER_API_URL + 'api/rankings';
+  public resourceUrlUpdate = SERVER_API_URL + 'api/rankings/update';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, protected matchesService: MatchTennisService) {}
 
   create(ranking: IRankingTennis): Observable<EntityResponseType> {
     return this.http.post<IRankingTennis>(this.resourceUrl, ranking, { observe: 'response' });
@@ -34,5 +36,11 @@ export class RankingTennisService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  updateTournamentPlayerRanking(playerid: number, roundid: number) {
+    const req = { idp: playerid, idr: roundid };
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrlUpdate, { params: options, observe: 'response' });
   }
 }

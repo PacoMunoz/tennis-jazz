@@ -20,7 +20,9 @@
       "startDate": "Start Date",
       "endDate": "End Date",
       "tournamentGroup": "Tournament Group",
-      "matchs": "Matchs"
+      "matches": "Matches",
+      "showAll": "Show All",
+      "showCurrent": "Show Current"
     }
   }
 }

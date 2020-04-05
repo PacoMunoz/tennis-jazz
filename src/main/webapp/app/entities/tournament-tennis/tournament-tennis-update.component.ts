@@ -14,15 +14,18 @@ import { TournamentTennisService } from './tournament-tennis.service';
 export class TournamentTennisUpdateComponent implements OnInit {
   isSaving: boolean;
   startDateDp: any;
+  endDateDp: any;
 
   editForm = this.fb.group({
     id: [],
-    name: [],
-    startDate: [],
+    name: [null, [Validators.required]],
+    startDate: [null, [Validators.required]],
+    endDate: [],
     inProgress: [],
     winPoints: [null, [Validators.required]],
     lossPoints: [null, [Validators.required]],
-    notPresentPoints: []
+    notPresentPoints: [],
+    injuredPoints: []
   });
 
   constructor(protected tournamentService: TournamentTennisService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -39,10 +42,12 @@ export class TournamentTennisUpdateComponent implements OnInit {
       id: tournament.id,
       name: tournament.name,
       startDate: tournament.startDate,
+      endDate: tournament.endDate,
       inProgress: tournament.inProgress,
       winPoints: tournament.winPoints,
       lossPoints: tournament.lossPoints,
-      notPresentPoints: tournament.notPresentPoints
+      notPresentPoints: tournament.notPresentPoints,
+      injuredPoints: tournament.injuredPoints
     });
   }
 
@@ -66,10 +71,12 @@ export class TournamentTennisUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       startDate: this.editForm.get(['startDate']).value,
+      endDate: this.editForm.get(['endDate']).value,
       inProgress: this.editForm.get(['inProgress']).value,
       winPoints: this.editForm.get(['winPoints']).value,
       lossPoints: this.editForm.get(['lossPoints']).value,
-      notPresentPoints: this.editForm.get(['notPresentPoints']).value
+      notPresentPoints: this.editForm.get(['notPresentPoints']).value,
+      injuredPoints: this.editForm.get(['injuredPoints']).value
     };
   }
 

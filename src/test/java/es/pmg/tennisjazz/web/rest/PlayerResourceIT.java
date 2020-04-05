@@ -4,6 +4,8 @@ import es.pmg.tennisjazz.TennisJazzApp;
 import es.pmg.tennisjazz.domain.Player;
 import es.pmg.tennisjazz.domain.Match;
 import es.pmg.tennisjazz.domain.Ranking;
+import es.pmg.tennisjazz.domain.Gender;
+import es.pmg.tennisjazz.domain.User;
 import es.pmg.tennisjazz.domain.TournamentGroup;
 import es.pmg.tennisjazz.repository.PlayerRepository;
 import es.pmg.tennisjazz.service.PlayerService;
@@ -22,6 +24,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -53,6 +56,11 @@ public class PlayerResourceIT {
 
     private static final String DEFAULT_OTHER = "AAAAAAAAAA";
     private static final String UPDATED_OTHER = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_AVATAR = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_AVATAR = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_AVATAR_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_AVATAR_CONTENT_TYPE = "image/png";
 
     @Autowired
     private PlayerRepository playerRepository;
@@ -106,7 +114,9 @@ public class PlayerResourceIT {
             .surname(DEFAULT_SURNAME)
             .email(DEFAULT_EMAIL)
             .phone(DEFAULT_PHONE)
-            .other(DEFAULT_OTHER);
+            .other(DEFAULT_OTHER)
+            .avatar(DEFAULT_AVATAR)
+            .avatarContentType(DEFAULT_AVATAR_CONTENT_TYPE);
         return player;
     }
     /**
@@ -121,7 +131,9 @@ public class PlayerResourceIT {
             .surname(UPDATED_SURNAME)
             .email(UPDATED_EMAIL)
             .phone(UPDATED_PHONE)
-            .other(UPDATED_OTHER);
+            .other(UPDATED_OTHER)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
         return player;
     }
 
@@ -150,6 +162,8 @@ public class PlayerResourceIT {
         assertThat(testPlayer.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testPlayer.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testPlayer.getOther()).isEqualTo(DEFAULT_OTHER);
+        assertThat(testPlayer.getAvatar()).isEqualTo(DEFAULT_AVATAR);
+        assertThat(testPlayer.getAvatarContentType()).isEqualTo(DEFAULT_AVATAR_CONTENT_TYPE);
     }
 
     @Test
@@ -192,6 +206,42 @@ public class PlayerResourceIT {
 
     @Test
     @Transactional
+    public void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setEmail(null);
+
+        // Create the Player, which fails.
+
+        restPlayerMockMvc.perform(post("/api/players")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(player)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPhoneIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setPhone(null);
+
+        // Create the Player, which fails.
+
+        restPlayerMockMvc.perform(post("/api/players")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(player)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPlayers() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
@@ -205,7 +255,9 @@ public class PlayerResourceIT {
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
-            .andExpect(jsonPath("$.[*].other").value(hasItem(DEFAULT_OTHER.toString())));
+            .andExpect(jsonPath("$.[*].other").value(hasItem(DEFAULT_OTHER.toString())))
+            .andExpect(jsonPath("$.[*].avatarContentType").value(hasItem(DEFAULT_AVATAR_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].avatar").value(hasItem(Base64Utils.encodeToString(DEFAULT_AVATAR))));
     }
     
     @Test
@@ -223,7 +275,9 @@ public class PlayerResourceIT {
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
-            .andExpect(jsonPath("$.other").value(DEFAULT_OTHER.toString()));
+            .andExpect(jsonPath("$.other").value(DEFAULT_OTHER.toString()))
+            .andExpect(jsonPath("$.avatarContentType").value(DEFAULT_AVATAR_CONTENT_TYPE))
+            .andExpect(jsonPath("$.avatar").value(Base64Utils.encodeToString(DEFAULT_AVATAR)));
     }
 
     @Test
@@ -483,6 +537,46 @@ public class PlayerResourceIT {
 
     @Test
     @Transactional
+    public void getAllPlayersByGenderIsEqualToSomething() throws Exception {
+        // Initialize the database
+        playerRepository.saveAndFlush(player);
+        Gender gender = GenderResourceIT.createEntity(em);
+        em.persist(gender);
+        em.flush();
+        player.setGender(gender);
+        playerRepository.saveAndFlush(player);
+        Long genderId = gender.getId();
+
+        // Get all the playerList where gender equals to genderId
+        defaultPlayerShouldBeFound("genderId.equals=" + genderId);
+
+        // Get all the playerList where gender equals to genderId + 1
+        defaultPlayerShouldNotBeFound("genderId.equals=" + (genderId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPlayersByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        playerRepository.saveAndFlush(player);
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        player.setUser(user);
+        playerRepository.saveAndFlush(player);
+        Long userId = user.getId();
+
+        // Get all the playerList where user equals to userId
+        defaultPlayerShouldBeFound("userId.equals=" + userId);
+
+        // Get all the playerList where user equals to userId + 1
+        defaultPlayerShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+
+    @Test
+    @Transactional
     public void getAllPlayersByGroupsIsEqualToSomething() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
@@ -512,7 +606,9 @@ public class PlayerResourceIT {
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
-            .andExpect(jsonPath("$.[*].other").value(hasItem(DEFAULT_OTHER)));
+            .andExpect(jsonPath("$.[*].other").value(hasItem(DEFAULT_OTHER)))
+            .andExpect(jsonPath("$.[*].avatarContentType").value(hasItem(DEFAULT_AVATAR_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].avatar").value(hasItem(Base64Utils.encodeToString(DEFAULT_AVATAR))));
 
         // Check, that the count call also returns 1
         restPlayerMockMvc.perform(get("/api/players/count?sort=id,desc&" + filter))
@@ -564,7 +660,9 @@ public class PlayerResourceIT {
             .surname(UPDATED_SURNAME)
             .email(UPDATED_EMAIL)
             .phone(UPDATED_PHONE)
-            .other(UPDATED_OTHER);
+            .other(UPDATED_OTHER)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
 
         restPlayerMockMvc.perform(put("/api/players")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -580,6 +678,8 @@ public class PlayerResourceIT {
         assertThat(testPlayer.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testPlayer.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testPlayer.getOther()).isEqualTo(UPDATED_OTHER);
+        assertThat(testPlayer.getAvatar()).isEqualTo(UPDATED_AVATAR);
+        assertThat(testPlayer.getAvatarContentType()).isEqualTo(UPDATED_AVATAR_CONTENT_TYPE);
     }
 
     @Test

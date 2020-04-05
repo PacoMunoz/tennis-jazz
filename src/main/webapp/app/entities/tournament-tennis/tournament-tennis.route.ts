@@ -7,11 +7,10 @@ import { filter, map } from 'rxjs/operators';
 import { TournamentTennis } from 'app/shared/model/tournament-tennis.model';
 import { TournamentTennisService } from './tournament-tennis.service';
 import { TournamentTennisComponent } from './tournament-tennis.component';
-import { TournamentTennisDetailComponent } from './tournament-tennis-detail.component';
 import { TournamentTennisUpdateComponent } from './tournament-tennis-update.component';
 import { TournamentTennisDeletePopupComponent } from './tournament-tennis-delete-dialog.component';
 import { ITournamentTennis } from 'app/shared/model/tournament-tennis.model';
-import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
+import { TournamentTennisViewComponent } from 'app/entities/tournament-tennis/tournament-tennis-view-component';
 
 @Injectable({ providedIn: 'root' })
 export class TournamentTennisResolve implements Resolve<ITournamentTennis> {
@@ -34,31 +33,19 @@ export const tournamentRoute: Routes = [
     path: '',
     component: TournamentTennisComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
-    component: TournamentTennisDetailComponent,
+    component: TournamentTennisViewComponent,
     resolve: {
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'tennisJazzApp.tournament.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/view-groups',
-    component: TournamentTennisGroupListComponent,
-    resolve: {
-      tournament: TournamentTennisResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -70,7 +57,7 @@ export const tournamentRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -82,7 +69,7 @@ export const tournamentRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -97,7 +84,7 @@ export const tournamentPopupRoute: Routes = [
       tournament: TournamentTennisResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'tennisJazzApp.tournament.home.title'
     },
     canActivate: [UserRouteAccessService],

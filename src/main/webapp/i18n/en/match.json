@@ -4,8 +4,9 @@
       "home": {
         "title": "Matches",
         "createLabel": "Create a new Match",
-        "createOrEditLabel": "Create or edit a Match",
-        "notFound": "No Matches found"
+        "editLabel": "Edit Match",
+        "notFound": "No Matches found",
+        "notCurrentFound": "No Current Matches found"
       },
       "created": "A new Match is created with identifier {{ param }}",
       "updated": "A Match is updated with identifier {{ param }}",
@@ -16,8 +17,25 @@
       "detail": {
         "title": "Match"
       },
+      "set1": "Set One",
+      "set2": "Set Two",
+      "set3": "Set Three",
+      "totalSets": "Total Sets",
+      "games": "Games",
+      "retired": "Retired",
+      "notAppear": "Not Appear",
+      "tieBreakPoints": "Tie Break Points",
+      "tieBreak": "Tie Break",
+      "summary": "Summary",
+      "otherData": "Other Data",
       "localPlayerSet1Result": "Local Player Set 1 Result",
       "visitorPlayerSet1Result": "Visitor Player Set 1 Result",
+      "localPlayerTBSet1Result": "Local Player TB Set 1 Result",
+      "visitorPlayerTBSet1Result": "Visitor Player TB Set 1 Result",
+      "localPlayerTBSet2Result": "Local Player TB Set 2 Result",
+      "visitorPlayerTBSet2Result": "Visitor Player TB Set 2 Result",
+      "localPlayerTBSet3Result": "Local Player TB Set 3 Result",
+      "visitorPlayerTBSet3Result": "Visitor Player TB Set 3 Result",
       "localPlayerSet2Result": "Local Player Set 2 Result",
       "visitorPlayerSet2Result": "Visitor Player Set 2 Result",
       "localPlayerSet3Result": "Local Player Set 3 Result",
@@ -28,6 +46,7 @@
       "visitorPlayerAbandoned": "Visitor Player Abandoned",
       "localPlayerNotPresent": "Local Player Not Present",
       "visitorPlayerNotPresent": "Visitor Player Not Present",
+      "postponed": "Postponed",
       "round": "Round",
       "visitorPlayer": "Visitor Player",
       "localPlayer": "Local Player"

@@ -1,4 +1,61 @@
-<div class="row">
+<div class="row center-content my-5">
+    <div class="col-md-12 mb-3 center-content">
+        <kbd class="h1 text-white" jhiTranslate="global.tournaments" >Tournaments</kbd>
+    </div>
+    <jhi-alert></jhi-alert>
+    <div class="container center-content" [ngSwitch]="isAuthenticated()">
+        <div class="tournament-card col-md-5" *ngFor="let tournament of tournaments">
+            <mat-card >
+                <mat-card-header class="center-content">
+                    <img mat-card-avatar class="mat-card-avatar d-none d-lg-block" src="/content/images/tennis-2players.png" />
+                    <mat-card-title><kbd> {{tournament.name}} </kbd></mat-card-title>
+                    <mat-card-subtitle class="text-white font-weight-bold">
+                        Del {{tournament.startDate|date}} al {{tournament.endDate|date}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                    <span *ngSwitchCase="true">
+                        <mat-icon aria-hidden="false" aria-label="phone">smartphone</mat-icon>
+                        <span class="card-phone-number font-weight-bold"> 662696151 </span>
+                    </span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="text-white font-weight-bold">Zafra (Badajoz)</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-button class="btn btn-white btn-sm font-weight-bold"
+                            [routerLink]="['tournament-tennis', tournament.id, 'view']">Consultar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <!--<div class="col-md-4">
+        <div class="container tournament-card" fxLayout="row wrap" fxLayoutAlign="space-around" fxLayoutGap="10px">
+            <mat-card class="mb-3 center-content"
+                      *ngFor="let tournament of tournaments">
+                <mat-card-header>
+                    <mat-card-title><kbd> {{tournament.name}} </kbd></mat-card-title>
+                    <mat-card-subtitle class="text-white">Del {{tournament.startDate|date}}
+                        al {{tournament.endDate|date}} </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-card-subtitle>
+                    <span>
+                        <mat-icon aria-hidden="false" aria-label="phone">smartphone</mat-icon>
+                        <span class="card-phone-number"> 662696151 </span>
+                    </span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="text-white">Zafra (Badajoz)</mat-card-subtitle>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button class="btn btn-white btn-sm"
+                            [routerLink]="['tournament-tennis', tournament.id, 'view']">VER
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div> -->
+</div>
+<!--<div class="row">
     <div class="col-md-3">
         <span class="hipster img-fluid rounded"></span>
     </div>
@@ -38,4 +95,4 @@
             <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" jhiTranslate="home.github">GitHub</a>!
         </p>
     </div>
-</div>
+</div> -->

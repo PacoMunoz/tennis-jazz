@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IPlayerTennis } from 'app/shared/model/player-tennis.model';
-import { AccountService } from 'app/core';
+import { AccountService } from 'app/core/auth/account.service';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { PlayerTennisService } from './player-tennis.service';
 
 @Component({
@@ -28,6 +29,7 @@ export class PlayerTennisComponent implements OnInit, OnDestroy {
   constructor(
     protected playerService: PlayerTennisService,
     protected jhiAlertService: JhiAlertService,
+    protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected parseLinks: JhiParseLinks,
     protected accountService: AccountService
@@ -80,6 +82,14 @@ export class PlayerTennisComponent implements OnInit, OnDestroy {
 
   trackId(index: number, item: IPlayerTennis) {
     return item.id;
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
   }
 
   registerChangeInPlayers() {

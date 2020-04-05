@@ -88,6 +88,7 @@ Custom alerts for notification
 .alerts {
   .alert {
     text-overflow: ellipsis;
+
     pre {
       background: none;
       border: none;
@@ -96,22 +97,28 @@ Custom alerts for notification
       padding: 0;
       margin: 0;
     }
+
     .popover pre {
       font-size: 10px;
     }
   }
+
   .jhi-toast {
     position: fixed;
     width: 100%;
+
     &.left {
       left: 5px;
     }
+
     &.right {
       right: 5px;
     }
+
     &.top {
       top: 55px;
     }
+
     &.bottom {
       bottom: 55px;
     }
@@ -138,6 +145,7 @@ entity detail page css
     dt {
       margin-bottom: 15px;
     }
+
     dd {
       border-bottom: 1px solid #eee;
       padding-left: 180px;
@@ -164,3 +172,477 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+/* ==========================================================================
+custom css styles
+========================================================================== */
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 1280px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .wrapper {
+    padding-left: 32px;
+    padding-right: 32px;
+    max-width: 1264px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 1248px;
+  }
+}
+
+.wrapper {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1240px;
+}
+
+.container-fluid {
+  padding-top: 10px !important;
+  padding-bottom: 50px !important;
+  min-height: 550px;
+}
+
+.container-ranking-table {
+  height: 600px;
+}
+
+@media screen and (max-width: 414px) {
+  .container-fluid {
+    padding: 0 !important;
+  }
+  .jh-card {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .container-ranking-table {
+    height: 400px;
+  }
+}
+
+/* ================== match and round styles ============================= */
+
+.Match__body {
+  padding: 0 16px 8px;
+  border: 2px solid #ebedf0;
+  background-color: #fff;
+}
+
+.Match_wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Match__body:hover {
+  border: 2px solid #ff2882;
+}
+
+.Match__line:not(:last-child) {
+  border-bottom: 2px solid #ebedf0;
+}
+
+.Match__line {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  min-height: 64px;
+}
+
+.Match__line--winner .Match__player,
+.Match__line--winner .Match__set {
+  font-weight: 700;
+}
+
+.Match__player__holder {
+  position: relative;
+  -webkit-box-flex: 1;
+  flex: 1;
+}
+
+.Match__player:last-child {
+  margin-bottom: 0;
+}
+
+.Match__player:first-child {
+  margin-bottom: 4px;
+}
+
+.Match__player {
+  color: #1e1e1e;
+  font-size: 14px;
+  line-height: 24px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.Match__winner {
+  margin-right: 16px;
+}
+
+.Match__winner svg * {
+  fill: #ff2882;
+}
+
+.Match__winner svg {
+  display: -webkit-inline-box;
+  display: inline-flex;
+}
+
+.Match__line--winner .Match__player,
+.Match__line--winner .Match__set {
+  font-weight: 700;
+}
+
+.Match__set {
+  color: #1e1e1e;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.Match__set ul {
+  display: -webkit-box;
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0rem;
+}
+
+.Match__set li {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  width: 28px;
+  text-align: center;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.Draw-round {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  justify-content: space-around;
+  //width: 50%;
+  position: relative;
+  padding-top: 70px;
+}
+
+.Draw-round > div {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.Draw-round__name--left {
+  width: calc(100% - 64px);
+}
+
+.Draw-round__name {
+  font-size: 13px;
+  line-height: 16px;
+  color: #ff2882;
+  font-weight: 700;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #ff2882;
+  width: 100%;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 0 !important;
+}
+
+.Draw-round__date {
+  color: #1e1e1e;
+  position: relative;
+  font-size: 80%;
+  vertical-align: baseline;
+}
+
+@media screen and (max-width: 767px) {
+  .Draw-round:first-child {
+    //width: 100%;
+  }
+  .Draw-round:first-child > div {
+    padding-right: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .Draw-round:first-child {
+    //width: 50%;
+  }
+}
+
+.mat-tab-tournament-view .mat-tab-header {
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #3f1052;
+}
+
+.mat-tab-tournament-view .mat-tab-label,
+.mat-tab-link {
+  color: #ffffff;
+}
+
+.mat-tab-tournament-view .tournament-mat-tab-body {
+  margin-top: 25px;
+}
+
+.mat-tab-tournament-view .mat-bottom-tab-tournament-view .mat-tab-header {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.mat-tab-tournament-view .mat-tab-header,
+.mat-tab-tournament-view .mat-tab-nav-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #00ff87;
+  height: 5px;
+}
+
+/* ===================================== custom tournament-card ============================= */
+
+.tournament-card .mat-card {
+  background-color: #ff2882;
+  color: #ffffff;
+}
+
+.tournament-card .mat-card-subtitle {
+  color: #37003c;
+}
+
+.tournament-card .mat-card-avatar {
+  background-size: cover;
+}
+
+.tournament-card .mat-card-avatar {
+  height: 144px !important;
+  width: 190px !important;
+  border-radius: 0 !important;
+}
+
+.tournament-card .card-phone-number {
+  position: relative;
+  bottom: 5px;
+}
+
+.tournament-card mat-card-title {
+  font-size: 24px !important;
+  font-weight: 500;
+}
+
+/* ===================================== custom navigator ============================= */
+
+.dropdown-item {
+  color: #ffffff !important;
+  background-color: #ee2982 !important;
+}
+
+.dropdown-item:hover {
+  text-decoration: underline !important;
+  background-color: #ee2982 !important;
+}
+
+container-fluid .dropdown-menu {
+  padding: 0 !important;
+}
+
+/* ===================================== custom mat-card for players ============================= */
+
+/* ===================================== custom styles ========================================== */
+
+hr {
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  border-top: 0px solid rgba(0, 0, 0, 0.1);
+  border-color: #da291c;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: #1e1e1e;
+}
+
+/* ===================================== custom styles ========================================== */
+
+.colores {
+  color: #3f1052;
+  color: #00ff87;
+  color: #e90052;
+  color: #ff2882;
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #2f2f2f;
+}
+
+.btn-white:hover {
+  background-color: #00ff87;
+  color: #fff;
+}
+
+.bg-purple {
+  background-image: none !important;
+  background-color: #3f1052 !important;
+}
+
+.bg-pink {
+  background-image: none !important;
+  background-color: #ff2882 !important;
+}
+
+.bg-green {
+  background-image: none !important;
+  background-color: #00ff87 !important;
+}
+
+/* ===================================== custom outline bottom ========================================== */
+
+.btn-outline-purple {
+  color: #3f1052;
+  border-color: #3f1052;
+}
+
+.btn-outline-purple:hover {
+  color: #fff;
+  background-color: #3f1052;
+  border-color: #3f1052;
+}
+
+.btn-outline-purple:focus,
+.btn-outline-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(63, 16, 82, 0.5);
+}
+
+.btn-outline-purple.disabled,
+.btn-outline-purple:disabled {
+  color: #3f1052;
+  background-color: transparent;
+}
+
+.btn-outline-purple:not(:disabled):not(.disabled):active,
+.btn-outline-purple:not(:disabled):not(.disabled).active,
+.show > .btn-outline-purple.dropdown-toggle {
+  color: #fff;
+  background-color: #3f1052;
+  border-color: #3f1052;
+}
+
+.btn-outline-purple:not(:disabled):not(.disabled):active:focus,
+.btn-outline-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(63, 16, 82, 0.5);
+}
+
+/* ===================================== footer ========================================== */
+
+.footer {
+  background-color: #3f1052;
+}
+
+.footer-img {
+  margin: 25px 8px;
+  height: 100px;
+  width: 80px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.jazz-img {
+  background: url('../images/jazz-inverse-white.png') no-repeat center center;
+  background-size: contain;
+}
+
+.tennis-w-img {
+  background: url('../images/tennis-white.png') no-repeat center center;
+  background-size: contain;
+}
+
+.tennis-m-img {
+  background: url('../images/tennis-man-white.png') no-repeat center center;
+  background-size: contain;
+}
+
+/* ===================================== ranking table ========================================== */
+
+.ranking-table .table thead th {
+  vertical-align: middle;
+}
+
+.ranking-table .table th,
+.table td {
+  vertical-align: middle;
+}
+
+.ranking-table thead {
+  background-color: #fbfbfb;
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding: 8px !important;
+}
+
+.mat-column-name {
+  padding: 18px !important;
+}
+
+.mat-column-points {
+  padding-left: 25px !important;
+}
+
+/* ===================================== ranking table end ========================================== */
+
+.pink_subtitle {
+  color: #ff2882;
+  border-bottom: 2px solid #ff2882;
+}

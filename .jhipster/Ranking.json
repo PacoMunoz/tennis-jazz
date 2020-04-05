@@ -6,7 +6,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "gamesWin",
+            "fieldName": "gamesWon",
             "fieldType": "Integer"
         },
         {
@@ -14,7 +14,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "setsWin",
+            "fieldName": "setsWon",
             "fieldType": "Integer"
         },
         {
@@ -39,6 +39,14 @@
         },
         {
             "fieldName": "matchesAbandoned",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tieBreaksPlayed",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tieBreaksWon",
             "fieldType": "Integer"
         }
     ],

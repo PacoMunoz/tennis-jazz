@@ -98,9 +98,9 @@ public class RoundQueryService extends QueryService<Round> {
                 specification = specification.and(buildSpecification(criteria.getTournamentGroupId(),
                     root -> root.join(Round_.tournamentGroup, JoinType.LEFT).get(TournamentGroup_.id)));
             }
-            if (criteria.getMatchsId() != null) {
-                specification = specification.and(buildSpecification(criteria.getMatchsId(),
-                    root -> root.join(Round_.matchs, JoinType.LEFT).get(Match_.id)));
+            if (criteria.getMatchesId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMatchesId(),
+                    root -> root.join(Round_.matches, JoinType.LEFT).get(Match_.id)));
             }
         }
         return specification;

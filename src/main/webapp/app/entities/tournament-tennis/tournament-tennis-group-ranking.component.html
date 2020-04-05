@@ -1,18 +1,144 @@
-<table  class="table table-striped table-bordered">
-    <tbody >
-    <tr>
-        <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span></th>
-        <th scope="row"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span></th>
-    </tr>
-    <tr *ngFor="let playerRank of ranking |  slice : 0: sliceEnd  ">
-        <td>{{playerRank.player.name}} {{playerRank.player.surname}}</td>
-        <td>{{playerRank.points}}</td>
-    </tr>
-    </tbody>
-</table>
-<button *ngIf="ranking.length > 4 && !showLessButton" type="submit"
-        class="btn btn-info btn-sm"
-        (click)="showMore()"><fa-icon [icon]="'plus'"></fa-icon><span class="d-none d-md-inline" jhiTranslate="showMore">Show More</span></button>
-<button *ngIf="ranking.length > 4 && showLessButton" type="submit"
-        class="btn btn-info btn-sm"
-        (click)="showLess()"><fa-icon [icon]="'plus'"></fa-icon><span class="d-none d-md-inline" jhiTranslate="showLess">Show Less</span></button>
+<div class="alert alert-warning" *ngIf="ranking?.length === 0">
+    <span jhiTranslate="tennisJazzApp.ranking.home.notFound">No Rankings found</span>
+</div>
+
+<div class="mat-elevation-z8  container container-ranking-table" style="overflow: auto;" *ngIf="ranking?.length > 0">
+    <table class="" mat-table [dataSource]="ranking" >
+        <!-- Ranking Column -->
+        <ng-container matColumnDef="#" sticky>
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell class="font-weight-bold" *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name" sticky>
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-md-inline" jhiTranslate="tennisJazzApp.ranking.player">Player</span>
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <img mat-card-avatar class="mat-card-avatar" [src]="element.player.avatar" />
+                <div class="mt-1 mt-sm-2">
+                    {{element.player.name}}
+                    <!--<span class="d-none d-md-inline">{{element.player.name}}</span>-->
+                    <!--<span class="d-inline d-md-none">{{element.player.name|slice : 0 : 1}}.</span> -->
+                    {{element.player.surname}}
+                </div>
+            </td>
+        </ng-container>
+        <!-- Points Column -->
+        <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.points"> &nbsp;Pt.&nbsp; </span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.points">Points</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+        </ng-container>
+        <!-- Matches Played Column -->
+        <ng-container matColumnDef="matches-played">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.matchesPlayed">M.P</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Mat.Played</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.matchesPlayed}} </td>
+        </ng-container>
+        <!-- Matches Won Column -->
+        <ng-container matColumnDef="matches-won">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.matchesWon">M.W</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesWon">Mat.Won</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.matchesWon}} </td>
+        </ng-container>
+        <!-- Matches Loss Column -->
+        <ng-container matColumnDef="matches-loss">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.matchesLoss">M.L</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesLoss">Mat.Loss</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.matchesLoss}} </td>
+        </ng-container>
+        <!-- Matches Not Present Column -->
+        <ng-container matColumnDef="matches-not-present">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.matchesNotPresent">N.P</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesNotPresent">Not Present</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.matchesNotPresent}} </td>
+        </ng-container>
+        <!-- Matches Abandoned Column -->
+        <ng-container matColumnDef="matches-abandoned">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.matchesAbandoned">Ret</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.matchesAbandoned">Retired</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.matchesAbandoned}} </td>
+        </ng-container>
+        <!-- Sets Won Column -->
+        <ng-container matColumnDef="sets-won">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.setsWon">S.W</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.setsWon">Sets.Won</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.setsWon}} </td>
+        </ng-container>
+        <!-- Sets Loss Column -->
+        <ng-container matColumnDef="sets-loss">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.setsLoss">S.L</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets.Loss</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.setsLoss}} </td>
+        </ng-container>
+        <!-- Games Won Column -->
+        <ng-container matColumnDef="games-won">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.gamesWon">G.W</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.gamesWon">Games.Won</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.gamesWon}} </td>
+        </ng-container>
+        <!-- Games Loss Column -->
+        <ng-container matColumnDef="games-loss">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.gamesLoss">G.L</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games.Loss</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.gamesLoss}} </td>
+        </ng-container>
+        <!-- Games Loss Column -->
+        <ng-container matColumnDef="games-loss2">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.gamesLoss">G.L</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games.Loss</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.gamesLoss}} </td>
+        </ng-container>
+        <!-- Games Loss Column -->
+        <ng-container matColumnDef="games-loss3">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.gamesLoss">G.L</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games.Loss</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.gamesLoss}} </td>
+        </ng-container>
+        <!-- Tie Breaks Played Column -->
+        <ng-container matColumnDef="tie-breaks-played">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.tieBreaksPlayed">TB.P</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.tieBreaksPlayed">Tie Breaks Played</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.tieBreaksPlayed}} </td>
+        </ng-container>
+        <!-- Tie Breaks Won Column -->
+        <ng-container matColumnDef="tie-breaks-won">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="d-inline d-md-none" jhiTranslate="tennisJazzApp.ranking.xs.tieBreaksWon">TB.W</span>
+                <span class="d-none d-md-inline" jhiTranslate="tennisJazzApp.ranking.tieBreaksWon">Tie Breaks Won</span>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.tieBreaksWon}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

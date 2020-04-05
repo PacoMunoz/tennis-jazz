@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import es.pmg.tennisjazz.service.dto.TournamentCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -75,10 +76,10 @@ public class MatchQueryService extends QueryService<Match> {
     }
 
     /**
-     * Function to convert ConsumerCriteria to a {@link Specification}
+     * Function to convert {@link MatchCriteria} to a {@link Specification}
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
-     */    
+     */
     protected Specification<Match> createSpecification(MatchCriteria criteria) {
         Specification<Match> specification = Specification.where(null);
         if (criteria != null) {
@@ -90,6 +91,24 @@ public class MatchQueryService extends QueryService<Match> {
             }
             if (criteria.getVisitorPlayerSet1Result() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerSet1Result(), Match_.visitorPlayerSet1Result));
+            }
+            if (criteria.getLocalPlayerTBSet1Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerTBSet1Result(), Match_.localPlayerTBSet1Result));
+            }
+            if (criteria.getVisitorPlayerTBSet1Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerTBSet1Result(), Match_.visitorPlayerTBSet1Result));
+            }
+            if (criteria.getLocalPlayerTBSet2Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerTBSet2Result(), Match_.localPlayerTBSet2Result));
+            }
+            if (criteria.getVisitorPlayerTBSet2Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerTBSet2Result(), Match_.visitorPlayerTBSet2Result));
+            }
+            if (criteria.getLocalPlayerTBSet3Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerTBSet3Result(), Match_.localPlayerTBSet3Result));
+            }
+            if (criteria.getVisitorPlayerTBSet3Result() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getVisitorPlayerTBSet3Result(), Match_.visitorPlayerTBSet3Result));
             }
             if (criteria.getLocalPlayerSet2Result() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLocalPlayerSet2Result(), Match_.localPlayerSet2Result));
@@ -121,6 +140,9 @@ public class MatchQueryService extends QueryService<Match> {
             if (criteria.getVisitorPlayerNotPresent() != null) {
                 specification = specification.and(buildSpecification(criteria.getVisitorPlayerNotPresent(), Match_.visitorPlayerNotPresent));
             }
+            if (criteria.getPostponed() != null) {
+                specification = specification.and(buildSpecification(criteria.getPostponed(), Match_.postponed));
+            }
             if (criteria.getRoundId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRoundId(),
                     root -> root.join(Match_.round, JoinType.LEFT).get(Round_.id)));
@@ -135,5 +157,10 @@ public class MatchQueryService extends QueryService<Match> {
             }
         }
         return specification;
+    }
+
+    public Page<Match> findCurrentByPlayer(Long idPlayer, Pageable pageable) {
+        log.debug("find current by playerId : {}", idPlayer);
+        return this.matchRepository.buscarPartidosEnCurso(idPlayer, pageable);
     }
 }

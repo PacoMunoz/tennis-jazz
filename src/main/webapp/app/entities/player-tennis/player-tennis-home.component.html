@@ -1,0 +1,154 @@
+
+<div id="page-heading" class="content ">
+    <span class="bg-green p-3 text-white" jhiTranslate="global.menu.account.myAccount">My Account</span>
+</div>
+<jhi-alert></jhi-alert>
+<br/>
+<div class="content p-3 bg-purple">
+    <h4 class="text-white ml-3" id="page-subheading">
+        <span jhiTranslate="global.menu.account.myTournaments">My Tournaments</span>
+    </h4>
+</div>
+<div class="alert alert-warning p-3" *ngIf="currentMatches?.length === 0">
+    <span jhiTranslate="tennisJazzApp.match.home.notCurrentFound">No current matches found</span>
+</div>
+<div class="Rounds-wrapper container mt-5" fxLayout="row wrap"  fxLayoutAlign="space-around center"
+     fxLayoutGap="10px">
+    <div *ngFor="let match of currentMatches" class="col-md-6">
+        <div class="col-md bg-pink rounded-top p-3">
+            <h5 class="text-white">{{match.round.tournamentGroup.tournament.name}}</h5>
+        </div>
+        <div class="Draw-round">
+            <div class="Draw-round__name Draw-round__name--left">
+                <div class="ml-3" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap.xs="15px">
+                    <div fxFlex fxLayoutAlign="start">{{match.round.name}}</div>
+                    <div fxFlex fxLayoutAlign="end" fxLayoutAlign.xs="start" fxLayoutAlign.sm="start"><span
+                        class="Draw-round__date">Del {{match.round.startDate|date}}
+                        al {{match.round.endDate|date}}</span></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="Match_wrapper container">
+                        <div class="Match">
+                            <div class="Match__body">
+                                <div class="Match__line"
+                                     [ngClass]="{
+                                        'Match__line--winner' : (match.localPlayerSets > match.visitorPlayerSets
+                                                                || match.visitorPlayerAbandoned
+                                                                || match.visitorPlayerNotPresent)
+                                                                && !match.postponed}">
+                                    <div class="Match__player__holder">
+                                        <div class="Match__player">
+                                            <img mat-card-avatar class="mat-card-avatar" [src]="match.localPlayer.avatar" />
+                                            <span class="d-none d-md-inline pl-1 pl-sm-2">{{match.localPlayer.name}}</span>
+                                            <span class="d-inline d-md-none">
+                                                {{match.localPlayer.name|slice : 0 : 1}}
+                                            </span>&nbsp;
+                                            <span class="Match__player__ln">{{match.localPlayer.surname}}</span>
+                                            <!--<span class="Match__player__seed">[16]</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="Match__winner"
+                                         *ngIf="(match.localPlayerSets > match.visitorPlayerSets
+                                                || match.visitorPlayerAbandoned
+                                                || match.visitorPlayerNotPresent)
+                                                && !match.postponed">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="m5.23685955 13.7247081-4.23685955-6.05086255 1.63830409-1.14715287 2.869736 4.09840772 8.62510041-8.6251004 1.4142136 1.41421356z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="Match__set">
+                                        <div *ngIf="match.postponed" class="font-weight-bold"><span jhiTranslate="tennisJazzApp.match.postponed">postponed</span></div>
+                                        <ul><!---->
+                                            <li>
+                                                {{match.localPlayerSet1Result}}
+                                                <sup *ngIf="match.localPlayerTBSet1Result != null">
+                                                    {{match.localPlayerTBSet1Result}}
+                                                </sup>
+                                            </li>
+                                            <li>
+                                                {{match.localPlayerSet2Result}}
+                                                <sup *ngIf="match.localPlayerTBSet2Result != null">
+                                                    {{match.localPlayerTBSet2Result}}
+                                                </sup>
+                                            </li>
+                                            <li *ngIf="match.localPlayerSet3Result != null">
+                                                {{match.localPlayerSet3Result}}
+                                                <sup *ngIf="match.localPlayerTBSet3Result != null">
+                                                    {{match.localPlayerTBSet3Result}}
+                                                </sup>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="Match__line"
+                                     [ngClass]="{
+                                        'Match__line--winner' : (match.localPlayerSets < match.visitorPlayerSets
+                                                                || match.localPlayerAbandoned
+                                                                || match.localPlayerNotPresent)
+                                                                && !match.postponed}">
+                                    <div class="Match__player__holder">
+                                        <div class="Match__player">
+                                            <img mat-card-avatar class="mat-card-avatar" [src]="match.visitorPlayer.avatar" />
+                                            <span class="d-none d-md-inline pl-1 pl-sm-2">{{match.visitorPlayer.name}}</span>
+                                            <span class="d-inline d-md-none">{{match.visitorPlayer.name|slice : 0 : 1}}
+                                                .</span>&nbsp;
+                                            <span class="Match__player__ln">{{match.visitorPlayer.surname}}</span>
+                                            <!--<span class="Match__player__seed">[16]</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="Match__winner"
+                                         *ngIf="(match.visitorPlayerSets > match.localPlayerSets
+                                                || match.localPlayerAbandoned
+                                                || match.localPlayerNotPresent)
+                                                && !match.postponed">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="m5.23685955 13.7247081-4.23685955-6.05086255 1.63830409-1.14715287 2.869736 4.09840772 8.62510041-8.6251004 1.4142136 1.41421356z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="Match__set">
+                                        <ul><!---->
+                                            <li>
+                                                {{match.visitorPlayerSet1Result}}
+                                                <sup *ngIf="match.visitorPlayerTBSet1Result != null">
+                                                    {{match.visitorPlayerTBSet1Result}}
+                                                </sup>
+                                            </li>
+                                            <li>
+                                                {{match.visitorPlayerSet2Result}}
+                                                <sup *ngIf="match.visitorPlayerTBSet2Result != null">
+                                                    {{match.visitorPlayerTBSet2Result}}
+                                                </sup>
+                                            </li>
+                                            <li *ngIf="match.visitorPlayerSet3Result != null">
+                                                {{match.visitorPlayerSet3Result}}
+                                                <sup *ngIf="match.visitorPlayerTBSet3Result != null">
+                                                    {{match.visitorPlayerTBSet3Result}}
+                                                </sup>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-content">
+                            <button id="jh-create-entity"
+                                    class="btn-xs btn-primary btn-xs float-left jh-create-entity"
+                                    [routerLink]="['/match-tennis', match.id, 'new-or-update-current']">
+                                <fa-icon [icon]="'plus'"></fa-icon>
+                                <span jhiTranslate="tennisJazzApp.match.home.editLabel">
+                                    Edit Match
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

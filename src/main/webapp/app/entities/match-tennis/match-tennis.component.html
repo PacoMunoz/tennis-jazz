@@ -14,12 +14,18 @@
         <span jhiTranslate="tennisJazzApp.match.home.notFound">No matches found</span>
     </div>
     <div class="table-responsive" *ngIf="matches?.length > 0">
-        <table class="table table-striped">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerSet1Result"><span jhiTranslate="tennisJazzApp.match.localPlayerSet1Result">Local Player Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayerSet1Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet1Result">Visitor Player Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localPlayerTBSet1Result"><span jhiTranslate="tennisJazzApp.match.localPlayerTBSet1Result">Local Player TB Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visitorPlayerTBSet1Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerTBSet1Result">Visitor Player TB Set 1 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localPlayerTBSet2Result"><span jhiTranslate="tennisJazzApp.match.localPlayerTBSet2Result">Local Player TB Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visitorPlayerTBSet2Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerTBSet2Result">Visitor Player TB Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localPlayerTBSet3Result"><span jhiTranslate="tennisJazzApp.match.localPlayerTBSet3Result">Local Player TB Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="visitorPlayerTBSet3Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerTBSet3Result">Visitor Player TB Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerSet2Result"><span jhiTranslate="tennisJazzApp.match.localPlayerSet2Result">Local Player Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayerSet2Result"><span jhiTranslate="tennisJazzApp.match.visitorPlayerSet2Result">Visitor Player Set 2 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerSet3Result"><span jhiTranslate="tennisJazzApp.match.localPlayerSet3Result">Local Player Set 3 Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -30,6 +36,7 @@
             <th jhiSortBy="visitorPlayerAbandoned"><span jhiTranslate="tennisJazzApp.match.visitorPlayerAbandoned">Visitor Player Abandoned</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayerNotPresent"><span jhiTranslate="tennisJazzApp.match.localPlayerNotPresent">Local Player Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayerNotPresent"><span jhiTranslate="tennisJazzApp.match.visitorPlayerNotPresent">Visitor Player Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="postponed"><span jhiTranslate="tennisJazzApp.match.postponed">Postponed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="round.id"><span jhiTranslate="tennisJazzApp.match.round">Round</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="visitorPlayer.id"><span jhiTranslate="tennisJazzApp.match.visitorPlayer">Visitor Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="localPlayer.id"><span jhiTranslate="tennisJazzApp.match.localPlayer">Local Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -41,6 +48,12 @@
                 <td><a [routerLink]="['/match-tennis', match.id, 'view' ]">{{match.id}}</a></td>
                 <td>{{match.localPlayerSet1Result}}</td>
                 <td>{{match.visitorPlayerSet1Result}}</td>
+                <td>{{match.localPlayerTBSet1Result}}</td>
+                <td>{{match.visitorPlayerTBSet1Result}}</td>
+                <td>{{match.localPlayerTBSet2Result}}</td>
+                <td>{{match.visitorPlayerTBSet2Result}}</td>
+                <td>{{match.localPlayerTBSet3Result}}</td>
+                <td>{{match.visitorPlayerTBSet3Result}}</td>
                 <td>{{match.localPlayerSet2Result}}</td>
                 <td>{{match.visitorPlayerSet2Result}}</td>
                 <td>{{match.localPlayerSet3Result}}</td>
@@ -51,6 +64,7 @@
                 <td>{{match.visitorPlayerAbandoned}}</td>
                 <td>{{match.localPlayerNotPresent}}</td>
                 <td>{{match.visitorPlayerNotPresent}}</td>
+                <td>{{match.postponed}}</td>
                 <td>
                     <div *ngIf="match.round">
                         <a [routerLink]="['/round-tennis', match.round?.id, 'view' ]" >{{match.round?.id}}</a>

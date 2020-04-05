@@ -3,10 +3,20 @@
     "fields": [
         {
             "fieldName": "name",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "startDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
             "fieldType": "LocalDate"
         },
         {
@@ -29,6 +39,10 @@
         },
         {
             "fieldName": "notPresentPoints",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "injuredPoints",
             "fieldType": "Integer"
         }
     ],

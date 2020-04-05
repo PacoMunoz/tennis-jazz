@@ -46,6 +46,10 @@ public class TournamentResourceIT {
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
     private static final LocalDate SMALLER_START_DATE = LocalDate.ofEpochDay(-1L);
 
+    private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_END_DATE = LocalDate.ofEpochDay(-1L);
+
     private static final Boolean DEFAULT_IN_PROGRESS = false;
     private static final Boolean UPDATED_IN_PROGRESS = true;
 
@@ -60,6 +64,10 @@ public class TournamentResourceIT {
     private static final Integer DEFAULT_NOT_PRESENT_POINTS = 1;
     private static final Integer UPDATED_NOT_PRESENT_POINTS = 2;
     private static final Integer SMALLER_NOT_PRESENT_POINTS = 1 - 1;
+
+    private static final Integer DEFAULT_INJURED_POINTS = 1;
+    private static final Integer UPDATED_INJURED_POINTS = 2;
+    private static final Integer SMALLER_INJURED_POINTS = 1 - 1;
 
     @Autowired
     private TournamentRepository tournamentRepository;
@@ -111,10 +119,12 @@ public class TournamentResourceIT {
         Tournament tournament = new Tournament()
             .name(DEFAULT_NAME)
             .startDate(DEFAULT_START_DATE)
+            .endDate(DEFAULT_END_DATE)
             .inProgress(DEFAULT_IN_PROGRESS)
             .winPoints(DEFAULT_WIN_POINTS)
             .lossPoints(DEFAULT_LOSS_POINTS)
-            .notPresentPoints(DEFAULT_NOT_PRESENT_POINTS);
+            .notPresentPoints(DEFAULT_NOT_PRESENT_POINTS)
+            .injuredPoints(DEFAULT_INJURED_POINTS);
         return tournament;
     }
     /**
@@ -127,10 +137,12 @@ public class TournamentResourceIT {
         Tournament tournament = new Tournament()
             .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
+            .endDate(UPDATED_END_DATE)
             .inProgress(UPDATED_IN_PROGRESS)
             .winPoints(UPDATED_WIN_POINTS)
             .lossPoints(UPDATED_LOSS_POINTS)
-            .notPresentPoints(UPDATED_NOT_PRESENT_POINTS);
+            .notPresentPoints(UPDATED_NOT_PRESENT_POINTS)
+            .injuredPoints(UPDATED_INJURED_POINTS);
         return tournament;
     }
 
@@ -156,10 +168,12 @@ public class TournamentResourceIT {
         Tournament testTournament = tournamentList.get(tournamentList.size() - 1);
         assertThat(testTournament.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(DEFAULT_START_DATE);
+        assertThat(testTournament.getEndDate()).isEqualTo(DEFAULT_END_DATE);
         assertThat(testTournament.isInProgress()).isEqualTo(DEFAULT_IN_PROGRESS);
         assertThat(testTournament.getWinPoints()).isEqualTo(DEFAULT_WIN_POINTS);
         assertThat(testTournament.getLossPoints()).isEqualTo(DEFAULT_LOSS_POINTS);
         assertThat(testTournament.getNotPresentPoints()).isEqualTo(DEFAULT_NOT_PRESENT_POINTS);
+        assertThat(testTournament.getInjuredPoints()).isEqualTo(DEFAULT_INJURED_POINTS);
     }
 
     @Test
@@ -181,6 +195,42 @@ public class TournamentResourceIT {
         assertThat(tournamentList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tournamentRepository.findAll().size();
+        // set the field null
+        tournament.setName(null);
+
+        // Create the Tournament, which fails.
+
+        restTournamentMockMvc.perform(post("/api/tournaments")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(tournament)))
+            .andExpect(status().isBadRequest());
+
+        List<Tournament> tournamentList = tournamentRepository.findAll();
+        assertThat(tournamentList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStartDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tournamentRepository.findAll().size();
+        // set the field null
+        tournament.setStartDate(null);
+
+        // Create the Tournament, which fails.
+
+        restTournamentMockMvc.perform(post("/api/tournaments")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(tournament)))
+            .andExpect(status().isBadRequest());
+
+        List<Tournament> tournamentList = tournamentRepository.findAll();
+        assertThat(tournamentList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -231,10 +281,12 @@ public class TournamentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].inProgress").value(hasItem(DEFAULT_IN_PROGRESS.booleanValue())))
             .andExpect(jsonPath("$.[*].winPoints").value(hasItem(DEFAULT_WIN_POINTS)))
             .andExpect(jsonPath("$.[*].lossPoints").value(hasItem(DEFAULT_LOSS_POINTS)))
-            .andExpect(jsonPath("$.[*].notPresentPoints").value(hasItem(DEFAULT_NOT_PRESENT_POINTS)));
+            .andExpect(jsonPath("$.[*].notPresentPoints").value(hasItem(DEFAULT_NOT_PRESENT_POINTS)))
+            .andExpect(jsonPath("$.[*].injuredPoints").value(hasItem(DEFAULT_INJURED_POINTS)));
     }
     
     @Test
@@ -250,10 +302,12 @@ public class TournamentResourceIT {
             .andExpect(jsonPath("$.id").value(tournament.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
+            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
             .andExpect(jsonPath("$.inProgress").value(DEFAULT_IN_PROGRESS.booleanValue()))
             .andExpect(jsonPath("$.winPoints").value(DEFAULT_WIN_POINTS))
             .andExpect(jsonPath("$.lossPoints").value(DEFAULT_LOSS_POINTS))
-            .andExpect(jsonPath("$.notPresentPoints").value(DEFAULT_NOT_PRESENT_POINTS));
+            .andExpect(jsonPath("$.notPresentPoints").value(DEFAULT_NOT_PRESENT_POINTS))
+            .andExpect(jsonPath("$.injuredPoints").value(DEFAULT_INJURED_POINTS));
     }
 
     @Test
@@ -384,6 +438,98 @@ public class TournamentResourceIT {
 
         // Get all the tournamentList where startDate is greater than SMALLER_START_DATE
         defaultTournamentShouldBeFound("startDate.greaterThan=" + SMALLER_START_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate equals to DEFAULT_END_DATE
+        defaultTournamentShouldBeFound("endDate.equals=" + DEFAULT_END_DATE);
+
+        // Get all the tournamentList where endDate equals to UPDATED_END_DATE
+        defaultTournamentShouldNotBeFound("endDate.equals=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate in DEFAULT_END_DATE or UPDATED_END_DATE
+        defaultTournamentShouldBeFound("endDate.in=" + DEFAULT_END_DATE + "," + UPDATED_END_DATE);
+
+        // Get all the tournamentList where endDate equals to UPDATED_END_DATE
+        defaultTournamentShouldNotBeFound("endDate.in=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate is not null
+        defaultTournamentShouldBeFound("endDate.specified=true");
+
+        // Get all the tournamentList where endDate is null
+        defaultTournamentShouldNotBeFound("endDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate is greater than or equal to DEFAULT_END_DATE
+        defaultTournamentShouldBeFound("endDate.greaterThanOrEqual=" + DEFAULT_END_DATE);
+
+        // Get all the tournamentList where endDate is greater than or equal to UPDATED_END_DATE
+        defaultTournamentShouldNotBeFound("endDate.greaterThanOrEqual=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate is less than or equal to DEFAULT_END_DATE
+        defaultTournamentShouldBeFound("endDate.lessThanOrEqual=" + DEFAULT_END_DATE);
+
+        // Get all the tournamentList where endDate is less than or equal to SMALLER_END_DATE
+        defaultTournamentShouldNotBeFound("endDate.lessThanOrEqual=" + SMALLER_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate is less than DEFAULT_END_DATE
+        defaultTournamentShouldNotBeFound("endDate.lessThan=" + DEFAULT_END_DATE);
+
+        // Get all the tournamentList where endDate is less than UPDATED_END_DATE
+        defaultTournamentShouldBeFound("endDate.lessThan=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByEndDateIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where endDate is greater than DEFAULT_END_DATE
+        defaultTournamentShouldNotBeFound("endDate.greaterThan=" + DEFAULT_END_DATE);
+
+        // Get all the tournamentList where endDate is greater than SMALLER_END_DATE
+        defaultTournamentShouldBeFound("endDate.greaterThan=" + SMALLER_END_DATE);
     }
 
 
@@ -704,6 +850,98 @@ public class TournamentResourceIT {
 
     @Test
     @Transactional
+    public void getAllTournamentsByInjuredPointsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints equals to DEFAULT_INJURED_POINTS
+        defaultTournamentShouldBeFound("injuredPoints.equals=" + DEFAULT_INJURED_POINTS);
+
+        // Get all the tournamentList where injuredPoints equals to UPDATED_INJURED_POINTS
+        defaultTournamentShouldNotBeFound("injuredPoints.equals=" + UPDATED_INJURED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByInjuredPointsIsInShouldWork() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints in DEFAULT_INJURED_POINTS or UPDATED_INJURED_POINTS
+        defaultTournamentShouldBeFound("injuredPoints.in=" + DEFAULT_INJURED_POINTS + "," + UPDATED_INJURED_POINTS);
+
+        // Get all the tournamentList where injuredPoints equals to UPDATED_INJURED_POINTS
+        defaultTournamentShouldNotBeFound("injuredPoints.in=" + UPDATED_INJURED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByInjuredPointsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints is not null
+        defaultTournamentShouldBeFound("injuredPoints.specified=true");
+
+        // Get all the tournamentList where injuredPoints is null
+        defaultTournamentShouldNotBeFound("injuredPoints.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByInjuredPointsIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints is greater than or equal to DEFAULT_INJURED_POINTS
+        defaultTournamentShouldBeFound("injuredPoints.greaterThanOrEqual=" + DEFAULT_INJURED_POINTS);
+
+        // Get all the tournamentList where injuredPoints is greater than or equal to UPDATED_INJURED_POINTS
+        defaultTournamentShouldNotBeFound("injuredPoints.greaterThanOrEqual=" + UPDATED_INJURED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByInjuredPointsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints is less than or equal to DEFAULT_INJURED_POINTS
+        defaultTournamentShouldBeFound("injuredPoints.lessThanOrEqual=" + DEFAULT_INJURED_POINTS);
+
+        // Get all the tournamentList where injuredPoints is less than or equal to SMALLER_INJURED_POINTS
+        defaultTournamentShouldNotBeFound("injuredPoints.lessThanOrEqual=" + SMALLER_INJURED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByInjuredPointsIsLessThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints is less than DEFAULT_INJURED_POINTS
+        defaultTournamentShouldNotBeFound("injuredPoints.lessThan=" + DEFAULT_INJURED_POINTS);
+
+        // Get all the tournamentList where injuredPoints is less than UPDATED_INJURED_POINTS
+        defaultTournamentShouldBeFound("injuredPoints.lessThan=" + UPDATED_INJURED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTournamentsByInjuredPointsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        tournamentRepository.saveAndFlush(tournament);
+
+        // Get all the tournamentList where injuredPoints is greater than DEFAULT_INJURED_POINTS
+        defaultTournamentShouldNotBeFound("injuredPoints.greaterThan=" + DEFAULT_INJURED_POINTS);
+
+        // Get all the tournamentList where injuredPoints is greater than SMALLER_INJURED_POINTS
+        defaultTournamentShouldBeFound("injuredPoints.greaterThan=" + SMALLER_INJURED_POINTS);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllTournamentsByGroupsIsEqualToSomething() throws Exception {
         // Initialize the database
         tournamentRepository.saveAndFlush(tournament);
@@ -731,10 +969,12 @@ public class TournamentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tournament.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].inProgress").value(hasItem(DEFAULT_IN_PROGRESS.booleanValue())))
             .andExpect(jsonPath("$.[*].winPoints").value(hasItem(DEFAULT_WIN_POINTS)))
             .andExpect(jsonPath("$.[*].lossPoints").value(hasItem(DEFAULT_LOSS_POINTS)))
-            .andExpect(jsonPath("$.[*].notPresentPoints").value(hasItem(DEFAULT_NOT_PRESENT_POINTS)));
+            .andExpect(jsonPath("$.[*].notPresentPoints").value(hasItem(DEFAULT_NOT_PRESENT_POINTS)))
+            .andExpect(jsonPath("$.[*].injuredPoints").value(hasItem(DEFAULT_INJURED_POINTS)));
 
         // Check, that the count call also returns 1
         restTournamentMockMvc.perform(get("/api/tournaments/count?sort=id,desc&" + filter))
@@ -784,10 +1024,12 @@ public class TournamentResourceIT {
         updatedTournament
             .name(UPDATED_NAME)
             .startDate(UPDATED_START_DATE)
+            .endDate(UPDATED_END_DATE)
             .inProgress(UPDATED_IN_PROGRESS)
             .winPoints(UPDATED_WIN_POINTS)
             .lossPoints(UPDATED_LOSS_POINTS)
-            .notPresentPoints(UPDATED_NOT_PRESENT_POINTS);
+            .notPresentPoints(UPDATED_NOT_PRESENT_POINTS)
+            .injuredPoints(UPDATED_INJURED_POINTS);
 
         restTournamentMockMvc.perform(put("/api/tournaments")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -800,10 +1042,12 @@ public class TournamentResourceIT {
         Tournament testTournament = tournamentList.get(tournamentList.size() - 1);
         assertThat(testTournament.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTournament.getStartDate()).isEqualTo(UPDATED_START_DATE);
+        assertThat(testTournament.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testTournament.isInProgress()).isEqualTo(UPDATED_IN_PROGRESS);
         assertThat(testTournament.getWinPoints()).isEqualTo(UPDATED_WIN_POINTS);
         assertThat(testTournament.getLossPoints()).isEqualTo(UPDATED_LOSS_POINTS);
         assertThat(testTournament.getNotPresentPoints()).isEqualTo(UPDATED_NOT_PRESENT_POINTS);
+        assertThat(testTournament.getInjuredPoints()).isEqualTo(UPDATED_INJURED_POINTS);
     }
 
     @Test

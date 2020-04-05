@@ -458,21 +458,21 @@ public class RoundResourceIT {
 
     @Test
     @Transactional
-    public void getAllRoundsByMatchsIsEqualToSomething() throws Exception {
+    public void getAllRoundsByMatchesIsEqualToSomething() throws Exception {
         // Initialize the database
         roundRepository.saveAndFlush(round);
-        Match matchs = MatchResourceIT.createEntity(em);
-        em.persist(matchs);
+        Match matches = MatchResourceIT.createEntity(em);
+        em.persist(matches);
         em.flush();
-        round.addMatchs(matchs);
+        round.addMatches(matches);
         roundRepository.saveAndFlush(round);
-        Long matchsId = matchs.getId();
+        Long matchesId = matches.getId();
 
-        // Get all the roundList where matchs equals to matchsId
-        defaultRoundShouldBeFound("matchsId.equals=" + matchsId);
+        // Get all the roundList where matches equals to matchesId
+        defaultRoundShouldBeFound("matchesId.equals=" + matchesId);
 
-        // Get all the roundList where matchs equals to matchsId + 1
-        defaultRoundShouldNotBeFound("matchsId.equals=" + (matchsId + 1));
+        // Get all the roundList where matches equals to matchesId + 1
+        defaultRoundShouldNotBeFound("matchesId.equals=" + (matchesId + 1));
     }
 
     /**

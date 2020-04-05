@@ -35,7 +35,7 @@ public class RoundCriteria implements Serializable, Criteria {
 
     private LongFilter tournamentGroupId;
 
-    private LongFilter matchsId;
+    private LongFilter matchesId;
 
     public RoundCriteria(){
     }
@@ -46,7 +46,7 @@ public class RoundCriteria implements Serializable, Criteria {
         this.startDate = other.startDate == null ? null : other.startDate.copy();
         this.endDate = other.endDate == null ? null : other.endDate.copy();
         this.tournamentGroupId = other.tournamentGroupId == null ? null : other.tournamentGroupId.copy();
-        this.matchsId = other.matchsId == null ? null : other.matchsId.copy();
+        this.matchesId = other.matchesId == null ? null : other.matchesId.copy();
     }
 
     @Override
@@ -94,12 +94,12 @@ public class RoundCriteria implements Serializable, Criteria {
         this.tournamentGroupId = tournamentGroupId;
     }
 
-    public LongFilter getMatchsId() {
-        return matchsId;
+    public LongFilter getMatchesId() {
+        return matchesId;
     }
 
-    public void setMatchsId(LongFilter matchsId) {
-        this.matchsId = matchsId;
+    public void setMatchesId(LongFilter matchesId) {
+        this.matchesId = matchesId;
     }
 
 
@@ -118,7 +118,7 @@ public class RoundCriteria implements Serializable, Criteria {
             Objects.equals(startDate, that.startDate) &&
             Objects.equals(endDate, that.endDate) &&
             Objects.equals(tournamentGroupId, that.tournamentGroupId) &&
-            Objects.equals(matchsId, that.matchsId);
+            Objects.equals(matchesId, that.matchesId);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class RoundCriteria implements Serializable, Criteria {
         startDate,
         endDate,
         tournamentGroupId,
-        matchsId
+        matchesId
         );
     }
 
@@ -141,7 +141,7 @@ public class RoundCriteria implements Serializable, Criteria {
                 (startDate != null ? "startDate=" + startDate + ", " : "") +
                 (endDate != null ? "endDate=" + endDate + ", " : "") +
                 (tournamentGroupId != null ? "tournamentGroupId=" + tournamentGroupId + ", " : "") +
-                (matchsId != null ? "matchsId=" + matchsId + ", " : "") +
+                (matchesId != null ? "matchesId=" + matchesId + ", " : "") +
             "}";
     }
 

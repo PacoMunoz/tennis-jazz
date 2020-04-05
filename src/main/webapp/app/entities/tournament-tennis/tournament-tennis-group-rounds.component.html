@@ -1,0 +1,33 @@
+<div class="center-content">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-purple" [ngClass]="isShowingAllRounds ? '' : 'active' ">
+            <input type="radio" name="options" id="option1" autocomplete="off" (click)="getCurrentRound()">
+            <span class="d-md-inline"
+                  jhiTranslate="tennisJazzApp.round.showCurrent">Show Current</span>
+        </label>
+        <label class="btn btn-outline-purple" [ngClass]="isShowingAllRounds ? 'active' : '' ">
+            <input type="radio" name="options" id="option2" autocomplete="off" (click)="getAllRounds()">
+            <span class="d-md-inline"
+                  jhiTranslate="tennisJazzApp.round.showAll">Show All</span>
+        </label>
+    </div>
+</div>
+<div class="Rounds-wrapper container mt-2" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="space-around"
+     fxLayoutGap="10px">
+    <div *ngFor="let round of rounds" class="Round" [fxFlex]="'100%'" fxFlex.lt-md="100%">
+        <!--<div *ngFor="let round of rounds" class="Round" [fxFlex]="isShowingAllRounds ? '45%' : '100%' "
+             fxFlex.lt-md="100%"> -->
+            <div class="Draw-round">
+                <div class="Draw-round__name Draw-round__name--left">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap.xs="15px">
+                        <div fxFlex fxLayoutAlign="start">{{round.name}}</div>
+                        <div fxFlex fxLayoutAlign="end" fxLayoutAlign.xs="start" fxLayoutAlign.sm="start"><span
+                            class="Draw-round__date">Del {{round.startDate|date}} al {{round.endDate|date}}</span></div>
+                    </div>
+                </div>
+                <jhi-tournament-tennis-group-round-match [isShowingAllRounds]="isShowingAllRounds"
+                                                         [round]="round"></jhi-tournament-tennis-group-round-match>
+            </div>
+        </div>
+    </div>
+

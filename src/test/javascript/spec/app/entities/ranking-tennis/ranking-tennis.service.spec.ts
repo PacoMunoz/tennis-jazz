@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(RankingTennisService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new RankingTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+      elemDefault = new RankingTennis(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -60,15 +60,17 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             points: 1,
-            gamesWin: 1,
+            gamesWon: 1,
             gamesLoss: 1,
-            setsWin: 1,
+            setsWon: 1,
             setsLoss: 1,
             matchesPlayed: 1,
             matchesWon: 1,
             matchesLoss: 1,
             matchesNotPresent: 1,
-            matchesAbandoned: 1
+            matchesAbandoned: 1,
+            tieBreaksPlayed: 1,
+            tieBreaksWon: 1
           },
           elemDefault
         );
@@ -87,15 +89,17 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             points: 1,
-            gamesWin: 1,
+            gamesWon: 1,
             gamesLoss: 1,
-            setsWin: 1,
+            setsWon: 1,
             setsLoss: 1,
             matchesPlayed: 1,
             matchesWon: 1,
             matchesLoss: 1,
             matchesNotPresent: 1,
-            matchesAbandoned: 1
+            matchesAbandoned: 1,
+            tieBreaksPlayed: 1,
+            tieBreaksWon: 1
           },
           elemDefault
         );

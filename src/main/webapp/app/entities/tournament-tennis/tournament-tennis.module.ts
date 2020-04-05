@@ -13,21 +13,30 @@ import {
   tournamentRoute,
   tournamentPopupRoute
 } from './';
-import { TournamentTennisGroupListComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-list.component';
 import { TournamentTennisGroupRankingComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-ranking.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { TournamentTennisViewComponent } from 'app/entities/tournament-tennis/tournament-tennis-view-component';
+import { TournamentTennisGroupRoundsComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-rounds.component';
+import { TournamentTennisGroupRoundMatchComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-round-match.component';
+import { TournamentTennisGroupPlayerComponent } from 'app/entities/tournament-tennis/tournament-tennis-group-player.component';
+import { TournamentTennisSearchComponent } from 'app/entities/tournament-tennis/tournament-tennis-search.component';
 
 const ENTITY_STATES = [...tournamentRoute, ...tournamentPopupRoute];
 
 @NgModule({
-  imports: [TennisJazzSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [TennisJazzSharedModule, RouterModule.forChild(ENTITY_STATES), FlexLayoutModule],
   declarations: [
     TournamentTennisComponent,
     TournamentTennisDetailComponent,
     TournamentTennisUpdateComponent,
     TournamentTennisDeleteDialogComponent,
     TournamentTennisDeletePopupComponent,
-    TournamentTennisGroupListComponent,
-    TournamentTennisGroupRankingComponent
+    TournamentTennisViewComponent,
+    TournamentTennisGroupRankingComponent,
+    TournamentTennisGroupRoundsComponent,
+    TournamentTennisGroupRoundMatchComponent,
+    TournamentTennisGroupPlayerComponent,
+    TournamentTennisSearchComponent
   ],
   entryComponents: [
     TournamentTennisComponent,

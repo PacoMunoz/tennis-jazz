@@ -31,6 +31,8 @@ public class TournamentCriteria implements Serializable, Criteria {
 
     private LocalDateFilter startDate;
 
+    private LocalDateFilter endDate;
+
     private BooleanFilter inProgress;
 
     private IntegerFilter winPoints;
@@ -38,6 +40,8 @@ public class TournamentCriteria implements Serializable, Criteria {
     private IntegerFilter lossPoints;
 
     private IntegerFilter notPresentPoints;
+
+    private IntegerFilter injuredPoints;
 
     private LongFilter groupsId;
 
@@ -48,10 +52,12 @@ public class TournamentCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.startDate = other.startDate == null ? null : other.startDate.copy();
+        this.endDate = other.endDate == null ? null : other.endDate.copy();
         this.inProgress = other.inProgress == null ? null : other.inProgress.copy();
         this.winPoints = other.winPoints == null ? null : other.winPoints.copy();
         this.lossPoints = other.lossPoints == null ? null : other.lossPoints.copy();
         this.notPresentPoints = other.notPresentPoints == null ? null : other.notPresentPoints.copy();
+        this.injuredPoints = other.injuredPoints == null ? null : other.injuredPoints.copy();
         this.groupsId = other.groupsId == null ? null : other.groupsId.copy();
     }
 
@@ -82,6 +88,14 @@ public class TournamentCriteria implements Serializable, Criteria {
 
     public void setStartDate(LocalDateFilter startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDateFilter getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateFilter endDate) {
+        this.endDate = endDate;
     }
 
     public BooleanFilter getInProgress() {
@@ -116,6 +130,14 @@ public class TournamentCriteria implements Serializable, Criteria {
         this.notPresentPoints = notPresentPoints;
     }
 
+    public IntegerFilter getInjuredPoints() {
+        return injuredPoints;
+    }
+
+    public void setInjuredPoints(IntegerFilter injuredPoints) {
+        this.injuredPoints = injuredPoints;
+    }
+
     public LongFilter getGroupsId() {
         return groupsId;
     }
@@ -138,10 +160,12 @@ public class TournamentCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(startDate, that.startDate) &&
+            Objects.equals(endDate, that.endDate) &&
             Objects.equals(inProgress, that.inProgress) &&
             Objects.equals(winPoints, that.winPoints) &&
             Objects.equals(lossPoints, that.lossPoints) &&
             Objects.equals(notPresentPoints, that.notPresentPoints) &&
+            Objects.equals(injuredPoints, that.injuredPoints) &&
             Objects.equals(groupsId, that.groupsId);
     }
 
@@ -151,10 +175,12 @@ public class TournamentCriteria implements Serializable, Criteria {
         id,
         name,
         startDate,
+        endDate,
         inProgress,
         winPoints,
         lossPoints,
         notPresentPoints,
+        injuredPoints,
         groupsId
         );
     }
@@ -165,10 +191,12 @@ public class TournamentCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (startDate != null ? "startDate=" + startDate + ", " : "") +
+                (endDate != null ? "endDate=" + endDate + ", " : "") +
                 (inProgress != null ? "inProgress=" + inProgress + ", " : "") +
                 (winPoints != null ? "winPoints=" + winPoints + ", " : "") +
                 (lossPoints != null ? "lossPoints=" + lossPoints + ", " : "") +
                 (notPresentPoints != null ? "notPresentPoints=" + notPresentPoints + ", " : "") +
+                (injuredPoints != null ? "injuredPoints=" + injuredPoints + ", " : "") +
                 (groupsId != null ? "groupsId=" + groupsId + ", " : "") +
             "}";
     }

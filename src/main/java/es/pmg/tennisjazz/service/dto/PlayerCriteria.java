@@ -42,6 +42,10 @@ public class PlayerCriteria implements Serializable, Criteria {
 
     private LongFilter rankingsId;
 
+    private LongFilter genderId;
+
+    private LongFilter userId;
+
     private LongFilter groupsId;
 
     public PlayerCriteria(){
@@ -57,6 +61,8 @@ public class PlayerCriteria implements Serializable, Criteria {
         this.visitorMatchesId = other.visitorMatchesId == null ? null : other.visitorMatchesId.copy();
         this.localMatchesId = other.localMatchesId == null ? null : other.localMatchesId.copy();
         this.rankingsId = other.rankingsId == null ? null : other.rankingsId.copy();
+        this.genderId = other.genderId == null ? null : other.genderId.copy();
+        this.userId = other.userId == null ? null : other.userId.copy();
         this.groupsId = other.groupsId == null ? null : other.groupsId.copy();
     }
 
@@ -137,6 +143,22 @@ public class PlayerCriteria implements Serializable, Criteria {
         this.rankingsId = rankingsId;
     }
 
+    public LongFilter getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(LongFilter genderId) {
+        this.genderId = genderId;
+    }
+
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
+    }
+
     public LongFilter getGroupsId() {
         return groupsId;
     }
@@ -165,6 +187,8 @@ public class PlayerCriteria implements Serializable, Criteria {
             Objects.equals(visitorMatchesId, that.visitorMatchesId) &&
             Objects.equals(localMatchesId, that.localMatchesId) &&
             Objects.equals(rankingsId, that.rankingsId) &&
+            Objects.equals(genderId, that.genderId) &&
+            Objects.equals(userId, that.userId) &&
             Objects.equals(groupsId, that.groupsId);
     }
 
@@ -180,6 +204,8 @@ public class PlayerCriteria implements Serializable, Criteria {
         visitorMatchesId,
         localMatchesId,
         rankingsId,
+        genderId,
+        userId,
         groupsId
         );
     }
@@ -196,6 +222,8 @@ public class PlayerCriteria implements Serializable, Criteria {
                 (visitorMatchesId != null ? "visitorMatchesId=" + visitorMatchesId + ", " : "") +
                 (localMatchesId != null ? "localMatchesId=" + localMatchesId + ", " : "") +
                 (rankingsId != null ? "rankingsId=" + rankingsId + ", " : "") +
+                (genderId != null ? "genderId=" + genderId + ", " : "") +
+                (userId != null ? "userId=" + userId + ", " : "") +
                 (groupsId != null ? "groupsId=" + groupsId + ", " : "") +
             "}";
     }

@@ -19,15 +19,17 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="points"><span jhiTranslate="tennisJazzApp.ranking.points">Points</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="gamesWin"><span jhiTranslate="tennisJazzApp.ranking.gamesWin">Games Win</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gamesWon"><span jhiTranslate="tennisJazzApp.ranking.gamesWon">Games Won</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="gamesLoss"><span jhiTranslate="tennisJazzApp.ranking.gamesLoss">Games Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="setsWin"><span jhiTranslate="tennisJazzApp.ranking.setsWin">Sets Win</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="setsWon"><span jhiTranslate="tennisJazzApp.ranking.setsWon">Sets Won</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="setsLoss"><span jhiTranslate="tennisJazzApp.ranking.setsLoss">Sets Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesPlayed"><span jhiTranslate="tennisJazzApp.ranking.matchesPlayed">Matches Played</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesWon"><span jhiTranslate="tennisJazzApp.ranking.matchesWon">Matches Won</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesLoss"><span jhiTranslate="tennisJazzApp.ranking.matchesLoss">Matches Loss</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesNotPresent"><span jhiTranslate="tennisJazzApp.ranking.matchesNotPresent">Matches Not Present</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="matchesAbandoned"><span jhiTranslate="tennisJazzApp.ranking.matchesAbandoned">Matches Abandoned</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tieBreaksPlayed"><span jhiTranslate="tennisJazzApp.ranking.tieBreaksPlayed">Tie Breaks Played</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tieBreaksWon"><span jhiTranslate="tennisJazzApp.ranking.tieBreaksWon">Tie Breaks Won</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tournamentGroup.id"><span jhiTranslate="tennisJazzApp.ranking.tournamentGroup">Tournament Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="player.id"><span jhiTranslate="tennisJazzApp.ranking.player">Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -37,15 +39,17 @@
             <tr *ngFor="let ranking of rankings ;trackBy: trackId">
                 <td><a [routerLink]="['/ranking-tennis', ranking.id, 'view' ]">{{ranking.id}}</a></td>
                 <td>{{ranking.points}}</td>
-                <td>{{ranking.gamesWin}}</td>
+                <td>{{ranking.gamesWon}}</td>
                 <td>{{ranking.gamesLoss}}</td>
-                <td>{{ranking.setsWin}}</td>
+                <td>{{ranking.setsWon}}</td>
                 <td>{{ranking.setsLoss}}</td>
                 <td>{{ranking.matchesPlayed}}</td>
                 <td>{{ranking.matchesWon}}</td>
                 <td>{{ranking.matchesLoss}}</td>
                 <td>{{ranking.matchesNotPresent}}</td>
                 <td>{{ranking.matchesAbandoned}}</td>
+                <td>{{ranking.tieBreaksPlayed}}</td>
+                <td>{{ranking.tieBreaksWon}}</td>
                 <td>
                     <div *ngIf="ranking.tournamentGroup">
                         <a [routerLink]="['/tournament-group-tennis', ranking.tournamentGroup?.id, 'view' ]" >{{ranking.tournamentGroup?.id}}</a>

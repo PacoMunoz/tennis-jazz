@@ -4,8 +4,10 @@
       "home": {
         "title": "Players",
         "createLabel": "Crear nuevo Player",
+        "editLabel": "Editar Jugador",
         "createOrEditLabel": "Crear o editar Player",
-        "notFound": "No Players found"
+        "notFound": "No Players found",
+        "currentMatches": "Partidos en "
       },
       "created": "Un nuevo Player ha sido creado con el identificador {{ param }}",
       "updated": "Un Player ha sido actualizado con el identificador {{ param }}",
@@ -20,10 +22,15 @@
       "surname": "Surname",
       "email": "Email",
       "phone": "Phone",
-      "other": "Other",
+      "phone.placeholder": "Su Teléfono",
+      "other": "Otros",
+      "other.placeholder": "Otros Datos",
+      "avatar": "Avatar",
       "visitorMatches": "Visitor Matches",
       "localMatches": "Local Matches",
       "rankings": "Rankings",
+      "gender": "Gender",
+      "user": "User",
       "groups": "Groups"
     }
   }

@@ -1,0 +1,56 @@
+<jhi-alert></jhi-alert>
+
+<div class="col-md-12 center-content bg-pink rounded-top p-3">
+    <h1 class="text-white">{{tournament.name}}</h1>
+</div>
+
+<mat-tab-group class="mat-tab-tournament-view" mat-align-tabs="center" [selectedIndex]="selectedPrincipalTab">
+
+    <mat-tab label="{{ 'tennisJazzApp.ranking.home.title' | translate }}">
+        <ng-template matTabContent>
+            <div class="mat-bottom-tab-tournament-view">
+                <mat-tab-group>
+                    <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">
+                        <div class="tournament-mat-tab-body">
+                            <jhi-tournament-tennis-group-ranking [group]="tournamentGroup">
+                            </jhi-tournament-tennis-group-ranking>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="{{ 'tennisJazzApp.round.home.title' | translate }}">
+        <ng-template matTabContent>
+            <div class="mat-bottom-tab-tournament-view">
+                <mat-tab-group>
+                    <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">
+                        <div class="tournament-mat-tab-body">
+                            <jhi-tournament-tennis-group-rounds [group]="tournamentGroup">
+                            </jhi-tournament-tennis-group-rounds>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="{{ 'tennisJazzApp.player.home.title' | translate }}">
+        <ng-template matTabContent>
+            <div class="mat-bottom-tab-tournament-view">
+                <mat-tab-group>
+                    <mat-tab *ngFor="let tournamentGroup of tournamentGroups;" label="{{tournamentGroup.name}}">
+                        <div class="tournament-mat-tab-body">
+                            <jhi-tournament-tennis-group-player [group]="tournamentGroup">
+                            </jhi-tournament-tennis-group-player>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>
+
+

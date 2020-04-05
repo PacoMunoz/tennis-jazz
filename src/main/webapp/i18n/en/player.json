@@ -5,7 +5,9 @@
         "title": "Players",
         "createLabel": "Create a new Player",
         "createOrEditLabel": "Create or edit a Player",
-        "notFound": "No Players found"
+        "editLabel": "Edit Player",
+        "notFound": "No Players found",
+        "currentMatches": "Current Matches"
       },
       "created": "A new Player is created with identifier {{ param }}",
       "updated": "A Player is updated with identifier {{ param }}",
@@ -20,10 +22,15 @@
       "surname": "Surname",
       "email": "Email",
       "phone": "Phone",
+      "phone.placeholder": "Your Phone",
       "other": "Other",
+      "other.placeholder": "Other Data",
+      "avatar": "Avatar",
       "visitorMatches": "Visitor Matches",
       "localMatches": "Local Matches",
       "rankings": "Rankings",
+      "gender": "Gender",
+      "user": "User",
       "groups": "Groups"
     }
   }

@@ -24,6 +24,30 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="local_player_tb_set_1_result" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="visitor_player_tb_set_1_result" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="local_player_tb_set_2_result" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="visitor_player_tb_set_2_result" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="local_player_tb_set_3_result" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="visitor_player_tb_set_3_result" type="integer">
+                <constraints nullable="true" />
+            </column>
+
             <column name="local_player_set_2_result" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -102,6 +126,12 @@
             <column name="id" type="numeric"/>
             <column name="local_player_set_1_result" type="numeric"/>
             <column name="visitor_player_set_1_result" type="numeric"/>
+            <column name="local_player_tb_set_1_result" type="numeric"/>
+            <column name="visitor_player_tb_set_1_result" type="numeric"/>
+            <column name="local_player_tb_set_2_result" type="numeric"/>
+            <column name="visitor_player_tb_set_2_result" type="numeric"/>
+            <column name="local_player_tb_set_3_result" type="numeric"/>
+            <column name="visitor_player_tb_set_3_result" type="numeric"/>
             <column name="local_player_set_2_result" type="numeric"/>
             <column name="visitor_player_set_2_result" type="numeric"/>
             <column name="local_player_set_3_result" type="numeric"/>

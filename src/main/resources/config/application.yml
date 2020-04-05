@@ -128,7 +128,7 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: tennisJazz@localhost
+    from: gestion@jtenis.es
   swagger:
     default-include-pattern: /api/.*
     title: tennisJazz API

@@ -13,6 +13,12 @@
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.startDate" for="field_startDate">Start Date</label>
@@ -20,6 +26,21 @@
                         <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" formControlName="startDate"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('startDate').invalid && (editForm.get('startDate').dirty || editForm.get('startDate').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('startDate').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.endDate" for="field_endDate">End Date</label>
+                    <div class="input-group">
+                        <input id="field_endDate" type="text" class="form-control" name="endDate" ngbDatepicker  #endDateDp="ngbDatepicker" formControlName="endDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
                 </div>
@@ -62,6 +83,11 @@
                     <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.notPresentPoints" for="field_notPresentPoints">Not Present Points</label>
                     <input type="number" class="form-control" name="notPresentPoints" id="field_notPresentPoints"
                            formControlName="notPresentPoints"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tennisJazzApp.tournament.injuredPoints" for="field_injuredPoints">Injured Points</label>
+                    <input type="number" class="form-control" name="injuredPoints" id="field_injuredPoints"
+                           formControlName="injuredPoints"/>
                 </div>
 
             </div>

@@ -17,17 +17,33 @@
         "title": "Ranking"
       },
       "points": "Points",
-      "gamesWin": "Games Win",
+      "gamesWon": "Games Won",
       "gamesLoss": "Games Loss",
-      "setsWin": "Sets Win",
+      "setsWon": "Sets Won",
       "setsLoss": "Sets Loss",
       "matchesPlayed": "Matches Played",
       "matchesWon": "Matches Won",
       "matchesLoss": "Matches Loss",
       "matchesNotPresent": "Matches Not Present",
       "matchesAbandoned": "Matches Abandoned",
+      "tieBreaksPlayed": "Tie Breaks Played",
+      "tieBreaksWon": "Tie Breaks Won",
       "tournamentGroup": "Tournament Group",
-      "player": "Player"
+      "player": "Player",
+      "xs": {
+        "points": "PT.",
+        "matchesPlayed": "M.P",
+        "matchesWon": "M.W",
+        "matchesLoss": "M.L",
+        "setsWon": "S.W",
+        "setsLoss": "S.L",
+        "gamesWon": "G.W",
+        "gamesLoss": "G.L",
+        "matchesNotPresent": "N.P",
+        "matchesAbandoned": "Ret.",
+        "tieBreaksPlayed": "TB.P",
+        "tieBreaksWon": "TB.W"
+      }
     }
   }
 }

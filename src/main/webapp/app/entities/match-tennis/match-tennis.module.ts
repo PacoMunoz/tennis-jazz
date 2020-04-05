@@ -13,6 +13,7 @@ import {
   matchRoute,
   matchPopupRoute
 } from './';
+import { MatchTennisNewUpdateComponent } from 'app/entities/match-tennis/match-tennis-new-update.component';
 
 const ENTITY_STATES = [...matchRoute, ...matchPopupRoute];
 
@@ -23,7 +24,8 @@ const ENTITY_STATES = [...matchRoute, ...matchPopupRoute];
     MatchTennisDetailComponent,
     MatchTennisUpdateComponent,
     MatchTennisDeleteDialogComponent,
-    MatchTennisDeletePopupComponent
+    MatchTennisDeletePopupComponent,
+    MatchTennisNewUpdateComponent
   ],
   entryComponents: [MatchTennisComponent, MatchTennisUpdateComponent, MatchTennisDeleteDialogComponent, MatchTennisDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],

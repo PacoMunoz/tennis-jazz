@@ -133,9 +133,9 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
           ranking.points = 0;
           ranking.matchesPlayed = 0;
           ranking.setsLoss = 0;
-          ranking.setsWin = 0;
+          ranking.setsWon = 0;
           ranking.gamesLoss = 0;
-          ranking.gamesWin = 0;
+          ranking.gamesWon = 0;
           ranking.matchesWon = 0;
           ranking.matchesNotPresent = 0;
           ranking.matchesAbandoned = 0;
@@ -275,7 +275,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     const ranking: IRankingTennis = {};
     ranking.player = player;
     ranking.tournamentGroup = group;
-    ranking.gamesWin =
+    ranking.gamesWon =
       (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
       (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
       (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
@@ -293,7 +293,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       ranking.matchesLoss = 1;
       ranking.points = 1;
     }
-    ranking.setsWin = match.localPlayerSets;
+    ranking.setsWon = match.localPlayerSets;
     ranking.setsLoss = match.visitorPlayerSets;
     ranking.matchesPlayed = 1;
     this.rankingTennisService
@@ -309,7 +309,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
       (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
       (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
-    ranking.gamesWin =
+    ranking.gamesWon =
       (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
       (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
       (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
@@ -323,7 +323,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       ranking.matchesLoss = 1;
       ranking.points = 1;
     }
-    ranking.setsWin = match.visitorPlayerSets;
+    ranking.setsWon = match.visitorPlayerSets;
     ranking.setsLoss = match.localPlayerSets;
     ranking.matchesPlayed = 1;
     this.rankingTennisService
@@ -346,7 +346,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
     if (match.localPlayerNotPresent) {
       ranking.matchesNotPresent += 1;
     }
-    ranking.gamesWin +=
+    ranking.gamesWon +=
       (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
       (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
       (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
@@ -354,7 +354,7 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
       (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
       (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
-    ranking.setsWin += match.localPlayerSets;
+    ranking.setsWon += match.localPlayerSets;
     ranking.setsLoss += match.visitorPlayerSets;
     ranking.matchesPlayed += 1;
     this.rankingTennisService
@@ -380,11 +380,11 @@ export class TournamentGroupTennisComponent implements OnInit, OnDestroy {
       (match.localPlayerSet1Result != null ? match.localPlayerSet1Result : 0) +
       (match.localPlayerSet2Result != null ? match.localPlayerSet2Result : 0) +
       (match.localPlayerSet3Result != null ? match.localPlayerSet3Result : 0);
-    ranking.gamesWin +=
+    ranking.gamesWon +=
       (match.visitorPlayerSet1Result != null ? match.visitorPlayerSet1Result : 0) +
       (match.visitorPlayerSet2Result != null ? match.visitorPlayerSet2Result : 0) +
       (match.visitorPlayerSet3Result != null ? match.visitorPlayerSet3Result : 0);
-    ranking.setsWin += match.visitorPlayerSets;
+    ranking.setsWon += match.visitorPlayerSets;
     ranking.setsLoss += match.localPlayerSets;
     ranking.matchesPlayed += 1;
     this.rankingTennisService
