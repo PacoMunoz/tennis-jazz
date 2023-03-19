@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@angular/animations": "^8.2.14",
-    "@angular/cli": "8.0.2",
+    "@angular/cli": "15.2.4",
     "@angular/compiler-cli": "8.0.0",
     "@ng-bootstrap/ng-bootstrap": "^4.2.1",
     "@ngtools/webpack": "8.0.2",
