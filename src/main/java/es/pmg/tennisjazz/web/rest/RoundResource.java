@@ -93,9 +93,7 @@ public class RoundResource {
     /**
      * {@code GET  /rounds} : get all the rounds.
      *
-
      * @param pageable the pagination information.
-
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rounds in body.
      */
@@ -105,6 +103,19 @@ public class RoundResource {
         Page<Round> page = roundQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+
+    /**
+     * {@code GET /rounds/all} : get all rounds without pagination
+     * @param criteria tje criteria which the request entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rounds in body.
+     */
+    @GetMapping("/rounds/all")
+    public ResponseEntity<List<Round>> getAllRounds(RoundCriteria criteria) {
+        log.debug("REST request to get Rounds without pagination by criteria: {}", criteria);
+        List<Round> rounds = roundQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(rounds);
     }
 
     /**

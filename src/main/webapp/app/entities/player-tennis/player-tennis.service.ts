@@ -32,6 +32,11 @@ export class PlayerTennisService {
     return this.http.get<IPlayerTennis[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryAll(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IPlayerTennis[]>(this.resourceUrl + '/all', { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

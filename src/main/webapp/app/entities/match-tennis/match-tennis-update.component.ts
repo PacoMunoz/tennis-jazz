@@ -66,14 +66,19 @@ export class MatchTennisUpdateComponent implements OnInit {
       this.updateForm(match);
     });
     this.roundService
-      .query()
+      .queryAll()
       .pipe(
         filter((mayBeOk: HttpResponse<IRoundTennis[]>) => mayBeOk.ok),
         map((response: HttpResponse<IRoundTennis[]>) => response.body)
       )
-      .subscribe((res: IRoundTennis[]) => (this.rounds = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe(
+        (res: IRoundTennis[]) => {
+          this.rounds = res;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     this.playerService
-      .query()
+      .queryAll()
       .pipe(
         filter((mayBeOk: HttpResponse<IPlayerTennis[]>) => mayBeOk.ok),
         map((response: HttpResponse<IPlayerTennis[]>) => response.body)

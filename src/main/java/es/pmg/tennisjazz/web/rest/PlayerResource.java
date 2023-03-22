@@ -108,6 +108,20 @@ public class PlayerResource {
     }
 
     /**
+     * {@code GET /players/all} : get all the players without pagination
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of players in body.
+     */
+    @GetMapping("/players/all")
+    public ResponseEntity<List<Player>> getAllPlayer(PlayerCriteria criteria) {
+        log.debug("REST request to get Players without pagination by criteria: {}", criteria);
+        List<Player> players = playerQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(players);
+    }
+
+
+    /**
     * {@code GET  /players/count} : count all the players.
     *
     * @param criteria the criteria which the requested entities should match.
